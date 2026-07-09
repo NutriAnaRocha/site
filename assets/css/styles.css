@@ -407,3 +407,24 @@ section{padding:96px 0}
 /* ---------- Foco acessível ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible{
   outline:3px solid var(--bordo);outline-offset:2px;border-radius:4px}
+
+/* ---------- Modal de captura de lead (e-book grátis) ---------- */
+.lead-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.lead-modal.open{display:flex}
+.lead-modal__backdrop{position:absolute;inset:0;background:rgba(60,20,40,.55);backdrop-filter:blur(3px)}
+.lead-modal__box{position:relative;background:var(--branco);border-radius:22px;max-width:420px;width:100%;
+  padding:34px 30px 26px;box-shadow:0 26px 70px rgba(60,20,40,.4);text-align:left;
+  max-height:calc(100vh - 40px);overflow-y:auto;animation:leadPop .28s ease}
+@keyframes leadPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.lead-modal__close{position:absolute;top:14px;right:16px;width:34px;height:34px;border:none;background:transparent;
+  font-size:1.7rem;line-height:1;color:var(--cinza);cursor:pointer;border-radius:50%}
+.lead-modal__close:hover{background:var(--rosa-suave);color:var(--bordo)}
+.lead-modal__box h3{margin:.15rem 0 .5rem}
+.lead-modal__sub{color:var(--cinza);font-size:.95rem;margin-bottom:18px}
+.lead-modal .field{margin-bottom:14px}
+.lead-modal__err{color:#b3261e;font-size:.88rem;margin:0 0 12px;background:#fdeceb;border:1px solid #f6c9c5;
+  border-radius:10px;padding:9px 12px}
+.lead-modal__check{width:60px;height:60px;border-radius:50%;background:#eaf6ee;color:#217a49;
+  display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:700;margin:4px 0 12px}
+.lead-modal [data-lead-submit].is-loading{opacity:.7;pointer-events:none}
+body.lead-open{overflow:hidden}
