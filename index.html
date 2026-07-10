@@ -10,6 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Abertura: decide antes de pintar (evita flash em quem já viu / prefere menos animação) -->
+<script>try{if(sessionStorage.getItem('introSeen')||matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('no-intro')}else{sessionStorage.setItem('introSeen','1')}}catch(e){document.documentElement.classList.add('no-intro')}</script>
 <link rel="stylesheet" href="assets/css/styles.css">
 <!-- Open Graph -->
 <meta property="og:title" content="Nutri Ana Luísa Rocha — Nutrição Clínica e Saúde da Mulher">
@@ -18,6 +20,14 @@
 <meta property="og:image" content="assets/img/logo-ana.png">
 </head>
 <body>
+
+<!-- ===================== ABERTURA (splash estilo Netflix) ===================== -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro__logo">
+    <img src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista">
+    <span class="intro__shine"></span>
+  </div>
+</div>
 
 <!-- ===================== NAV ===================== -->
 <header class="nav" id="nav">

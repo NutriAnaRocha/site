@@ -47,6 +47,21 @@ const wa = (msg) => `https://wa.me/${CONFIG.WHATS}?text=${encodeURIComponent(msg
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ---- Abertura (splash): fecha após a animação; pode pular clicando ---- */
+  const intro = document.getElementById("intro");
+  if (intro && !document.documentElement.classList.contains("no-intro")) {
+    document.body.classList.add("intro-lock");
+    let ended = false;
+    const finish = () => {
+      if (ended) return; ended = true;
+      intro.classList.add("hide");
+      document.body.classList.remove("intro-lock");
+      setTimeout(() => intro.classList.add("done"), 600);
+    };
+    setTimeout(finish, 2600);
+    intro.addEventListener("click", finish);
+  }
+
   /* ---- Preenche links de WhatsApp por data-attribute ----
      Uso no HTML: <a data-wa="agendar"> ou <a data-wa="ebook" data-titulo="..."> */
   document.querySelectorAll("[data-wa]").forEach(el => {

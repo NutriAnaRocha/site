@@ -408,6 +408,25 @@ section{padding:96px 0}
 a:focus-visible,button:focus-visible,input:focus-visible{
   outline:3px solid var(--bordo);outline-offset:2px;border-radius:4px}
 
+/* ---------- Abertura / splash estilo Netflix ---------- */
+.intro{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 42%, #8E1B6C 0%, #6B1450 55%, #490e37 100%)}
+.no-intro .intro{display:none !important}
+.intro.hide{opacity:0;transform:scale(1.06);pointer-events:none;transition:opacity .55s ease, transform .55s ease}
+.intro.done{display:none !important}
+.intro__logo{position:relative;transform:scale(.82);opacity:0;filter:blur(7px);
+  animation:introIn .9s cubic-bezier(.2,.7,.2,1) forwards, introZoom .7s ease-in 1.9s forwards}
+.intro__logo img{width:min(72vw,340px);height:auto;display:block;
+  filter:drop-shadow(0 10px 34px rgba(0,0,0,.4))}
+.intro__shine{position:absolute;top:-10%;bottom:-10%;left:-45%;width:38%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent);
+  transform:skewX(-18deg);opacity:0;animation:introShine 1.05s ease-in-out .8s}
+@keyframes introIn{to{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes introShine{0%{left:-45%;opacity:0}18%{opacity:.85}100%{left:125%;opacity:0}}
+@keyframes introZoom{to{transform:scale(1.55);opacity:0}}
+body.intro-lock{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.intro{display:none !important}}
+
 /* ---------- Modal de captura de lead (e-book grátis) ---------- */
 .lead-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 .lead-modal.open{display:flex}
