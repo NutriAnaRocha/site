@@ -47,6 +47,24 @@ const wa = (msg) => `https://wa.me/${CONFIG.WHATS}?text=${encodeURIComponent(msg
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ---- Abrir direto na biblioteca de e-books ----
+     (respeita links com âncora própria e não puxa se a pessoa já rolou) */
+  if (!location.hash) {
+    let userScrolled = false;
+    const markScroll = () => { userScrolled = true; };
+    window.addEventListener("wheel", markScroll, { passive: true, once: true });
+    window.addEventListener("touchmove", markScroll, { passive: true, once: true });
+    const jumpToEbooks = () => {
+      if (userScrolled) return;
+      const eb = document.getElementById("ebooks");
+      if (!eb) return;
+      const y = eb.getBoundingClientRect().top + window.pageYOffset - 86; // desconta a barra fixa
+      window.scrollTo({ top: y, left: 0, behavior: "auto" });
+    };
+    jumpToEbooks();
+    window.addEventListener("load", jumpToEbooks); // recalcula após as imagens carregarem
+  }
+
   /* ---- Abertura (splash): fecha após a animação; pode pular clicando ---- */
   const intro = document.getElementById("intro");
   if (intro && !document.documentElement.classList.contains("no-intro")) {
