@@ -414,16 +414,23 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .no-intro .intro{display:none !important}
 .intro.hide{opacity:0;transform:scale(1.06);pointer-events:none;transition:opacity .55s ease, transform .55s ease}
 .intro.done{display:none !important}
-.intro__logo{position:relative;transform:scale(.82);opacity:0;filter:blur(7px);
-  animation:introIn .9s cubic-bezier(.2,.7,.2,1) forwards, introZoom .7s ease-in 1.9s forwards}
-.intro__logo img{width:min(72vw,340px);height:auto;display:block;
-  filter:drop-shadow(0 10px 34px rgba(0,0,0,.4))}
-.intro__shine{position:absolute;top:-10%;bottom:-10%;left:-45%;width:38%;
-  background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent);
-  transform:skewX(-18deg);opacity:0;animation:introShine 1.05s ease-in-out .8s}
-@keyframes introIn{to{opacity:1;transform:scale(1);filter:blur(0)}}
-@keyframes introShine{0%{left:-45%;opacity:0}18%{opacity:.85}100%{left:125%;opacity:0}}
-@keyframes introZoom{to{transform:scale(1.55);opacity:0}}
+.intro__logo{position:relative;text-align:center;padding:0 6vw;
+  animation:introZoom .7s ease-in 2.05s forwards}
+.intro__word{font-family:var(--serif);color:#fff;font-weight:900;white-space:nowrap;
+  font-size:clamp(2rem,7vw,3.4rem);line-height:1;filter:drop-shadow(0 8px 30px rgba(0,0,0,.4))}
+.intro__word span{display:inline-block;opacity:0;transform:translateY(.4em) scale(.85);
+  animation:letterIn .3s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i,0) * .07s)}
+.intro__word .sp{width:.26em;opacity:1;animation:none}
+.intro__sub{font-family:var(--sans);color:rgba(255,255,255,.85);text-transform:uppercase;
+  letter-spacing:.34em;font-size:.8rem;margin-top:.7rem;opacity:0;
+  animation:subIn .5s ease 1s forwards}
+.intro__shine{position:absolute;top:-20%;bottom:-20%;left:-45%;width:36%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);
+  transform:skewX(-18deg);opacity:0;animation:introShine 1s ease-in-out 1.05s}
+@keyframes letterIn{to{opacity:1;transform:none}}
+@keyframes subIn{to{opacity:1}}
+@keyframes introShine{0%{left:-45%;opacity:0}18%{opacity:.85}100%{left:130%;opacity:0}}
+@keyframes introZoom{to{transform:scale(1.5);opacity:0}}
 body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.intro{display:none !important}}
 

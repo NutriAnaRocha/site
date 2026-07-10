@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.remove("intro-lock");
       setTimeout(() => intro.classList.add("done"), 600);
     };
-    setTimeout(finish, 2600);
+    setTimeout(finish, 2800);
     intro.addEventListener("click", finish);
   }
 
