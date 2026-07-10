@@ -461,6 +461,43 @@
   <a class="btn btn-primary" data-wa="agendar">📅 Agendar Consulta</a>
 </div>
 
+<!-- ===================== GUIA DE BOAS-VINDAS ===================== -->
+<div class="guide" id="guide" aria-hidden="true">
+  <div class="guide__backdrop" data-guide-close></div>
+  <div class="guide__box" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <button class="guide__close" type="button" data-guide-close aria-label="Fechar">&times;</button>
+    <span class="eyebrow">Seja bem-vinda 🌸</span>
+    <h3 id="guide-title">Por onde você quer começar?</h3>
+    <p class="guide__sub">Um resumo rápido do que você encontra por aqui — é só clicar:</p>
+    <div class="guide__grid">
+      <a class="guide__item" data-goto="#consultas">
+        <span class="guide__ic">📅</span>
+        <span><b>Agendar consulta</b><small>Presencial ou online, com acompanhamento de verdade</small></span>
+        <span class="guide__arw">→</span>
+      </a>
+      <a class="guide__item" data-goto="#ebooks">
+        <span class="guide__ic">📚</span>
+        <span><b>E-books &amp; materiais</b><small>Guias gratuitos pra baixar na hora</small></span>
+        <span class="guide__arw">→</span>
+      </a>
+      <a class="guide__item" data-goto="#vip">
+        <span class="guide__ic">💬</span>
+        <span><b>Comunidade VIP</b><small>Receitas e dicas grátis no seu WhatsApp</small></span>
+        <span class="guide__arw">→</span>
+      </a>
+      <a class="guide__item" data-goto="#sobre">
+        <span class="guide__ic">👩‍⚕️</span>
+        <span><b>Conhecer a Ana</b><small>Minha história e como eu cuido de você</small></span>
+        <span class="guide__arw">→</span>
+      </a>
+    </div>
+    <button class="guide__skip" type="button" data-guide-close>Prefiro explorar sozinha</button>
+  </div>
+</div>
+
+<!-- Botão flutuante que reabre o guia a qualquer momento -->
+<button class="guide-fab" id="guide-fab" type="button" aria-label="Por onde começar?">✨ Por onde começar?</button>
+
 <!-- ===================== MODAL: baixar e-book grátis ===================== -->
 <div class="lead-modal" id="lead-modal" aria-hidden="true">
   <div class="lead-modal__backdrop" data-lead-close></div>

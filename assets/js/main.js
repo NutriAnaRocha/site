@@ -47,22 +47,41 @@ const wa = (msg) => `https://wa.me/${CONFIG.WHATS}?text=${encodeURIComponent(msg
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---- Abrir direto na biblioteca de e-books ----
-     (respeita links com âncora própria e não puxa se a pessoa já rolou) */
-  if (!location.hash) {
-    let userScrolled = false;
-    const markScroll = () => { userScrolled = true; };
-    window.addEventListener("wheel", markScroll, { passive: true, once: true });
-    window.addEventListener("touchmove", markScroll, { passive: true, once: true });
-    const jumpToEbooks = () => {
-      if (userScrolled) return;
-      const eb = document.getElementById("ebooks");
-      if (!eb) return;
-      const y = eb.getBoundingClientRect().top + window.pageYOffset - 86; // desconta a barra fixa
-      window.scrollTo({ top: y, left: 0, behavior: "auto" });
-    };
-    jumpToEbooks();
-    window.addEventListener("load", jumpToEbooks); // recalcula após as imagens carregarem
+  /* ---- Começa no topo (scrollRestoration=manual já evita cair no meio) ---- */
+  if (!location.hash) window.scrollTo(0, 0);
+
+  /* ---- Guia de boas-vindas: mostra o que o site oferece (1x por sessão) ---- */
+  const guide = document.getElementById("guide");
+  const openGuide = () => {
+    if (!guide) return;
+    guide.classList.add("open");
+    document.body.classList.add("lead-open");
+  };
+  const closeGuide = () => {
+    if (!guide) return;
+    guide.classList.remove("open");
+    document.body.classList.remove("lead-open");
+  };
+  const maybeShowGuide = () => {
+    if (!guide || location.hash) return;
+    try { if (sessionStorage.getItem("guideSeen")) return; sessionStorage.setItem("guideSeen", "1"); } catch (e) {}
+    openGuide();
+  };
+  if (guide) {
+    guide.querySelectorAll("[data-guide-close]").forEach(el => el.addEventListener("click", closeGuide));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && guide.classList.contains("open")) closeGuide(); });
+    // Botões de destino: rola suave até a seção e fecha o guia
+    guide.querySelectorAll("[data-goto]").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const alvo = document.querySelector(el.getAttribute("data-goto"));
+        closeGuide();
+        if (alvo) setTimeout(() => alvo.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+      });
+    });
+    // Botão flutuante que reabre o guia a qualquer momento
+    const fab = document.getElementById("guide-fab");
+    if (fab) fab.addEventListener("click", openGuide);
   }
 
   /* ---- Abertura (splash): fecha após a animação; pode pular clicando ---- */
@@ -75,9 +94,13 @@ document.addEventListener("DOMContentLoaded", () => {
       intro.classList.add("hide");
       document.body.classList.remove("intro-lock");
       setTimeout(() => intro.classList.add("done"), 600);
+      setTimeout(maybeShowGuide, 700); // guia entra quando a abertura sai
     };
     setTimeout(finish, 2800);
     intro.addEventListener("click", finish);
+  } else {
+    // Sem abertura (revisita na sessão / menos animação): mostra o guia logo
+    setTimeout(maybeShowGuide, 500);
   }
 
   /* ---- Preenche links de WhatsApp por data-attribute ----
