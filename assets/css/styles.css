@@ -408,6 +408,48 @@ section{padding:96px 0}
 a:focus-visible,button:focus-visible,input:focus-visible{
   outline:3px solid var(--bordo);outline-offset:2px;border-radius:4px}
 
+/* ---------- Biblioteca estilo Netflix / Kiwify (prateleiras) ---------- */
+.ebooks-nf{background:linear-gradient(180deg,#2b1122 0%,#1c0f19 55%,#150c14 100%);color:#fff;overflow:hidden}
+.ebooks-nf .eyebrow{color:var(--rosa);opacity:1}
+.ebooks-nf h2{color:#fff}
+.ebooks-nf .lead{color:rgba(255,255,255,.72)}
+.shelf{margin-top:38px;position:relative}
+.shelf__title{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.3rem;margin:0 0 16px}
+.shelf__scroller{position:relative}
+.shelf__row{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;
+  padding:8px 2px 20px;-ms-overflow-style:none;scrollbar-width:none}
+.shelf__row::-webkit-scrollbar{display:none}
+.nf-card{flex:0 0 auto;width:212px;scroll-snap-align:start;background:#241521;border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.09);transition:transform .25s ease,box-shadow .25s ease}
+.nf-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 20px 44px rgba(0,0,0,.55);z-index:2}
+.nf-card__poster{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.nf-card__poster img{width:100%;height:100%;object-fit:cover;display:block}
+.nf-card__poster--soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  text-align:center;padding:26px 20px;background:linear-gradient(150deg,var(--rosa-suave),var(--rosa))}
+.nf-card__poster--soon .ec-tag{font-family:var(--sans);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--bordo);opacity:.75}
+.nf-card__poster--soon .ec-title{font-family:var(--serif);font-weight:900;font-size:1.05rem;color:var(--bordo);line-height:1.2}
+.nf-card__poster--soon .ec-logo{width:42px;height:42px;object-fit:contain;opacity:.9}
+.nf-badge{position:absolute;top:10px;right:10px;font-family:var(--sans);font-weight:700;font-size:.72rem;
+  padding:5px 11px;border-radius:999px;backdrop-filter:blur(4px)}
+.nf-badge--free{background:rgba(33,122,73,.94);color:#fff}
+.nf-badge--paid{background:rgba(255,255,255,.94);color:var(--bordo)}
+.nf-badge--soon{background:rgba(107,20,80,.85);color:#fff}
+.nf-card__info{padding:13px 15px 17px}
+.nf-card__info h3{font-size:.98rem;line-height:1.28;margin:0 0 12px;color:#fff;min-height:2.5em}
+.nf-card__cta{width:100%;font-size:.86rem;padding:9px 12px}
+.nf-card__cta.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff}
+.nf-card__cta.ghost:hover{background:#fff;color:var(--bordo);border-color:#fff;transform:translateY(-1px)}
+.shelf__arrow{position:absolute;top:calc(50% - 34px);transform:translateY(-50%);z-index:3;width:46px;height:46px;
+  border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;
+  display:none;align-items:center;justify-content:center;transition:background .2s}
+.shelf__arrow:hover{background:rgba(0,0,0,.82)}
+.shelf__arrow--left{left:-8px}
+.shelf__arrow--right{right:-8px}
+.shelf__arrow.show{display:flex}
+.nf-footer{margin-top:40px;text-align:center}
+.ebooks-nf .selo{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.82)}
+@media (max-width:560px){.nf-card{width:158px}.shelf__title{font-size:1.12rem}}
+
 /* ---------- Abertura / splash estilo Netflix ---------- */
 .intro{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:hidden;
   background:radial-gradient(circle at 50% 42%, #8E1B6C 0%, #6B1450 55%, #490e37 100%)}

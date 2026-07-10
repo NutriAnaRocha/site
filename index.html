@@ -234,119 +234,99 @@
   </div>
 </section>
 
-<!-- ===================== BIBLIOTECA DIGITAL ===================== -->
-<section id="ebooks" class="bg-off center">
+<!-- ===================== BIBLIOTECA DIGITAL (estilo Netflix) ===================== -->
+<section id="ebooks" class="ebooks-nf">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Biblioteca Digital</span>
       <h2>E-books &amp; Materiais</h2>
-      <p class="lead">Materiais desenvolvidos por nutricionista para continuar cuidando de você além do consultório.</p>
+      <p class="lead">Materiais desenvolvidos por nutricionista para continuar cuidando de você além do consultório. Escolha um material e comece agora.</p>
     </div>
 
-    <div class="grid grid-3 reveal" style="text-align:left">
+    <!-- PRATELEIRA 1 -->
+    <div class="shelf reveal">
+      <h3 class="shelf__title">Canetas emagrecedoras</h3>
+      <div class="shelf__scroller">
+        <button class="shelf__arrow shelf__arrow--left" data-shelf-prev aria-label="Anterior">‹</button>
+        <div class="shelf__row">
 
-      <!-- E-BOOK PAGO — Guia Completo das Canetas -->
-      <article class="card ebook-card">
-        <div class="ebook-cover ebook-cover--full">
-          <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy">
-        </div>
-        <div class="ebook-body">
-          <h3>Guia Completo das Canetas Emagrecedoras</h3>
-          <p style="font-size:.92rem">Como emagrecer com saúde durante o tratamento, preservar a massa muscular e manter o resultado.</p>
-          <ul>
-            <li>Cardápio, hidratação e efeitos colaterais</li>
-            <li>Checklists e material 100% interativo</li>
-          </ul>
-          <div class="price">R$ 27</div>
-          <div class="foot">
-            <a class="btn btn-primary btn-block" href="guia-canetas.html">Ler o começo grátis →</a>
-          </div>
-        </div>
-      </article>
+          <article class="nf-card">
+            <div class="nf-card__poster">
+              <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy">
+              <span class="nf-badge nf-badge--paid">R$ 27</span>
+            </div>
+            <div class="nf-card__info">
+              <h3>Guia Completo das Canetas Emagrecedoras</h3>
+              <a class="btn nf-card__cta ghost" href="guia-canetas.html">Ler o começo →</a>
+            </div>
+          </article>
 
-      <!-- ISCA GRÁTIS — 5 Erros -->
-      <article class="card ebook-card">
-        <div class="ebook-cover ebook-cover--full">
-          <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy">
-        </div>
-        <div class="ebook-body">
-          <h3>5 Erros na Caneta Emagrecedora</h3>
-          <p style="font-size:.92rem">O material gratuito que mostra os deslizes mais comuns de quem usa canetas — e como evitá-los.</p>
-          <ul>
-            <li>Rápido e direto ao ponto</li>
-            <li>Perfeito pra quem está começando</li>
-          </ul>
-          <div class="price" style="color:#217a49">Grátis</div>
-          <div class="foot">
-            <a class="btn btn-outline btn-block" data-lead data-titulo="5 Erros na Caneta Emagrecedora" data-reader="ebooks/5-erros-na-caneta.html">Quero receber grátis</a>
-          </div>
-        </div>
-      </article>
+          <article class="nf-card">
+            <div class="nf-card__poster">
+              <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy">
+              <span class="nf-badge nf-badge--free">Grátis</span>
+            </div>
+            <div class="nf-card__info">
+              <h3>5 Erros na Caneta Emagrecedora</h3>
+              <a class="btn btn-primary nf-card__cta" data-lead data-titulo="5 Erros na Caneta Emagrecedora" data-reader="ebooks/5-erros-na-caneta.html">Ler grátis</a>
+            </div>
+          </article>
 
-      <!-- ISCA GRÁTIS — Imunidade Natural -->
-      <article class="card ebook-card">
-        <div class="ebook-cover ebook-cover--full">
-          <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy">
         </div>
-        <div class="ebook-body">
-          <h3>Imunidade Natural — Guia de Inverno</h3>
-          <p style="font-size:.92rem">Fortaleça seu corpo de forma natural nos meses frios, com alimentos e hábitos que aumentam a imunidade.</p>
-          <ul>
-            <li>Alimentos que fortalecem o organismo</li>
-            <li>Mais energia e disposição no inverno</li>
-          </ul>
-          <div class="price" style="color:#217a49">Grátis</div>
-          <div class="foot">
-            <a class="btn btn-outline btn-block" data-lead data-titulo="Imunidade Natural — Guia de Inverno" data-reader="">Quero receber grátis</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- ISCA GRÁTIS — Caldos & Sopas Fit -->
-      <article class="card ebook-card">
-        <div class="ebook-cover ebook-cover--full">
-          <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy">
-        </div>
-        <div class="ebook-body">
-          <h3>Caldos &amp; Sopas Fit</h3>
-          <p style="font-size:.92rem">20 receitas quentinhas e leves para uma alimentação reconfortante e saudável.</p>
-          <ul>
-            <li>Receitas práticas, nutritivas e leves</li>
-            <li>Perfeito para reeducação alimentar</li>
-          </ul>
-          <div class="price" style="color:#217a49">Grátis</div>
-          <div class="foot">
-            <a class="btn btn-outline btn-block" data-lead data-titulo="Caldos &amp; Sopas Fit" data-reader="">Quero receber grátis</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- PLANO MENSAL — assinatura -->
-      <article class="card ebook-card">
-        <div class="ebook-cover">
-          <span class="ec-tag">Assinatura</span>
-          <span class="ec-title">Plano Mensal de E-books</span>
-          <img class="ec-logo" src="assets/img/monograma.png" alt="">
-          <span class="ec-author">Ana Luísa Rocha · Nutri</span>
-        </div>
-        <div class="ebook-body">
-          <h3>Plano Mensal de E-books</h3>
-          <p style="font-size:.92rem">Assine e receba os novos materiais lançados todo mês, sempre em primeira mão.</p>
-          <ul>
-            <li>Novos e-books e guias todo mês</li>
-            <li>Preço especial de assinante</li>
-          </ul>
-          <div class="price">Em breve</div>
-          <div class="foot">
-            <a class="btn btn-outline btn-block" data-wa="assinar" data-titulo="Plano Mensal de E-books">Quero ser avisada</a>
-          </div>
-        </div>
-      </article>
+        <button class="shelf__arrow shelf__arrow--right" data-shelf-next aria-label="Próximo">›</button>
+      </div>
     </div>
 
-    <div class="reveal">
+    <!-- PRATELEIRA 2 -->
+    <div class="shelf reveal">
+      <h3 class="shelf__title">Cuidando de você no dia a dia</h3>
+      <div class="shelf__scroller">
+        <button class="shelf__arrow shelf__arrow--left" data-shelf-prev aria-label="Anterior">‹</button>
+        <div class="shelf__row">
+
+          <article class="nf-card">
+            <div class="nf-card__poster">
+              <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy">
+              <span class="nf-badge nf-badge--free">Grátis</span>
+            </div>
+            <div class="nf-card__info">
+              <h3>Imunidade Natural — Guia de Inverno</h3>
+              <a class="btn btn-primary nf-card__cta" data-lead data-titulo="Imunidade Natural — Guia de Inverno" data-reader="">Ler grátis</a>
+            </div>
+          </article>
+
+          <article class="nf-card">
+            <div class="nf-card__poster">
+              <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy">
+              <span class="nf-badge nf-badge--free">Grátis</span>
+            </div>
+            <div class="nf-card__info">
+              <h3>Caldos &amp; Sopas Fit</h3>
+              <a class="btn btn-primary nf-card__cta" data-lead data-titulo="Caldos &amp; Sopas Fit" data-reader="">Ler grátis</a>
+            </div>
+          </article>
+
+          <article class="nf-card">
+            <div class="nf-card__poster nf-card__poster--soon">
+              <span class="ec-tag">Assinatura</span>
+              <span class="ec-title">Plano Mensal de E-books</span>
+              <img class="ec-logo" src="assets/img/monograma.png" alt="">
+              <span class="nf-badge nf-badge--soon">Em breve</span>
+            </div>
+            <div class="nf-card__info">
+              <h3>Plano Mensal de E-books</h3>
+              <a class="btn nf-card__cta ghost" data-wa="assinar" data-titulo="Plano Mensal de E-books">Quero ser avisada</a>
+            </div>
+          </article>
+
+        </div>
+        <button class="shelf__arrow shelf__arrow--right" data-shelf-next aria-label="Próximo">›</button>
+      </div>
+    </div>
+
+    <div class="reveal nf-footer">
       <span class="selo"><img src="assets/img/crn.png" alt="Selo CRN"> Material desenvolvido por nutricionista · CRN 25100401</span>
-      <p style="margin-top:1rem;font-size:.92rem;color:var(--texto-sutil)">Já adquiriu um material? <a data-biblioteca class="link-cta" style="font-weight:600">Acessar minha biblioteca →</a></p>
+      <p style="margin-top:1rem;font-size:.92rem;color:rgba(255,255,255,.7)">Já adquiriu um material? <a data-biblioteca class="link-cta" style="font-weight:600;color:#fff">Acessar minha biblioteca →</a></p>
     </div>
   </div>
 </section>

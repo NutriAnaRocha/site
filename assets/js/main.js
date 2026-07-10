@@ -171,6 +171,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---- Prateleiras Netflix: setas + capa clicável ---- */
+  document.querySelectorAll(".shelf__scroller").forEach(scroller => {
+    const row  = scroller.querySelector(".shelf__row");
+    const prev = scroller.querySelector("[data-shelf-prev]");
+    const next = scroller.querySelector("[data-shelf-next]");
+    if (!row) return;
+    const step = () => Math.max(220, row.clientWidth * 0.8);
+    const updateArrows = () => {
+      const overflow = row.scrollWidth - row.clientWidth > 8;
+      const atStart = row.scrollLeft <= 4;
+      const atEnd   = row.scrollLeft >= row.scrollWidth - row.clientWidth - 4;
+      prev && prev.classList.toggle("show", overflow && !atStart);
+      next && next.classList.toggle("show", overflow && !atEnd);
+    };
+    prev && prev.addEventListener("click", () => row.scrollBy({ left: -step(), behavior: "smooth" }));
+    next && next.addEventListener("click", () => row.scrollBy({ left:  step(), behavior: "smooth" }));
+    row.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    updateArrows();
+  });
+  // Clicar na capa aciona o botão do card (Netflix-like)
+  document.querySelectorAll(".nf-card__poster").forEach(poster => {
+    poster.addEventListener("click", () => {
+      const cta = poster.closest(".nf-card")?.querySelector(".nf-card__cta");
+      if (cta) cta.click();
+    });
+  });
+
   /* ---- Biblioteca de e-books (login da plataforma p/ quem já comprou) ----
      Uso: <a data-biblioteca>Acessar minha biblioteca</a>.
      Se PLATAFORMA_URL estiver vazio, o link é removido. */
