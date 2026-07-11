@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora do Ciclo Feminino — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="Descubra sua janela fértil, o dia da ovulação e a próxima menstruação. Ferramenta gratuita da nutricionista Ana Luísa Rocha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calculadora do Ciclo Feminino — Nutri Ana Luísa Rocha">
+<meta property="og:description" content="Descubra sua janela fértil, o dia da ovulação e a próxima menstruação.">
+<meta property="og:image" content="https://nutrianarocha.github.io/site/assets/img/capa-gravidez.jpg">
+<meta property="og:url" content="https://nutrianarocha.github.io/site/calculadora-ciclo.html">
+<meta property="og:locale" content="pt_BR">
+<style>
+  .calc-wrap{max-width:760px;margin:0 auto;padding:36px 24px 70px}
+  .calc-card{background:#fff;border:1px solid var(--rosa-borda);border-radius:20px;padding:28px 26px;box-shadow:var(--shadow)}
+  .calc-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.calc-form{grid-template-columns:1fr}}
+  .calc-form .field{margin:0}
+  .calc-form .full{grid-column:1/-1}
+  .calc-result{margin-top:26px;display:none}
+  .calc-result.show{display:block;animation:leadPop .3s ease}
+  .calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:560px){.calc-grid{grid-template-columns:1fr}}
+  .calc-tile{border-radius:16px;padding:18px 16px;text-align:center;border:1px solid var(--rosa-borda);background:var(--rosa-suave)}
+  .calc-tile.fertile{background:linear-gradient(150deg,#fdeaf4,#f7d3e7);border-color:#efb9d8}
+  .calc-tile .lab{font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--bordo);opacity:.8}
+  .calc-tile .val{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.15rem;line-height:1.2;margin-top:6px}
+  .calc-tile .sub{font-size:.82rem;color:var(--cinza);margin-top:4px}
+  .calc-note{font-size:.85rem;color:var(--cinza);background:var(--rosa-suave);border:1px solid var(--rosa-borda);border-radius:12px;padding:12px 15px;margin-top:20px}
+  .calc-next{margin-top:20px}
+  .calc-next h3{font-size:1.05rem;margin-bottom:10px}
+  .calc-next ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .calc-next li{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border:1px solid var(--rosa-borda);border-radius:10px;font-size:.92rem}
+  .calc-next li b{color:var(--bordo)}
+  .calc-cross{margin-top:28px;background:var(--rosa-suave);border:1px solid var(--rosa-borda);border-radius:18px;padding:22px;text-align:center}
+</style>
+</head>
+<body>
+<header class="previa-top">
+  <a href="index.html"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha"></a>
+  <a href="index.html#ebooks" class="link-cta" style="font-weight:600">← Biblioteca</a>
+</header>
+
+<main class="calc-wrap">
+  <div class="section-head" style="margin-bottom:26px">
+    <span class="eyebrow">Ferramenta gratuita</span>
+    <h1 style="font-family:var(--serif);color:var(--bordo);font-size:clamp(1.8rem,4vw,2.4rem)">Calculadora do Ciclo Feminino</h1>
+    <p class="lead">Descubra sua <b>janela fértil</b>, o <b>dia mais provável de ovulação</b> e a <b>próxima menstruação</b> — a partir da sua última menstruação.</p>
+  </div>
+
+  <div class="calc-card">
+    <form id="calc-form" class="calc-form" novalidate>
+      <div class="field">
+        <label for="c-data">Primeiro dia da última menstruação</label>
+        <input type="date" id="c-data" required>
+      </div>
+      <div class="field">
+        <label for="c-ciclo">Duração média do ciclo (dias)</label>
+        <input type="number" id="c-ciclo" value="28" min="20" max="45" inputmode="numeric">
+      </div>
+      <div class="full">
+        <button type="submit" class="btn btn-primary btn-block">Calcular meu ciclo →</button>
+      </div>
+    </form>
+
+    <div class="calc-result" id="calc-result">
+      <div class="calc-grid">
+        <div class="calc-tile fertile">
+          <div class="lab">Janela fértil</div>
+          <div class="val" id="r-janela">—</div>
+          <div class="sub">6 dias de maior chance</div>
+        </div>
+        <div class="calc-tile">
+          <div class="lab">Ovulação provável</div>
+          <div class="val" id="r-ovu">—</div>
+          <div class="sub">dia mais fértil</div>
+        </div>
+        <div class="calc-tile">
+          <div class="lab">Próxima menstruação</div>
+          <div class="val" id="r-menst">—</div>
+          <div class="sub">estimativa</div>
+        </div>
+      </div>
+
+      <div class="calc-next">
+        <h3>Próximos ciclos</h3>
+        <ul id="r-proximos"></ul>
+      </div>
+
+      <div class="calc-note">
+        💛 Esta é uma <b>estimativa</b> baseada em um ciclo regular — ciclos variam de mês para mês.
+        <b>Não use como método contraceptivo.</b> Se seus ciclos são irregulares, vale conversar com sua nutri e/ou ginecologista.
+      </div>
+
+      <div class="calc-cross">
+        <p style="font-weight:700;color:var(--bordo);margin-bottom:6px">É tentante? 🌸</p>
+        <p style="margin-bottom:14px;color:var(--cinza);font-size:.95rem">Aprenda a preparar seu corpo com o guia gratuito da Ana.</p>
+        <a class="btn btn-primary" href="e/gravidez.html">Ver o e-book gratuito →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+(function(){
+  const form = document.getElementById("calc-form");
+  const res  = document.getElementById("calc-result");
+  const meses = ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  const dias  = ["domingo","segunda","terça","quarta","quinta","sexta","sábado"];
+  const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate()+n); return x; };
+  const fmt  = (d) => `${d.getDate()} de ${meses[d.getMonth()]}`;
+  const fmtDow = (d) => `${dias[d.getDay()]}, ${d.getDate()} de ${meses[d.getMonth()]}`;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const val = document.getElementById("c-data").value;
+    let ciclo = parseInt(document.getElementById("c-ciclo").value, 10);
+    if (!val) { document.getElementById("c-data").focus(); return; }
+    if (isNaN(ciclo) || ciclo < 20) ciclo = 28;
+    if (ciclo > 45) ciclo = 45;
+
+    // Usa data local (evita fuso do input date)
+    const [y,m,dd] = val.split("-").map(Number);
+    const inicio = new Date(y, m-1, dd);
+
+    const proxMenst = addDays(inicio, ciclo);
+    const ovulacao  = addDays(inicio, ciclo - 14);      // fase lútea ~14 dias
+    const fertIni   = addDays(ovulacao, -5);
+    const fertFim   = addDays(ovulacao, 1);
+
+    document.getElementById("r-janela").textContent = `${fmt(fertIni)} a ${fmt(fertFim)}`;
+    document.getElementById("r-ovu").textContent    = fmt(ovulacao);
+    document.getElementById("r-menst").textContent  = fmt(proxMenst);
+
+    const ul = document.getElementById("r-proximos");
+    ul.innerHTML = "";
+    for (let i=1; i<=3; i++){
+      const mi = addDays(inicio, ciclo*i);
+      const ov = addDays(inicio, ciclo*i - 14);
+      const li = document.createElement("li");
+      li.innerHTML = `<span>Menstruação: <b>${fmt(mi)}</b></span><span>Ovulação: <b>${fmt(ov)}</b></span>`;
+      ul.appendChild(li);
+    }
+    res.classList.add("show");
+    setTimeout(() => res.scrollIntoView({behavior:"smooth", block:"nearest"}), 60);
+  });
+})();
+</script>
+</body>
+</html>
