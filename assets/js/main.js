@@ -212,6 +212,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---- Compartilhar / copiar link (páginas de prévia) ---- */
+  const shareMsg = (url) => encodeURIComponent(`Olha esse e-book da Nutri Ana Luísa Rocha 🌸\n${url}`);
+  document.querySelectorAll("[data-share-wa]").forEach(el => {
+    el.href = `https://wa.me/?text=${shareMsg(location.href)}`;
+    el.target = "_blank"; el.rel = "noopener";
+  });
+  document.querySelectorAll("[data-copy]").forEach(el => {
+    el.addEventListener("click", async () => {
+      const original = el.textContent;
+      try { await navigator.clipboard.writeText(location.href); }
+      catch (e) { prompt("Copie o link:", location.href); return; }
+      el.textContent = "Link copiado ✓";
+      setTimeout(() => { el.textContent = original; }, 1800);
+    });
+  });
+
   /* ---- Prateleiras Netflix: setas + capa clicável ---- */
   document.querySelectorAll(".shelf__scroller").forEach(scroller => {
     const row  = scroller.querySelector(".shelf__row");

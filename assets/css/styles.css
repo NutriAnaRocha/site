@@ -476,6 +476,29 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 body.intro-lock{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.intro{display:none !important}}
 
+/* ---------- Página de prévia do e-book (compartilhável) ---------- */
+.previa-top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--rosa-borda);
+  display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.previa-top img{height:34px;width:auto}
+.previa-wrap{max-width:940px;margin:0 auto;padding:44px 24px 70px}
+.previa{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:start}
+@media (max-width:720px){.previa{grid-template-columns:1fr;gap:26px;text-align:center;justify-items:center}}
+.previa__cover{width:100%;max-width:300px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/4;background:var(--rosa-suave)}
+.previa__cover img{width:100%;height:100%;object-fit:cover;display:block}
+.previa__eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--bordo);opacity:.85}
+.previa h1{font-family:var(--serif);color:var(--bordo);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
+.previa__sub{color:var(--cinza);font-size:1.02rem;margin-bottom:18px}
+.previa__resumo{margin-bottom:20px;line-height:1.6}
+.previa__list{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.previa__list li{display:flex;gap:10px;align-items:flex-start}
+.previa__list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rosa);margin-top:8px;flex:none}
+.previa__cta{margin-bottom:8px}
+.previa__share{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center;justify-content:inherit}
+.previa__share small{width:100%;color:var(--cinza);font-size:.85rem;margin-bottom:-6px}
+.previa__free{display:inline-block;background:#eaf6ee;color:#217a49;border:1px solid #c7e8d3;font-weight:700;
+  font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+.previa__paid{display:inline-block;background:var(--rosa-suave);color:var(--bordo);border:1px solid var(--rosa-borda);font-weight:700;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+
 /* ---------- Guia de boas-vindas + botão flutuante ---------- */
 .guide{position:fixed;inset:0;z-index:1500;display:none;align-items:center;justify-content:center;padding:20px}
 .guide.open{display:flex}
