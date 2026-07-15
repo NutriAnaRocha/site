@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Guia Definitivo da Leitura de Rótulos — Nutricionista Ana Luísa Rocha</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Merienda:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--wine:#830e56;--wine-dark:#5e0a3d;--wine-light:#a8326f;
+--pink:#f1b3db;--pink-soft:#f8d6ec;--pink-pale:#fdf0f7;
+--gray:#64686b;--gray-light:#e8e8e8;--gray-soft:#f5f5f5;
+--white:#ffffff;--text:#3a3a3a;--text-light:#6d6e71;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Montserrat',sans-serif;color:var(--text);background:var(--white);line-height:1.7;overflow-x:hidden}
+
+/* ===== NAV ===== */
+.nav-bar{position:fixed;top:0;left:0;right:0;background:var(--wine);z-index:1000;box-shadow:0 2px 12px rgba(131,14,86,.3)}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+.nav-brand{font-family:'Merienda',cursive;color:var(--pink);font-size:1rem;font-weight:700}
+.nav-toggle{background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;display:block}
+.nav-menu{position:fixed;top:0;left:-320px;width:300px;height:100vh;background:var(--wine-dark);transition:left .3s;overflow-y:auto;padding:60px 0 30px;z-index:1001}
+.nav-menu.open{left:0}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none}
+.nav-overlay.show{display:block}
+.nav-close{position:absolute;top:12px;right:16px;background:none;border:none;color:var(--pink);font-size:1.5rem;cursor:pointer}
+.nav-menu a{display:block;padding:12px 24px;color:var(--pink-soft);text-decoration:none;font-size:.88rem;border-bottom:1px solid rgba(255,255,255,.06);transition:background .2s}
+.nav-menu a:hover,.nav-menu a.active{background:var(--wine);color:var(--white)}
+.nav-menu a .ch-num{display:inline-block;width:28px;font-weight:700;color:var(--pink);font-size:.78rem}
+
+/* ===== PAGES ===== */
+.page{display:none;min-height:100vh;padding-top:56px}
+.page.active{display:block}
+
+/* ===== COVER ===== */
+.cover{background:linear-gradient(160deg,var(--wine-dark) 0%,var(--wine) 40%,var(--wine-light) 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(241,179,219,.08)}
+.cover::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:rgba(241,179,219,.05)}
+.cover-content{position:relative;z-index:1;max-width:600px}
+.cover-badge{display:inline-block;background:var(--pink);color:var(--wine-dark);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:6px 18px;border-radius:20px;margin-bottom:24px}
+.cover h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.8rem);color:var(--white);line-height:1.15;margin-bottom:16px}
+.cover h1 span{color:var(--pink);display:block;font-family:'Merienda',cursive;font-weight:700;font-size:clamp(1.3rem,3.5vw,1.8rem);margin-top:8px}
+.cover-sub{color:var(--pink-soft);font-size:clamp(.9rem,2.2vw,1.05rem);font-weight:300;line-height:1.6;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+.cover-author{margin-top:12px}
+.cover-author .label{color:var(--pink);font-family:'Merienda',cursive;font-size:.85rem}
+.cover-author .name{color:var(--white);font-weight:700;font-size:1.1rem;margin-top:2px}
+.cover-author .crn{color:var(--pink-soft);font-size:.75rem;margin-top:2px}
+.cover-deco{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;opacity:.15}
+.cover-deco span{position:absolute;border:2px solid var(--pink);border-radius:50%}
+.cover-deco span:nth-child(1){width:120px;height:120px;top:10%;left:5%}
+.cover-deco span:nth-child(2){width:80px;height:80px;bottom:15%;right:8%}
+.cover-deco span:nth-child(3){width:60px;height:60px;top:50%;right:15%}
+.cover-start{display:inline-block;background:var(--pink);color:var(--wine-dark);font-weight:700;font-size:1rem;padding:14px 40px;border-radius:30px;cursor:pointer;border:none;margin-top:24px;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(241,179,219,.4)}
+.cover-start:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(241,179,219,.6)}
+
+/* ===== CONTENT PAGES ===== */
+.content-page{padding:80px 24px 60px;max-width:780px;margin:0 auto}
+.ch-header{text-align:center;margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--pink-soft)}
+.ch-eyebrow{font-family:'Merienda',cursive;color:var(--wine);font-size:.85rem;font-weight:700;margin-bottom:4px}
+.ch-title{font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(1.4rem,4vw,2rem);color:var(--wine-dark);line-height:1.25}
+.ch-title-alt{font-family:'Merienda',cursive;color:var(--wine);font-weight:700;font-size:clamp(1rem,3vw,1.3rem)}
+
+h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.15rem;color:var(--wine);margin:28px 0 12px;padding-left:14px;border-left:3px solid var(--pink)}
+h4{font-weight:600;color:var(--wine-dark);margin:20px 0 8px;font-size:1rem}
+p{margin-bottom:14px;font-size:.95rem}
+
+/* ===== COMPONENTS ===== */
+.highlight-box{background:linear-gradient(135deg,var(--pink-pale),var(--white));border-left:4px solid var(--wine);padding:20px 24px;border-radius:0 12px 12px 0;margin:24px 0;font-size:.95rem;position:relative}
+.highlight-box::before{content:'💡';position:absolute;top:-12px;left:-12px;font-size:1.3rem;background:var(--white);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.highlight-box.gold{border-left-color:#d4a338;background:linear-gradient(135deg,#fef9ed,var(--white))}
+.highlight-box.gold::before{content:'⭐'}
+.highlight-box.alert{border-left-color:#c0392b;background:linear-gradient(135deg,#fdf0f0,var(--white))}
+.highlight-box.alert::before{content:'⚠️'}
+
+.info-card{background:var(--white);border:1px solid var(--gray-light);border-radius:14px;padding:24px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.info-card h4{margin-top:0;color:var(--wine)}
+
+.tag{display:inline-block;background:var(--pink-pale);color:var(--wine);font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:16px;margin:3px}
+
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+@media(max-width:600px){.comparison{grid-template-columns:1fr}}
+.compare-card{border-radius:14px;padding:20px;border:2px solid var(--gray-light)}
+.compare-card.bad{border-color:#e74c3c;background:#fef5f5}
+.compare-card.good{border-color:#27ae60;background:#f0faf4}
+.compare-card .label{font-weight:700;font-size:.85rem;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.compare-card.bad .label{color:#c0392b}
+.compare-card.good .label{color:#1e8449}
+.compare-card ul{list-style:none;padding:0}
+.compare-card li{font-size:.85rem;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.compare-card li:last-child{border:none}
+
+.sugar-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.88rem;border-radius:12px;overflow:hidden}
+.sugar-table th{background:var(--wine);color:var(--white);padding:12px 16px;text-align:left;font-weight:600}
+.sugar-table td{padding:10px 16px;border-bottom:1px solid var(--gray-light)}
+.sugar-table tr:nth-child(even){background:var(--pink-pale)}
+.sugar-table tr:hover{background:var(--pink-soft)}
+
+.checklist{list-style:none;padding:0;margin:20px 0}
+.checklist li{padding:12px 16px 12px 44px;background:var(--white);border:1px solid var(--gray-light);border-radius:10px;margin-bottom:8px;position:relative;font-size:.92rem;cursor:pointer;transition:background .2s}
+.checklist li::before{content:'☐';position:absolute;left:16px;font-size:1.1rem;color:var(--wine)}
+.checklist li.checked{background:var(--pink-pale);text-decoration:line-through;color:var(--text-light)}
+.checklist li.checked::before{content:'☑';color:var(--wine)}
+
+.selo-card{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:12px;margin:8px 4px;font-size:.88rem;font-weight:600}
+.selo-card.acucar{background:#fff3e0;color:#e65100;border:1px solid #ffcc80}
+.selo-card.sodio{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9}
+.selo-card.gordura{background:#fce4ec;color:#c62828;border:1px solid #ef9a9a}
+
+.step-number{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--wine);color:var(--white);font-weight:700;font-size:.85rem;border-radius:50%;margin-right:10px;flex-shrink:0}
+
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}
+.product-item{border-radius:12px;padding:16px;border:1px solid var(--gray-light);text-align:center;transition:transform .2s}
+.product-item:hover{transform:translateY(-3px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.product-item .emoji{font-size:2rem;margin-bottom:8px}
+.product-item .p-name{font-weight:600;font-size:.9rem;color:var(--wine-dark)}
+.product-item .p-desc{font-size:.8rem;color:var(--text-light);margin-top:4px}
+.product-item.avoid{background:#fef5f5;border-color:#e74c3c}
+.product-item.ok{background:#fffde7;border-color:#f9a825}
+.product-item.best{background:#f0faf4;border-color:#27ae60}
+
+/* ===== QUIZ ===== */
+.quiz-q{background:var(--white);border:1px solid var(--gray-light);border-radius:14px;padding:24px;margin:20px 0;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.quiz-q .q-text{font-weight:600;font-size:1rem;color:var(--wine-dark);margin-bottom:14px}
+.quiz-q .q-num{font-family:'Merienda',cursive;color:var(--wine);font-size:.82rem}
+.quiz-opt{display:block;width:100%;text-align:left;background:var(--gray-soft);border:2px solid transparent;border-radius:10px;padding:12px 16px;margin:6px 0;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;color:var(--text)}
+.quiz-opt:hover{border-color:var(--pink);background:var(--pink-pale)}
+.quiz-opt.correct{background:#d4edda;border-color:#27ae60;color:#155724}
+.quiz-opt.wrong{background:#f8d7da;border-color:#c0392b;color:#721c24}
+.quiz-opt.reveal{background:#d4edda;border-color:#27ae60}
+.quiz-feedback{margin-top:10px;padding:12px;border-radius:8px;font-size:.88rem;display:none}
+.quiz-feedback.show{display:block}
+.quiz-score{text-align:center;padding:30px;background:linear-gradient(135deg,var(--pink-pale),var(--white));border-radius:16px;margin:30px 0}
+.quiz-score .score-num{font-size:3rem;font-weight:900;color:var(--wine)}
+.quiz-score .score-label{font-family:'Merienda',cursive;color:var(--wine);font-size:1.1rem}
+
+/* ===== CHALLENGE ===== */
+.day-card{background:var(--white);border:1px solid var(--gray-light);border-radius:14px;padding:20px;margin:14px 0;display:flex;align-items:flex-start;gap:16px;transition:background .2s}
+.day-card:hover{background:var(--pink-pale)}
+.day-num{background:var(--wine);color:var(--white);font-weight:800;font-size:.9rem;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Merienda',cursive}
+.day-content h4{margin:0 0 4px;color:var(--wine-dark)}
+.day-content p{margin:0;font-size:.88rem;color:var(--text-light)}
+
+/* ===== POCKET GUIDE ===== */
+.pocket{background:linear-gradient(145deg,var(--wine-dark),var(--wine));color:var(--white);border-radius:16px;padding:28px;margin:24px 0}
+.pocket h4{color:var(--pink);margin-top:16px;border-left:none;padding-left:0;font-family:'Merienda',cursive;font-size:1rem}
+.pocket h4:first-child{margin-top:0}
+.pocket ul{list-style:none;padding:0}
+.pocket li{padding:6px 0;font-size:.88rem;color:var(--pink-soft);border-bottom:1px solid rgba(255,255,255,.08)}
+.pocket li::before{content:'• ';color:var(--pink)}
+
+/* ===== ACCORDION ===== */
+.accordion{margin:16px 0}
+.acc-item{border:1px solid var(--gray-light);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.acc-header{width:100%;text-align:left;background:var(--gray-soft);border:none;padding:14px 20px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.92rem;color:var(--wine-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.acc-header:hover{background:var(--pink-pale)}
+.acc-header .arrow{transition:transform .3s;font-size:.8rem;color:var(--wine)}
+.acc-header.open .arrow{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px}
+.acc-body.open{max-height:2000px;padding:12px 20px 20px}
+
+/* ===== TRAFFIC LIGHT ===== */
+.traffic{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.traffic .t{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:500;padding:6px 14px;border-radius:20px}
+.traffic .green{background:#e8f5e9;color:#2e7d32}
+.traffic .yellow{background:#fff8e1;color:#f57f17}
+.traffic .red{background:#ffebee;color:#c62828}
+
+/* ===== CTA ===== */
+.cta-box{background:linear-gradient(135deg,var(--wine),var(--wine-light));border-radius:16px;padding:32px;text-align:center;margin:40px 0}
+.cta-box h3{color:var(--white);border:none;padding:0;font-family:'Merienda',cursive;font-size:1.2rem;margin-bottom:12px}
+.cta-box p{color:var(--pink-soft);font-size:.92rem;margin-bottom:20px}
+.cta-btn{display:inline-block;background:var(--pink);color:var(--wine-dark);font-weight:700;padding:14px 36px;border-radius:30px;text-decoration:none;font-size:.95rem;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(241,179,219,.4)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(241,179,219,.5)}
+
+/* ===== FOOTER NAV ===== */
+.page-nav{display:flex;justify-content:space-between;padding:30px 0;margin-top:40px;border-top:1px solid var(--gray-light)}
+.page-nav button{background:var(--wine);color:var(--white);border:none;padding:12px 28px;border-radius:25px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;transition:background .2s,transform .2s}
+.page-nav button:hover{background:var(--wine-dark);transform:translateY(-1px)}
+.page-nav button:disabled{opacity:.3;cursor:default;transform:none}
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap{position:fixed;bottom:0;left:0;right:0;height:4px;background:var(--gray-light);z-index:999}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--wine),var(--pink));width:0%;transition:width .4s}
+
+/* ===== TOC ===== */
+.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:30px 0}
+@media(max-width:600px){.toc-grid{grid-template-columns:1fr}}
+.toc-item{background:var(--white);border:1px solid var(--gray-light);border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.toc-item:hover{border-color:var(--wine);background:var(--pink-pale);transform:translateY(-2px)}
+.toc-num{font-family:'Merienda',cursive;font-weight:700;color:var(--wine);font-size:1.1rem;flex-shrink:0}
+.toc-text{font-size:.88rem;font-weight:500;color:var(--text)}
+
+/* ===== COLORANT CARDS ===== */
+.colorant-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:16px 0}
+.colorant-card{border-radius:12px;padding:14px;text-align:center;font-size:.85rem;font-weight:600;border:2px solid}
+.colorant-card.natural{background:#f0faf4;border-color:#81c784;color:#2e7d32}
+.colorant-card.artificial{background:#fef5f5;border-color:#e57373;color:#c62828}
+.caramel-scale{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}
+.caramel-item{flex:1;min-width:100px;text-align:center;padding:14px;border-radius:10px;font-size:.82rem}
+.caramel-item.c1{background:#fff8e1;border:1px solid #ffe082}
+.caramel-item.c2{background:#ffecb3;border:1px solid #ffd54f}
+.caramel-item.c3{background:#ffe0b2;border:1px solid #ffb74d}
+.caramel-item.c4{background:#ffccbc;border:1px solid #ff8a65}
+.caramel-item strong{display:block;margin-bottom:4px;font-size:.9rem}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .content-page{padding:70px 18px 50px}
+  .cover{padding:70px 20px 50px}
+  .comparison{gap:12px}
+  .product-grid{grid-template-columns:1fr 1fr}
+  .caramel-scale{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV BAR -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <span class="nav-brand">📖 Guia de Rótulos</span>
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
+  </div>
+</div>
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+<nav class="nav-menu">
+  <button class="nav-close" onclick="toggleMenu()">✕</button>
+  <a href="#" onclick="goTo('cover')"><span class="ch-num">🏠</span> Capa</a>
+  <a href="#" onclick="goTo('toc')"><span class="ch-num">📑</span> Sumário</a>
+  <a href="#" onclick="goTo('intro')"><span class="ch-num">▸</span> Introdução</a>
+  <a href="#" onclick="goTo('ch1')"><span class="ch-num">01</span> Rótulo Nutricional</a>
+  <a href="#" onclick="goTo('ch2')"><span class="ch-num">02</span> Lista de Ingredientes</a>
+  <a href="#" onclick="goTo('ch3')"><span class="ch-num">03</span> Nomes do Açúcar</a>
+  <a href="#" onclick="goTo('ch4')"><span class="ch-num">04</span> Tabela Nutricional</a>
+  <a href="#" onclick="goTo('ch5')"><span class="ch-num">05</span> Comparar Produtos</a>
+  <a href="#" onclick="goTo('ch6')"><span class="ch-num">06</span> Marketing que Engana</a>
+  <a href="#" onclick="goTo('ch7')"><span class="ch-num">07</span> Selos da Anvisa</a>
+  <a href="#" onclick="goTo('ch8')"><span class="ch-num">08</span> Checklist da Compra</a>
+  <a href="#" onclick="goTo('ch9')"><span class="ch-num">09</span> Supermercado na Prática</a>
+  <a href="#" onclick="goTo('chExtra')"><span class="ch-num">🎨</span> Corantes e Caramelos</a>
+  <a href="#" onclick="goTo('quiz')"><span class="ch-num">❓</span> Quiz Interativo</a>
+  <a href="#" onclick="goTo('challenge')"><span class="ch-num">🏆</span> Desafio 7 Dias</a>
+  <a href="#" onclick="goTo('bonus')"><span class="ch-num">🎁</span> Guia de Bolso</a>
+  <a href="#" onclick="goTo('conclusion')"><span class="ch-num">💜</span> Conclusão</a>
+</nav>
+
+<!-- PROGRESS -->
+<div class="progress-wrap"><div class="progress-fill" id="progressFill"></div></div>
+
+<!-- ==================== COVER ==================== -->
+<div class="page active" id="cover">
+  <div class="cover">
+    <div class="cover-deco"><span></span><span></span><span></span></div>
+    <div class="cover-content">
+      <div class="cover-badge">E-book Exclusivo</div>
+      <h1>Guia Definitivo da Leitura de Rótulos<span>Aprenda a Escolher de Forma Inteligente</span></h1>
+      <p class="cover-sub">Descubra os segredos escondidos nos rótulos e aprenda a fazer escolhas mais saudáveis para você e sua família.</p>
+      <div class="cover-author">
+        <div class="label">Autora</div>
+        <div class="name">Nutricionista Ana Luísa Rocha</div>
+        <div class="crn">CRN 25100401</div>
+      </div>
+      <button class="cover-start" onclick="goTo('toc')">Começar a Leitura →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TOC ==================== -->
+<div class="page" id="toc">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Sumário</div>
+      <div class="ch-title">O que você vai encontrar neste guia</div>
+    </div>
+    <div class="toc-grid">
+      <div class="toc-item" onclick="goTo('intro')"><span class="toc-num">📌</span><span class="toc-text">Introdução</span></div>
+      <div class="toc-item" onclick="goTo('ch1')"><span class="toc-num">01</span><span class="toc-text">O Que é um Rótulo Nutricional?</span></div>
+      <div class="toc-item" onclick="goTo('ch2')"><span class="toc-num">02</span><span class="toc-text">A Regra de Ouro da Lista de Ingredientes</span></div>
+      <div class="toc-item" onclick="goTo('ch3')"><span class="toc-num">03</span><span class="toc-text">Os Nomes Escondidos do Açúcar</span></div>
+      <div class="toc-item" onclick="goTo('ch4')"><span class="toc-num">04</span><span class="toc-text">Entendendo a Tabela Nutricional</span></div>
+      <div class="toc-item" onclick="goTo('ch5')"><span class="toc-num">05</span><span class="toc-text">Como Comparar Dois Produtos</span></div>
+      <div class="toc-item" onclick="goTo('ch6')"><span class="toc-num">06</span><span class="toc-text">O Marketing que Engana</span></div>
+      <div class="toc-item" onclick="goTo('ch7')"><span class="toc-num">07</span><span class="toc-text">Os Selos da Anvisa</span></div>
+      <div class="toc-item" onclick="goTo('ch8')"><span class="toc-num">08</span><span class="toc-text">Checklist da Compra Inteligente</span></div>
+      <div class="toc-item" onclick="goTo('ch9')"><span class="toc-num">09</span><span class="toc-text">Supermercado na Prática</span></div>
+      <div class="toc-item" onclick="goTo('chExtra')"><span class="toc-num">🎨</span><span class="toc-text">Corantes e Caramelos</span></div>
+      <div class="toc-item" onclick="goTo('quiz')"><span class="toc-num">❓</span><span class="toc-text">Quiz Interativo</span></div>
+      <div class="toc-item" onclick="goTo('challenge')"><span class="toc-num">🏆</span><span class="toc-text">Desafio de 7 Dias</span></div>
+      <div class="toc-item" onclick="goTo('bonus')"><span class="toc-num">🎁</span><span class="toc-text">Guia de Bolso</span></div>
+      <div class="toc-item" onclick="goTo('conclusion')"><span class="toc-num">💜</span><span class="toc-text">Conclusão</span></div>
+    </div>
+    <div class="page-nav">
+      <button onclick="goTo('cover')">← Capa</button>
+      <button onclick="goTo('intro')">Introdução →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== INTRODUÇÃO ==================== -->
+<div class="page" id="intro">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Introdução</div>
+      <div class="ch-title">Por Que Aprender a Ler Rótulos<br><span class="ch-title-alt">Muda Tudo?</span></div>
+    </div>
+
+    <p>Você já parou para pensar em quantas decisões alimentares toma por semana? A cada ida ao supermercado, escolhemos dezenas de produtos — muitas vezes guiadas apenas pela embalagem bonita, pelo preço ou por frases atraentes como <em>"light"</em>, <em>"natural"</em> ou <em>"integral"</em>.</p>
+
+    <p>Mas e se eu te contar que boa parte dessas expressões pode ser pura estratégia de marketing? Que um produto vendido como saudável pode conter mais açúcar do que um refrigerante? Ou que aquele iogurte "fit" da prateleira tem uma lista de ingredientes maior que uma receita de bolo?</p>
+
+    <div class="highlight-box">
+      <strong>Saber ler rótulos é como ter um superpoder no supermercado.</strong> Quando você entende o que está por trás das embalagens, para de ser influenciada pela propaganda e começa a fazer escolhas baseadas em informação real.
+    </div>
+
+    <h3>O que a indústria não quer que você saiba</h3>
+    <p>A indústria alimentícia investe bilhões em embalagens atraentes, palavras persuasivas e até cores pensadas para gerar confiança. Expressões vagas como <em>"ingredientes selecionados"</em> ou <em>"receita caseira"</em> não têm regulamentação rigorosa e podem ser usadas por qualquer fabricante.</p>
+
+    <p>O lado bom? A legislação brasileira obriga que todas as informações nutricionais reais estejam no rótulo. Ou seja: a verdade sempre está ali — você só precisa saber onde olhar.</p>
+
+    <h3>O que você vai aprender neste guia</h3>
+    <p>Ao longo dos próximos capítulos, vou te ensinar — de forma simples e prática — a:</p>
+    <ul class="checklist" style="cursor:default">
+      <li>Entender cada parte de um rótulo nutricional</li>
+      <li>Identificar açúcares escondidos sob nomes diferentes</li>
+      <li>Comparar produtos e escolher os melhores</li>
+      <li>Reconhecer armadilhas do marketing alimentar</li>
+      <li>Interpretar os novos selos da Anvisa</li>
+      <li>Montar uma lista de compras mais inteligente</li>
+    </ul>
+
+    <div class="highlight-box gold">
+      <strong>Lembre-se:</strong> o objetivo não é criar paranoia com comida, mas te dar ferramentas para fazer escolhas mais conscientes, sem abrir mão do prazer de comer.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('toc')">← Sumário</button>
+      <button onclick="goTo('ch1')">Capítulo 1 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 1 ==================== -->
+<div class="page" id="ch1">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 1</div>
+      <div class="ch-title">O Que é um Rótulo Nutricional?</div>
+    </div>
+
+    <p>O rótulo é o documento de identidade do alimento. Toda informação que você precisa para decidir se vale a pena comprar um produto está ali — basta saber interpretá-la.</p>
+
+    <h3>As 5 partes do rótulo que você precisa conhecer</h3>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">📋 Tabela Nutricional <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>É a tabela obrigatória que traz as quantidades de calorias, carboidratos, proteínas, gorduras, fibras, sódio e outros nutrientes. Ela sempre aparece com base em uma <strong>porção definida</strong> pelo fabricante.</p>
+          <p><strong>Exemplo prático:</strong> Um pacote de biscoito pode informar que uma porção tem 120 calorias. Mas se a porção são apenas 3 biscoitos e você costuma comer 10, na verdade está consumindo 400 calorias.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">📝 Lista de Ingredientes <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>A lista de ingredientes mostra tudo o que foi usado para fabricar o produto, <strong>em ordem decrescente de quantidade</strong>. O primeiro ingrediente é sempre o mais abundante.</p>
+          <p><strong>Dica:</strong> Se açúcar, gordura vegetal ou farinha refinada estão entre os três primeiros ingredientes, é sinal de que o produto pode não ser a melhor escolha.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🏷️ Alegações Nutricionais <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>São frases como <em>"rico em fibras"</em>, <em>"fonte de vitaminas"</em> ou <em>"baixo teor de gordura"</em>. A Anvisa regulamenta essas alegações, mas nem sempre elas contam toda a história. Um produto pode ser <em>"zero gordura"</em> e ao mesmo tempo estar repleto de açúcar.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">✅ Selos e Certificações <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Os selos podem indicar que o produto é orgânico, não transgênico, ou que contém altos teores de açúcar, sódio ou gordura saturada (novos selos de alerta da Anvisa). Falaremos mais sobre eles no Capítulo 7.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">⚖️ Informações Obrigatórias por Lei <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Todo rótulo deve conter: data de fabricação e validade, lote, peso líquido, modo de conservação, informações sobre alérgenos (como glúten, leite, soja, ovos) e dados do fabricante. Essas informações são obrigatórias pela legislação brasileira e protegem o consumidor.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Regra prática:</strong> Antes de olhar a frente da embalagem (que é marketing), vire o produto e leia a parte de trás (que é informação real).
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('intro')">← Introdução</button>
+      <button onclick="goTo('ch2')">Capítulo 2 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 2 ==================== -->
+<div class="page" id="ch2">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 2</div>
+      <div class="ch-title">A Regra de Ouro da<br><span class="ch-title-alt">Lista de Ingredientes</span></div>
+    </div>
+
+    <p>Se eu pudesse te ensinar apenas uma coisa sobre rótulos, seria esta: <strong>leia a lista de ingredientes antes de qualquer outra coisa.</strong> Ela é a parte mais honesta do rótulo.</p>
+
+    <h3>Ordem importa — e muito!</h3>
+    <p>Os ingredientes são listados do mais presente para o menos presente no produto. Se açúcar ou gordura vegetal aparecem logo no início, aquele produto tem mais açúcar ou gordura do que qualquer outro ingrediente.</p>
+
+    <div class="comparison">
+      <div class="compare-card good">
+        <div class="label">✅ Lista simples</div>
+        <ul>
+          <li><strong>Aveia em flocos, cacau em pó, açúcar de coco</strong></li>
+          <li>3 ingredientes</li>
+          <li>Todos reconhecíveis</li>
+          <li>Sem aditivos químicos</li>
+        </ul>
+      </div>
+      <div class="compare-card bad">
+        <div class="label">❌ Lista complexa</div>
+        <ul>
+          <li><strong>Farinha de trigo enriquecida, açúcar, gordura vegetal, sal, emulsificante polisorbato 80, corante caramelo IV, aromatizante...</strong></li>
+          <li>+10 ingredientes</li>
+          <li>Vários nomes técnicos</li>
+          <li>Muitos aditivos</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Como identificar ultraprocessados?</h3>
+    <p>Se a lista de ingredientes tiver itens que você não usaria na sua cozinha — como emulsificantes, espessantes, aromatizantes, realçadores de sabor, corantes — provavelmente é um produto ultraprocessado.</p>
+
+    <div class="highlight-box gold" style="text-align:center;font-size:1.1rem">
+      <strong style="font-family:'Merienda',cursive;font-size:1.15rem;color:var(--wine)">✨ Regra de Ouro ✨</strong><br>
+      "Quanto menor e mais simples a lista de ingredientes, melhor."
+    </div>
+
+    <h3>Ingredientes que merecem atenção</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
+      <span class="tag">Gordura vegetal hidrogenada</span>
+      <span class="tag">Xarope de glicose</span>
+      <span class="tag">Maltodextrina</span>
+      <span class="tag">Glutamato monossódico</span>
+      <span class="tag">Corantes artificiais</span>
+      <span class="tag">Aromatizantes</span>
+      <span class="tag">Emulsificantes</span>
+      <span class="tag">Edulcorantes artificiais</span>
+      <span class="tag">Realçadores de sabor</span>
+    </div>
+
+    <h3>Quantos ingredientes são aceitáveis?</h3>
+    <div class="traffic">
+      <span class="t green">🟢 Até 5 ingredientes — ótimo</span>
+      <span class="t yellow">🟡 5 a 8 — avalie com atenção</span>
+      <span class="t red">🔴 Mais de 8 — provavelmente ultraprocessado</span>
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch1')">← Capítulo 1</button>
+      <button onclick="goTo('ch3')">Capítulo 3 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 3 ==================== -->
+<div class="page" id="ch3">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 3</div>
+      <div class="ch-title">Os Nomes Escondidos<br><span class="ch-title-alt">do Açúcar</span></div>
+    </div>
+
+    <p>Você sabia que o açúcar pode aparecer no rótulo com mais de 50 nomes diferentes? Essa é uma das maiores armadilhas da indústria: diluir o açúcar em várias formas para que ele não apareça como primeiro ingrediente.</p>
+
+    <h3>Os disfarces mais comuns</h3>
+    <table class="sugar-table">
+      <thead>
+        <tr><th>Nome no rótulo</th><th>O que é</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Xarope de glicose</strong></td><td>Açúcar líquido derivado do milho ou da mandioca. Muito usado em biscoitos e doces.</td></tr>
+        <tr><td><strong>Maltodextrina</strong></td><td>Carboidrato de absorção rápida, eleva a glicemia como o açúcar.</td></tr>
+        <tr><td><strong>Dextrose</strong></td><td>Forma de glicose obtida do amido. Comum em suplementos e alimentos processados.</td></tr>
+        <tr><td><strong>Frutose</strong></td><td>Açúcar natural das frutas, mas quando isolada e adicionada em excesso pode sobrecarregar o fígado.</td></tr>
+        <tr><td><strong>Açúcar invertido</strong></td><td>Mistura de glicose e frutose. Usado para manter umidade em bolos e pães.</td></tr>
+        <tr><td><strong>Xarope de milho</strong></td><td>Similar ao xarope de glicose, associado a aumento de inflamação.</td></tr>
+        <tr><td><strong>Melado / Mel</strong></td><td>Parecem mais naturais, mas o efeito no organismo é semelhante ao açúcar.</td></tr>
+        <tr><td><strong>Sacarose</strong></td><td>É o açúcar de mesa comum. Quando você vê "sacarose", leia "açúcar".</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Outros nomes que escondem açúcar</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
+      <span class="tag">Glucose</span>
+      <span class="tag">Xarope de malte</span>
+      <span class="tag">Suco de fruta concentrado</span>
+      <span class="tag">Caldo de cana</span>
+      <span class="tag">Melaço</span>
+      <span class="tag">Açúcar mascavo</span>
+      <span class="tag">Açúcar demerara</span>
+      <span class="tag">Açúcar de coco</span>
+      <span class="tag">Rapadura</span>
+      <span class="tag">Néctar de agave</span>
+      <span class="tag">Xarope de arroz</span>
+      <span class="tag">Polydextrose</span>
+    </div>
+
+    <div class="highlight-box alert">
+      <strong>Atenção:</strong> Quando dois ou três tipos de açúcar aparecem em posições diferentes na lista, a soma deles pode fazer com que o açúcar seja o ingrediente principal do produto — mas ele não aparece em primeiro lugar porque foi dividido.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch2')">← Capítulo 2</button>
+      <button onclick="goTo('ch4')">Capítulo 4 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 4 ==================== -->
+<div class="page" id="ch4">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 4</div>
+      <div class="ch-title">Entendendo a<br><span class="ch-title-alt">Tabela Nutricional</span></div>
+    </div>
+
+    <p>A tabela nutricional é obrigatória em todos os alimentos embalados no Brasil. Cada linha conta uma história sobre o que você está prestes a comer. Vamos decifrar cada uma:</p>
+
+    <div class="accordion">
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">📏 Porção <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>É a base de tudo. Todos os valores da tabela se referem àquela porção específica. Sempre pergunte: <strong>"Eu como só essa quantidade?"</strong> Muitas vezes a porção indicada é menor do que o consumo real.</p>
+          <p><strong>Exemplo:</strong> Um suco de caixinha de 200ml pode indicar a porção como 100ml. Se você beber a caixinha inteira, precisa dobrar todos os valores da tabela.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🔥 Calorias (Valor Energético) <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Indicam a energia que o alimento fornece. Calorias não são inimigas — mas a qualidade importa. 200 kcal de abacate são muito diferentes de 200 kcal de biscoito recheado.</p>
+          <p>O mais importante não é ficar obcecada com calorias, mas sim com a <strong>qualidade nutricional</strong> do alimento.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🍞 Carboidratos <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>São a principal fonte de energia do corpo. Inclui açúcares e amido. Compare a quantidade total de carboidratos com a de <strong>açúcares</strong> — se os dois valores forem muito parecidos, a maior parte dos carboidratos vem de açúcar.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">💪 Proteínas <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Essenciais para músculos, saciedade e imunidade. Em geral, quanto maior o teor proteico, mais nutritivo o alimento. Busque opções com pelo menos 5g por porção em snacks e 10g ou mais em refeições.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🥑 Gorduras Totais <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Nem toda gordura é ruim. As gorduras boas (mono e poli-insaturadas) são essenciais. O importante é observar de onde vem a gordura. Azeite, castanhas e peixes são fontes excelentes.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">⚠️ Gorduras Saturadas e Trans <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p><strong>Saturadas:</strong> presentes em carnes, laticínios e coco. O consumo moderado é aceitável, mas em excesso pode impactar a saúde cardiovascular.</p>
+          <p><strong>Trans:</strong> a pior de todas. Mesmo quando o rótulo diz "0g de gordura trans", se a lista de ingredientes contiver <em>"gordura vegetal hidrogenada"</em>, o produto contém gordura trans. A legislação permite declarar zero quando há menos de 0,2g por porção.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🌾 Fibras <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>Aliadas da saciedade, do intestino e do controle da glicemia. Busque alimentos com pelo menos <strong>2,5g por porção</strong>. Acima de 5g por porção é considerado alto teor de fibras.</p>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-header" onclick="toggleAcc(this)">🧂 Sódio <span class="arrow">▼</span></button>
+        <div class="acc-body">
+          <p>O excesso de sódio contribui para hipertensão e retenção de líquidos. A recomendação é de no máximo <strong>2.000mg por dia</strong>. Produtos com mais de 400mg por porção merecem atenção redobrada.</p>
+          <p><strong>Dica:</strong> Temperos prontos, macarrões instantâneos e embutidos são os campeões de sódio.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Resumo rápido para análise:</strong> Prefira alimentos com mais fibras e proteínas, menos sódio e açúcares, e sem gordura trans na lista de ingredientes.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch3')">← Capítulo 3</button>
+      <button onclick="goTo('ch5')">Capítulo 5 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 5 ==================== -->
+<div class="page" id="ch5">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 5</div>
+      <div class="ch-title">Como Comparar<br><span class="ch-title-alt">Dois Produtos</span></div>
+    </div>
+
+    <p>Agora que você já sabe ler rótulos, vamos à parte prática: como comparar dois produtos lado a lado para escolher o melhor? A regra é simples: <strong>compare sempre pela mesma quantidade</strong> (100g ou 100ml) e analise ingredientes + tabela nutricional.</p>
+
+    <h3>🥛 Comparação 1: Iogurtes</h3>
+    <div class="comparison">
+      <div class="compare-card bad">
+        <div class="label">❌ Iogurte A — "Cremoso com polpa"</div>
+        <ul>
+          <li>Açúcar como 2º ingrediente</li>
+          <li>12g de açúcar / 100g</li>
+          <li>2g de proteína / 100g</li>
+          <li>0g de fibras</li>
+          <li>Corante e aromatizante</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <div class="label">✅ Iogurte B — Natural integral</div>
+        <ul>
+          <li>Apenas leite e fermento lácteo</li>
+          <li>4g de açúcar natural / 100g</li>
+          <li>6g de proteína / 100g</li>
+          <li>0g de fibras</li>
+          <li>Sem aditivos</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>🍞 Comparação 2: Pães Integrais</h3>
+    <div class="comparison">
+      <div class="compare-card bad">
+        <div class="label">❌ Pão A — "Integral" (entre aspas)</div>
+        <ul>
+          <li>Farinha de trigo enriquecida como 1º ingrediente</li>
+          <li>Açúcar como 3º ingrediente</li>
+          <li>1,5g de fibra por fatia</li>
+          <li>Gordura vegetal na composição</li>
+          <li>+15 ingredientes</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <div class="label">✅ Pão B — Integral de verdade</div>
+        <ul>
+          <li>Farinha de trigo integral como 1º ingrediente</li>
+          <li>Sem açúcar adicionado</li>
+          <li>3g de fibra por fatia</li>
+          <li>Sem gordura vegetal</li>
+          <li>5 a 7 ingredientes</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>🥣 Comparação 3: Cereais Matinais</h3>
+    <div class="comparison">
+      <div class="compare-card bad">
+        <div class="label">❌ Cereal A — Flocos açucarados</div>
+        <ul>
+          <li>Açúcar como 1º ou 2º ingrediente</li>
+          <li>26g de açúcar / 100g</li>
+          <li>2g de fibras / 100g</li>
+          <li>Corantes e aromatizantes</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <div class="label">✅ Cereal B — Granola artesanal</div>
+        <ul>
+          <li>Aveia como 1º ingrediente</li>
+          <li>6g de açúcar / 100g</li>
+          <li>5g de fibras / 100g</li>
+          <li>Sem aditivos artificiais</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>💪 Comparação 4: Barras de Proteína</h3>
+    <div class="comparison">
+      <div class="compare-card bad">
+        <div class="label">❌ Barra A — "Proteica" (mas não tanto)</div>
+        <ul>
+          <li>Xarope de glicose como 1º ingrediente</li>
+          <li>8g de proteína</li>
+          <li>18g de carboidratos (14g açúcar)</li>
+          <li>Cobertura sabor chocolate</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <div class="label">✅ Barra B — Proteína de verdade</div>
+        <ul>
+          <li>Whey protein como 1º ingrediente</li>
+          <li>20g de proteína</li>
+          <li>8g de carboidratos (2g açúcar)</li>
+          <li>Chocolate real (cacau)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Dica prática:</strong> Quando os produtos parecem iguais na frente da embalagem, a verdade sempre está na lista de ingredientes e na tabela nutricional.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch4')">← Capítulo 4</button>
+      <button onclick="goTo('ch6')">Capítulo 6 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 6 ==================== -->
+<div class="page" id="ch6">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 6</div>
+      <div class="ch-title">O Marketing<br><span class="ch-title-alt">que Engana</span></div>
+    </div>
+
+    <p>A embalagem é a vitrine do produto. E a indústria sabe exatamente como usar palavras, cores e imagens para criar uma percepção de saudabilidade que nem sempre corresponde à realidade.</p>
+
+    <h3>Expressões que merecem desconfiança</h3>
+
+    <div class="info-card">
+      <h4>🏷️ "Fit" / "Fitness"</h4>
+      <p>Não existe regulamentação para essa palavra em alimentos. Qualquer produto pode se chamar "fit", mesmo sendo repleto de açúcar e aditivos. Sempre vire o produto e confira os ingredientes.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Light"</h4>
+      <p>Significa redução de pelo menos 25% em algum nutriente (geralmente gordura ou açúcar) em relação ao produto convencional. Mas reduzir gordura pode significar adicionar mais açúcar para manter o sabor — e vice-versa.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Zero"</h4>
+      <p>Pode ser zero açúcar, zero gordura ou zero lactose. Mas zero em um nutriente não garante que o produto seja saudável. Um refrigerante zero açúcar continua sendo uma bebida sem valor nutricional, com aditivos e adoçantes.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Integral"</h4>
+      <p>Até recentemente, não havia percentual mínimo de farinha integral obrigatório. Muitos pães tinham farinha branca como principal ingrediente e um pouco de farinha integral para poder usar a palavra. Sempre confira se a <strong>farinha integral é o primeiro ingrediente</strong>.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Natural" / "Artesanal"</h4>
+      <p>Termos muito vagos e pouco regulamentados. Um suco "natural" pode conter apenas 30% de fruta. Um produto "artesanal" pode ser produzido em larga escala industrial.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Sem açúcar"</h4>
+      <p>Pode conter adoçantes artificiais ou naturais em grande quantidade. Além disso, pode conter maltodextrina ou xarope de glicose — que são formas de açúcar com outros nomes.</p>
+    </div>
+    <div class="info-card">
+      <h4>🏷️ "Rico em fibras"</h4>
+      <p>Precisa ter no mínimo 5g de fibras por porção. Mas verifique se essas fibras vêm de fontes reais (como grãos integrais) ou de fibras adicionadas industrialmente como a polidextrose.</p>
+    </div>
+
+    <div class="highlight-box alert">
+      <strong>Regra de ouro:</strong> Nunca confie apenas na frente da embalagem. A informação real sempre está na lista de ingredientes e na tabela nutricional.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch5')">← Capítulo 5</button>
+      <button onclick="goTo('ch7')">Capítulo 7 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 7 ==================== -->
+<div class="page" id="ch7">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 7</div>
+      <div class="ch-title">Os Selos<br><span class="ch-title-alt">da Anvisa</span></div>
+    </div>
+
+    <p>Desde outubro de 2022, a Anvisa implementou um novo modelo de rotulagem nutricional frontal no Brasil. Os selos em formato de lupa aparecem na frente das embalagens para alertar sobre altos teores de nutrientes críticos.</p>
+
+    <h3>Os 3 selos de alerta</h3>
+
+    <div style="text-align:center;margin:24px 0">
+      <div class="selo-card acucar">🔍 ALTO EM AÇÚCAR ADICIONADO</div>
+      <div class="selo-card sodio">🔍 ALTO EM SÓDIO</div>
+      <div class="selo-card gordura">🔍 ALTO EM GORDURA SATURADA</div>
+    </div>
+
+    <h3>Quando os selos são obrigatórios?</h3>
+
+    <div class="info-card">
+      <h4>🍬 Alto em Açúcar Adicionado</h4>
+      <p>Aparece quando o produto tem <strong>15g ou mais de açúcar adicionado por 100g</strong> (sólidos) ou <strong>7,5g ou mais por 100ml</strong> (líquidos). Muito presente em biscoitos, achocolatados, cereais matinais e iogurtes saborizados.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>🧂 Alto em Sódio</h4>
+      <p>Aparece quando o produto tem <strong>600mg ou mais de sódio por 100g</strong> (sólidos) ou <strong>300mg ou mais por 100ml</strong> (líquidos). Comum em embutidos, temperos prontos, macarrões instantâneos e snacks salgados.</p>
+    </div>
+
+    <div class="info-card">
+      <h4>🫒 Alto em Gordura Saturada</h4>
+      <p>Aparece quando o produto tem <strong>6g ou mais de gordura saturada por 100g</strong> (sólidos) ou <strong>3g ou mais por 100ml</strong> (líquidos). Frequente em sorvetes, chocolates, margarinas e alimentos fritos embalados.</p>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Importante:</strong> Os selos não significam que o produto é proibido — são ferramentas de informação. Um chocolate de qualidade pode ter o selo de gordura saturada, mas continua sendo infinitamente melhor que um biscoito recheado com três selos. Use os selos como guia, não como regra absoluta.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch6')">← Capítulo 6</button>
+      <button onclick="goTo('ch8')">Capítulo 8 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 8 ==================== -->
+<div class="page" id="ch8">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 8</div>
+      <div class="ch-title">Checklist da<br><span class="ch-title-alt">Compra Inteligente</span></div>
+    </div>
+
+    <p>Agora que você já sabe interpretar rótulos, aqui está seu passo a passo para usar no supermercado. Cada vez que pegar um produto novo, siga estes 7 passos:</p>
+
+    <div class="info-card" style="padding:0;overflow:hidden">
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px;background:var(--pink-pale)">
+        <span class="step-number">1</span>
+        <div><strong>Leia a lista de ingredientes</strong><br><span style="font-size:.85rem;color:var(--text-light)">Comece sempre por aqui. Se a lista for enorme e cheia de nomes que você não reconhece, repense a compra.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px">
+        <span class="step-number">2</span>
+        <div><strong>Observe os 3 primeiros ingredientes</strong><br><span style="font-size:.85rem;color:var(--text-light)">Eles representam a maior parte do produto. Se açúcar, gordura vegetal ou farinha refinada estão aí, é sinal de alerta.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px;background:var(--pink-pale)">
+        <span class="step-number">3</span>
+        <div><strong>Verifique o tamanho da porção</strong><br><span style="font-size:.85rem;color:var(--text-light)">Confira se a porção informada corresponde ao que você realmente consome. Muitas vezes a porção é irreal.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px">
+        <span class="step-number">4</span>
+        <div><strong>Analise as fibras</strong><br><span style="font-size:.85rem;color:var(--text-light)">Quanto mais, melhor. Prefira opções com pelo menos 2,5g por porção.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px;background:var(--pink-pale)">
+        <span class="step-number">5</span>
+        <div><strong>Analise as proteínas</strong><br><span style="font-size:.85rem;color:var(--text-light)">Mais proteína geralmente indica maior valor nutricional e mais saciedade.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px">
+        <span class="step-number">6</span>
+        <div><strong>Observe o sódio</strong><br><span style="font-size:.85rem;color:var(--text-light)">Evite produtos com mais de 400mg por porção. Compare sempre com similares e prefira a opção com menos sódio.</span></div>
+      </div>
+      <div style="padding:20px 24px;display:flex;align-items:center;gap:12px;background:var(--pink-pale)">
+        <span class="step-number">7</span>
+        <div><strong>Verifique açúcares adicionados</strong><br><span style="font-size:.85rem;color:var(--text-light)">Observe se o produto tem selos da Anvisa e se o açúcar está entre os primeiros ingredientes.</span></div>
+      </div>
+    </div>
+
+    <div class="highlight-box gold">
+      <strong>Dica da Nutri:</strong> Nos primeiros dias pode parecer trabalhoso, mas em poucas semanas você já vai saber de cor quais produtos merecem espaço no seu carrinho. Vira automático!
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch7')">← Capítulo 7</button>
+      <button onclick="goTo('ch9')">Capítulo 9 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO 9 ==================== -->
+<div class="page" id="ch9">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo 9</div>
+      <div class="ch-title">Supermercado<br><span class="ch-title-alt">na Prática</span></div>
+    </div>
+
+    <p>Vamos aplicar tudo o que aprendemos? Organizei por categoria os tipos de produtos que você vai encontrar no supermercado, divididos entre: evitar, consumir ocasionalmente e melhores escolhas.</p>
+
+    <h3>🍞 Pães</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Pão de forma branco</div><div class="p-desc">Farinha refinada, açúcar, muitos aditivos</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Bisnaguinha integral</div><div class="p-desc">Pode ter mais açúcar do que parece. Confira!</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Pão 100% integral artesanal</div><div class="p-desc">Poucos ingredientes, farinha integral em 1º lugar</div></div>
+    </div>
+
+    <h3>🥛 Iogurtes</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Iogurte de morango "polpa"</div><div class="p-desc">Corante, aromatizante, muito açúcar</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Iogurte grego light</div><div class="p-desc">Menos gordura, mas pode ter amido e adoçante</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Iogurte natural integral</div><div class="p-desc">Leite + fermento lácteo. O mais simples e nutritivo</div></div>
+    </div>
+
+    <h3>🍪 Biscoitos</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Biscoito recheado</div><div class="p-desc">Açúcar, gordura vegetal, aditivos em excesso</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Biscoito integral industrializado</div><div class="p-desc">Pode ter farinha branca como 1º ingrediente</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Biscoito de arroz ou polvilho</div><div class="p-desc">Poucos ingredientes, sem açúcar adicionado</div></div>
+    </div>
+
+    <h3>📊 Barras</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Barra de cereal açucarada</div><div class="p-desc">Xarope de glicose, açúcar, gordura vegetal</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Barra proteica com cobertura</div><div class="p-desc">Boa proteína, mas analise açúcar e aditivos</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Barra de nuts e sementes</div><div class="p-desc">Ingredientes reconhecíveis, sem xaropes</div></div>
+    </div>
+
+    <h3>🥣 Cereais</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Cereal colorido açucarado</div><div class="p-desc">Mais açúcar que fibra, corantes artificiais</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Granola industrializada</div><div class="p-desc">Pode ter açúcar mascavo/mel em excesso</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Aveia em flocos + sementes</div><div class="p-desc">Monte sua própria granola com ingredientes reais</div></div>
+    </div>
+
+    <h3>🥤 Bebidas</h3>
+    <div class="product-grid">
+      <div class="product-item avoid"><div class="emoji">🔴</div><div class="p-name">Refrigerante / Suco de caixinha</div><div class="p-desc">Açúcar ou adoçantes, aditivos, zero nutrientes</div></div>
+      <div class="product-item ok"><div class="emoji">🟡</div><div class="p-name">Suco integral sem açúcar</div><div class="p-desc">Melhor escolha, mas sem fibras da fruta inteira</div></div>
+      <div class="product-item best"><div class="emoji">🟢</div><div class="p-name">Água, água com gás, chás naturais</div><div class="p-desc">A hidratação mais limpa e acessível que existe</div></div>
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch8')">← Capítulo 8</button>
+      <button onclick="goTo('chExtra')">Capítulo Extra →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CAPÍTULO EXTRA ==================== -->
+<div class="page" id="chExtra">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Capítulo Extra</div>
+      <div class="ch-title">Corantes e Caramelos<br><span class="ch-title-alt">O Que Você Precisa Saber</span></div>
+    </div>
+
+    <p>Quando olhamos um alimento e pensamos <em>"que cor bonita"</em>, muitas vezes essa aparência foi criada artificialmente para aumentar o desejo de compra. Os corantes são aditivos utilizados para deixar os alimentos mais atrativos visualmente, mas nem sempre trazem benefícios para a saúde.</p>
+
+    <h3>O que são corantes?</h3>
+    <p>Corantes são substâncias adicionadas aos alimentos para modificar, intensificar ou padronizar sua cor. Eles podem ser naturais ou artificiais.</p>
+
+    <h3>Corantes Naturais</h3>
+    <p>Obtidos de fontes naturais, como plantas, frutas, vegetais e minerais. Geralmente são considerados opções mais seguras e menos processadas.</p>
+    <div class="colorant-grid">
+      <div class="colorant-card natural">🌿 Urucum</div>
+      <div class="colorant-card natural">🥕 Betacaroteno</div>
+      <div class="colorant-card natural">🟡 Cúrcuma</div>
+      <div class="colorant-card natural">🌱 Clorofila</div>
+      <div class="colorant-card natural">🌶️ Páprica</div>
+    </div>
+
+    <h3>Corantes Artificiais</h3>
+    <p>Produzidos em laboratório para oferecer cores mais intensas e duradouras. São frequentemente encontrados em balas, gelatinas, refrigerantes, sorvetes, biscoitos recheados e cereais matinais coloridos.</p>
+    <div class="colorant-grid">
+      <div class="colorant-card artificial">Tartrazina (Amarelo nº 5)</div>
+      <div class="colorant-card artificial">Amarelo Crepúsculo</div>
+      <div class="colorant-card artificial">Vermelho 40</div>
+      <div class="colorant-card artificial">Azul Brilhante</div>
+      <div class="colorant-card artificial">Eritrosina</div>
+    </div>
+
+    <div class="highlight-box alert">
+      <strong>Atenção aos Corantes Artificiais</strong><br>
+      Embora aprovados para uso dentro dos limites estabelecidos pelos órgãos reguladores, algumas pessoas podem apresentar sensibilidade a determinados corantes. Alguns estudos sugerem possíveis associações entre o consumo excessivo de certos corantes artificiais e reações alérgicas, hiperatividade em crianças suscetíveis e alterações comportamentais em indivíduos sensíveis. Por isso, quanto menor a exposição a alimentos ultraprocessados ricos em aditivos, melhor.
+    </div>
+
+    <h3>O Que é o Corante Caramelo?</h3>
+    <p>O corante caramelo é um dos aditivos mais utilizados pela indústria alimentícia. Ele está presente em refrigerantes tipo cola, molhos prontos, caldos industrializados, biscoitos, pães industrializados e bebidas alcoólicas. Sua função é dar coloração marrom ao alimento.</p>
+
+    <h4>Os Diferentes Tipos de Caramelo</h4>
+    <div class="caramel-scale">
+      <div class="caramel-item c1"><strong>Caramelo I</strong>INS 150a<br>Aquecimento de açúcares</div>
+      <div class="caramel-item c2"><strong>Caramelo II</strong>INS 150b<br>Com sulfitos</div>
+      <div class="caramel-item c3"><strong>Caramelo III</strong>INS 150c<br>Com amônia</div>
+      <div class="caramel-item c4"><strong>Caramelo IV</strong>INS 150d<br>Amônia + sulfitos</div>
+    </div>
+    <p>O Caramelo IV é o mais utilizado em refrigerantes escuros.</p>
+
+    <h3>Como Identificar no Rótulo</h3>
+    <p>Procure por termos como:</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:16px 0">
+      <span class="tag">Corante caramelo</span>
+      <span class="tag">Caramelo I a IV</span>
+      <span class="tag">INS 150a</span>
+      <span class="tag">INS 150b</span>
+      <span class="tag">INS 150c</span>
+      <span class="tag">INS 150d</span>
+    </div>
+
+    <div class="info-card">
+      <h4>✅ Regra Prática da Nutricionista</h4>
+      <p>Ao analisar um produto, pergunte: a cor é realmente necessária? O alimento teria a mesma qualidade sem esse corante? Existem muitas substâncias artificiais na lista de ingredientes? Quanto mais colorido artificialmente for um alimento, maior a chance de ele ser ultraprocessado.</p>
+    </div>
+
+    <h3>Resumo Rápido</h3>
+    <div class="traffic">
+      <span class="t green">🟢 Menos ingredientes e mais naturais = melhor escolha</span>
+      <span class="t green">🟢 Corantes naturais costumam ser preferíveis</span>
+      <span class="t yellow">🟡 Corante caramelo merece atenção em ultraprocessados</span>
+      <span class="t red">🔴 Muitos corantes artificiais = procure alternativa mais simples</span>
+    </div>
+
+    <div class="highlight-box gold">
+      Lembre-se: a melhor estratégia não é procurar alimentos "perfeitos", mas aprender a fazer escolhas cada vez mais conscientes.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('ch9')">← Capítulo 9</button>
+      <button onclick="goTo('quiz')">Quiz Interativo →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== QUIZ ==================== -->
+<div class="page" id="quiz">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Quiz Interativo</div>
+      <div class="ch-title">Teste Seu<br><span class="ch-title-alt">Conhecimento!</span></div>
+    </div>
+
+    <p>Chegou a hora de colocar em prática tudo o que você aprendeu. Responda às 10 perguntas abaixo e descubra se você já é uma especialista em rótulos!</p>
+
+    <div id="quizContainer"></div>
+
+    <div class="quiz-score" id="quizScore" style="display:none">
+      <div class="score-label">Sua pontuação</div>
+      <div class="score-num" id="scoreNum">0/10</div>
+      <p id="scoreMsg" style="margin-top:12px;color:var(--wine)"></p>
+      <button onclick="resetQuiz()" style="margin-top:16px;background:var(--wine);color:var(--white);border:none;padding:10px 28px;border-radius:20px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600">Refazer Quiz</button>
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('chExtra')">← Corantes</button>
+      <button onclick="goTo('challenge')">Desafio 7 Dias →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DESAFIO 7 DIAS ==================== -->
+<div class="page" id="challenge">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Desafio</div>
+      <div class="ch-title">7 Dias de Leitura<br><span class="ch-title-alt">de Rótulos</span></div>
+    </div>
+
+    <p>Conhecimento sem prática vira esquecimento. Por isso, preparei um desafio de 7 dias para você transformar a leitura de rótulos em hábito. A cada dia, uma missão simples e rápida.</p>
+
+    <div class="day-card">
+      <div class="day-num">1</div>
+      <div class="day-content">
+        <h4>Dia da Despensa</h4>
+        <p>Escolha 3 produtos da sua despensa e leia a lista de ingredientes de cada um. Anote quantos ingredientes cada um tem.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">2</div>
+      <div class="day-content">
+        <h4>Caça ao Açúcar</h4>
+        <p>Identifique produtos na sua casa que contenham açúcar disfarçado (xarope de glicose, maltodextrina, dextrose etc.).</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">3</div>
+      <div class="day-content">
+        <h4>Comparação Inteligente</h4>
+        <p>No supermercado, escolha uma categoria (iogurte, pão ou cereal) e compare dois produtos da mesma prateleira pelo rótulo.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">4</div>
+      <div class="day-content">
+        <h4>Desmascarando o Marketing</h4>
+        <p>Encontre 2 produtos que usem palavras como "fit", "natural" ou "integral" e confira se o conteúdo real corresponde à promessa.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">5</div>
+      <div class="day-content">
+        <h4>Verificação de Sódio</h4>
+        <p>Analise o sódio de 3 produtos que você consome com frequência. Algum ultrapassa 400mg por porção?</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">6</div>
+      <div class="day-content">
+        <h4>Troca Consciente</h4>
+        <p>Substitua pelo menos 1 produto da sua rotina por uma versão com ingredientes mais simples e naturais.</p>
+      </div>
+    </div>
+    <div class="day-card">
+      <div class="day-num">7</div>
+      <div class="day-content">
+        <h4>Compra Guiada</h4>
+        <p>Faça uma compra completa usando o checklist dos 7 passos do Capítulo 8. Celebre cada escolha consciente!</p>
+      </div>
+    </div>
+
+    <div class="highlight-box gold">
+      <strong>Ao final dos 7 dias, você terá desenvolvido um novo olhar sobre os alimentos.</strong> Não precisa ser perfeita — precisa ser cada vez mais consciente.
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('quiz')">← Quiz</button>
+      <button onclick="goTo('bonus')">Material Bônus →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BÔNUS ==================== -->
+<div class="page" id="bonus">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Material Bônus</div>
+      <div class="ch-title">Guia de Bolso da<br><span class="ch-title-alt">Leitura de Rótulos</span></div>
+    </div>
+
+    <p>Salve esta seção ou tire um print para consultar rapidamente durante suas compras. Aqui está tudo resumido para facilitar suas escolhas no dia a dia.</p>
+
+    <div class="pocket">
+      <h4>🍬 Açúcares Escondidos — Fique Atenta!</h4>
+      <ul>
+        <li>Xarope de glicose / Xarope de milho</li>
+        <li>Maltodextrina</li>
+        <li>Dextrose / Glucose</li>
+        <li>Frutose / Sacarose</li>
+        <li>Açúcar invertido</li>
+        <li>Xarope de malte / Xarope de arroz</li>
+        <li>Melado / Melaço</li>
+        <li>Néctar de agave</li>
+        <li>Suco de fruta concentrado</li>
+        <li>Polydextrose</li>
+      </ul>
+
+      <h4>⚠️ Ingredientes que Merecem Atenção</h4>
+      <ul>
+        <li>Gordura vegetal hidrogenada (gordura trans)</li>
+        <li>Glutamato monossódico (realçador de sabor)</li>
+        <li>Corantes artificiais (Tartrazina, Vermelho 40...)</li>
+        <li>Corante caramelo IV (INS 150d)</li>
+        <li>Aromatizantes artificiais</li>
+        <li>Emulsificantes (polisorbato, lecitina de soja modificada)</li>
+        <li>Edulcorantes artificiais em excesso</li>
+      </ul>
+
+      <h4>✅ Critérios para Escolher um Bom Produto</h4>
+      <ul>
+        <li>Lista curta de ingredientes (até 5 = ideal)</li>
+        <li>Primeiro ingrediente = ingrediente real</li>
+        <li>Sem açúcar entre os 3 primeiros</li>
+        <li>Fibras acima de 2,5g por porção</li>
+        <li>Sódio abaixo de 400mg por porção</li>
+        <li>Sem gordura vegetal hidrogenada</li>
+        <li>Sem corantes artificiais</li>
+        <li>Poucos ou nenhum selo de alerta da Anvisa</li>
+      </ul>
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('challenge')">← Desafio</button>
+      <button onclick="goTo('conclusion')">Conclusão →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONCLUSÃO ==================== -->
+<div class="page" id="conclusion">
+  <div class="content-page">
+    <div class="ch-header">
+      <div class="ch-eyebrow">Conclusão</div>
+      <div class="ch-title">Sua Jornada de<br><span class="ch-title-alt">Escolhas Conscientes</span></div>
+    </div>
+
+    <p>Se você chegou até aqui, quero te parabenizar. Ler este guia por completo mostra que você está comprometida com a sua saúde e com a saúde de quem você ama.</p>
+
+    <p>Aprender a ler rótulos não é sobre se tornar obcecada por cada detalhe nutricional. É sobre ter <strong>informação para fazer escolhas mais conscientes</strong>, sem culpa e sem paranoia.</p>
+
+    <p>A partir de agora, quando você olhar para um produto no supermercado, vai enxergar muito além da embalagem bonita. Vai entender o que realmente está dentro daquele pacote. E essa informação é poder.</p>
+
+    <div class="highlight-box gold" style="text-align:center">
+      <span style="font-family:'Merienda',cursive;font-size:1.2rem;color:var(--wine);display:block;margin-bottom:8px">✨ Lembre-se sempre ✨</span>
+      <strong>Você não precisa ser perfeita. Precisa ser consciente.</strong><br>
+      Cada escolha um pouco melhor do que a anterior já é uma grande vitória.
+    </div>
+
+    <p>Compartilhe este guia com amigas, familiares e com quem mais possa se beneficiar deste conhecimento. Porque quando uma mulher aprende, ela transforma a casa inteira.</p>
+
+    <div class="cta-box">
+      <h3>Quer ir além?</h3>
+      <p>Agende uma consulta personalizada e vamos construir juntas o plano alimentar ideal para você.</p>
+      <a href="https://wa.me/message/MKAWDGILVCXCI1" target="_blank" class="cta-btn">📱 Falar com a Nutri Ana</a>
+    </div>
+
+    <div style="text-align:center;margin:40px 0 20px">
+      <p style="font-family:'Merienda',cursive;color:var(--wine);font-size:1rem">Com carinho,</p>
+      <p style="font-weight:700;font-size:1.1rem;color:var(--wine-dark)">Nutricionista Ana Luísa Rocha</p>
+      <p style="font-size:.82rem;color:var(--text-light)">CRN 25100401</p>
+      <p style="font-size:.78rem;color:var(--text-light);margin-top:8px;font-style:italic">"Nutricionista apaixonada por transformar vidas através da alimentação.<br>Atendimento humanizado, baseado em ciência e focado em resultados sustentáveis."</p>
+    </div>
+
+    <div class="page-nav">
+      <button onclick="goTo('bonus')">← Material Bônus</button>
+      <button onclick="goTo('cover')">Voltar à Capa</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+const pages=['cover','toc','intro','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch8','ch9','chExtra','quiz','challenge','bonus','conclusion'];
+
+function goTo(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+  updateProgress(id);
+  // Update active nav
+  document.querySelectorAll('.nav-menu a').forEach(a=>a.classList.remove('active'));
+  const idx=pages.indexOf(id);
+  if(idx>=0){const links=document.querySelectorAll('.nav-menu a');if(links[idx])links[idx].classList.add('active')}
+  if(document.querySelector('.nav-menu').classList.contains('open'))toggleMenu();
+}
+
+function updateProgress(id){
+  const idx=pages.indexOf(id);
+  const pct=((idx)/(pages.length-1))*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+}
+
+function toggleMenu(){
+  document.querySelector('.nav-menu').classList.toggle('open');
+  document.querySelector('.nav-overlay').classList.toggle('show');
+}
+
+// ===== ACCORDION =====
+function toggleAcc(btn){
+  const body=btn.nextElementSibling;
+  const isOpen=body.classList.contains('open');
+  // Close all in same accordion
+  const acc=btn.closest('.accordion');
+  if(acc){acc.querySelectorAll('.acc-body').forEach(b=>b.classList.remove('open'));acc.querySelectorAll('.acc-header').forEach(h=>h.classList.remove('open'))}
+  if(!isOpen){body.classList.add('open');btn.classList.add('open')}
+}
+
+// ===== CHECKLIST =====
+document.addEventListener('click',function(e){
+  if(e.target.closest('.checklist li')){e.target.closest('li').classList.toggle('checked')}
+});
+
+// ===== QUIZ =====
+const quizData=[
+  {q:"Na lista de ingredientes, o primeiro item é:",opts:["O mais saboroso","O mais importante nutricionalmente","O mais presente em quantidade","O mais caro"],correct:2,explain:"Os ingredientes são listados em ordem decrescente de quantidade. O primeiro é sempre o mais abundante no produto."},
+  {q:"Qual destes nomes NÃO é uma forma de açúcar?",opts:["Maltodextrina","Dextrose","Lecitina de soja","Xarope de glicose"],correct:2,explain:"Lecitina de soja é um emulsificante, não uma forma de açúcar. Todos os outros são tipos de açúcar."},
+  {q:"Um produto com 'gordura vegetal hidrogenada' na lista de ingredientes contém:",opts:["Gordura boa para o coração","Gordura trans","Fibra vegetal","Ômega 3"],correct:1,explain:"Gordura vegetal hidrogenada é sinônimo de gordura trans, a mais prejudicial para a saúde cardiovascular."},
+  {q:"Quantos miligramas de sódio por porção merecem atenção redobrada?",opts:["Acima de 100mg","Acima de 200mg","Acima de 400mg","Acima de 50mg"],correct:2,explain:"Produtos com mais de 400mg de sódio por porção merecem atenção especial, pois a recomendação diária total é de no máximo 2.000mg."},
+  {q:"O que significa a expressão 'light' no rótulo?",opts:["O produto não tem calorias","Tem redução de pelo menos 25% em algum nutriente","É 100% natural","É orgânico e sem aditivos"],correct:1,explain:"Light indica redução de pelo menos 25% em algum nutriente em relação à versão convencional, mas isso não garante que o produto seja saudável."},
+  {q:"Como saber se um pão é realmente integral?",opts:["Se a embalagem é marrom","Se diz 'integral' na frente","Se a farinha integral é o 1º ingrediente","Se tem sementes por cima"],correct:2,explain:"O verdadeiro indicador é a lista de ingredientes: a farinha de trigo integral deve ser o primeiro ingrediente."},
+  {q:"Os novos selos de alerta da Anvisa são obrigatórios quando o produto é alto em:",opts:["Açúcar, sódio e gordura saturada","Fibras e proteínas","Vitaminas e minerais","Calorias totais"],correct:0,explain:"Os selos em formato de lupa alertam sobre altos teores de açúcar adicionado, sódio e gordura saturada."},
+  {q:"Qual é o tipo de corante caramelo mais utilizado em refrigerantes escuros?",opts:["Caramelo I","Caramelo II","Caramelo III","Caramelo IV"],correct:3,explain:"O Caramelo IV (INS 150d), produzido com amônia e sulfitos, é o mais utilizado em refrigerantes tipo cola."},
+  {q:"Um produto com lista de ingredientes muito longa e nomes que você não reconhece provavelmente é:",opts:["Orgânico","In natura","Ultraprocessado","Integral"],correct:2,explain:"Listas longas com aditivos, emulsificantes, aromatizantes e nomes técnicos são características de produtos ultraprocessados."},
+  {q:"Qual a melhor atitude ao fazer compras no supermercado?",opts:["Comprar apenas pela marca conhecida","Escolher pelo preço mais baixo","Ler a lista de ingredientes antes de decidir","Seguir apenas as promoções"],correct:2,explain:"A melhor atitude é sempre ler a lista de ingredientes e a tabela nutricional antes de colocar o produto no carrinho."}
+];
+
+let quizAnswered=0,quizScore=0;
+
+function buildQuiz(){
+  const c=document.getElementById('quizContainer');
+  c.innerHTML='';
+  quizAnswered=0;quizScore=0;
+  document.getElementById('quizScore').style.display='none';
+  quizData.forEach((item,i)=>{
+    let html=`<div class="quiz-q" id="q${i}"><div class="q-num">Pergunta ${i+1} de 10</div><div class="q-text">${item.q}</div>`;
+    item.opts.forEach((opt,j)=>{
+      html+=`<button class="quiz-opt" onclick="answerQuiz(${i},${j})">${opt}</button>`;
+    });
+    html+=`<div class="quiz-feedback" id="fb${i}"></div></div>`;
+    c.innerHTML+=html;
+  });
+}
+
+function answerQuiz(qi,oi){
+  const qEl=document.getElementById('q'+qi);
+  if(qEl.dataset.answered)return;
+  qEl.dataset.answered='true';
+  quizAnswered++;
+  const btns=qEl.querySelectorAll('.quiz-opt');
+  const correct=quizData[qi].correct;
+  if(oi===correct){quizScore++;btns[oi].classList.add('correct')}
+  else{btns[oi].classList.add('wrong');btns[correct].classList.add('reveal')}
+  const fb=document.getElementById('fb'+qi);
+  fb.innerHTML=`<strong>${oi===correct?'✅ Correto!':'❌ Não foi dessa vez.'}</strong> ${quizData[qi].explain}`;
+  fb.style.background=oi===correct?'#d4edda':'#f8d7da';
+  fb.classList.add('show');
+  if(quizAnswered===10)showScore();
+}
+
+function showScore(){
+  const s=document.getElementById('quizScore');
+  s.style.display='block';
+  document.getElementById('scoreNum').textContent=quizScore+'/10';
+  let msg='';
+  if(quizScore<=4)msg='Continue estudando! Releia os capítulos e refaça o quiz. Você vai chegar lá! 💪';
+  else if(quizScore<=7)msg='Muito bem! Você já tem uma boa base. Revise os pontos que errou e ficará ainda melhor! 🌟';
+  else msg='Parabéns! Você é uma verdadeira especialista em rótulos! 🏆';
+  document.getElementById('scoreMsg').textContent=msg;
+  s.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function resetQuiz(){buildQuiz()}
+
+buildQuiz();
+</script>
+</body>
+</html>
