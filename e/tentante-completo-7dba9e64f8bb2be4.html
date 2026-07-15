@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Completo da Tentante — Ana Luísa Rocha</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bordo:#8E1B6C; --bordo-escuro:#6B1450; --bordo-hover:#7A1760;
+    --rosa:#F1B3DB; --rosa-suave:#FBEAF4; --rosa-borda:#F3D3E7; --blush:#FADCEC;
+    --dourado:#C79A3E; --dourado-claro:#E7CE92;
+    --texto:#2c2230; --cinza:#6f6470; --creme:#FFFCFE;
+    --serif:"Merienda",Georgia,serif; --sans:"Montserrat","Segoe UI",system-ui,sans-serif;
+    --shadow:0 18px 50px rgba(107,20,80,.14);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:20px}
+  body{margin:0;font-family:var(--sans);color:var(--texto);background:var(--creme);line-height:1.7;font-size:17px}
+  img,svg{max-width:100%}
+  h1,h2,h3,h4{font-family:var(--serif);color:var(--bordo);line-height:1.2;font-weight:900;text-wrap:balance}
+  a{color:var(--bordo)}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Reveal ao rolar ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1 !important;transform:none !important;transition:none}}
+
+  /* ---------- CAPA ---------- */
+  .capa{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:60px 24px;color:#fff;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 50% 35%,#9d2278 0%,#7a1861 45%,#5a0f45 100%)}
+  .capa .ring{position:absolute;border-radius:50%;border:1px solid rgba(231,206,146,.35);opacity:.55;animation:float 9s ease-in-out infinite}
+  .capa .ring.r1{width:340px;height:340px;top:-120px;left:-100px}
+  .capa .ring.r2{width:400px;height:400px;bottom:-160px;right:-140px;animation-delay:-3s}
+  .capa .spark{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--dourado-claro);opacity:.7;animation:twinkle 4s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+  @keyframes twinkle{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.85;transform:scale(1)}}
+  .capa .selo{position:relative;font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:700;color:var(--dourado-claro);border:1px solid rgba(231,206,146,.5);border-radius:999px;padding:8px 18px;margin-bottom:24px}
+  .capa .flor{position:relative;margin-bottom:14px;color:var(--dourado-claro);opacity:.95}
+  .capa h1{position:relative;color:#fff;font-size:clamp(2.2rem,7vw,3.4rem);margin:0 0 10px;text-shadow:0 8px 30px rgba(0,0,0,.3)}
+  .capa .sub{position:relative;max-width:30ch;color:rgba(255,255,255,.9);font-size:1.05rem;margin:0 auto 26px}
+  .capa .autora{position:relative;font-family:var(--serif);font-size:1.4rem;color:var(--dourado-claro);margin-top:8px}
+  .capa .crn{position:relative;font-size:.82rem;color:rgba(255,255,255,.75);letter-spacing:.06em}
+  .capa .scroll{position:relative;margin-top:38px;font-size:.8rem;color:rgba(255,255,255,.7);letter-spacing:.14em;text-transform:uppercase;animation:bob 2s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  /* ---------- ÍNDICE ---------- */
+  .indice{padding:64px 0}
+  .eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--bordo);opacity:.8}
+  .indice h2{font-size:1.9rem;margin:.3rem 0 1.6rem}
+  .toc{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .toc li a{display:flex;align-items:center;gap:16px;padding:14px 18px;border:1px solid var(--rosa-borda);border-radius:14px;
+    text-decoration:none;color:var(--texto);background:#fff;transition:.18s}
+  .toc li a:hover{border-color:var(--bordo);transform:translateX(4px);box-shadow:0 8px 20px rgba(142,27,108,.1)}
+  .toc .n{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.15rem;min-width:32px}
+  .toc .soon{opacity:.5;pointer-events:none}
+  .toc .soon .tagsoon{margin-left:auto;font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--rosa-suave);color:var(--bordo);padding:3px 9px;border-radius:999px}
+
+  /* ---------- MÓDULOS ---------- */
+  .modulo{padding:56px 0;border-top:1px solid var(--rosa-borda)}
+  .mod-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;color:#fff;background:var(--bordo);padding:6px 14px;border-radius:999px;margin-bottom:14px}
+  .modulo h2{font-size:2rem;margin:0 0 8px}
+  .modulo h3{font-size:1.3rem;margin:34px 0 10px;display:flex;align-items:center;gap:10px}
+  .modulo h3 .ic{flex:none}
+  .modulo p{margin:0 0 16px}
+  .lead-txt{font-size:1.08rem;color:var(--cinza)}
+  .divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:38px 0;color:var(--dourado-claro);border:0}
+  .divider::before,.divider::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--dourado-claro))}
+  .divider::after{background:linear-gradient(90deg,var(--dourado-claro),transparent)}
+
+  /* Bloco ilustrado (texto + arte) */
+  .ilustra{display:grid;grid-template-columns:1fr 150px;gap:22px;align-items:center;
+    background:linear-gradient(160deg,#fff,var(--rosa-suave));border:1px solid var(--rosa-borda);border-radius:18px;padding:22px 24px;margin:22px 0}
+  .ilustra.rev{grid-template-columns:150px 1fr}
+  .ilustra p{margin:0}
+  .ilustra .art{display:flex;align-items:center;justify-content:center}
+  @media(max-width:560px){.ilustra,.ilustra.rev{grid-template-columns:1fr}.ilustra .art{order:-1;max-width:130px;margin:0 auto}}
+
+  /* Grade de alimentos com ícones */
+  .foodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+  @media(max-width:620px){.foodgrid{grid-template-columns:repeat(2,1fr)}}
+  .food{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:16px 12px;text-align:center;transition:.2s}
+  .food:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(142,27,108,.14);border-color:var(--rosa)}
+  .food .badge{width:52px;height:52px;margin:0 auto 10px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--rosa-suave);border:1.5px solid var(--dourado-claro);color:var(--bordo)}
+  .food b{display:block;font-size:.9rem;color:var(--bordo);font-family:var(--serif)}
+  .food small{color:var(--cinza);font-size:.76rem;display:block;margin-top:2px;line-height:1.35}
+
+  /* Troca inteligente (flip cards) */
+  .swaps{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  @media(max-width:560px){.swaps{grid-template-columns:1fr}}
+  .flip{perspective:1000px;height:130px;cursor:pointer}
+  .flip__in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+  .flip.on .flip__in{transform:rotateY(180deg)}
+  .flip__f,.flip__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+    border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px}
+  .flip__f{background:#fff;border:1px solid var(--rosa-borda)}
+  .flip__f .k{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza);font-weight:700}
+  .flip__f b{font-family:var(--serif);color:var(--texto);font-size:1.1rem;margin-top:4px}
+  .flip__f .tap{margin-top:10px;font-size:.72rem;color:var(--bordo);opacity:.75}
+  .flip__b{background:linear-gradient(150deg,var(--bordo),var(--bordo-escuro));color:#fff;transform:rotateY(180deg)}
+  .flip__b .k{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dourado-claro);font-weight:700}
+  .flip__b b{font-family:var(--serif);font-size:1.15rem;margin-top:4px}
+
+  ul.warn{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:10px}
+  ul.warn li{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--rosa-borda);border-radius:12px;padding:12px 14px}
+  ul.warn li .wic{color:var(--dourado);flex:none;margin-top:2px;font-weight:900}
+
+  /* Caixa "O que a ciência mostra" */
+  .ciencia{background:linear-gradient(160deg,#fbf3e3,#fdf7ee);border:1px solid var(--dourado-claro);border-radius:18px;padding:22px 24px;margin:30px 0}
+  .ciencia h4{color:#8a6b1e;margin:0 0 8px;display:flex;align-items:center;gap:8px;font-size:1.05rem}
+  .ciencia p{font-size:.96rem;margin:0 0 10px}
+  .ciencia ol{margin:10px 0 0;padding-left:20px;font-size:.86rem;color:#5f5240}
+  .ciencia ol li{margin-bottom:6px}
+
+  .aviso{background:var(--rosa-suave);border-left:4px solid var(--bordo);border-radius:10px;padding:16px 18px;margin:24px 0;font-size:.95rem}
+  .aviso b{color:var(--bordo)}
+
+  /* Workbook */
+  .work{background:#fff;border:1px solid var(--rosa-borda);border-radius:18px;padding:24px;margin:28px 0;box-shadow:var(--shadow)}
+  .work h3{margin-top:0;display:flex;align-items:center;gap:10px}
+  .work .hint{font-size:.85rem;color:var(--cinza);margin:-4px 0 16px}
+  .check-head{display:flex;align-items:center;gap:20px;margin-bottom:12px}
+  .ring{flex:none}
+  .ring .track{fill:none;stroke:var(--rosa-suave);stroke-width:9}
+  .ring .prog{fill:none;stroke:var(--bordo);stroke-width:9;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .6s ease}
+  .ring text{font-family:var(--serif);font-weight:900;fill:var(--bordo);font-size:15px}
+  .check-head .cbmsg{font-size:.9rem;color:var(--cinza)}
+  .check-head .cbmsg b{color:var(--bordo);font-family:var(--serif)}
+  .task{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--rosa-borda)}
+  .task:last-child{border-bottom:0}
+  .task input[type=checkbox]{appearance:none;-webkit-appearance:none;width:22px;height:22px;flex:none;margin-top:2px;
+    border:2px solid var(--rosa);border-radius:6px;cursor:pointer;position:relative;transition:.15s;background:#fff}
+  .task input[type=checkbox]:checked{background:var(--bordo);border-color:var(--bordo)}
+  .task input[type=checkbox]:checked::after{content:"✓";color:#fff;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700}
+  .task label{cursor:pointer}
+  .task input:checked + label{color:var(--cinza);text-decoration:line-through}
+  .celebra{display:none;margin-top:14px;background:linear-gradient(150deg,#eaf6ee,#f4fbf6);border:1px solid #c7e8d3;border-radius:12px;padding:14px 16px;color:#1c6b3f;font-size:.92rem}
+  .celebra.on{display:block;animation:pop .4s ease}
+  @keyframes pop{from{transform:scale(.96);opacity:0}to{transform:none;opacity:1}}
+  .metas{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+  @media(max-width:540px){.metas{grid-template-columns:1fr}}
+  .meta-sem{border:1px solid var(--rosa-borda);border-radius:12px;padding:14px}
+  .meta-sem b{color:var(--bordo);font-family:var(--serif)}
+  .meta-sem input{width:100%;border:0;border-bottom:1px dashed var(--rosa);background:transparent;padding:6px 2px;font-family:var(--sans);font-size:.92rem;margin-top:8px}
+  .meta-sem input:focus{outline:0;border-color:var(--bordo)}
+  .notas{width:100%;min-height:120px;border:1px solid var(--rosa-borda);border-radius:12px;padding:14px;font-family:var(--sans);font-size:.95rem;resize:vertical;background:var(--rosa-suave)}
+  .notas:focus{outline:2px solid var(--bordo);background:#fff}
+  .saved{font-size:.78rem;color:#217a49;margin-top:8px;height:1em}
+
+  /* Nutrientes (flip mais alto) */
+  .flip.tall{height:158px}
+  /* Abas de fase do ciclo */
+  .phase-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 14px}
+  .phase-tabs button{font-family:var(--sans);font-weight:600;font-size:.85rem;border:1.5px solid var(--rosa-borda);background:#fff;color:var(--bordo);padding:8px 15px;border-radius:999px;cursor:pointer;transition:.15s}
+  .phase-tabs button.on{background:var(--bordo);color:#fff;border-color:var(--bordo)}
+  .phase-panel{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:20px 22px;min-height:120px}
+  .phase-panel .dia{font-size:.74rem;color:var(--dourado);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+  .phase-panel h4{margin:4px 0 8px;font-size:1.2rem}
+  .phase-wheel{display:block;margin:8px auto 0}
+  /* Calculadora embutida */
+  .calc{background:#fff;border:1px solid var(--rosa-borda);border-radius:18px;padding:22px 24px;margin:24px 0;box-shadow:var(--shadow)}
+  .calc .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:520px){.calc .row{grid-template-columns:1fr}}
+  .calc label{display:block;font-size:.85rem;font-weight:600;color:var(--bordo);margin-bottom:6px}
+  .calc input{width:100%;border:1px solid var(--rosa-borda);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-size:1rem}
+  .calc input:focus{outline:2px solid var(--bordo);border-color:var(--bordo)}
+  .calc .btn-primary{background:var(--bordo);color:#fff;border:1.5px solid var(--bordo);width:100%;justify-content:center;margin-top:14px}
+  .calc .btn-primary:hover{background:var(--bordo-hover)}
+  .calc-out{display:none;margin-top:18px;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .calc-out.on{display:grid;animation:pop .35s ease}
+  @media(max-width:520px){.calc-out.on{grid-template-columns:1fr}}
+  .calc-tile{border:1px solid var(--rosa-borda);border-radius:14px;padding:14px;text-align:center;background:var(--rosa-suave)}
+  .calc-tile.f{background:linear-gradient(150deg,#fdeaf4,#f7d3e7);border-color:#efb9d8}
+  .calc-tile .l{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--bordo);font-weight:700}
+  .calc-tile .v{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.02rem;margin-top:5px;line-height:1.2}
+
+  .mod-nav{display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;text-decoration:none;padding:12px 22px;border-radius:999px;border:1.5px solid var(--bordo);cursor:pointer;transition:.2s;font-size:.95rem}
+  .btn-ghost{background:transparent;color:var(--bordo)} .btn-ghost:hover{background:var(--rosa-suave)}
+  .back-top{text-align:center;margin-top:20px}
+  .back-top a{font-size:.85rem;color:var(--cinza);text-decoration:none}
+  /* Régua de fertilidade */
+  .ruler{height:18px;border-radius:999px;background:linear-gradient(90deg,#e7d3df,#f1b3db,#d6519a,#8E1B6C);margin:14px 0 6px}
+  .ruler-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--cinza);font-weight:600}
+  /* Tipos de muco */
+  .mucus{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+  @media(max-width:720px){.mucus{grid-template-columns:1fr 1fr}}
+  @media(max-width:440px){.mucus{grid-template-columns:1fr}}
+  .mtype{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:14px;text-align:center;display:flex;flex-direction:column}
+  .mtype.fertile{border:2px solid var(--bordo);box-shadow:0 10px 26px rgba(142,27,108,.16)}
+  .mtype .art{height:92px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+  .mtype .selo{align-self:center;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--bordo);color:#fff;padding:3px 9px;border-radius:999px;margin-bottom:6px}
+  .mtype b{color:var(--bordo);font-family:var(--serif)}
+  .mtype small{color:var(--cinza);font-size:.78rem;display:block;margin:3px 0 10px}
+  .mtype .obs{text-align:left;font-size:.78rem;display:flex;flex-direction:column;gap:7px;border-top:1px dashed var(--rosa-borda);padding-top:10px;margin-top:auto}
+  .mtype .obs label{display:flex;gap:7px;align-items:center;cursor:pointer;color:var(--cinza)}
+  .mtype .obs input{width:15px;height:15px;accent-color:var(--bordo);flex:none}
+  /* Tabelas */
+  .tbl-wrap{overflow-x:auto;margin:16px 0;border-radius:12px;border:1px solid var(--rosa-borda)}
+  .tbl{width:100%;border-collapse:collapse;font-size:.9rem;min-width:440px}
+  .tbl th{background:var(--bordo);color:#fff;font-family:var(--sans);font-weight:600;font-size:.78rem;padding:10px 12px;text-align:left}
+  .tbl td{padding:9px 12px;border-top:1px solid var(--rosa-borda);vertical-align:top}
+  .tbl tr:nth-child(even) td{background:var(--rosa-suave)}
+  .tbl input{width:100%;border:0;border-bottom:1px dashed var(--rosa);background:transparent;font-family:var(--sans);font-size:.84rem;padding:3px 0}
+  .tbl input:focus{outline:0;border-color:var(--bordo)}
+  /* Seed cycling / fases 2 cards */
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+  @media(max-width:560px){.duo{grid-template-columns:1fr}}
+  .phasebox{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:18px 20px}
+  .phasebox h4{margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .phasebox .fase-d{font-size:.74rem;color:var(--dourado);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .phasebox ul{margin:0;padding-left:18px}
+  /* Condições (accordion nativo) */
+  details.cond{background:#fff;border:1px solid var(--rosa-borda);border-radius:12px;margin:10px 0;padding:0 18px;overflow:hidden}
+  details.cond summary{cursor:pointer;font-family:var(--serif);color:var(--bordo);font-weight:900;font-size:1.05rem;padding:15px 0;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  details.cond summary::-webkit-details-marker{display:none}
+  details.cond summary::after{content:"+";color:var(--dourado);font-size:1.4rem;transition:.2s}
+  details.cond[open] summary::after{transform:rotate(45deg)}
+  details.cond p{padding:0 0 16px;margin:0;color:var(--texto)}
+  /* Cardápio dia */
+  details.dia{background:#fff;border:1px solid var(--rosa-borda);border-radius:12px;margin:9px 0;padding:0 18px}
+  details.dia summary{cursor:pointer;font-family:var(--serif);color:var(--bordo);font-weight:900;padding:13px 0;list-style:none;display:flex;justify-content:space-between}
+  details.dia summary::-webkit-details-marker{display:none}
+  details.dia summary::after{content:"▾";color:var(--dourado);transition:.2s}
+  details.dia[open] summary::after{transform:rotate(180deg)}
+  details.dia .refe{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;padding:6px 0 16px;font-size:.92rem}
+  details.dia .refe b{color:var(--bordo)}
+  /* Receitas */
+  .recipe{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:18px 20px;margin:12px 0}
+  .recipe h4{margin:0 0 4px}
+  .recipe .tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--bordo);background:var(--rosa-suave);border-radius:999px;padding:3px 10px;margin-bottom:8px}
+  .recipe .cols{display:grid;grid-template-columns:1fr 1.3fr;gap:16px}
+  @media(max-width:540px){.recipe .cols{grid-template-columns:1fr}}
+  .recipe h5{margin:0 0 6px;font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dourado)}
+  .recipe ul{margin:0;padding-left:18px;font-size:.92rem}
+  .recipe ol{margin:0;padding-left:18px;font-size:.92rem}
+  /* Tracker de água */
+  .water{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .water input{position:absolute;opacity:0;width:0;height:0}
+  .water label{cursor:pointer;color:var(--rosa);transition:.15s;display:flex}
+  .water input:checked + label{color:var(--bordo);transform:scale(1.08)}
+
+  footer.fim{background:var(--bordo-escuro);color:#fff;text-align:center;padding:50px 24px;margin-top:40px}
+  footer.fim .autora{font-family:var(--serif);font-size:1.5rem;color:var(--dourado-claro)}
+  footer.fim p{font-size:.85rem;color:rgba(255,255,255,.75);margin:6px 0 0}
+</style>
+</head>
+<body>
+
+<!-- ===================== CAPA ===================== -->
+<header class="capa" id="topo">
+  <span class="ring r1"></span><span class="ring r2"></span>
+  <span class="spark" style="top:22%;left:24%"></span>
+  <span class="spark" style="top:30%;right:20%;animation-delay:-1.5s"></span>
+  <span class="spark" style="bottom:26%;left:30%;animation-delay:-2.5s"></span>
+  <span class="selo">E-book · Guia Completo</span>
+  <div class="flor">
+    <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+      <path d="M12 12c0-3 1.5-6 0-9-1.5 3 0 6 0 9z"/><path d="M12 12c3 0 6 1.5 9 0-3-1.5-6 0-9 0z"/>
+      <path d="M12 12c0 3-1.5 6 0 9 1.5-3 0-6 0-9z"/><path d="M12 12c-3 0-6-1.5-9 0 3 1.5 6 0 9 0z"/>
+      <circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/></svg>
+  </div>
+  <h1>Guia Completo<br>da Tentante</h1>
+  <p class="sub">Prepare seu corpo, compreenda seu ciclo e desenvolva hábitos que apoiem sua jornada rumo à maternidade.</p>
+  <div class="autora">Ana Luísa Rocha</div>
+  <div class="crn">Nutricionista · CRN 25100401 · Saúde da Mulher</div>
+  <div class="scroll">↓ role para começar</div>
+</header>
+
+<!-- ===================== ÍNDICE ===================== -->
+<section class="indice">
+  <div class="wrap reveal">
+    <span class="eyebrow">Sumário</span>
+    <h2>Sua jornada em 12 módulos</h2>
+    <ul class="toc">
+      <li><a href="#mod1"><span class="n">1</span> Os primeiros 30 dias: desinflamando o organismo</a></li>
+      <li><a href="#mod2"><span class="n">2</span> Preparando o corpo para a gravidez</a></li>
+      <li><a href="#mod3"><span class="n">3</span> Entendendo o ciclo menstrual</a></li>
+      <li><a href="#mod4"><span class="n">4</span> Janela fértil e ovulação</a></li>
+      <li><a href="#mod5"><span class="n">5</span> Guia completo do muco cervical</a></li>
+      <li><a href="#mod6"><span class="n">6</span> Seed cycling — ciclo das sementes</a></li>
+      <li><a href="#mod7"><span class="n">7</span> Chás para cada fase do ciclo</a></li>
+      <li><a href="#mod8"><span class="n">8</span> Suplementação para tentantes</a></li>
+      <li><a href="#mod9"><span class="n">9</span> Condições que impactam a fertilidade</a></li>
+      <li><a href="#mod10"><span class="n">10</span> Cardápio completo de 30 dias</a></li>
+      <li><a href="#mod11"><span class="n">11</span> Receitas para fertilidade</a></li>
+      <li><a href="#mod12"><span class="n">12</span> Workbook da tentante</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 1 ===================== -->
+<section class="modulo" id="mod1">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🌸 Módulo 1</span>
+      <h2>Os Primeiros 30 Dias: Desinflamando o Organismo</h2>
+      <p class="lead-txt">Antes de pensar em ovulação, muco ou suplementos, existe um passo que prepara o terreno para tudo o que vem depois: reduzir a inflamação e cuidar do intestino. É por aqui que a gente começa.</p>
+    </div>
+
+    <!-- Inflamação -->
+    <div class="ilustra reveal">
+      <p><b style="color:var(--bordo)">O que é inflamação crônica de baixo grau?</b><br>
+      É uma inflamação <b>silenciosa</b> — não dói, não aparece — que fica "no fogo baixo" por meses, alimentada por noites mal dormidas, estresse, ultraprocessados, açúcar e álcool. Ela consome energia do corpo e atrapalha processos delicados, inclusive os hormonais. Desinflamar é baixar essa chama e preparar um ambiente mais tranquilo para o corpo trabalhar.</p>
+      <div class="art">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" stroke="var(--bordo)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M60 24c8 14 22 20 22 38a22 22 0 0 1-44 0c0-7 2-12 6-17 1 6 4 9 8 10-4-11 2-22 8-31z"/>
+          <path d="M60 96v12M46 100l-4 8M74 100l4 8" stroke="var(--dourado)"/>
+        </svg>
+      </div>
+    </div>
+
+    <h3><span class="ic">💗</span> Inflamação e seus hormônios</h3>
+    <p>Seus hormônios conversam o tempo todo com o resto do corpo. Com inflamação crônica, essa conversa fica "com ruído": a sinalização perde precisão e o equilíbrio do ciclo fica mais instável. Some-se o <b>cortisol</b> (hormônio do estresse) que, em excesso e por muito tempo, compete com o bom funcionamento do ciclo. Por isso sono, estresse e alimentação não são detalhe — são base.</p>
+
+    <!-- Intestino / microbiota -->
+    <div class="ilustra rev reveal">
+      <div class="art">
+        <svg width="130" height="120" viewBox="0 0 140 120" fill="none">
+          <path d="M22 92c0-42 34-30 34-58 0-8-6-14-14-14" stroke="var(--bordo)" stroke-width="11" stroke-linecap="round"/>
+          <path d="M118 92c0-42-34-30-34-58 0-8 6-14 14-14" stroke="var(--bordo)" stroke-width="11" stroke-linecap="round" opacity=".55"/>
+          <circle cx="46" cy="60" r="4" fill="var(--dourado)"/><circle cx="70" cy="44" r="3.4" fill="var(--rosa)"/>
+          <circle cx="90" cy="66" r="4.2" fill="var(--dourado)"/><circle cx="58" cy="80" r="3" fill="var(--rosa)"/>
+          <circle cx="80" cy="84" r="3.6" fill="var(--dourado)"/>
+        </svg>
+      </div>
+      <p><b style="color:var(--bordo)">O intestino é onde tudo começa.</b><br>
+      Grande parte da inflamação nasce (ou é apaziguada) ali. No seu intestino vivem trilhões de microrganismos — a <b>microbiota</b>. Bem alimentada com fibras, vegetais e fermentados, ela produz substâncias anti-inflamatórias e ajuda a regular o corpo. A boa notícia: ela responde <b>rápido</b> — poucas semanas de escolhas melhores já fazem diferença.</p>
+    </div>
+
+    <hr class="divider">
+
+    <!-- TROCA INTELIGENTE -->
+    <div class="reveal">
+      <h3><span class="ic">🔄</span> Troca inteligente <span style="font-size:.8rem;font-weight:400;color:var(--cinza)">(toque nos cards)</span></h3>
+      <p style="color:var(--cinza);font-size:.95rem">Desinflamar não é cortar tudo — é trocar o que pesa por algo que nutre. Toque para ver a troca:</p>
+      <div class="swaps">
+        <div class="flip"><div class="flip__in">
+          <div class="flip__f"><span class="k">No lugar de</span><b>Refrigerante</b><span class="tap">toque para virar ↻</span></div>
+          <div class="flip__b"><span class="k">Experimente</span><b>Água com gás, limão e hortelã</b></div>
+        </div></div>
+        <div class="flip"><div class="flip__in">
+          <div class="flip__f"><span class="k">No lugar de</span><b>Biscoito recheado</b><span class="tap">toque para virar ↻</span></div>
+          <div class="flip__b"><span class="k">Experimente</span><b>Fruta + castanhas</b></div>
+        </div></div>
+        <div class="flip"><div class="flip__in">
+          <div class="flip__f"><span class="k">No lugar de</span><b>Pão branco</b><span class="tap">toque para virar ↻</span></div>
+          <div class="flip__b"><span class="k">Experimente</span><b>Pão integral ou tapioca com ovo</b></div>
+        </div></div>
+        <div class="flip"><div class="flip__in">
+          <div class="flip__f"><span class="k">No lugar de</span><b>Suco de caixinha</b><span class="tap">toque para virar ↻</span></div>
+          <div class="flip__b"><span class="k">Experimente</span><b>Fruta in natura + água</b></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- ALIMENTOS ANTI-INFLAMATÓRIOS -->
+    <div class="reveal">
+      <h3><span class="ic">🥗</span> Alimentos que desinflamam</h3>
+      <div class="foodgrid">
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-8 6-14 16-14 0 10-6 15-14 15"/><path d="M4 20c3-5 7-8 11-10"/></svg></div><b>Vegetais</b><small>quanto mais cor, melhor</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="14" r="3.2"/><circle cx="15" cy="14" r="3.2"/><path d="M9.5 10.5c0-2 1-3 2.5-3s2.5 1 2.5 3"/></svg></div><b>Frutas</b><small>vermelhas e roxas</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4c4 3 5.5 6 5.5 9.5A5.5 5.5 0 0 1 6.5 13.5C6.5 10 8 7 12 4z"/><circle cx="12" cy="14" r="2.3"/></svg></div><b>Gorduras boas</b><small>azeite, abacate, castanhas</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 12c3-3.5 7-4.5 11-3 1.8.7 3.5 1.7 5 3-1.5 1.3-3.2 2.3-5 3-4 1.5-8 .5-11-3z"/><path d="M19 9l2-1.5v9L19 15"/></svg></div><b>Ômega-3</b><small>sardinha, salmão, linhaça</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 21V8"/><path d="M12 8c-2.2 0-3.4-1.7-3.4-3.4 2.2 0 3.4 1.7 3.4 3.4z"/><path d="M12 8c2.2 0 3.4-1.7 3.4-3.4-2.2 0-3.4 1.7-3.4 3.4z"/><path d="M12 14c-2.2 0-3.4-1.7-3.4-3.4 2.2 0 3.4 1.7 3.4 3.4z"/><path d="M12 14c2.2 0 3.4-1.7 3.4-3.4-2.2 0-3.4 1.7-3.4 3.4z"/></svg></div><b>Fibras</b><small>aveia, feijão, lentilha</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="7" y="8" width="10" height="12" rx="2"/><path d="M8 8V6h8v2M9.5 4h5"/></svg></div><b>Fermentados</b><small>iogurte, kefir</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12h16"/><path d="M5 12a7 7 0 0 0 14 0"/><path d="M14 3l-2 6"/></svg></div><b>Temperos</b><small>cúrcuma, gengibre, alho</small></div>
+        <div class="food"><div class="badge"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></div><b>Água</b><small>hidratação é parte</small></div>
+      </div>
+    </div>
+
+    <!-- ATENÇÃO -->
+    <div class="reveal">
+      <h3><span class="ic">⚠️</span> Reduza aos poucos</h3>
+      <ul class="warn">
+        <li><span class="wic">•</span><span><b>Ultraprocessados</b> — embutidos, salgadinhos, congelados prontos, biscoitos recheados.</span></li>
+        <li><span class="wic">•</span><span><b>Açúcar em excesso</b> — refrigerantes, sucos industrializados, doces do dia a dia.</span></li>
+        <li><span class="wic">•</span><span><b>Frituras e gorduras trans</b> — presentes em muitos industrializados.</span></li>
+        <li><span class="wic">•</span><span><b>Excesso de álcool</b> — vale reduzir bastante nessa fase.</span></li>
+        <li><span class="wic">•</span><span><b>Excesso de cafeína</b> — sem terror: um café com moderação está ok.</span></li>
+      </ul>
+      <div class="aviso"><b>Sem radicalismo, combinado?</b> É trocar, aos poucos, o que pesa por aquilo que nutre — de um jeito que você consiga manter. Consistência ganha da perfeição.</div>
+    </div>
+
+    <!-- CIÊNCIA -->
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra</h4>
+      <p>Revisões sobre alimentação e fertilidade apontam que padrões ricos em vegetais, frutas, grãos integrais, leguminosas, azeite e ômega-3 — como a <b>dieta mediterrânea</b> — se associam a melhores desfechos reprodutivos, enquanto padrões ricos em ultraprocessados e açúcar tendem ao contrário. Microbiota e redução da inflamação vêm sendo cada vez mais estudadas nesse contexto.</p>
+      <ol>
+        <li>Gaskins AJ, Chavarro JE. <i>Diet and fertility: a review.</i> American Journal of Obstetrics and Gynecology, 2018.</li>
+        <li>Harvard Medical School. <i>Diet and female fertility: doctor, what should I eat?</i></li>
+      </ol>
+    </div>
+
+    <!-- WORKBOOK: CHECKLIST COM ANEL DE PROGRESSO -->
+    <div class="work reveal">
+      <div class="check-head">
+        <svg class="ring" width="86" height="86" viewBox="0 0 86 86">
+          <circle class="track" cx="43" cy="43" r="36"></circle>
+          <circle class="prog" id="ring1" cx="43" cy="43" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2"></circle>
+          <text id="ringtxt" x="43" y="49" text-anchor="middle">0%</text>
+        </svg>
+        <div>
+          <h3 style="margin:0">Checklist dos 30 dias</h3>
+          <div class="cbmsg" id="cbmsg">Marque conforme for incorporando — <b>salva sozinho</b> 🌸</div>
+        </div>
+      </div>
+      <div class="checklist" data-ring="ring1" data-txt="ringtxt" data-msg="cbmsg" data-cel="celebra1">
+        <div class="task"><input type="checkbox" id="c1a"><label for="c1a">Incluí vegetais/folhas em pelo menos 2 refeições por dia</label></div>
+        <div class="task"><input type="checkbox" id="c1b"><label for="c1b">Reduzi refrigerantes e sucos industrializados</label></div>
+        <div class="task"><input type="checkbox" id="c1c"><label for="c1c">Incluí uma fonte de ômega-3 na semana</label></div>
+        <div class="task"><input type="checkbox" id="c1d"><label for="c1d">Aumentei as fibras (aveia, leguminosas, frutas)</label></div>
+        <div class="task"><input type="checkbox" id="c1e"><label for="c1e">Diminuí os ultraprocessados no dia a dia</label></div>
+        <div class="task"><input type="checkbox" id="c1f"><label for="c1f">Estou bebendo mais água ao longo do dia</label></div>
+        <div class="task"><input type="checkbox" id="c1g"><label for="c1g">Cuidei do sono e busquei reduzir o estresse</label></div>
+        <div class="task"><input type="checkbox" id="c1h"><label for="c1h">Incluí um alimento fermentado (se tolero bem)</label></div>
+      </div>
+      <div class="celebra" id="celebra1">🎉 <b>Parabéns!</b> Você completou os 30 dias de desinflamação. Seu corpo já está num terreno melhor para as próximas etapas.</div>
+    </div>
+
+    <!-- METAS -->
+    <div class="work reveal">
+      <h3>🎯 Minhas metas semanais</h3>
+      <p class="hint">Uma meta pequena e possível por semana vale mais que dez impossíveis.</p>
+      <div class="metas">
+        <div class="meta-sem"><b>Semana 1</b><input type="text" id="m1s1" placeholder="Ex.: verdura no almoço todo dia"></div>
+        <div class="meta-sem"><b>Semana 2</b><input type="text" id="m1s2" placeholder="Ex.: trocar o doce da tarde por fruta"></div>
+        <div class="meta-sem"><b>Semana 3</b><input type="text" id="m1s3" placeholder="Sua meta..."></div>
+        <div class="meta-sem"><b>Semana 4</b><input type="text" id="m1s4" placeholder="Sua meta..."></div>
+      </div>
+    </div>
+
+    <!-- ANOTAÇÕES -->
+    <div class="work reveal">
+      <h3>📝 Minhas anotações</h3>
+      <p class="hint">Como você se sentiu nesses primeiros dias? O que ficou mais fácil? O que foi difícil?</p>
+      <textarea class="notas" id="notas1" placeholder="Escreva aqui..."></textarea>
+      <div class="saved" data-saved-for="notas1"></div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#topo">↑ Voltar ao índice</a></div>
+    <div class="back-top"><a href="#topo">Guia Completo da Tentante · Ana Luísa Rocha</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 2 ===================== -->
+<section class="modulo" id="mod2">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🌷 Módulo 2</span>
+      <h2>Preparando o Corpo para a Gravidez</h2>
+      <p class="lead-txt">Com o terreno mais calmo, é hora de abastecer o corpo com os nutrientes que fazem diferença nessa fase. Toque em cada card para ver onde encontrar.</p>
+    </div>
+
+    <div class="reveal">
+      <h3><span class="ic">🧡</span> Nutrientes fundamentais <span style="font-size:.8rem;font-weight:400;color:var(--cinza)">(toque para virar)</span></h3>
+      <div class="swaps">
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Proteínas</b><span class="tap">constroem e reparam · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Ovos, carnes, peixes, leguminosas, laticínios</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Ácido fólico (folato)</b><span class="tap">essencial na formação do bebê · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Folhas verde-escuras, leguminosas — e suplementação orientada</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Ferro</b><span class="tap">previne anemia · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Carnes, feijão, lentilha, folhas escuras (com vitamina C)</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Vitamina D</b><span class="tap">imunidade e hormônios · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Sol com moderação, peixes, ovos, cogumelos</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Zinco</b><span class="tap">fertilidade e divisão celular · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Carnes, sementes de abóbora, castanhas, grão-de-bico</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Selênio</b><span class="tap">antioxidante · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Castanha-do-pará (1 a 2 por dia já bastam)</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Colina</b><span class="tap">desenvolvimento do bebê · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Gema do ovo, fígado, leguminosas</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Ômega-3</b><span class="tap">anti-inflamatório · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Sardinha, salmão, linhaça e chia</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Nutriente</span><b>Fibras</b><span class="tap">intestino e equilíbrio hormonal · toque ↻</span></div>
+          <div class="flip__b"><span class="k">Onde encontrar</span><b>Aveia, leguminosas, frutas e vegetais</b></div>
+        </div></div>
+      </div>
+      <div class="aviso"><b>Importante:</b> o ácido fólico costuma ser recomendado já na fase de tentativa, mas a <b>dose e a necessidade de cada suplemento são individuais</b> — devem ser definidas com seu médico e/ou nutricionista.</div>
+    </div>
+
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra</h4>
+      <p>Revisões recentes reúnem as evidências sobre nutrientes e fertilidade — ácido fólico, vitamina D, ômega-3, antioxidantes e outros micronutrientes — reforçando o papel de uma alimentação completa no preparo pré-concepcional, com suplementação individualizada quando indicada.</p>
+      <ol>
+        <li>The Effect of Nutrient Supplementation on Female Fertility. <i>Systematic Review</i>, 2024.</li>
+        <li>Nutritional Supplements and IVF: An Evidence-Based Approach, 2024.</li>
+        <li>Effect of Omega-3 Supplements or Diets on Fertility in Women. <i>Meta-analysis</i>, 2024.</li>
+      </ol>
+    </div>
+
+    <div class="work reveal">
+      <h3>🛒 Minha lista de compras da semana</h3>
+      <p class="hint">Monte sua lista com foco nos nutrientes acima — marque o que já tem em casa. Salva sozinho.</p>
+      <div class="metas">
+        <div class="meta-sem"><b>Proteínas</b><input type="text" id="m2p" placeholder="Ovos, frango, sardinha..."></div>
+        <div class="meta-sem"><b>Folhas &amp; vegetais</b><input type="text" id="m2v" placeholder="Espinafre, brócolis, couve..."></div>
+        <div class="meta-sem"><b>Leguminosas &amp; grãos</b><input type="text" id="m2g" placeholder="Feijão, lentilha, grão-de-bico..."></div>
+        <div class="meta-sem"><b>Frutas</b><input type="text" id="m2f" placeholder="Frutas vermelhas, laranja..."></div>
+        <div class="meta-sem"><b>Gorduras boas &amp; sementes</b><input type="text" id="m2gb" placeholder="Azeite, castanhas, linhaça..."></div>
+        <div class="meta-sem"><b>Outros</b><input type="text" id="m2o" placeholder="Iogurte, cúrcuma, castanha-do-pará..."></div>
+      </div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod1">← Módulo 1</a><a class="btn btn-ghost" href="#mod3">Módulo 3 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 3 ===================== -->
+<section class="modulo" id="mod3">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🌙 Módulo 3</span>
+      <h2>Entendendo o Ciclo Menstrual</h2>
+      <p class="lead-txt">Conhecer o próprio ciclo é ter um mapa nas mãos. Ele se divide em quatro fases — toque em cada uma para entender o que acontece no seu corpo.</p>
+    </div>
+
+    <div class="reveal">
+      <svg class="phase-wheel" width="180" height="180" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--rosa-suave)" stroke-width="14"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#c0447f" stroke-width="14" stroke-dasharray="35 216" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--rosa)" stroke-width="14" stroke-dasharray="56 195" stroke-dashoffset="-35" transform="rotate(-90 50 50)"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--dourado)" stroke-width="14" stroke-dasharray="18 233" stroke-dashoffset="-91" transform="rotate(-90 50 50)"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#b98cae" stroke-width="14" stroke-dasharray="97 154" stroke-dashoffset="-109" transform="rotate(-90 50 50)"/>
+        <text x="50" y="47" text-anchor="middle" style="font-family:var(--serif);font-weight:900;fill:var(--bordo);font-size:9px">ciclo</text>
+        <text x="50" y="58" text-anchor="middle" style="font-family:var(--sans);fill:var(--cinza);font-size:6px">~28 dias</text>
+      </svg>
+      <div class="phase-tabs" data-panel="phasepanel" data-data="phasedata">
+        <button data-k="menstrual">Menstrual</button>
+        <button data-k="folicular">Folicular</button>
+        <button data-k="ovulacao">Ovulação</button>
+        <button data-k="lutea">Lútea</button>
+      </div>
+      <div class="phase-panel" id="phasepanel"></div>
+      <script type="application/json" id="phasedata">{
+        "menstrual":{"dia":"Dias 1 a 5 (aprox.)","t":"Fase menstrual","p":"É o início do ciclo, quando o endométrio descama e vem a menstruação. Os hormônios estão baixos e a energia costuma cair — é um bom momento para acolher o descanso, caprichar no ferro e se hidratar bem."},
+        "folicular":{"dia":"Dias 1 a 13 (aprox.)","t":"Fase folicular","p":"O estrogênio começa a subir e o corpo prepara os folículos para a ovulação. Costuma ser a fase de mais energia, disposição e bom humor — ótima para atividade física e para investir em alimentos frescos e coloridos."},
+        "ovulacao":{"dia":"Por volta do dia 14","t":"Ovulação","p":"O óvulo é liberado — é o pico da fertilidade. Muitas mulheres percebem aumento da libido e o muco tipo clara de ovo. É o centro da sua janela fértil (veremos em detalhe no Módulo 4)."},
+        "lutea":{"dia":"Dias 15 a 28 (aprox.)","t":"Fase lútea","p":"A progesterona assume para preparar o útero. Pode surgir a TPM (mais fome, sensibilidade, cansaço). Vale priorizar conforto, magnésio, fibras e uma rotina mais tranquila."}
+      }</script>
+      <p style="font-size:.85rem;color:var(--cinza);margin-top:12px">Os dias são uma referência para um ciclo de ~28 dias — cada mulher tem o seu ritmo.</p>
+    </div>
+
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra</h4>
+      <p>O ciclo menstrual reflete a saúde geral do corpo. Acompanhar suas fases ajuda a identificar padrões, reconhecer a janela fértil e perceber sinais que merecem avaliação profissional. Alimentação e estilo de vida influenciam esse equilíbrio hormonal.</p>
+      <ol><li>Gaskins AJ, Chavarro JE. <i>Diet and fertility: a review.</i> AJOG, 2018.</li></ol>
+    </div>
+
+    <div class="work reveal">
+      <h3>🗓️ Diário do meu ciclo</h3>
+      <p class="hint">Anote as datas para começar a conhecer o seu padrão. Salva sozinho.</p>
+      <div class="metas">
+        <div class="meta-sem"><b>Início da última menstruação</b><input type="text" id="m3ini" placeholder="Ex.: 03/07"></div>
+        <div class="meta-sem"><b>Duração média do ciclo</b><input type="text" id="m3dur" placeholder="Ex.: 28 dias"></div>
+        <div class="meta-sem"><b>Como me senti nesta fase</b><input type="text" id="m3sent" placeholder="Energia, humor, sono..."></div>
+        <div class="meta-sem"><b>Observações</b><input type="text" id="m3obs" placeholder="Cólica, apetite, libido..."></div>
+      </div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod2">← Módulo 2</a><a class="btn btn-ghost" href="#mod4">Módulo 4 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 4 ===================== -->
+<section class="modulo" id="mod4">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">✨ Módulo 4</span>
+      <h2>Janela Fértil e Ovulação</h2>
+      <p class="lead-txt">A janela fértil são os dias em que a chance de engravidar é maior — em torno da ovulação. Aprender a reconhecê-la é um dos maiores trunfos da tentante.</p>
+    </div>
+
+    <h3><span class="ic">🔎</span> Como identificar a ovulação</h3>
+    <p>Seu corpo dá sinais. Aprender a lê-los vale mais do que qualquer app sozinho:</p>
+    <ul class="warn">
+      <li><span class="wic">•</span><span><b>Muco cervical</b> — fica transparente, elástico e escorregadio (tipo clara de ovo). É o sinal mais confiável — dedicamos o Módulo 5 inteiro a ele.</span></li>
+      <li><span class="wic">•</span><span><b>Temperatura basal</b> — medida ao acordar, sobe levemente <i>depois</i> da ovulação. Ajuda a confirmar que ela ocorreu.</span></li>
+      <li><span class="wic">•</span><span><b>Libido</b> — costuma aumentar nos dias mais férteis.</span></li>
+      <li><span class="wic">•</span><span><b>Pequenos sinais</b> — leve dor de um lado do baixo-ventre, sensibilidade nos seios.</span></li>
+    </ul>
+
+    <div class="calc reveal">
+      <h3 style="margin-top:0">🌸 Calculadora da janela fértil</h3>
+      <p class="hint">Uma estimativa a partir da sua última menstruação. <b>Não é método contraceptivo.</b></p>
+      <form id="calc-form-e">
+        <div class="row">
+          <div><label for="ce-data">1º dia da última menstruação</label><input type="date" id="ce-data" required></div>
+          <div><label for="ce-ciclo">Duração média do ciclo (dias)</label><input type="number" id="ce-ciclo" value="28" min="20" max="45" inputmode="numeric"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular →</button>
+      </form>
+      <div class="calc-out" id="calc-out-e">
+        <div class="calc-tile f"><div class="l">Janela fértil</div><div class="v" id="ce-janela">—</div></div>
+        <div class="calc-tile"><div class="l">Ovulação provável</div><div class="v" id="ce-ovu">—</div></div>
+        <div class="calc-tile"><div class="l">Próxima menstruação</div><div class="v" id="ce-menst">—</div></div>
+      </div>
+    </div>
+
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra</h4>
+      <p>A janela fértil corresponde aos ~6 dias que terminam no dia da ovulação. A observação do muco cervical e da temperatura basal são métodos reconhecidos de percepção da fertilidade — úteis para identificar os dias de maior chance, com boa margem quando bem aplicados.</p>
+    </div>
+
+    <div class="work reveal">
+      <h3>✅ Checklist de observação</h3>
+      <div class="check-head">
+        <svg class="ring" width="86" height="86" viewBox="0 0 86 86">
+          <circle class="track" cx="43" cy="43" r="36"></circle>
+          <circle class="prog" id="ring4" cx="43" cy="43" r="36" stroke-dasharray="226.2" stroke-dashoffset="226.2"></circle>
+          <text id="ringtxt4" x="43" y="49" text-anchor="middle">0%</text>
+        </svg>
+        <div><h3 style="margin:0">Estou observando meu corpo</h3><div class="cbmsg" id="cbmsg4">Marque o que já pratica 🌸</div></div>
+      </div>
+      <div class="checklist" data-ring="ring4" data-txt="ringtxt4" data-msg="cbmsg4">
+        <div class="task"><input type="checkbox" id="c4a"><label for="c4a">Observo meu muco cervical ao longo do ciclo</label></div>
+        <div class="task"><input type="checkbox" id="c4b"><label for="c4b">Anoto o primeiro dia de cada menstruação</label></div>
+        <div class="task"><input type="checkbox" id="c4c"><label for="c4c">Percebo mudanças de libido e disposição</label></div>
+        <div class="task"><input type="checkbox" id="c4d"><label for="c4d">Se quiser confirmar: meço a temperatura basal ao acordar</label></div>
+      </div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod3">← Módulo 3</a><a class="btn btn-ghost" href="#topo">↑ Índice</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 5 ===================== -->
+<section class="modulo" id="mod5">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">💧 Módulo 5</span>
+      <h2>Guia Completo do Muco Cervical</h2>
+      <p class="lead-txt">O muco cervical é um dos sinais mais confiáveis de fertilidade — e quase ninguém ensina a observar direito. Aqui você aprende a reconhecer cada tipo e o que ele diz sobre o seu ciclo.</p>
+    </div>
+
+    <div class="ilustra reveal">
+      <p><b style="color:var(--bordo)">O que é e por que importa?</b><br>
+      É a secreção natural produzida pelo colo do útero, e ele <b>muda ao longo do ciclo</b> conforme os hormônios. Perto da ovulação, fica parecido com <b>clara de ovo</b> — transparente, elástico e escorregadio — criando o ambiente ideal para a fecundação. Observá-lo é como ler um "termômetro" da sua fertilidade.</p>
+      <div class="art">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <path d="M30 84c0-30 22-24 22-46 0-7-5-12-12-12" stroke="var(--bordo)" stroke-width="9" stroke-linecap="round"/>
+          <ellipse cx="78" cy="60" rx="9" ry="16" fill="none" stroke="var(--dourado)" stroke-width="3"/>
+          <path d="M78 50c0 12 0 12 0 20" stroke="var(--rosa)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <h3><span class="ic">📏</span> Da menos fértil à mais fértil</h3>
+      <p style="color:var(--cinza);font-size:.95rem">Conforme a ovulação se aproxima, o muco fica mais transparente e elástico:</p>
+      <div class="ruler"></div>
+      <div class="ruler-labels"><span>◀ Menos fértil</span><span>Mais fértil ▶</span></div>
+
+      <div class="mucus">
+        <div class="mtype">
+          <div class="art"><svg width="60" height="86" viewBox="0 0 60 86"><ellipse cx="30" cy="16" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><ellipse cx="30" cy="70" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><circle cx="30" cy="43" r="1.6" fill="#e7cdbd"/></svg></div>
+          <b>Seco</b><small>Sem secreção aparente</small>
+          <div class="obs">
+            <label><input type="checkbox" id="mu1a"> Já observei</label>
+            <label><input type="checkbox" id="mu1b"> Nunca observei</label>
+            <label><input type="checkbox" id="mu1c"> Acompanhar este mês</label>
+          </div>
+        </div>
+        <div class="mtype">
+          <div class="art"><svg width="60" height="86" viewBox="0 0 60 86"><ellipse cx="30" cy="16" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><ellipse cx="30" cy="70" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><path d="M27 30 q6 13 0 26 q-6 -13 0 -26z" fill="#f0dfe8" stroke="#e2c3d3" stroke-width="1"/></svg></div>
+          <b>Pegajoso</b><small>Espesso, pouco elástico</small>
+          <div class="obs">
+            <label><input type="checkbox" id="mu2a"> Já observei</label>
+            <label><input type="checkbox" id="mu2b"> Nunca observei</label>
+            <label><input type="checkbox" id="mu2c"> Acompanhar este mês</label>
+          </div>
+        </div>
+        <div class="mtype">
+          <div class="art"><svg width="60" height="86" viewBox="0 0 60 86"><ellipse cx="30" cy="16" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><ellipse cx="30" cy="70" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><rect x="25" y="27" width="10" height="32" rx="5" fill="#f7ecf2" stroke="#ecd7e4" stroke-width="1"/></svg></div>
+          <b>Cremoso</b><small>Branco, tipo creme</small>
+          <div class="obs">
+            <label><input type="checkbox" id="mu3a"> Já observei</label>
+            <label><input type="checkbox" id="mu3b"> Nunca observei</label>
+            <label><input type="checkbox" id="mu3c"> Acompanhar este mês</label>
+          </div>
+        </div>
+        <div class="mtype fertile">
+          <span class="selo">⭐ Mais fértil</span>
+          <div class="art"><svg width="60" height="86" viewBox="0 0 60 86"><ellipse cx="30" cy="14" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><ellipse cx="30" cy="72" rx="18" ry="11" fill="#f6d7c0" stroke="#dcae90" stroke-width="1.5"/><path d="M30 24 C24 44 36 44 30 62" stroke="#cfeaf2" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="27" cy="34" r="1.5" fill="#fff"/><circle cx="33" cy="52" r="1.3" fill="#fff"/></svg></div>
+          <b>Clara de ovo</b><small>Transparente, brilhante, muito elástico</small>
+          <div class="obs">
+            <label><input type="checkbox" id="mu4a"> Já observei</label>
+            <label><input type="checkbox" id="mu4b"> Nunca observei</label>
+            <label><input type="checkbox" id="mu4c"> Acompanhar este mês</label>
+          </div>
+        </div>
+      </div>
+      <div class="aviso"><b>Como observar:</b> após a higiene das mãos, colha um pouco da secreção e observe cor, textura e o quanto ela estica entre os dedos. Faça sempre no mesmo horário. Também vale reparar na <b>sensação vulvar</b>: seca, úmida ou escorregadia.</div>
+    </div>
+
+    <div class="work reveal">
+      <h3>🗓️ Diário de observação do muco</h3>
+      <p class="hint">Registre alguns dias para começar. O ideal é acompanhar por <b>3 ciclos</b> para conhecer o seu padrão. Salva sozinho.</p>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>Dia do ciclo</th><th>Tipo de muco</th><th>Sensação vulvar</th><th>Observações</th></tr></thead>
+          <tbody>
+            <tr><td><input id="d5r1a" placeholder="ex.: 10"></td><td><input id="d5r1b" placeholder="cremoso"></td><td><input id="d5r1c" placeholder="úmida"></td><td><input id="d5r1d" placeholder="..."></td></tr>
+            <tr><td><input id="d5r2a" placeholder="ex.: 12"></td><td><input id="d5r2b" placeholder="clara de ovo"></td><td><input id="d5r2c" placeholder="escorregadia"></td><td><input id="d5r2d"></td></tr>
+            <tr><td><input id="d5r3a"></td><td><input id="d5r3b"></td><td><input id="d5r3c"></td><td><input id="d5r3d"></td></tr>
+            <tr><td><input id="d5r4a"></td><td><input id="d5r4b"></td><td><input id="d5r4c"></td><td><input id="d5r4d"></td></tr>
+            <tr><td><input id="d5r5a"></td><td><input id="d5r5b"></td><td><input id="d5r5c"></td><td><input id="d5r5d"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra</h4>
+      <p>A observação do muco cervical é a base dos métodos de percepção da fertilidade e ajuda a identificar a janela fértil com boa precisão quando bem aplicada. É uma ferramenta de autoconhecimento — e não substitui avaliação médica quando há dúvidas ou irregularidades.</p>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod4">← Módulo 4</a><a class="btn btn-ghost" href="#mod6">Módulo 6 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 6 ===================== -->
+<section class="modulo" id="mod6">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🌻 Módulo 6</span>
+      <h2>Seed Cycling — Ciclo das Sementes</h2>
+      <p class="lead-txt">Uma prática simples que usa sementes diferentes em cada metade do ciclo, com a proposta de apoiar o equilíbrio hormonal de forma natural.</p>
+    </div>
+
+    <div class="duo reveal">
+      <div class="phasebox">
+        <div class="fase-d">1ª metade · fase folicular</div>
+        <h4>🌱 Linhaça + Abóbora</h4>
+        <p style="margin:8px 0 0;font-size:.95rem">Da menstruação até a ovulação. Ricas em fibras e ômega-3, entram como apoio à fase de subida do estrogênio.</p>
+        <ul style="margin-top:8px"><li>1 colher (sopa) de linhaça</li><li>1 colher (sopa) de sementes de abóbora</li></ul>
+      </div>
+      <div class="phasebox">
+        <div class="fase-d">2ª metade · fase lútea</div>
+        <h4>🌻 Gergelim + Girassol</h4>
+        <p style="margin:8px 0 0;font-size:.95rem">Da ovulação até a próxima menstruação. Fontes de zinco e vitamina E, acompanham a fase da progesterona.</p>
+        <ul style="margin-top:8px"><li>1 colher (sopa) de gergelim</li><li>1 colher (sopa) de sementes de girassol</li></ul>
+      </div>
+    </div>
+    <p style="font-size:.92rem;color:var(--cinza)"><b>Como usar:</b> moa as sementes na hora (absorve melhor) e acrescente em vitaminas, iogurte, frutas ou saladas.</p>
+
+    <div class="ciencia reveal">
+      <h4>🔬 O que a ciência mostra — com honestidade</h4>
+      <p>O seed cycling é <b>seguro</b> (são só sementes nutritivas!), mas a evidência científica de que ele "regula hormônios" por si só ainda é <b>limitada</b>. O maior valor está no que essas sementes oferecem: fibras, gorduras boas, zinco e magnésio. Use como um <b>complemento gostoso</b> de uma alimentação equilibrada — não como tratamento.</p>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod5">← Módulo 5</a><a class="btn btn-ghost" href="#mod7">Módulo 7 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 7 ===================== -->
+<section class="modulo" id="mod7">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🍵 Módulo 7</span>
+      <h2>Chás para Cada Fase do Ciclo</h2>
+      <p class="lead-txt">Chás podem ser aliados do bem-estar em cada fase — desde que com expectativas realistas. Aqui vão os de melhor respaldo e como usá-los.</p>
+    </div>
+
+    <div class="tbl-wrap reveal">
+      <table class="tbl">
+        <thead><tr><th>Fase</th><th>Chá</th><th>Para quê</th><th>Sugestão</th></tr></thead>
+        <tbody>
+          <tr><td><b>Menstrual</b></td><td>Gengibre</td><td>Conforto e bem-estar nos dias de cólica</td><td>Após as refeições</td></tr>
+          <tr><td><b>Folicular</b></td><td>Hortelã / cavalinha</td><td>Leveza e hidratação</td><td>Ao longo do dia</td></tr>
+          <tr><td><b>Ovulação</b></td><td>Camomila</td><td>Relaxamento e sono</td><td>Fim de tarde/noite</td></tr>
+          <tr><td><b>Lútea</b></td><td>Camomila / erva-cidreira</td><td>Aconchego na TPM</td><td>À noite</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.92rem;color:var(--cinza)"><b>Modo de preparo geral:</b> 1 colher (chá) da erva para 1 xícara de água quente (não fervente), abafe por 5–10 min e coe.</p>
+
+    <div class="aviso"><b>Atenção e honestidade:</b> não existe chá que "gruda o embrião" ou garanta gravidez — desconfie de promessas assim. Algumas plantas são <b>contraindicadas</b> ao tentar engravidar ou na gestação. Sempre confirme cada erva com seu médico/nutricionista antes de usar com frequência.</div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod6">← Módulo 6</a><a class="btn btn-ghost" href="#mod8">Módulo 8 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 8 ===================== -->
+<section class="modulo" id="mod8">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">💊 Módulo 8</span>
+      <h2>Suplementação para Tentantes</h2>
+      <p class="lead-txt">Suplementos podem preencher lacunas importantes nessa fase — mas não são "quanto mais, melhor". Toque em cada um para entender o papel.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="swaps">
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Ácido fólico</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Formação do bebê nas primeiras semanas. Costuma começar antes de engravidar.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Ferro</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Repor estoques e prevenir anemia — se houver necessidade comprovada.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Vitamina D</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Imunidade e equilíbrio hormonal — dose guiada por exame.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Zinco &amp; Selênio</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Antioxidantes ligados à saúde reprodutiva.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Colina &amp; Ômega-3</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Desenvolvimento do bebê e efeito anti-inflamatório.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Coenzima Q10</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Estudada no contexto da qualidade dos óvulos, sobretudo após os 35.</b></div>
+        </div></div>
+        <div class="flip tall"><div class="flip__in">
+          <div class="flip__f"><span class="k">Suplemento</span><b>Mio-inositol</b><span class="tap">toque ↻</span></div>
+          <div class="flip__b"><span class="k">Papel</span><b>Especialmente estudado para quem tem SOP e resistência à insulina.</b></div>
+        </div></div>
+      </div>
+      <div class="aviso" style="border-color:var(--bordo);background:#fbeaf4"><b>Regra de ouro:</b> a suplementação <b>deve ser individualizada e orientada por profissional habilitado.</b> O que serve para uma pessoa pode ser desnecessário — ou demais — para outra. Nada aqui substitui a sua avaliação e seus exames.</div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod7">← Módulo 7</a><a class="btn btn-ghost" href="#mod9">Módulo 9 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 9 ===================== -->
+<section class="modulo" id="mod9">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🩺 Módulo 9</span>
+      <h2>Condições que Podem Impactar a Fertilidade</h2>
+      <p class="lead-txt">Algumas condições são comuns e podem influenciar a jornada — conhecê-las ajuda a buscar o cuidado certo, sem medo. Toque para abrir cada uma.</p>
+    </div>
+
+    <div class="reveal">
+      <details class="cond"><summary>SOP (Síndrome dos Ovários Policísticos)</summary>
+        <p>É uma das causas mais comuns de irregularidade menstrual. Costuma vir acompanhada de resistência à insulina. A boa notícia: alimentação, movimento e, quando indicado, mio-inositol e acompanhamento adequado fazem muita diferença no equilíbrio e na regularidade do ciclo.</p></details>
+      <details class="cond"><summary>Endometriose</summary>
+        <p>Condição em que tecido semelhante ao endométrio cresce fora do útero, podendo causar dor e impactar a fertilidade. Uma alimentação anti-inflamatória (Módulo 1!) costuma ser aliada do bem-estar, sempre junto do acompanhamento médico.</p></details>
+      <details class="cond"><summary>Resistência à insulina</summary>
+        <p>Quando o corpo responde mal à insulina, o equilíbrio hormonal sofre. Reduzir ultraprocessados e açúcar, priorizar fibras e proteínas e manter-se ativa ajudam a melhorar a sensibilidade à insulina.</p></details>
+      <details class="cond"><summary>Sobrepeso e obesidade</summary>
+        <p>O peso influencia os hormônios do ciclo. Não se trata de estética nem de metas radicais: pequenas mudanças sustentáveis, com acompanhamento, já favorecem a regularidade do ciclo e a saúde como um todo — com leveza e sem culpa.</p></details>
+    </div>
+
+    <div class="aviso"><b>Com acolhimento:</b> ter uma dessas condições <b>não significa</b> que você não vai engravidar. Significa que vale ter um cuidado mais próximo. Procure seu médico e sua nutri — você não precisa passar por isso sozinha.</div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod8">← Módulo 8</a><a class="btn btn-ghost" href="#mod10">Módulo 10 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 10 ===================== -->
+<section class="modulo" id="mod10">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">🍽️ Módulo 10</span>
+      <h2>Cardápio da Tentante</h2>
+      <p class="lead-txt">Um modelo de semana para te inspirar — equilibrado, colorido e cheio dos nutrientes dos módulos anteriores. Repita e adapte pelos 30 dias, com as trocas que combinam com você.</p>
+    </div>
+
+    <div class="reveal">
+      <details class="dia" open><summary>Segunda-feira</summary><div class="refe">
+        <b>Café</b><span>Ovos mexidos + fruta + chá</span><b>Almoço</b><span>Arroz integral, feijão, frango grelhado e salada colorida</span>
+        <b>Lanche</b><span>Iogurte natural + linhaça + fruta</span><b>Jantar</b><span>Omelete de legumes + salada</span></div></details>
+      <details class="dia"><summary>Terça-feira</summary><div class="refe">
+        <b>Café</b><span>Tapioca com ovo + café</span><b>Almoço</b><span>Quinoa, lentilha, peixe assado e brócolis</span>
+        <b>Lanche</b><span>Fruta + castanhas</span><b>Jantar</b><span>Sopa de legumes com frango desfiado</span></div></details>
+      <details class="dia"><summary>Quarta-feira</summary><div class="refe">
+        <b>Café</b><span>Aveia com fruta e sementes de abóbora</span><b>Almoço</b><span>Arroz, grão-de-bico, carne magra e salada</span>
+        <b>Lanche</b><span>Iogurte + fruta vermelha</span><b>Jantar</b><span>Wrap integral de frango e folhas</span></div></details>
+      <details class="dia"><summary>Quinta-feira</summary><div class="refe">
+        <b>Café</b><span>Vitamina de banana, aveia e linhaça</span><b>Almoço</b><span>Arroz integral, feijão, sardinha e legumes</span>
+        <b>Lanche</b><span>Fruta + pasta de amendoim</span><b>Jantar</b><span>Salada completa com ovo e grão-de-bico</span></div></details>
+      <details class="dia"><summary>Sexta-feira</summary><div class="refe">
+        <b>Café</b><span>Ovos + abacate + café</span><b>Almoço</b><span>Quinoa, frango, abóbora e salada</span>
+        <b>Lanche</b><span>Iogurte + gergelim + fruta</span><b>Jantar</b><span>Creme de abóbora + frango</span></div></details>
+      <details class="dia"><summary>Fim de semana</summary><div class="refe">
+        <b>Ideia</b><span>Refeições mais livres e prazerosas, mantendo o bom senso: capriche nos vegetais, hidrate-se e aproveite sem culpa. 🌸</span></div></details>
+    </div>
+
+    <div class="work reveal">
+      <h3>🔄 Minhas substituições favoritas</h3>
+      <p class="hint">Anote trocas que funcionam pra você (por preferência, alergia ou o que tem em casa). Salva sozinho.</p>
+      <div class="metas">
+        <div class="meta-sem"><b>No lugar de...</b><input type="text" id="m10a" placeholder="ex.: frango"></div>
+        <div class="meta-sem"><b>Eu uso...</b><input type="text" id="m10b" placeholder="ex.: ovos ou peixe"></div>
+        <div class="meta-sem"><b>No lugar de...</b><input type="text" id="m10c"></div>
+        <div class="meta-sem"><b>Eu uso...</b><input type="text" id="m10d"></div>
+      </div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod9">← Módulo 9</a><a class="btn btn-ghost" href="#mod11">Módulo 11 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 11 ===================== -->
+<section class="modulo" id="mod11">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">👩‍🍳 Módulo 11</span>
+      <h2>Receitas para Fertilidade</h2>
+      <p class="lead-txt">Receitas práticas, gostosas e cheias dos nutrientes certos — do smoothie ao jantar.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="recipe"><span class="tag">Smoothie</span><h4>Smoothie verde da fertilidade</h4><div class="cols">
+        <div><h5>Ingredientes</h5><ul><li>1 banana</li><li>1 punhado de espinafre</li><li>1 col. (sopa) de linhaça</li><li>200 ml de leite ou bebida vegetal</li><li>Gelo a gosto</li></ul></div>
+        <div><h5>Preparo</h5><ol><li>Bata tudo no liquidificador até ficar cremoso.</li><li>Sirva na hora. Rico em folato, fibras e ômega-3.</li></ol></div></div></div>
+
+      <div class="recipe"><span class="tag">Lanche</span><h4>Bolinho de aveia com sementes</h4><div class="cols">
+        <div><h5>Ingredientes</h5><ul><li>1 banana amassada</li><li>4 col. (sopa) de aveia</li><li>1 col. (sopa) de sementes de abóbora</li><li>Canela a gosto</li></ul></div>
+        <div><h5>Preparo</h5><ol><li>Misture tudo e modele bolinhas.</li><li>Asse por ~15 min a 180 °C. Ótimo para a fase folicular.</li></ol></div></div></div>
+
+      <div class="recipe"><span class="tag">Refeição</span><h4>Salada nutritiva de grão-de-bico</h4><div class="cols">
+        <div><h5>Ingredientes</h5><ul><li>1 xíc. de grão-de-bico cozido</li><li>Folhas variadas</li><li>Tomate, pepino, cenoura</li><li>Azeite, limão e gergelim</li></ul></div>
+        <div><h5>Preparo</h5><ol><li>Misture os vegetais com o grão-de-bico.</li><li>Tempere com azeite, limão e gergelim. Ferro + fibras + gorduras boas.</li></ol></div></div></div>
+
+      <div class="recipe"><span class="tag">Anti-inflamatória</span><h4>Salmão com legumes assados</h4><div class="cols">
+        <div><h5>Ingredientes</h5><ul><li>1 posta de salmão (ou sardinha)</li><li>Abobrinha, cenoura e brócolis</li><li>Azeite, alho e cúrcuma</li></ul></div>
+        <div><h5>Preparo</h5><ol><li>Tempere e asse tudo junto por ~20 min.</li><li>Rico em ômega-3 e antioxidantes.</li></ol></div></div></div>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod10">← Módulo 10</a><a class="btn btn-ghost" href="#mod12">Módulo 12 →</a></div>
+  </div>
+</section>
+
+<!-- ===================== MÓDULO 12 ===================== -->
+<section class="modulo" id="mod12">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="mod-tag">📔 Módulo 12</span>
+      <h2>Workbook da Tentante</h2>
+      <p class="lead-txt">Seu espaço para acompanhar a jornada. Tudo salva sozinho no seu aparelho — volte sempre que quiser.</p>
+    </div>
+
+    <div class="work reveal">
+      <h3>💧 Água de hoje</h3>
+      <p class="hint">Toque em um copo a cada ~200 ml. Meta: 8 copos.</p>
+      <div class="water">
+        <input type="checkbox" id="ag1"><label for="ag1"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag2"><label for="ag2"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag3"><label for="ag3"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag4"><label for="ag4"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag5"><label for="ag5"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag6"><label for="ag6"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag7"><label for="ag7"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+        <input type="checkbox" id="ag8"><label for="ag8"><svg width="30" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c4 5 6.5 8 6.5 11.5A6.5 6.5 0 0 1 5.5 14.5C5.5 11 8 8 12 3z"/></svg></label>
+      </div>
+    </div>
+
+    <div class="work reveal">
+      <h3>🌿 Meus hábitos da semana</h3>
+      <div class="checklist" data-ring="" data-txt="" data-msg="">
+        <div class="task"><input type="checkbox" id="h1"><label for="h1">Me movimentei (caminhada, treino, dança...)</label></div>
+        <div class="task"><input type="checkbox" id="h2"><label for="h2">Dormi bem na maioria das noites</label></div>
+        <div class="task"><input type="checkbox" id="h3"><label for="h3">Cuidei do estresse (respirar, pausas, lazer)</label></div>
+        <div class="task"><input type="checkbox" id="h4"><label for="h4">Comi vegetais e proteína todos os dias</label></div>
+        <div class="task"><input type="checkbox" id="h5"><label for="h5">Observei meu corpo e anotei o ciclo</label></div>
+      </div>
+    </div>
+
+    <div class="work reveal">
+      <h3>🎯 Minhas metas do mês</h3>
+      <div class="metas">
+        <div class="meta-sem"><b>Meta 1</b><input type="text" id="mm1" placeholder="..."></div>
+        <div class="meta-sem"><b>Meta 2</b><input type="text" id="mm2" placeholder="..."></div>
+      </div>
+    </div>
+
+    <div class="work reveal">
+      <h3>💭 Minhas reflexões</h3>
+      <p class="hint">Como está sendo essa jornada pra você? Escreva livremente.</p>
+      <textarea class="notas" id="reflex" placeholder="Escreva aqui..."></textarea>
+      <div class="saved" data-saved-for="reflex"></div>
+    </div>
+
+    <div class="ilustra reveal" style="text-align:center;grid-template-columns:1fr">
+      <p style="font-size:1.05rem"><b style="color:var(--bordo);font-family:var(--serif);font-size:1.2rem">Você chegou até aqui 💛</b><br>
+      Preparar o corpo é um ato de amor e paciência. Confie no processo, cuide de você com carinho e conte com acompanhamento profissional sempre que precisar. Estou torcendo por você. — <i>Ana</i></p>
+    </div>
+
+    <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod11">← Módulo 11</a><a class="btn btn-ghost" href="#topo">↑ Voltar ao índice</a></div>
+  </div>
+</section>
+
+<footer class="fim">
+  <div class="autora">Ana Luísa Rocha</div>
+  <p>Nutricionista · CRN 25100401 · Saúde da Mulher</p>
+  <p style="margin-top:14px;max-width:46ch;margin-left:auto;margin-right:auto">Este material é educativo e não substitui a consulta individual com nutricionista e/ou médico. A suplementação deve ser individualizada e orientada por profissional habilitado.</p>
+</footer>
+
+<script>
+/* Reveal ao rolar */
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+/* Flip cards */
+document.querySelectorAll('.flip').forEach(function(f){
+  f.addEventListener('click',function(){f.classList.toggle('on');});
+});
+
+/* Anel de progresso do checklist */
+function updateRing(box){
+  var ring=document.getElementById(box.dataset.ring),
+      txt=document.getElementById(box.dataset.txt),
+      msg=document.getElementById(box.dataset.msg),
+      cel=box.dataset.cel?document.getElementById(box.dataset.cel):null,
+      boxes=box.querySelectorAll('input[type=checkbox]'),
+      done=box.querySelectorAll('input[type=checkbox]:checked').length,
+      total=boxes.length, frac=total?done/total:0,
+      C=2*Math.PI*36;
+  if(ring) ring.style.strokeDashoffset=C*(1-frac);
+  if(txt) txt.textContent=Math.round(frac*100)+'%';
+  if(msg){msg.innerHTML = done===0 ? 'Marque conforme for incorporando — <b>salva sozinho</b> 🌸'
+      : done===total ? '<b>Tudo pronto!</b> 30 dias completos 💪'
+      : '<b>'+done+' de '+total+'</b> — você está indo muito bem!';}
+  if(cel) cel.classList.toggle('on',done===total);
+}
+
+/* Abas de fase do ciclo */
+document.querySelectorAll('.phase-tabs').forEach(function(tabs){
+  var panel=document.getElementById(tabs.dataset.panel);
+  var data=JSON.parse(document.getElementById(tabs.dataset.data).textContent);
+  tabs.querySelectorAll('button').forEach(function(b){
+    b.addEventListener('click',function(){
+      tabs.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var d=data[b.dataset.k];
+      panel.innerHTML='<div class="dia">'+d.dia+'</div><h4>'+d.t+'</h4><p style="margin:0">'+d.p+'</p>';
+    });
+  });
+  var first=tabs.querySelector('button'); if(first) first.click();
+});
+
+/* Calculadora da janela fértil (embutida) */
+(function(){
+  var form=document.getElementById('calc-form-e'); if(!form) return;
+  var meses=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  var add=function(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;};
+  var fmt=function(d){return d.getDate()+" de "+meses[d.getMonth()];};
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('ce-data').value; if(!v){document.getElementById('ce-data').focus();return;}
+    var c=parseInt(document.getElementById('ce-ciclo').value,10); if(isNaN(c)||c<20)c=28; if(c>45)c=45;
+    var p=v.split('-').map(Number), ini=new Date(p[0],p[1]-1,p[2]);
+    var ovu=add(ini,c-14), fi=add(ovu,-5), ff=add(ovu,1), prox=add(ini,c);
+    document.getElementById('ce-janela').textContent=fmt(fi)+" a "+fmt(ff);
+    document.getElementById('ce-ovu').textContent=fmt(ovu);
+    document.getElementById('ce-menst').textContent=fmt(prox);
+    document.getElementById('calc-out-e').classList.add('on');
+  });
+})();
+
+/* Persistência (localStorage) + ring */
+(function(){
+  var KEY="tentante_wb_";
+  document.querySelectorAll('input[type=checkbox],input[type=text],textarea').forEach(function(el){
+    if(!el.id) return;
+    var k=KEY+el.id, saved=localStorage.getItem(k);
+    if(saved!==null){ if(el.type==="checkbox") el.checked=(saved==="1"); else el.value=saved; }
+    el.addEventListener(el.type==="checkbox"?"change":"input",function(){
+      localStorage.setItem(k, el.type==="checkbox" ? (el.checked?"1":"0") : el.value);
+      var flag=document.querySelector('[data-saved-for="'+el.id+'"]');
+      if(flag){flag.textContent="salvo ✓";clearTimeout(el._t);el._t=setTimeout(function(){flag.textContent="";},1500);}
+      var box=el.closest('.checklist'); if(box) updateRing(box);
+    });
+  });
+  document.querySelectorAll('.checklist').forEach(updateRing);
+})();
+</script>
+</body>
+</html>
