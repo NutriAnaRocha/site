@@ -23,10 +23,13 @@ const MSG = {
   contato:  "Olá, Ana! Vim pelo seu site e gostaria de falar com você 🌸",
 };
 
-/* Quando você criar o checkout na Kiwify/Hotmart, cole os links aqui.
-   Se o link existir, o botão de compra usa ele; se ficar "", cai no WhatsApp. */
+/* Links de checkout do InfinitePay (pagamento Pix/cartão). A chave é o
+   data-titulo do botão. Se o link existir, o botão de compra usa ele;
+   se ficar "", cai no WhatsApp. Cada link já redireciona, após o pagamento,
+   para a página secreta com o e-book completo. */
 const CHECKOUT = {
-  "Guia Completo das Canetas": "",   // ex.: "https://pay.kiwify.com.br/xxxxxxx"
+  "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G_oAAMSS6VJhK9QAu2Y8waGQ875z_QtFiMeItY0nvm_b2F_Fo-AQnA6h2Sp6u3E7t_jpDR_HJ2kzyaXE_ufLJnrbJKW82E4YCdsNO1NPOtcTCSZ6RJGaHo4887C7dMOVI6f9ry7v8EtVn4mPA_pmQVsAwMryaQOFxLMvHVSgp8KPoqzDRoqomv-LOifChY_EPpquz55Q009bpc92y26VwIP7bowswsQe9p0xUZfsfvcB.v1.8631f6ea0b1e9893",
+  "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=GwYBAGRsbaNSEqG82fqPRMhn8uIhMZqXYF466__0VAKwWlJb0Nai4H76duODXrT7dXMhmURkcyqmw2P18wVEG1B2w5OgkvWoM1iinmQeT1SihV5RWxGJjjTrsLw0wydHSud_ur6jb6M7HxR6P58UdUYAzSwtkGgZYbRqUXe_PDUwSUn7ckM5ZjX0j7bGCxjafFx8HhWWQ98qVH6YQvVywKaqrE71zGJWPbzEbwNHkZ842KGO79vUSyYB.v1.1b1265c5cdcdf0ee",
   "Plano Mensal de E-books":   "",
 };
 
