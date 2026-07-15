@@ -497,6 +497,13 @@ p{margin-bottom:14px;font-size:.95rem}
       <a class="cover-start" href="https://checkout.infinitepay.io/analuisarocha?lenc=GwMBYKwOeBPrKqEGbLnJzY83EEuLwtUuOkKVNXWzQRLImgIB_-_WBgoogaKxhDsvmaTIusytbnje2Mw8PZUAqFpSW9CWfAvseuODHjR8blN6nohQrbFrsOxEQekD6se9q4exqHtVl60eTzsKFWPao64mCVo41jw1iRAXPvcnG_r4dZeix_PNTCEdxg7F6i8Q3lyBisYe-s2KjNj1OGydugdYV_zRt1Fh49ClqOq0OB2SEWtprSssna5Eju-sMiHixcxDHLCdHQA.v1.f487d9a9b89e88ca" style="text-decoration:none">Quero desbloquear por R$ 7,90 &rarr;</a>
     </div>
     <p style="text-align:center;color:var(--text-light);font-size:.8rem;margin-top:18px">💜 Material desenvolvido por nutricionista &middot; CRN 25100401 &middot; Conteúdo com base científica</p>
+    <div style="text-align:center;margin-top:26px;padding-top:22px;border-top:1px solid var(--gray-light)">
+      <p style="color:var(--text-light);font-size:.88rem;margin-bottom:12px">Gostou? Compartilhe com quem precisa 💕</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <a id="shareWa" style="display:inline-block;background:transparent;color:var(--wine);border:2px solid var(--wine);font-weight:700;padding:11px 24px;border-radius:30px;cursor:pointer;text-decoration:none;font-size:.9rem;transition:all .2s">Compartilhar no WhatsApp</a>
+        <button id="copyLink" type="button" style="background:transparent;color:var(--wine);border:2px solid var(--wine);font-weight:700;padding:11px 24px;border-radius:30px;cursor:pointer;font-size:.9rem;font-family:'Montserrat',sans-serif;transition:all .2s">Copiar link</button>
+      </div>
+    </div>
     <div class="page-nav">
       <button onclick="goTo('ch2')">&larr; Voltar</button>
       <button onclick="goTo('cover')">Início</button>
@@ -545,6 +552,25 @@ function toggleAcc(btn){
 document.addEventListener('click',function(e){
   if(e.target.closest('.checklist li')){e.target.closest('li').classList.toggle('checked')}
 });
+
+// ===== COMPARTILHAR / COPIAR LINK =====
+(function(){
+  var wa=document.getElementById('shareWa');
+  if(wa){
+    var texto=encodeURIComponent('Olha esse e-book da Nutri Ana Luísa Rocha 🌸\n'+location.href);
+    wa.href='https://wa.me/?text='+texto;wa.target='_blank';wa.rel='noopener';
+  }
+  var copy=document.getElementById('copyLink');
+  if(copy){
+    copy.addEventListener('click',async function(){
+      var original=copy.textContent;
+      try{await navigator.clipboard.writeText(location.href);}
+      catch(e){prompt('Copie o link:',location.href);return;}
+      copy.textContent='Link copiado ✓';
+      setTimeout(function(){copy.textContent=original;},1800);
+    });
+  }
+})();
 
 
 </script>
