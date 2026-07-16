@@ -552,4 +552,6 @@ body.intro-lock{overflow:hidden}
 .lead-modal__check{width:60px;height:60px;border-radius:50%;background:#eaf6ee;color:#217a49;
   display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:700;margin:4px 0 12px}
 .lead-modal [data-lead-submit].is-loading{opacity:.7;pointer-events:none}
+/* Estado "enviando" para qualquer botão fora do modal (ex.: login da biblioteca). */
+.btn.is-loading{opacity:.7;pointer-events:none}
 body.lead-open{overflow:hidden}

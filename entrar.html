@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar na minha biblioteca — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="Acesse a sua biblioteca de e-books da nutricionista Ana Luísa Rocha.">
+<meta name="theme-color" content="#8E1B6C">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/monograma.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<header class="nav nav-scrolled" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista"></a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="menu">
+      <a href="index.html#ebooks">E-books</a>
+      <a href="index.html#consultas">Consultas</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<section class="bg-rosa vip" style="padding-top:calc(var(--nav-h) + 60px)">
+  <div class="wrap">
+    <div class="box">
+
+      <!-- ---------- Passo: entrar ---------- -->
+      <div data-step="entrar">
+        <span class="eyebrow">Minha biblioteca</span>
+        <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem">Que bom te ver de novo 🌸</h1>
+        <p class="lead" style="margin-bottom:22px">Entre com o seu e-mail para ler os e-books que você já adquiriu.</p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="email">Seu e-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="senha">Sua senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Sua senha" autocomplete="current-password" required>
+          </div>
+          <p class="lead-modal__err" data-err hidden></p>
+          <button type="submit" class="btn btn-primary btn-block" data-submit>Entrar na minha biblioteca →</button>
+        </form>
+
+        <p class="microcopy" style="margin-top:14px">
+          <a href="#" id="link-esqueci">Esqueci minha senha</a>
+        </p>
+        <p class="microcopy" style="margin-top:18px;border-top:1px solid var(--rosa-borda);padding-top:16px">
+          Ainda não tem acesso? <a href="index.html#ebooks">Conheça os e-books →</a>
+        </p>
+      </div>
+
+      <!-- ---------- Passo: criar senha (convite / recuperação) ---------- -->
+      <div data-step="senha" hidden>
+        <span class="eyebrow">Quase lá</span>
+        <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem" data-senha-titulo>Crie a sua senha 🌸</h1>
+        <p class="lead" style="margin-bottom:22px" data-senha-sub>Escolha uma senha para acessar a sua biblioteca sempre que quiser.</p>
+
+        <form id="senha-form" novalidate>
+          <div class="field">
+            <label for="senha1">Nova senha</label>
+            <input type="password" id="senha1" placeholder="Mínimo de 6 caracteres" autocomplete="new-password" required>
+          </div>
+          <div class="field">
+            <label for="senha2">Confirmar nova senha</label>
+            <input type="password" id="senha2" placeholder="Repita a senha" autocomplete="new-password" required>
+          </div>
+          <p class="lead-modal__err" data-err2 hidden></p>
+          <button type="submit" class="btn btn-primary btn-block" data-submit2>Salvar e entrar →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista">
+      <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html#ebooks">E-books</a></li>
+        <li><a href="index.html#consultas">Consultas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li><a href="privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos.html">Termos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar">© <span data-year>2026</span> Ana Luísa Rocha — Nutricionista · CRN 25100401.</div></div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/conta.js"></script>
+</body>
+</html>

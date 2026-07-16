@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Biblioteca — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="Seus e-books e materiais da nutricionista Ana Luísa Rocha, para ler quando quiser.">
+<meta name="theme-color" content="#8E1B6C">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/monograma.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  /* --- Biblioteca (usa os tokens do styles.css) --- */
+  .bib-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:34px}
+  .bib-sair{background:none;border:1px solid var(--rosa-borda);color:var(--bordo);font-family:var(--sans);
+    font-weight:600;font-size:.85rem;padding:9px 18px;border-radius:999px;cursor:pointer;transition:background .2s}
+  .bib-sair:hover{background:var(--rosa-suave)}
+  .bib-cat{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.45rem;
+    margin:0 0 18px;padding-bottom:.5rem;border-bottom:1px solid var(--rosa-borda)}
+  .bib-section{margin-bottom:52px}
+  .bib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px}
+  .bib-card{background:var(--branco);border:1px solid var(--rosa-borda);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+  .bib-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+  .bib-cover-wrap{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--rosa-suave)}
+  .bib-cover{width:100%;height:100%;object-fit:cover;display:block}
+  .bib-cover--ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;
+    font-family:var(--serif);font-weight:900;color:var(--branco);font-size:1.05rem;line-height:1.25;
+    background:linear-gradient(150deg,var(--bordo),var(--rosa))}
+  .is-locked .bib-cover{filter:grayscale(.45) brightness(.92)}
+  .bib-badge{position:absolute;top:10px;left:10px;font-size:.7rem;font-weight:700;padding:.28em .75em;
+    border-radius:999px;color:var(--branco);letter-spacing:.02em}
+  .bib-badge--free{background:#217a49}
+  .bib-badge--own{background:var(--bordo)}
+  .bib-body{padding:18px;display:flex;flex-direction:column;gap:.45rem;flex:1}
+  .bib-body h3{font-size:1rem;line-height:1.3;color:var(--bordo);margin:0}
+  .bib-body p{font-size:.85rem;color:var(--cinza);margin:0;flex:1}
+  .bib-foot{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .bib-foot .btn{font-size:.85rem;padding:11px 16px}
+  .bib-empty,#bib-loading{color:var(--cinza);text-align:center;padding:60px 0}
+  /* Leitor em tela cheia */
+  .bib-reader{position:fixed;inset:0;z-index:200;background:var(--branco);display:flex;flex-direction:column}
+  .bib-reader[hidden]{display:none}
+  .bib-reader__bar{display:flex;align-items:center;gap:14px;padding:.6rem 18px;border-bottom:1px solid var(--rosa-borda)}
+  .bib-reader__bar strong{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1rem;
+    flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bib-reader__close{border:1px solid var(--rosa-borda);background:var(--branco);border-radius:var(--radius-sm);
+    padding:.45rem .9rem;font-family:var(--sans);font-weight:600;cursor:pointer;color:var(--bordo)}
+  .bib-reader__close:hover{background:var(--rosa-suave)}
+  #bib-frame{flex:1;width:100%;border:0}
+  @media(max-width:520px){.bib-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}}
+</style>
+</head>
+<body>
+
+<header class="nav nav-scrolled" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista"></a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="menu">
+      <a href="index.html#ebooks">E-books</a>
+      <a href="index.html#consultas">Consultas</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<section style="padding-top:calc(var(--nav-h) + 56px)">
+  <div class="wrap">
+    <div class="bib-head">
+      <div>
+        <span class="eyebrow">Minha biblioteca</span>
+        <h1 style="font-size:clamp(1.9rem,4vw,2.6rem);margin:.2rem 0 .3rem" id="bib-hi">Minha Biblioteca</h1>
+        <p class="lead" style="margin:0">Seus e-books e materiais, para ler quando quiser.</p>
+      </div>
+      <button class="bib-sair" type="button" data-logout>Sair</button>
+    </div>
+
+    <p id="bib-loading">Carregando a sua biblioteca…</p>
+    <div id="bib-catalogo"></div>
+  </div>
+</section>
+
+<!-- Leitor -->
+<div class="bib-reader" id="bib-reader" hidden>
+  <div class="bib-reader__bar">
+    <strong id="bib-reader-title">E-book</strong>
+    <button class="bib-reader__close" type="button" data-fechar-leitor>Fechar ✕</button>
+  </div>
+  <iframe id="bib-frame" title="Leitor de e-book" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista">
+      <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher.</p>
+    </div>
+    <div>
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html#ebooks">E-books</a></li>
+        <li><a href="index.html#consultas">Consultas</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institucional</h4>
+      <ul>
+        <li><a href="privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos.html">Termos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar">© <span data-year>2026</span> Ana Luísa Rocha — Nutricionista · CRN 25100401.</div></div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/biblioteca.js"></script>
+</body>
+</html>

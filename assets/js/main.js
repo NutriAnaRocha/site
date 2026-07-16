@@ -33,10 +33,13 @@ const CHECKOUT = {
   "Plano Mensal de E-books":   "",
 };
 
-/* Biblioteca de e-books (Plataforma Nutri): onde o cliente que JÁ comprou
-   faz login e lê. Cole aqui a URL da tela de login da plataforma quando
-   publicá-la. Enquanto vazio, os links "Acessar minha biblioteca" somem. */
-const PLATAFORMA_URL = "https://nutrianarocha.github.io/Plataforma/prototipo/biblioteca.html";
+/* Biblioteca de e-books: onde o cliente que JÁ comprou faz login e lê.
+   Agora é uma página DO PRÓPRIO SITE (biblioteca.html + entrar.html), com a
+   marca da Ana — antes mandávamos pro login do NutriPlat, que é um portal
+   pra nutricionistas e confundia quem só comprou um e-book. O login é o mesmo
+   Supabase, então a conta vale nos dois. Se vazio, os links "Acessar minha
+   biblioteca" somem. Caminho relativo: só use [data-biblioteca] em páginas da raiz. */
+const PLATAFORMA_URL = "biblioteca.html";
 
 /* Captura de leads dos e-books gratuitos (grava telefone no Supabase).
    Depois de deixar nome + WhatsApp, a pessoa lê o e-book na hora. */
@@ -259,12 +262,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---- Biblioteca de e-books (login da plataforma p/ quem já comprou) ----
+  /* ---- Biblioteca de e-books (p/ quem já comprou) ----
      Uso: <a data-biblioteca>Acessar minha biblioteca</a>.
-     Se PLATAFORMA_URL estiver vazio, o link é removido. */
+     Se PLATAFORMA_URL estiver vazio, o link é removido.
+     Link externo abre em nova aba; interno (a biblioteca do site) abre na
+     mesma aba — é navegação dentro do próprio site. */
   document.querySelectorAll("[data-biblioteca]").forEach(el => {
-    if (PLATAFORMA_URL) { el.href = PLATAFORMA_URL; el.target = "_blank"; el.rel = "noopener"; }
-    else { el.remove(); }
+    if (!PLATAFORMA_URL) { el.remove(); return; }
+    el.href = PLATAFORMA_URL;
+    if (/^https?:\/\//i.test(PLATAFORMA_URL)) { el.target = "_blank"; el.rel = "noopener"; }
   });
 
   /* ---- Links diretos (Instagram / e-mail / localização) ---- */
