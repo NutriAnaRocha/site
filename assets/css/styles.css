@@ -414,6 +414,9 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .ebooks-nf .eyebrow{color:var(--rosa);opacity:1}
 .ebooks-nf h2{color:#fff}
 .ebooks-nf .lead{color:rgba(255,255,255,.72)}
+.nf-biblio-cta{display:inline-flex;align-items:center;gap:6px;margin-top:20px;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.nf-biblio-cta:hover{transform:translateY(-2px)}
+.nf-footer .nf-biblio-cta{margin-top:.6rem}
 .shelf{margin-top:38px;position:relative}
 .shelf__title{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.3rem;margin:0 0 16px}
 .shelf__scroller{position:relative}
