@@ -32,11 +32,11 @@ body{font-family:'Montserrat',sans-serif;color:var(--text);background:var(--whit
 .nav-menu a .ch-num{display:inline-block;width:28px;font-weight:700;color:var(--pink);font-size:.78rem}
 
 /* ===== PAGES ===== */
-.page{display:none;min-height:100vh;padding-top:56px}
+.page{display:none;min-height:100vh;min-height:100dvh;padding-top:56px}
 .page.active{display:block}
 
 /* ===== COVER ===== */
-.cover{background:linear-gradient(160deg,var(--wine-dark) 0%,var(--wine) 40%,var(--wine-light) 100%);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
+.cover{background:linear-gradient(160deg,var(--wine-dark) 0%,var(--wine) 40%,var(--wine-light) 100%);min-height:calc(100vh - 56px);min-height:calc(100dvh - 56px);display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
 .cover::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(241,179,219,.08)}
 .cover::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;background:rgba(241,179,219,.05)}
 .cover-content{position:relative;z-index:1;max-width:600px}
