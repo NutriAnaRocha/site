@@ -28,8 +28,8 @@ const MSG = {
    se ficar "", cai no WhatsApp. Cada link já redireciona, após o pagamento,
    para a página secreta com o e-book completo. */
 const CHECKOUT = {
-  "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G_oAAMSS6VJhK9QAu2Y8waGQ875z_QtFiMeItY0nvm_b2F_Fo-AQnA6h2Sp6u3E7t_jpDR_HJ2kzyaXE_ufLJnrbJKW82E4YCdsNO1NPOtcTCSZ6RJGaHo4887C7dMOVI6f9ry7v8EtVn4mPA_pmQVsAwMryaQOFxLMvHVSgp8KPoqzDRoqomv-LOifChY_EPpquz55Q009bpc92y26VwIP7bowswsQe9p0xUZfsfvcB.v1.8631f6ea0b1e9893",
-  "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=GwYBAGRsbaNSEqG82fqPRMhn8uIhMZqXYF466__0VAKwWlJb0Nai4H76duODXrT7dXMhmURkcyqmw2P18wVEG1B2w5OgkvWoM1iinmQeT1SihV5RWxGJjjTrsLw0wydHSud_ur6jb6M7HxR6P58UdUYAzSwtkGgZYbRqUXe_PDUwSUn7ckM5ZjX0j7bGCxjafFx8HhWWQ98qVH6YQvVywKaqrE71zGJWPbzEbwNHkZ842KGO79vUSyYB.v1.1b1265c5cdcdf0ee",
+  "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G1IBABwJdgwxEe8MQKPkMpS9nPMm7IRC22aAQgEJ2_v0vmsKSeEzcrsJNaERlNj5JhlV0boDOyj836W24FsYfAujWsaBBhrW4jC94eP4JG0muZTYvrOiO0um-k0oCSShgZn-rLO9QMJE15Ao24UTz7TfXbuhuROn8Z_3gO-ySl8LOKDPoDAArizNQGHxwo8OKVCUpmdS1sTSSZDN_kVtpaZEgLQHcy7I1dwUiqWCkCErQQb3bHRw6GG76XQ5r3Nsdn9xWSJ3lfK3BwAY_nNK4yRabQI_1HbiLNI1BWaqI-CQomkrJuqNLWpMSEdIQRjB-uN1c5XyAQ.v1.0ba00280056ebff1",
+  "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=G14BAIyUqJ0vDVdlz-bM7IyaMO0PMB5Q6Ob--wW6ArtlloVGUGLxXXdgNzqA_UtqC7616HCP2jIONNDjW8DpNo_LS6S2raQrsDnPUjWQnCB6MXB4CIHAF5azzfYCBxp6Bh-ZBieaul9eD0NKJ0r7v7wKfSnqw0iH__NdhiAYIKj0bVB9zriMPgTvl_QFTHay_riRHQOj8OlrPEiRbxXz4VGxE4W-Do4nqnqoRVTUkehUwome1MR3gXY6zV6N1uRas1mVG72b4FwSTjVEc3HYH8b_NAw8301zy7Qj5itxkIWWGEQuUAi4yJAY_CJxjeiOojt6yF3Ipl83DdEE.v1.bc80cb571de96e80",
   "Plano Mensal de E-books":   "",
 };
 
