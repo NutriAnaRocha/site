@@ -16,6 +16,10 @@
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:'Montserrat',sans-serif;color:var(--text);background:var(--white);line-height:1.7;overflow-x:hidden}
+/* Na capa, o fundo da página acompanha o vinho da capa. Sem isso, quando a
+   barra do navegador do celular retrai, o viewport cresce além dos 100dvh da
+   capa e o branco do body aparece como uma faixa no rodapé. */
+body.on-cover{background:var(--wine-dark)}
 
 /* ===== NAV ===== */
 .nav-bar{position:fixed;top:0;left:0;right:0;background:var(--wine);z-index:1000;box-shadow:0 2px 12px rgba(131,14,86,.3)}
@@ -216,7 +220,7 @@ p{margin-bottom:14px;font-size:.95rem}
 }
 </style>
 </head>
-<body>
+<body class="on-cover">
 
 <!-- NAV BAR -->
 <div class="nav-bar">
@@ -1208,6 +1212,7 @@ const pages=['cover','toc','intro','ch1','ch2','ch3','ch4','ch5','ch6','ch7','ch
 function goTo(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  document.body.classList.toggle('on-cover', id==='cover');
   window.scrollTo(0,0);
   updateProgress(id);
   // Update active nav
