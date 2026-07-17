@@ -452,7 +452,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .shelf__arrow.show{display:flex}
 .nf-footer{margin-top:40px;text-align:center}
 .ebooks-nf .selo{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.82)}
-@media (max-width:560px){.nf-card{width:158px}.shelf__title{font-size:1.12rem}}
+
+/* Destaque da assinatura, abaixo das prateleiras */
+.nf-plano{margin-top:46px;display:flex;align-items:center;gap:24px;padding:26px 30px;border-radius:20px;
+  background:linear-gradient(120deg,var(--rosa-suave),var(--rosa));border:1px solid rgba(255,255,255,.22)}
+.nf-plano__art{flex:0 0 auto;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.5)}
+.nf-plano__art img{width:44px;height:44px;object-fit:contain}
+.nf-plano__text{flex:1 1 auto;min-width:0}
+.nf-plano__tag{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--bordo);opacity:.75}
+.nf-plano__text h3{font-family:var(--serif);font-weight:900;font-size:1.42rem;line-height:1.2;color:var(--bordo);margin:.35rem 0 .45rem}
+.nf-plano__text p{font-size:.94rem;line-height:1.5;color:rgba(74,14,55,.85);margin:0}
+.nf-plano__cta{flex:0 0 auto;white-space:nowrap}
+@media (max-width:760px){
+  .nf-plano{flex-direction:column;align-items:flex-start;gap:16px;padding:24px 22px}
+  .nf-plano__cta{width:100%;justify-content:center}
+}
+
+@media (max-width:560px){.nf-card{width:158px}.shelf__title{font-size:1.12rem}.nf-plano__text h3{font-size:1.24rem}}
 
 /* ---------- Abertura / splash estilo Netflix ---------- */
 .intro{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:hidden;
