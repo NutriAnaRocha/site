@@ -23,7 +23,7 @@
   var COMPRAR_URL = "index.html#ebooks";
 
   // capa_url e previa_url no catálogo são relativos à PLATAFORMA
-  // (ex.: "assets/img/capas/x.png", "assets/previas/x.html"). Aqui no site
+  // (ex.: "assets/img/capas/x.jpg", "assets/previas/x.html"). Aqui no site
   // esses caminhos não existem — resolvemos contra a base da plataforma.
   var PLATAFORMA_BASE = "https://nutrianarocha.github.io/Plataforma/prototipo/";
   function resolver(url) {
