@@ -11,12 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700;900&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bordo:#8E1B6C; --bordo-escuro:#6B1450; --bordo-hover:#7A1760;
-    --rosa:#F1B3DB; --rosa-suave:#FBEAF4; --rosa-borda:#F3D3E7; --blush:#FADCEC;
+    --bordo:#840B55; --bordo-escuro:#5E0A3D; --bordo-hover:#6F0947;
+    --rosa:#F1B2DC; --rosa-suave:#FCEFF7; --rosa-borda:#F6D8EC; --blush:#FADCEC;
     --dourado:#C79A3E; --dourado-claro:#E7CE92;
     --texto:#2c2230; --cinza:#6f6470; --creme:#FFFCFE;
     --serif:"Merienda",Georgia,serif; --sans:"Montserrat","Segoe UI",system-ui,sans-serif;
-    --shadow:0 18px 50px rgba(107,20,80,.14);
+    --shadow:0 18px 50px rgba(94,10,61,.14);
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth;scroll-padding-top:20px}
@@ -58,7 +58,7 @@
   .toc{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
   .toc li a{display:flex;align-items:center;gap:16px;padding:14px 18px;border:1px solid var(--rosa-borda);border-radius:14px;
     text-decoration:none;color:var(--texto);background:#fff;transition:.18s}
-  .toc li a:hover{border-color:var(--bordo);transform:translateX(4px);box-shadow:0 8px 20px rgba(142,27,108,.1)}
+  .toc li a:hover{border-color:var(--bordo);transform:translateX(4px);box-shadow:0 8px 20px rgba(132,11,85,.1)}
   .toc .n{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.15rem;min-width:32px}
   .toc .soon{opacity:.5;pointer-events:none}
   .toc .soon .tagsoon{margin-left:auto;font-family:var(--sans);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
@@ -89,7 +89,7 @@
   .foodgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
   @media(max-width:620px){.foodgrid{grid-template-columns:repeat(2,1fr)}}
   .food{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:16px 12px;text-align:center;transition:.2s}
-  .food:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(142,27,108,.14);border-color:var(--rosa)}
+  .food:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(132,11,85,.14);border-color:var(--rosa)}
   .food .badge{width:52px;height:52px;margin:0 auto 10px;border-radius:50%;display:flex;align-items:center;justify-content:center;
     background:var(--rosa-suave);border:1.5px solid var(--dourado-claro);color:var(--bordo)}
   .food b{display:block;font-size:.9rem;color:var(--bordo);font-family:var(--serif)}
@@ -190,14 +190,14 @@
   .back-top{text-align:center;margin-top:20px}
   .back-top a{font-size:.85rem;color:var(--cinza);text-decoration:none}
   /* Régua de fertilidade */
-  .ruler{height:18px;border-radius:999px;background:linear-gradient(90deg,#e7d3df,#f1b3db,#d6519a,#8E1B6C);margin:14px 0 6px}
+  .ruler{height:18px;border-radius:999px;background:linear-gradient(90deg,#e7d3df,#F1B2DC,#d6519a,#840B55);margin:14px 0 6px}
   .ruler-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--cinza);font-weight:600}
   /* Tipos de muco */
   .mucus{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
   @media(max-width:720px){.mucus{grid-template-columns:1fr 1fr}}
   @media(max-width:440px){.mucus{grid-template-columns:1fr}}
   .mtype{background:#fff;border:1px solid var(--rosa-borda);border-radius:16px;padding:14px;text-align:center;display:flex;flex-direction:column}
-  .mtype.fertile{border:2px solid var(--bordo);box-shadow:0 10px 26px rgba(142,27,108,.16)}
+  .mtype.fertile{border:2px solid var(--bordo);box-shadow:0 10px 26px rgba(132,11,85,.16)}
   .mtype .art{height:92px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
   .mtype .selo{align-self:center;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--bordo);color:#fff;padding:3px 9px;border-radius:999px;margin-bottom:6px}
   .mtype b{color:var(--bordo);font-family:var(--serif)}
@@ -847,7 +847,7 @@
           <div class="flip__b"><span class="k">Papel</span><b>Especialmente estudado para quem tem SOP e resistência à insulina.</b></div>
         </div></div>
       </div>
-      <div class="aviso" style="border-color:var(--bordo);background:#fbeaf4"><b>Regra de ouro:</b> a suplementação <b>deve ser individualizada e orientada por profissional habilitado.</b> O que serve para uma pessoa pode ser desnecessário — ou demais — para outra. Nada aqui substitui a sua avaliação e seus exames.</div>
+      <div class="aviso" style="border-color:var(--bordo);background:#FCEFF7"><b>Regra de ouro:</b> a suplementação <b>deve ser individualizada e orientada por profissional habilitado.</b> O que serve para uma pessoa pode ser desnecessário — ou demais — para outra. Nada aqui substitui a sua avaliação e seus exames.</div>
     </div>
 
     <div class="mod-nav reveal"><a class="btn btn-ghost" href="#mod7">← Módulo 7</a><a class="btn btn-ghost" href="#mod9">Módulo 9 →</a></div>

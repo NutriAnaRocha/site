@@ -14,15 +14,15 @@
 
 /* ============ TOKENS — Identidade Ana Luisa Rocha ============ */
 :root{
-  --vinho:#7B284C; --vinho-2:#9C3D63; --vinho-soft:#9C3D63; --vinho-escuro:#5E1D3A;
-  --rosa:#F4DCE5; --rosa-2:#FBEEF3; --rosa-3:#FDF7FA;
+  --vinho:#840B55; --vinho-2:#A82670; --vinho-soft:#A82670; --vinho-escuro:#5E0A3D;
+  --rosa:#F1B2DC; --rosa-2:#FCEFF7; --rosa-3:#FDF7FA;
   --grafite:#3C3C3C; --cinza:#8A8A8A; --cinza-c:#F5F5F5;
-  --branco:#fff; --ouro:#9C3D63; --ouro-2:#c98aa6;
+  --branco:#fff; --ouro:#A82670; --ouro-2:#c98aa6;
   --linha:#E7E7EA; --ok:#3f7d6b; --alerta:#b7791f;
   --serif:"Merienda","Georgia",serif;
   --sans:"Montserrat","Segoe UI",system-ui,-apple-system,sans-serif;
-  --r:20px; --sh:0 24px 60px rgba(123,40,76,.12),0 10px 24px rgba(60,60,60,.10);
-  --sh-sm:0 4px 12px rgba(60,60,60,.06),0 12px 28px rgba(123,40,76,.07);
+  --r:20px; --sh:0 24px 60px rgba(132,11,85,.12),0 10px 24px rgba(60,60,60,.10);
+  --sh-sm:0 4px 12px rgba(60,60,60,.06),0 12px 28px rgba(132,11,85,.07);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -36,13 +36,13 @@ img{max-width:100%}
 a{color:var(--vinho)}
 
 /* ============ PROGRESS BAR ============ */
-#topbar{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(123,40,76,.12);z-index:80}
+#topbar{position:fixed;top:0;left:0;right:0;height:4px;background:rgba(132,11,85,.12);z-index:80}
 #topbar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--vinho),var(--vinho-2));transition:width .4s ease}
 
 /* ============ READER / LIVRO ============ */
 #reader{max-width:880px;margin:0 auto;padding:54px 24px 130px}
 .book{position:relative;background:var(--branco);border-radius:var(--r);box-shadow:var(--sh);
-  padding:0;overflow:hidden;border:1px solid rgba(123,40,76,.06)}
+  padding:0;overflow:hidden;border:1px solid rgba(132,11,85,.06)}
 .book::before{content:"";position:absolute;left:0;top:0;bottom:0;width:7px;
   background:linear-gradient(180deg,var(--vinho),var(--vinho-escuro));z-index:5}
 .runhead{display:flex;align-items:center;gap:12px;padding:18px 40px;border-bottom:1px solid var(--linha);
@@ -77,7 +77,7 @@ a{color:var(--vinho)}
 .botbar .nav-mini{display:none}
 
 /* ============ SUMÁRIO (overlay) ============ */
-#toc{position:fixed;inset:0;z-index:90;background:rgba(94,29,58,.55);backdrop-filter:blur(6px);
+#toc{position:fixed;inset:0;z-index:90;background:rgba(94,10,61,.55);backdrop-filter:blur(6px);
   display:none;align-items:center;justify-content:center;padding:24px}
 #toc.open{display:flex;animation:fade .25s ease}
 @keyframes fade{from{opacity:0}to{opacity:1}}
