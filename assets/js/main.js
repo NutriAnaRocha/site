@@ -30,7 +30,6 @@ const MSG = {
 const CHECKOUT = {
   "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G1IBABwJdgwxEe8MQKPkMpS9nPMm7IRC22aAQgEJ2_v0vmsKSeEzcrsJNaERlNj5JhlV0boDOyj836W24FsYfAujWsaBBhrW4jC94eP4JG0muZTYvrOiO0um-k0oCSShgZn-rLO9QMJE15Ao24UTz7TfXbuhuROn8Z_3gO-ySl8LOKDPoDAArizNQGHxwo8OKVCUpmdS1sTSSZDN_kVtpaZEgLQHcy7I1dwUiqWCkCErQQb3bHRw6GG76XQ5r3Nsdn9xWSJ3lfK3BwAY_nNK4yRabQI_1HbiLNI1BWaqI-CQomkrJuqNLWpMSEdIQRjB-uN1c5XyAQ.v1.0ba00280056ebff1",
   "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=G14BAIyUqJ0vDVdlz-bM7IyaMO0PMB5Q6Ob--wW6ArtlloVGUGLxXXdgNzqA_UtqC7616HCP2jIONNDjW8DpNo_LS6S2raQrsDnPUjWQnCB6MXB4CIHAF5azzfYCBxp6Bh-ZBieaul9eD0NKJ0r7v7wKfSnqw0iH__NdhiAYIKj0bVB9zriMPgTvl_QFTHay_riRHQOj8OlrPEiRbxXz4VGxE4W-Do4nqnqoRVTUkehUwome1MR3gXY6zV6N1uRas1mVG72b4FwSTjVEc3HYH8b_NAw8301zy7Qj5itxkIWWGEQuUAi4yJAY_CJxjeiOojt6yF3Ipl83DdEE.v1.bc80cb571de96e80",
-  "Plano Mensal de E-books":   "",
 };
 
 /* Biblioteca de e-books: onde o cliente que JÁ comprou faz login e lê.
