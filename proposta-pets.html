@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta — E-books para quem compra seu filhote</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#840B55">
+<meta name="description" content="Proposta de criação de e-books personalizados para entregar junto com o filhote. Dois formatos: Essencial e Completo.">
+<link rel="icon" href="assets/img/monograma.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:"Merienda";
+  src:url("assets/fonts/Merienda.ttf") format("truetype");
+  font-weight:300 900;
+  font-display:swap;
+}
+
+:root{
+  --bordo:#840B55;
+  --bordo-escuro:#5E0A3D;
+  --bordo-hover:#6F0947;
+  --rosa:#F1B2DC;
+  --rosa-suave:#FCEFF7;
+  --rosa-borda:#F6D8EC;
+  --cinza:#63666A;
+  --cinza-claro:#8A8D92;
+  --branco:#fff;
+  --off:#FBF9FA;
+  --serif:"Merienda", Georgia, serif;
+  --sans:"Montserrat","Segoe UI",system-ui,-apple-system,sans-serif;
+  --max:1120px;
+  --radius:14px;
+  --radius-sm:10px;
+  --shadow:0 10px 34px rgba(94,10,61,.12);
+  --shadow-hover:0 18px 44px rgba(94,10,61,.20);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  font-family:var(--sans);color:var(--cinza);background:var(--branco);
+  line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:900;color:var(--bordo);line-height:1.18}
+h1{font-size:clamp(1.9rem,5.4vw,3.2rem)}
+h2{font-size:clamp(1.55rem,3.8vw,2.3rem)}
+h3{font-size:clamp(1.1rem,2.2vw,1.35rem)}
+p{margin:0 0 1rem}
+strong{color:var(--bordo-escuro);font-weight:700}
+
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 22px}
+section{padding:72px 0}
+.eyebrow{
+  font-weight:600;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--bordo);opacity:.85;margin-bottom:.8rem;display:inline-block;
+}
+.section-head{max-width:700px;margin:0 auto 44px;text-align:center}
+.lead{font-size:1.06rem}
+.bg-rosa{background:var(--rosa-suave)}
+.bg-off{background:var(--off)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--sans);font-weight:600;font-size:.98rem;line-height:1;
+  padding:16px 30px;border-radius:var(--radius-sm);border:2px solid transparent;
+  cursor:pointer;transition:transform .18s ease,background .18s ease,box-shadow .18s ease,color .18s ease;
+  text-align:center;min-height:48px;
+}
+.btn-primary{background:var(--bordo);color:var(--branco);box-shadow:0 8px 22px rgba(132,11,85,.28)}
+.btn-primary:hover{background:var(--bordo-hover);transform:translateY(-2px)}
+.btn-light{background:var(--branco);color:var(--bordo)}
+.btn-light:hover{transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--bordo);border-color:var(--bordo)}
+.btn-outline:hover{background:var(--bordo);color:var(--branco)}
+
+/* ---------- Topo ---------- */
+.topo{
+  background:linear-gradient(160deg,var(--bordo) 0%,var(--bordo-escuro) 100%);
+  color:var(--branco);padding:26px 0 78px;position:relative;overflow:hidden;
+}
+.topo::after{
+  content:"";position:absolute;inset:auto 0 -1px 0;height:60px;background:var(--branco);
+  border-radius:60% 60% 0 0/100% 100% 0 0;
+}
+.topo-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.topo-bar img{height:38px;width:auto;filter:brightness(0) invert(1)}
+.topo-tag{
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:7px 14px;
+}
+.topo-conteudo{max-width:760px;margin:44px auto 0;text-align:center;position:relative;z-index:2}
+.topo h1{color:var(--branco)}
+.topo .sub{font-size:1.08rem;margin-top:1rem;color:rgba(255,255,255,.92)}
+.topo-para{
+  display:inline-block;margin-top:20px;font-size:.82rem;color:rgba(255,255,255,.8);
+  border-top:1px solid rgba(255,255,255,.28);padding-top:14px;
+}
+
+/* faixa de bichinhos */
+.bichos-faixa{
+  display:flex;justify-content:center;gap:26px;flex-wrap:wrap;
+  margin-top:34px;position:relative;z-index:2;
+}
+.bicho-item{display:flex;flex-direction:column;align-items:center;gap:6px;width:82px}
+.bicho-item svg{width:44px;height:44px;stroke:var(--rosa);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.bicho-item span{font-size:.68rem;letter-spacing:.05em;color:rgba(255,255,255,.85);text-align:center;line-height:1.3}
+
+/* ---------- Cards genéricos ---------- */
+.grid{display:grid;gap:22px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.card{
+  background:var(--branco);border:1px solid var(--rosa-borda);border-radius:var(--radius);
+  padding:28px;box-shadow:var(--shadow);
+}
+.card .ico{
+  width:46px;height:46px;border-radius:12px;background:var(--rosa-suave);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--bordo);
+}
+.card .ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card h3{margin-bottom:.5rem}
+.card p{margin:0;font-size:.95rem}
+
+/* ---------- Planos ---------- */
+.planos{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.plano{
+  background:var(--branco);border:2px solid var(--rosa-borda);border-radius:18px;
+  padding:32px 28px;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column;
+}
+.plano.destaque{border-color:var(--bordo);box-shadow:var(--shadow-hover)}
+.plano-selo{
+  position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+  background:var(--bordo);color:var(--branco);font-size:.66rem;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;padding:8px 18px;border-radius:999px;white-space:nowrap;
+}
+.plano-nome{font-family:var(--serif);font-size:1.55rem;color:var(--bordo);font-weight:900}
+.plano-paginas{
+  display:inline-block;margin:8px 0 18px;font-size:.72rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;background:var(--rosa-suave);color:var(--bordo);padding:6px 13px;border-radius:999px;
+}
+.plano-preco{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.plano-preco .cifra{font-size:1rem;color:var(--bordo);font-weight:600}
+.plano-preco .valor{font-family:var(--serif);font-size:3rem;color:var(--bordo);font-weight:900;line-height:1}
+.plano-preco .unidade{font-size:.9rem;color:var(--cinza-claro)}
+.plano-kit{
+  background:var(--rosa-suave);border:1px dashed var(--rosa);border-radius:var(--radius-sm);
+  padding:12px 14px;margin:16px 0 20px;font-size:.88rem;
+}
+.plano-kit b{color:var(--bordo);font-family:var(--serif);font-size:1.05rem}
+.plano ul{margin-bottom:22px;flex:1}
+.plano ul li{
+  position:relative;padding-left:28px;margin-bottom:11px;font-size:.94rem;line-height:1.5;
+}
+.plano ul li::before{
+  content:"";position:absolute;left:0;top:5px;width:17px;height:17px;border-radius:50%;
+  background:var(--rosa-suave);
+}
+.plano ul li::after{
+  content:"";position:absolute;left:5px;top:10px;width:7px;height:4px;
+  border-left:2px solid var(--bordo);border-bottom:2px solid var(--bordo);
+  transform:rotate(-45deg);
+}
+.plano-para{
+  font-size:.85rem;color:var(--cinza-claro);border-top:1px solid var(--rosa-borda);
+  padding-top:14px;margin-top:auto;
+}
+.plano-para b{color:var(--bordo)}
+
+/* ---------- Comparativo ---------- */
+.tabela-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:520px;background:var(--branco);font-size:.92rem}
+th,td{padding:14px 16px;border-bottom:1px solid var(--rosa-borda);text-align:left}
+thead th{background:var(--bordo);color:var(--branco);font-weight:600;font-size:.82rem;letter-spacing:.06em}
+thead th:not(:first-child),tbody td:not(:first-child){text-align:center;width:23%}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:var(--off)}
+.sim{color:var(--bordo);font-weight:700;font-size:1.1rem}
+.nao{color:#C9C3C6;font-weight:700}
+
+/* ---------- Prévia folheável ---------- */
+.previa{max-width:760px;margin:0 auto}
+.previa-abas{display:flex;justify-content:center;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.aba{
+  background:var(--branco);border:2px solid var(--rosa-borda);color:var(--cinza);
+  border-radius:999px;padding:11px 22px;font-family:var(--sans);font-weight:600;font-size:.85rem;
+  cursor:pointer;min-height:44px;transition:all .18s ease;
+}
+.aba[aria-selected="true"]{background:var(--bordo);border-color:var(--bordo);color:var(--branco)}
+.folha{
+  background:var(--branco);border-radius:var(--radius);box-shadow:var(--shadow-hover);
+  aspect-ratio:1/1.32;max-width:400px;margin:0 auto;padding:32px 28px;
+  display:flex;flex-direction:column;overflow:hidden;position:relative;
+  border:1px solid var(--rosa-borda);
+}
+.folha-capa{background:linear-gradient(165deg,var(--bordo) 0%,var(--bordo-escuro) 100%);color:var(--branco);justify-content:center;align-items:center;text-align:center;gap:14px}
+.folha-capa .mono{width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.3rem}
+.folha-capa .tit{font-family:var(--serif);font-size:1.6rem;line-height:1.2}
+.folha-capa .pet{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+.folha-capa .selo{margin-top:auto;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.folha h4{font-family:var(--serif);color:var(--bordo);font-size:1.15rem;margin-bottom:4px}
+.folha .kicker{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rosa);font-weight:700;margin-bottom:10px}
+.folha .linhas{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.folha .linhas i{display:block;height:7px;border-radius:4px;background:var(--rosa-suave)}
+.folha .linhas i:nth-child(3n){width:72%}
+.folha .linhas i:nth-child(4n){width:88%}
+.folha .mini{
+  margin-top:14px;background:var(--rosa-suave);border-radius:10px;padding:12px;
+  font-size:.72rem;color:var(--bordo);line-height:1.5;
+}
+.folha .rodape{margin-top:auto;font-size:.6rem;color:var(--cinza-claro);letter-spacing:.08em}
+.previa-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.seta{
+  width:48px;height:48px;border-radius:50%;border:2px solid var(--rosa-borda);background:var(--branco);
+  color:var(--bordo);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:all .18s ease;
+}
+.seta:hover:not(:disabled){background:var(--bordo);border-color:var(--bordo);color:var(--branco)}
+.seta:disabled{opacity:.35;cursor:default}
+.previa-contador{font-size:.85rem;font-weight:600;color:var(--bordo);min-width:110px;text-align:center}
+
+/* ---------- Montador ---------- */
+.montador{
+  background:var(--branco);border-radius:18px;box-shadow:var(--shadow-hover);
+  border:1px solid var(--rosa-borda);overflow:hidden;max-width:920px;margin:0 auto;
+}
+.montador-corpo{padding:30px 26px}
+.montador-passo{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--bordo);margin-bottom:14px}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.opt{
+  border:2px solid var(--rosa-borda);border-radius:var(--radius-sm);padding:14px 16px;
+  cursor:pointer;display:flex;align-items:center;gap:12px;transition:all .18s ease;min-height:56px;
+  background:var(--branco);
+}
+.opt:hover{border-color:var(--rosa)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .marca{
+  width:22px;height:22px;border-radius:6px;border:2px solid var(--rosa);flex:none;
+  display:flex;align-items:center;justify-content:center;transition:all .18s ease;
+}
+.opt.radio .marca{border-radius:50%}
+.opt .marca::after{content:"";transition:background .18s ease,border-color .18s ease}
+/* checkbox marcado vira um "check"; radio marcado vira um ponto */
+.opt:not(.radio) .marca::after{
+  width:10px;height:5px;margin-top:-3px;transform:rotate(-45deg);
+  border-left:2px solid transparent;border-bottom:2px solid transparent;
+}
+.opt.radio .marca::after{width:9px;height:9px;border-radius:50%;background:transparent}
+.opt .txt{font-size:.92rem;font-weight:600;color:var(--cinza);line-height:1.3}
+.opt .txt small{display:block;font-weight:400;font-size:.76rem;color:var(--cinza-claro)}
+.opt.ativo{border-color:var(--bordo);background:var(--rosa-suave)}
+.opt.ativo .marca{border-color:var(--bordo);background:var(--bordo)}
+.opt.ativo:not(.radio) .marca::after{border-color:var(--branco)}
+.opt.radio.ativo .marca::after{background:var(--branco)}
+.opt.ativo .txt{color:var(--bordo-escuro)}
+
+.resumo{
+  background:linear-gradient(160deg,var(--bordo) 0%,var(--bordo-escuro) 100%);
+  color:var(--branco);padding:28px 26px;text-align:center;
+}
+.resumo-linha{font-size:.88rem;color:rgba(255,255,255,.86);margin-bottom:6px;min-height:22px}
+.resumo-total{display:flex;align-items:baseline;justify-content:center;gap:6px;margin:6px 0}
+.resumo-total .c{font-size:1.1rem;font-weight:600}
+.resumo-total .v{font-family:var(--serif);font-size:3.2rem;font-weight:900;line-height:1}
+.resumo-economia{
+  display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;
+  padding:7px 16px;font-size:.8rem;font-weight:600;margin-top:4px;
+}
+.resumo-economia[hidden]{display:none}
+.resumo .btn{margin-top:20px;width:100%;max-width:380px}
+.resumo-obs{font-size:.72rem;color:rgba(255,255,255,.65);margin:14px 0 0}
+
+/* ---------- Passos ---------- */
+.passos{counter-reset:p;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.passo{position:relative;padding-top:56px}
+.passo::before{
+  counter-increment:p;content:counter(p);
+  position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;
+  background:var(--bordo);color:var(--branco);font-family:var(--serif);font-weight:900;
+  font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+}
+.passo h3{font-size:1.05rem;margin-bottom:.4rem}
+.passo p{font-size:.9rem;margin:0}
+
+/* ---------- Escopo ---------- */
+.escopo{
+  max-width:820px;margin:0 auto;background:var(--branco);border-left:4px solid var(--rosa);
+  border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);font-size:.94rem;
+}
+.escopo h3{font-size:1.1rem;margin-bottom:.6rem}
+.escopo p:last-child{margin-bottom:0}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:760px;margin:0 auto}
+.faq details{
+  background:var(--branco);border:1px solid var(--rosa-borda);border-radius:var(--radius-sm);
+  margin-bottom:12px;overflow:hidden;
+}
+.faq summary{
+  padding:18px 46px 18px 20px;cursor:pointer;font-weight:600;color:var(--bordo);
+  font-size:.96rem;list-style:none;position:relative;min-height:48px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  font-size:1.4rem;color:var(--rosa);font-weight:400;line-height:1;
+}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 20px 18px;font-size:.92rem;margin:0}
+
+/* ---------- Fechamento ---------- */
+.fechamento{
+  background:linear-gradient(160deg,var(--bordo) 0%,var(--bordo-escuro) 100%);
+  color:var(--branco);text-align:center;
+}
+.fechamento h2{color:var(--branco)}
+.fechamento p{color:rgba(255,255,255,.9);max-width:560px;margin-left:auto;margin-right:auto}
+.rodape{background:var(--bordo-escuro);color:rgba(255,255,255,.7);text-align:center;padding:28px 0;font-size:.8rem}
+.rodape img{height:30px;width:auto;margin:0 auto 12px;filter:brightness(0) invert(1);opacity:.9}
+
+/* ---------- Revelação ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:860px){
+  section{padding:56px 0}
+  .grid-3{grid-template-columns:1fr}
+  .planos{grid-template-columns:1fr;gap:34px}
+  .passos{grid-template-columns:1fr 1fr}
+  .opcoes{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .topo{padding-bottom:66px}
+  .bichos-faixa{gap:14px}
+  .bicho-item{width:62px}
+  .bicho-item svg{width:36px;height:36px}
+  .passos{grid-template-columns:1fr;gap:14px}
+  .passo{padding-top:0;padding-left:60px;min-height:48px}
+  .passo::before{width:42px;height:42px;top:-2px}
+  .plano{padding:28px 22px}
+  .montador-corpo{padding:24px 20px}
+  .resumo-total .v{font-size:2.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  *{transition-duration:.01ms!important}
+}
+@media print{
+  .topo::after,.previa-nav,.montador{box-shadow:none}
+  .btn{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOPO ============ -->
+<header class="topo">
+  <div class="wrap">
+    <div class="topo-bar">
+      <img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha">
+      <span class="topo-tag">Proposta comercial</span>
+    </div>
+
+    <div class="topo-conteudo">
+      <h1>Todo mundo entrega o filhote.<br>Quase ninguém entrega o manual.</h1>
+      <p class="sub">Um e-book com a sua marca, entregue junto com cada bichinho: o cliente sai
+      seguro de como cuidar, você aparece como criadora que se importa — e ainda recebe menos
+      mensagem de "socorro, ele não está comendo".</p>
+      <p class="topo-para">Preparada especialmente para você <span aria-hidden="true">🐾</span></p>
+    </div>
+
+    <div class="bichos-faixa" aria-hidden="true">
+      <div class="bicho-item">
+        <svg viewBox="0 0 32 32"><path d="M10.4 12.4L8 5.2l7.2 3.6z"/><path d="M21.6 12.4L24 5.2l-7.2 3.6z"/><path d="M7.8 16.6c0-4 3.7-6.8 8.2-6.8s8.2 2.8 8.2 6.8c0 3.4-2.3 5.5-4.4 6.7-1.6.9-2.6 2.3-3.8 2.3s-2.2-1.4-3.8-2.3c-2.1-1.2-4.4-3.3-4.4-6.7z"/><circle cx="12.8" cy="16.2" r=".9"/><circle cx="19.2" cy="16.2" r=".9"/><path d="M16 20.4v1.2"/><path d="M14.3 22.4c1.1.9 2.3.9 3.4 0"/></svg>
+        <span>Spitz<br>alemão</span>
+      </div>
+      <div class="bicho-item">
+        <svg viewBox="0 0 32 32"><ellipse cx="6.2" cy="19" rx="3" ry="5.6" transform="rotate(-14 6.2 19)"/><ellipse cx="25.8" cy="19" rx="3" ry="5.6" transform="rotate(14 25.8 19)"/><circle cx="16" cy="18" r="6.4"/><path d="M12.8 12c.9-2.4 1.9-3.4 3.2-3.4s2.3 1 3.2 3.4"/><circle cx="13.6" cy="17.4" r=".9"/><circle cx="18.4" cy="17.4" r=".9"/><path d="M16 19.8v1.1"/><path d="M14.4 21.8c1.1.8 2.1.8 3.2 0"/></svg>
+        <span>Shih<br>Tzu</span>
+      </div>
+      <div class="bicho-item">
+        <svg viewBox="0 0 32 32"><circle cx="9.6" cy="10.8" r="3.1"/><circle cx="22.4" cy="10.8" r="3.1"/><ellipse cx="16" cy="18.4" rx="9" ry="7.4"/><circle cx="12.4" cy="17.2" r=".9"/><circle cx="19.6" cy="17.2" r=".9"/><path d="M16 19.6v1.3"/><path d="M13.2 22.2c1.9 1.3 3.7 1.3 5.6 0"/><path d="M4.6 17.6h3M4.6 20.4h3M24.4 17.6h3M24.4 20.4h3"/></svg>
+        <span>Hamster</span>
+      </div>
+      <div class="bicho-item">
+        <svg viewBox="0 0 32 32"><path d="M12.6 14.2c-2-4.4-2.6-9-.7-9.7 1.9-.7 3.2 3.4 3.5 8.2"/><path d="M19.4 14.2c2-4.4 2.6-9 .7-9.7-1.9-.7-3.2 3.4-3.5 8.2"/><ellipse cx="16" cy="20.2" rx="7.6" ry="6.6"/><circle cx="13" cy="19.4" r=".9"/><circle cx="19" cy="19.4" r=".9"/><path d="M16 21.6v1.2"/><path d="M14.1 23.8c1.3.9 2.5.9 3.8 0"/></svg>
+        <span>Coelho<br>anão</span>
+      </div>
+      <div class="bicho-item">
+        <svg viewBox="0 0 32 32"><circle cx="9.6" cy="11.4" r="2.7"/><path d="M5.4 20.6c0-4.6 4-8 9.2-8s8.6 3.2 8.6 7.4c0 4.2-3.8 6.6-8.8 6.6s-9-2-9-6z"/><circle cx="10.2" cy="18.4" r=".9"/><path d="M5.6 21.6h2.2"/><path d="M23.2 21.4c3.4.5 5.4 2.4 5.8 5.4"/></svg>
+        <span>Gerbil</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ POR QUE ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por que fazer isso</span>
+      <h2>Não é um brinde. É um argumento de venda.</h2>
+      <p class="lead">Quem está escolhendo entre você e outro criador raramente decide pelo preço.
+      Decide por quem passa mais segurança.</p>
+    </div>
+
+    <div class="grid grid-3 reveal">
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5L12 15.6 7 18.2l1-5.5-4-3.9L9.6 8z"/></svg></div>
+        <h3>Você vale mais</h3>
+        <p>O mesmo filhote, com um material bonito e completo junto, passa a impressão de um
+        trabalho sério. Isso sustenta o seu preço sem precisar discutir valor.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 8.6 8.6 0 01-3.9-.9L3 20.5l1.5-4.5A8.4 8.4 0 1121 11.5z"/></svg></div>
+        <h3>Menos mensagem depois</h3>
+        <p>"Quanto de ração?", "pode dar banho?", "é normal ele fazer isso?". Tudo já respondido,
+        por escrito, no material que você entregou.</p>
+      </article>
+      <article class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M16 20v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="3.2"/><path d="M17 11l2 2 4-4"/></svg></div>
+        <h3>Gera indicação</h3>
+        <p>Cliente que recebe algo a mais mostra para os outros. É o seu nome e o seu contato
+        circulando na mão de quem já confia em você.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OS DOIS PLANOS ============ -->
+<section class="bg-rosa" id="planos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Duas formas de fazer</span>
+      <h2>Escolha o tamanho do seu e-book</h2>
+      <p class="lead">Os dois vêm com a sua marca e prontos para enviar. A diferença está em
+      quanta coisa cabe dentro.</p>
+    </div>
+
+    <div class="planos reveal">
+      <!-- Essencial -->
+      <article class="plano">
+        <div class="plano-nome">Essencial</div>
+        <span class="plano-paginas">3 páginas · o essencial</span>
+        <div class="plano-preco">
+          <span class="cifra">R$</span><span class="valor">50</span><span class="unidade">/ e-book</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--cinza-claro);margin:0">Um e-book por bichinho.</p>
+        <div class="plano-kit">
+          Levando os <b>5 bichinhos</b> de uma vez: <b>R$ 197</b> <span style="color:var(--cinza-claro)">(em vez de R$ 250)</span>
+        </div>
+        <ul>
+          <li>Capa personalizada com o nome e a logo do seu canil</li>
+          <li>Os cuidados dos primeiros dias em casa</li>
+          <li>Alimentação básica: o que dar e o que nunca dar</li>
+          <li>Seus contatos e redes sociais no final</li>
+          <li>PDF pronto para mandar no WhatsApp</li>
+          <li>1 rodada de ajustes depois de pronto</li>
+        </ul>
+        <p class="plano-para"><b>Para quem quer começar já</b> — dar um passo à frente da
+        concorrência sem investir muito.</p>
+      </article>
+
+      <!-- Completo -->
+      <article class="plano destaque">
+        <span class="plano-selo">O que eu recomendo</span>
+        <div class="plano-nome">Completo</div>
+        <span class="plano-paginas">10 páginas · guia de verdade</span>
+        <div class="plano-preco">
+          <span class="cifra">R$</span><span class="valor">75</span><span class="unidade">/ e-book</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--cinza-claro);margin:0">Um e-book por bichinho.</p>
+        <div class="plano-kit">
+          Levando os <b>5 bichinhos</b> de uma vez: <b>R$ 297</b> <span style="color:var(--cinza-claro)">(em vez de R$ 375)</span>
+        </div>
+        <ul>
+          <li>Tudo o que tem no Essencial</li>
+          <li>Capa <b>e</b> miolo com a identidade visual do seu canil</li>
+          <li>Alimentação por fase de vida, com quantidades</li>
+          <li>Rotina, ambiente e adaptação nos primeiros 30 dias</li>
+          <li>Banho, higiene e cuidados com pelo, unha e dentes</li>
+          <li>Sinais de alerta: quando é normal e quando é veterinário</li>
+          <li>Calendário de vacinas e vermífugos para preencher</li>
+          <li>Checklist do enxoval — o que comprar antes de buscar</li>
+          <li>Página final com a sua história e o seu contato</li>
+          <li>Versão imprimível para entregar impressa junto com o filhote</li>
+          <li>2 rodadas de ajustes depois de pronto</li>
+        </ul>
+        <p class="plano-para"><b>Para quem quer ser lembrada</b> — o material que o cliente
+        guarda, mostra para a família e usa por meses.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPARATIVO ============ -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Lado a lado</span>
+      <h2>A diferença na prática</h2>
+    </div>
+    <div class="tabela-scroll reveal">
+      <table>
+        <caption class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Comparativo entre os planos Essencial e Completo</caption>
+        <thead>
+          <tr><th scope="col">O que vem</th><th scope="col">Essencial</th><th scope="col">Completo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Páginas</td><td>3</td><td>10</td></tr>
+          <tr><td>Capa com sua logo</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+          <tr><td>Miolo com sua identidade visual</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Cuidados dos primeiros dias</td><td class="sim">✓</td><td class="sim">✓</td></tr>
+          <tr><td>Alimentação por fase, com quantidades</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Banho, higiene e pelagem</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Sinais de alerta de saúde</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Calendário de vacinas</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Checklist do enxoval</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Versão para imprimir</td><td class="nao">—</td><td class="sim">✓</td></tr>
+          <tr><td>Rodadas de ajuste</td><td>1</td><td>2</td></tr>
+          <tr><td>Preço por e-book</td><td><b>R$ 50</b></td><td><b>R$ 75</b></td></tr>
+          <tr><td>Os 5 bichinhos</td><td><b>R$ 197</b></td><td><b>R$ 297</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRÉVIA ============ -->
+<section class="bg-off">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Espia só</span>
+      <h2>Como fica por dentro</h2>
+      <p class="lead">As cores e a logo aqui são só de exemplo — o seu vai sair com a identidade
+      do seu canil.</p>
+    </div>
+
+    <div class="previa reveal">
+      <div class="previa-abas" role="tablist" aria-label="Escolha o plano para ver a prévia">
+        <button class="aba" role="tab" aria-selected="false" data-plano="essencial">Ver o Essencial</button>
+        <button class="aba" role="tab" aria-selected="true" data-plano="completo">Ver o Completo</button>
+      </div>
+
+      <div class="folha" id="folha" tabindex="0" aria-live="polite"></div>
+
+      <div class="previa-nav">
+        <button class="seta" id="ant" aria-label="Página anterior">‹</button>
+        <span class="previa-contador" id="contador">Página 1 de 10</span>
+        <button class="seta" id="prox" aria-label="Próxima página">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MONTADOR ============ -->
+<section id="montar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Monte o seu</span>
+      <h2>Faça as contas aqui mesmo</h2>
+      <p class="lead">Escolha o formato e os bichinhos que você vende. O valor aparece na hora.</p>
+    </div>
+
+    <div class="montador reveal">
+      <div class="montador-corpo">
+        <p class="montador-passo">1 · Qual formato?</p>
+        <div class="opcoes" id="grupo-plano">
+          <label class="opt radio">
+            <input type="radio" name="plano" value="essencial">
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Essencial<small>3 páginas · R$ 50 cada</small></span>
+          </label>
+          <label class="opt radio ativo">
+            <input type="radio" name="plano" value="completo" checked>
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Completo<small>10 páginas · R$ 75 cada</small></span>
+          </label>
+        </div>
+
+        <p class="montador-passo">2 · Para quais bichinhos?</p>
+        <div class="opcoes" id="grupo-pets">
+          <label class="opt ativo">
+            <input type="checkbox" name="pet" value="Spitz alemão" checked>
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Spitz alemão</span>
+          </label>
+          <label class="opt ativo">
+            <input type="checkbox" name="pet" value="Shih Tzu" checked>
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Shih Tzu</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" name="pet" value="Hamster">
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Hamster</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" name="pet" value="Coelho anão">
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Coelho anão</span>
+          </label>
+          <label class="opt">
+            <input type="checkbox" name="pet" value="Gerbil">
+            <span class="marca" aria-hidden="true"></span>
+            <span class="txt">Gerbil</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="resumo">
+        <p class="resumo-linha" id="resumo-linha">2 e-books no formato Completo</p>
+        <div class="resumo-total"><span class="c">R$</span><span class="v" id="total">150</span></div>
+        <span class="resumo-economia" id="economia" hidden></span>
+        <a class="btn btn-light" id="cta-wa" href="#" target="_blank" rel="noopener">Falar comigo no WhatsApp</a>
+        <p class="resumo-obs">Pagamento em uma vez só. Sem mensalidade, sem assinatura — o
+        material é seu para sempre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section class="bg-rosa">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Simples assim</span>
+      <h2>Como funciona</h2>
+    </div>
+    <div class="passos reveal">
+      <div class="passo">
+        <h3>Você me conta</h3>
+        <p>Me manda o que já usa: as orientações que você passa, sua logo, suas cores e fotos dos
+        bichinhos. Pode ser por áudio no WhatsApp.</p>
+      </div>
+      <div class="passo">
+        <h3>Eu completo</h3>
+        <p>O que faltar, eu pesquiso e escrevo. Você não precisa ter nada pronto — sua experiência
+        já é o suficiente para começar.</p>
+      </div>
+      <div class="passo">
+        <h3>Você aprova</h3>
+        <p>Te mando o e-book montado. Você lê, aponta o que quer mudar e eu ajusto.</p>
+      </div>
+      <div class="passo">
+        <h3>Pronto para usar</h3>
+        <p>Recebe o PDF final em até 7 dias úteis (Essencial) ou 12 dias úteis (Completo), pronto
+        para enviar a cada cliente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ESCOPO ============ -->
+<section>
+  <div class="wrap">
+    <div class="escopo reveal">
+      <h3>Para ficar tudo combinado</h3>
+      <p>Eu cuido do roteiro, do texto, do design e da diagramação — o material sai bonito,
+      organizado e com a cara do seu canil.</p>
+      <p>O conteúdo sobre os bichinhos nasce da <strong>sua experiência de criadora</strong>, e o que
+      faltar eu complemento com pesquisa. Antes de publicar, você lê e aprova tudo.</p>
+      <p>Sempre que o assunto for saúde do animal, o e-book orienta o tutor a procurar um
+      médico-veterinário — nenhum material substitui uma consulta. Isso protege você, protege o
+      cliente e deixa o e-book mais confiável, não menos.</p>
+      <p style="margin-bottom:0"><strong>O material é seu.</strong> Depois de entregue, você usa
+      como quiser, com quantos clientes quiser, para sempre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="bg-off">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>O que costumam me perguntar</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>Posso usar a minha logo e as minhas cores?</summary>
+        <p>Sim, e é justamente essa a graça. O e-book sai com a sua marca do começo ao fim. Se você
+        ainda não tem logo, a gente resolve isso de um jeito bonito com o nome do canil.</p>
+      </details>
+      <details>
+        <summary>E se depois eu quiser mudar alguma coisa?</summary>
+        <p>Cada e-book já vem com rodadas de ajuste inclusas (1 no Essencial, 2 no Completo). Depois
+        disso, alterações pontuais saem por um valor simbólico — é só me chamar.</p>
+      </details>
+      <details>
+        <summary>Posso imprimir e entregar em papel?</summary>
+        <p>No plano Completo, sim: você recebe uma versão preparada para impressão, ótima para
+        entregar junto com o filhote. No Essencial, o formato é digital.</p>
+      </details>
+      <details>
+        <summary>Posso vender o e-book separado, sem o bichinho?</summary>
+        <p>Pode. O material é seu, então você decide: dar de brinde, vender à parte ou usar como
+        isca para captar clientes novos nas redes.</p>
+      </details>
+      <details>
+        <summary>Preciso escrever alguma coisa?</summary>
+        <p>Não. Você me manda áudios contando como orienta seus clientes hoje e eu transformo isso
+        em texto. Se preferir mandar por escrito, também funciona.</p>
+      </details>
+      <details>
+        <summary>Como é o pagamento?</summary>
+        <p>Uma vez só, sem mensalidade. Metade para começar e metade na entrega, por Pix ou cartão.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FECHAMENTO ============ -->
+<section class="fechamento">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--rosa)">Vamos fazer?</span>
+    <h2>Seu filhote já é especial.<br>Falta a entrega estar à altura.</h2>
+    <p>Me chama no WhatsApp que a gente conversa sem compromisso — eu te digo direitinho o que
+    caberia melhor no seu caso.</p>
+    <p style="margin-top:26px">
+      <a class="btn btn-light" id="cta-wa-2" href="#" target="_blank" rel="noopener">Conversar no WhatsApp</a>
+    </p>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="wrap">
+    <img src="assets/img/logo-branco.png" alt="Ana Luísa Rocha">
+    <p style="margin:0">Proposta válida por 30 dias · Ana Luísa Rocha</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var WHATS = "5521994094557";
+
+  /* ---------------- Revelação ao rolar ---------------- */
+  var reduz = matchMedia("(prefers-reduced-motion:reduce)").matches;
+  var alvos = document.querySelectorAll(".reveal");
+  if(reduz || !("IntersectionObserver" in window)){
+    alvos.forEach(function(el){ el.classList.add("on"); });
+  }else{
+    var io = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("on"); io.unobserve(e.target); }
+      });
+    },{threshold:0,rootMargin:"0px 0px -8% 0px"});
+    alvos.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------------- Montador de orçamento ---------------- */
+  var PRECOS = {
+    essencial:{ nome:"Essencial", unidade:50, kit:197 },
+    completo :{ nome:"Completo",  unidade:75, kit:297 }
+  };
+  var TOTAL_PETS = 5;
+
+  var elTotal    = document.getElementById("total");
+  var elLinha    = document.getElementById("resumo-linha");
+  var elEconomia = document.getElementById("economia");
+  var ctas       = [document.getElementById("cta-wa"), document.getElementById("cta-wa-2")];
+
+  function brl(n){ return n.toLocaleString("pt-BR"); }
+
+  function lista(nomes){
+    if(nomes.length === 1) return nomes[0];
+    return nomes.slice(0,-1).join(", ") + " e " + nomes[nomes.length-1];
+  }
+
+  function calcular(){
+    var plano = document.querySelector('input[name="plano"]:checked').value;
+    var p = PRECOS[plano];
+    var pets = Array.prototype.map.call(
+      document.querySelectorAll('input[name="pet"]:checked'),
+      function(i){ return i.value; }
+    );
+    var qtd = pets.length;
+    var cheio = qtd * p.unidade;
+    var completo = qtd === TOTAL_PETS;
+    var total = completo ? p.kit : cheio;
+    var economia = cheio - total;
+
+    elTotal.textContent = brl(total);
+
+    if(qtd === 0){
+      elLinha.textContent = "Escolha pelo menos um bichinho";
+    }else if(completo){
+      elLinha.textContent = "Kit dos 5 bichinhos no formato " + p.nome;
+    }else{
+      elLinha.textContent = qtd + (qtd > 1 ? " e-books" : " e-book") +
+        " no formato " + p.nome + " · " + lista(pets);
+    }
+
+    if(economia > 0){
+      elEconomia.textContent = "Você economiza R$ " + brl(economia);
+      elEconomia.hidden = false;
+    }else{
+      elEconomia.hidden = true;
+    }
+
+    var msg;
+    if(qtd === 0){
+      msg = "Oi Ana! Vi a proposta dos e-books e queria entender melhor.";
+    }else if(completo){
+      msg = "Oi Ana! Vi a proposta e quero o kit dos 5 bichinhos no formato " +
+            p.nome + " — R$ " + brl(total) + ".";
+    }else{
+      msg = "Oi Ana! Vi a proposta e quero o formato " + p.nome + " para " +
+            lista(pets) + " — R$ " + brl(total) + ".";
+    }
+    var url = "https://wa.me/" + WHATS + "?text=" + encodeURIComponent(msg);
+    ctas.forEach(function(a){ if(a) a.href = url; });
+  }
+
+  /* estado visual dos cartões de opção */
+  function sincronizarVisual(){
+    document.querySelectorAll(".opt").forEach(function(l){
+      var input = l.querySelector("input");
+      l.classList.toggle("ativo", input.checked);
+    });
+  }
+
+  document.querySelectorAll('#grupo-plano input, #grupo-pets input').forEach(function(input){
+    input.addEventListener("change", function(){
+      sincronizarVisual();
+      calcular();
+    });
+  });
+
+  sincronizarVisual();
+  calcular();
+
+  /* ---------------- Prévia folheável ---------------- */
+  var PAGINAS = {
+    essencial:[
+      {tipo:"capa", tit:"Guia do seu novo<br>melhor amigo", pet:"Spitz alemão"},
+      {kicker:"Página 2", tit:"Os primeiros dias em casa",
+       mini:"O que fazer nas primeiras 48 horas · onde ele deve dormir · como apresentar a casa"},
+      {kicker:"Página 3", tit:"Alimentação e contatos",
+       mini:"O que pode e o que nunca pode · e no rodapé: o seu WhatsApp e o seu Instagram"}
+    ],
+    completo:[
+      {tipo:"capa", tit:"Guia completo<br>do seu filhote", pet:"Spitz alemão"},
+      {kicker:"Página 2", tit:"Boas-vindas da criadora",
+       mini:"Sua história, seu jeito de criar e por que esse filhote chegou até essa família"},
+      {kicker:"Página 3", tit:"Checklist do enxoval",
+       mini:"Tudo o que comprar ANTES de buscar — caminha, comedouro, transporte, brinquedos"},
+      {kicker:"Página 4", tit:"Os primeiros 30 dias",
+       mini:"Adaptação semana a semana: o que é normal, o que esperar, quando relaxar"},
+      {kicker:"Página 5", tit:"Alimentação por fase",
+       mini:"Quantidade por idade e peso · o que nunca oferecer · como trocar de ração"},
+      {kicker:"Página 6", tit:"Rotina e ambiente",
+       mini:"Sono, passeio, brincadeira e o espaço ideal dentro de casa"},
+      {kicker:"Página 7", tit:"Banho, pelo e higiene",
+       mini:"Frequência de banho, escovação, unhas, ouvidos e dentes"},
+      {kicker:"Página 8", tit:"Sinais de alerta",
+       mini:"O que é normal e o que é hora de procurar o veterinário — com clareza"},
+      {kicker:"Página 9", tit:"Vacinas e vermífugos",
+       mini:"Calendário para o tutor preencher e guardar junto com a carteirinha"},
+      {kicker:"Página 10", tit:"Fale comigo sempre",
+       mini:"Seu WhatsApp, seu Instagram e o convite para mandar fotos do crescimento"}
+    ]
+  };
+
+  var planoPrevia = "completo";
+  var pagina = 0;
+  var folha     = document.getElementById("folha");
+  var contador  = document.getElementById("contador");
+  var btnAnt    = document.getElementById("ant");
+  var btnProx   = document.getElementById("prox");
+
+  function desenhar(){
+    var paginas = PAGINAS[planoPrevia];
+    var p = paginas[pagina];
+    var html;
+
+    if(p.tipo === "capa"){
+      folha.className = "folha folha-capa";
+      html = '<span class="mono">A</span>' +
+             '<div class="tit">' + p.tit + '</div>' +
+             '<div class="pet">' + p.pet + '</div>' +
+             '<div class="selo">sua logo · seu canil</div>';
+    }else{
+      folha.className = "folha";
+      html = '<div class="kicker">' + p.kicker + '</div>' +
+             '<h4>' + p.tit + '</h4>' +
+             '<div class="linhas"><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
+             '<div class="mini">' + p.mini + '</div>' +
+             '<div class="rodape">seu canil · seu contato</div>';
+    }
+    folha.innerHTML = html;
+
+    contador.textContent = "Página " + (pagina + 1) + " de " + paginas.length;
+    btnAnt.disabled  = pagina === 0;
+    btnProx.disabled = pagina === paginas.length - 1;
+  }
+
+  function irPara(n){
+    var max = PAGINAS[planoPrevia].length - 1;
+    pagina = Math.max(0, Math.min(max, n));
+    desenhar();
+  }
+
+  btnAnt.addEventListener("click", function(){ irPara(pagina - 1); });
+  btnProx.addEventListener("click", function(){ irPara(pagina + 1); });
+
+  document.querySelectorAll(".aba").forEach(function(aba){
+    aba.addEventListener("click", function(){
+      document.querySelectorAll(".aba").forEach(function(a){
+        a.setAttribute("aria-selected", a === aba ? "true" : "false");
+      });
+      planoPrevia = aba.dataset.plano;
+      pagina = 0;
+      desenhar();
+    });
+  });
+
+  folha.addEventListener("keydown", function(e){
+    if(e.key === "ArrowRight"){ e.preventDefault(); irPara(pagina + 1); }
+    if(e.key === "ArrowLeft"){  e.preventDefault(); irPara(pagina - 1); }
+  });
+
+  /* swipe */
+  var x0 = null;
+  folha.addEventListener("touchstart", function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  folha.addEventListener("touchend", function(e){
+    if(x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 45) irPara(pagina + (dx < 0 ? 1 : -1));
+    x0 = null;
+  }, {passive:true});
+
+  desenhar();
+})();
+</script>
+</body>
+</html>
