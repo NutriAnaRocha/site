@@ -214,7 +214,8 @@ tbody tr:nth-child(even){background:var(--off)}
   margin-top:14px;background:var(--rosa-suave);border-radius:10px;padding:12px;
   font-size:.72rem;color:var(--bordo);line-height:1.5;
 }
-.folha .rodape{margin-top:auto;font-size:.6rem;color:var(--cinza-claro);letter-spacing:.08em}
+/* nome próprio: .rodape é o rodapé da página, não o da folha */
+.folha .pe{margin-top:auto;font-size:.6rem;color:var(--cinza-claro);letter-spacing:.08em}
 .previa-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
 .seta{
   width:48px;height:48px;border-radius:50%;border:2px solid var(--rosa-borda);background:var(--branco);
@@ -898,7 +899,7 @@ tbody tr:nth-child(even){background:var(--off)}
              '<h4>' + p.tit + '</h4>' +
              '<div class="linhas"><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
              '<div class="mini">' + p.mini + '</div>' +
-             '<div class="rodape">seu canil · seu contato</div>';
+             '<div class="pe">seu canil · seu contato</div>';
     }
     folha.innerHTML = html;
 
