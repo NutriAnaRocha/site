@@ -21,6 +21,8 @@ const MSG = {
   comprar:  (titulo) => `Olá, Ana! Quero desbloquear o e-book "${titulo}". Como faço o pagamento? 🌸`,
   assinar:  "Olá, Ana! Quero assinar o plano mensal de e-books e receber os novos lançamentos 🌸",
   contato:  "Olá, Ana! Vim pelo seu site e gostaria de falar com você 🌸",
+  programa: "Olá, Ana! Tenho interesse no Meu Plano e queria tirar uma dúvida antes 🌸",
+  acesso:   "Olá, Ana! Entrei no Meu Plano mas não recebi o e-mail de acesso. Meu e-mail da compra é: ",
 };
 
 /* Links de checkout do InfinitePay (pagamento Pix/cartão). A chave é o
@@ -30,6 +32,23 @@ const MSG = {
 const CHECKOUT = {
   "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G1IBABwJdgwxEe8MQKPkMpS9nPMm7IRC22aAQgEJ2_v0vmsKSeEzcrsJNaERlNj5JhlV0boDOyj836W24FsYfAujWsaBBhrW4jC94eP4JG0muZTYvrOiO0um-k0oCSShgZn-rLO9QMJE15Ao24UTz7TfXbuhuROn8Z_3gO-ySl8LOKDPoDAArizNQGHxwo8OKVCUpmdS1sTSSZDN_kVtpaZEgLQHcy7I1dwUiqWCkCErQQb3bHRw6GG76XQ5r3Nsdn9xWSJ3lfK3BwAY_nNK4yRabQI_1HbiLNI1BWaqI-CQomkrJuqNLWpMSEdIQRjB-uN1c5XyAQ.v1.0ba00280056ebff1",
   "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=G14BAIyUqJ0vDVdlz-bM7IyaMO0PMB5Q6Ob--wW6ArtlloVGUGLxXXdgNzqA_UtqC7616HCP2jIONNDjW8DpNo_LS6S2raQrsDnPUjWQnCB6MXB4CIHAF5azzfYCBxp6Bh-ZBieaul9eD0NKJ0r7v7wKfSnqw0iH__NdhiAYIKj0bVB9zriMPgTvl_QFTHay_riRHQOj8OlrPEiRbxXz4VGxE4W-Do4nqnqoRVTUkehUwome1MR3gXY6zV6N1uRas1mVG72b4FwSTjVEc3HYH8b_NAw8301zy7Qj5itxkIWWGEQuUAi4yJAY_CJxjeiOojt6yF3Ipl83DdEE.v1.bc80cb571de96e80",
+};
+
+/* Links de checkout do programa "Meu Plano com a Nutri Ana".
+   A chave é o data-programa do botão (trimestral | semestral | anual).
+
+   Cada link precisa ser criado no painel da InfinitePay com:
+     • order_nsu   = meuplano-trimestral | meuplano-semestral | meuplano-anual
+                     (é por ele que o webhook sabe qual plano liberar)
+     • redirect_url = https://nutrianarocha.github.io/site/obrigado-meu-plano.html
+     • webhook_url  = https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/programa-webhook
+
+   Enquanto um link estiver "", o botão cai no WhatsApp — nada quebra na
+   página, mas a compra automática não acontece. */
+const PROGRAMA = {
+  trimestral: "",
+  semestral: "",
+  anual: "",
 };
 
 /* Biblioteca de e-books: onde o cliente que JÁ comprou faz login e lê.
@@ -107,6 +126,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sem abertura (revisita na sessão / menos animação): mostra o guia logo
     setTimeout(maybeShowGuide, 500);
   }
+
+  /* ---- Botões dos planos do programa ----
+     Uso no HTML: <a data-programa="trimestral">. Sem link cadastrado,
+     manda para o WhatsApp com o plano já escrito na mensagem. */
+  document.querySelectorAll("[data-programa]").forEach(el => {
+    const plano = el.getAttribute("data-programa");
+    const link = PROGRAMA[plano];
+    if (link) {
+      el.href = link;
+    } else {
+      el.href = wa(`Olá, Ana! Quero entrar no Meu Plano — plano ${plano} 🌸`);
+    }
+    el.target = "_blank";
+    el.rel = "noopener";
+  });
 
   /* ---- Preenche links de WhatsApp por data-attribute ----
      Uso no HTML: <a data-wa="agendar"> ou <a data-wa="ebook" data-titulo="..."> */

@@ -1,0 +1,181 @@
+/* ============================================================
+   MEU PLANO COM A NUTRI ANA — página do programa.
+   Estilos próprios da página de venda do acompanhamento.
+   Mobile-first: os planos empilham e cada card vira largura cheia.
+   ============================================================ */
+
+/* ---------- Abertura ---------- */
+.pg-hero {
+  padding: calc(var(--nav-h, 72px) + 56px) 0 56px;
+  background: linear-gradient(180deg, #FCEFF7 0%, #FFFFFF 100%);
+  text-align: center;
+}
+.pg-hero h1 { margin: .3rem 0 .6rem; }
+.pg-hero .lead { max-width: 620px; margin: 0 auto; }
+.pg-hero__crn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #efe4ec;
+  font-size: .82rem;
+  color: #6b5a65;
+}
+
+/* ---------- É / Não é ---------- */
+.pg-dois {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 26px;
+}
+.pg-quadro {
+  padding: 26px;
+  border-radius: 18px;
+  border: 1px solid #efe4ec;
+  background: #fff;
+}
+.pg-quadro--nao { background: #FAF8F9; }
+.pg-quadro h3 { margin: 0 0 14px; font-size: 1.05rem; }
+.pg-quadro ul { margin: 0; padding: 0; list-style: none; }
+.pg-quadro li {
+  position: relative;
+  padding: 0 0 10px 26px;
+  font-size: .94rem;
+  line-height: 1.55;
+}
+.pg-quadro li::before {
+  position: absolute;
+  left: 0; top: 0;
+  font-weight: 700;
+}
+.pg-quadro--sim li::before { content: "✓"; color: #840B55; }
+.pg-quadro--nao li::before { content: "×"; color: #a9a2a6; }
+
+/* ---------- Passo a passo ---------- */
+.pg-passos {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-top: 30px;
+  counter-reset: passo;
+}
+.pg-passo {
+  position: relative;
+  padding: 26px 22px 22px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #efe4ec;
+}
+.pg-passo::before {
+  counter-increment: passo;
+  content: counter(passo);
+  display: grid;
+  place-items: center;
+  width: 34px; height: 34px;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: #840B55;
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+}
+.pg-passo h3 { margin: 0 0 8px; font-size: 1rem; }
+.pg-passo p { margin: 0; font-size: .9rem; line-height: 1.55; color: #6b5a65; }
+
+/* ---------- Planos ---------- */
+.pg-planos {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 30px;
+  align-items: start;
+}
+.pg-plano {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 26px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid #efe4ec;
+  box-shadow: 0 2px 10px rgba(132, 11, 85, .04);
+}
+.pg-plano--destaque {
+  border-color: #840B55;
+  box-shadow: 0 8px 26px rgba(132, 11, 85, .12);
+}
+.pg-plano__nome {
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #840B55;
+  font-weight: 700;
+}
+.pg-plano__preco {
+  margin: 14px 0 2px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #3C3C3C;
+  line-height: 1;
+}
+.pg-plano__preco small { font-size: 1rem; font-weight: 500; color: #6b5a65; }
+.pg-plano__mes { font-size: .85rem; color: #6b5a65; margin: 0 0 18px; }
+.pg-plano ul { margin: 0 0 22px; padding: 0; list-style: none; flex: 1; }
+.pg-plano li {
+  position: relative;
+  padding: 0 0 10px 24px;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+.pg-plano li::before { content: "✓"; position: absolute; left: 0; color: #840B55; font-weight: 700; }
+.pg-plano .btn { width: 100%; }
+
+/* ---------- Blocos de aviso ---------- */
+.pg-nota {
+  margin-top: 30px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: #FCEFF7;
+  border-left: 3px solid #840B55;
+  font-size: .92rem;
+  line-height: 1.6;
+}
+.pg-nota strong { color: #840B55; }
+.pg-nota p { margin: 0 0 10px; }
+.pg-nota p:last-child { margin-bottom: 0; }
+
+/* ---------- Perguntas ---------- */
+.pg-faq { margin-top: 26px; }
+.pg-faq details {
+  padding: 18px 20px;
+  border-bottom: 1px solid #efe4ec;
+}
+.pg-faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .97rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+.pg-faq summary::-webkit-details-marker { display: none; }
+.pg-faq summary::after { content: "+"; color: #840B55; font-size: 1.3rem; line-height: 1; }
+.pg-faq details[open] summary::after { content: "−"; }
+.pg-faq details p {
+  margin: 12px 0 0;
+  font-size: .92rem;
+  line-height: 1.65;
+  color: #6b5a65;
+}
+
+/* ---------- Fechamento ---------- */
+.pg-fim { text-align: center; padding: 56px 0; }
+.pg-fim .btn { margin-top: 18px; }
+
+@media (max-width: 560px) {
+  .pg-plano__preco { font-size: 1.9rem; }
+  .pg-quadro, .pg-plano { padding: 22px 20px; }
+}

@@ -16,6 +16,7 @@
   "use strict";
 
   var DESTINO_PADRAO = "biblioteca.html";
+  var PORTAL_URL = "https://nutrianarocha.github.io/Plataforma/prototipo/portal-paciente.html";
 
   var stepEntrar = document.querySelector('[data-step="entrar"]');
   var stepSenha  = document.querySelector('[data-step="senha"]');
@@ -61,11 +62,24 @@
   /* ---------- destino após autenticar ----------
      ?next=pagina.html tem prioridade (ex.: veio de "acessar minha biblioteca").
      A regex só aceita um .html do mesmo diretório — guarda contra open redirect.
-     Copiada de app.js:137-139. */
+     Copiada de app.js:137-139.
+
+     Sem ?next, o destino depende do papel: quem entra no programa "Meu Plano"
+     é criada como tipo='paciente' e não tem o que fazer na biblioteca — o
+     lugar dela é o portal, onde preenche a anamnese e recebe o plano.
+     A consulta ao profile é best-effort: qualquer falha cai na biblioteca. */
   function irParaDestino() {
     var next = new URLSearchParams(location.search).get("next");
     if (next && /^[a-z0-9-]+\.html$/i.test(next)) { window.location.href = next; return; }
-    window.location.href = DESTINO_PADRAO;
+
+    window.NutriDBReady.then(function (c) {
+      return c.from("profiles").select("tipo").maybeSingle();
+    }).then(function (res) {
+      var tipo = res && res.data && res.data.tipo;
+      window.location.href = tipo === "paciente" ? PORTAL_URL : DESTINO_PADRAO;
+    }).catch(function () {
+      window.location.href = DESTINO_PADRAO;
+    });
   }
 
   function mostrarPasso(qual) {

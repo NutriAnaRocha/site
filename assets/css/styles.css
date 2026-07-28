@@ -306,6 +306,12 @@ section{padding:96px 0}
 .doc ul{list-style:disc;padding-left:22px;margin-bottom:1rem}
 .doc ul li{margin-bottom:6px}
 .doc .back{display:inline-block;margin-top:30px}
+/* Tabela de condições nas páginas legais. No celular ela rola sozinha
+   dentro do próprio bloco, em vez de empurrar a página inteira. */
+.doc-table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:.92rem;display:block;overflow-x:auto}
+.doc-table th,.doc-table td{border:1px solid #efe4ec;padding:10px 12px;text-align:left;white-space:nowrap}
+.doc-table th{background:var(--rosa-suave,#FCEFF7);font-weight:600}
+.doc-table td{color:var(--cinza)}
 
 /* =========================================================
    ANIMAÇÕES
