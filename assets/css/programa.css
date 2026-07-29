@@ -120,7 +120,13 @@
   line-height: 1;
 }
 .pg-plano__preco small { font-size: 1rem; font-weight: 500; color: #6b5a65; }
+/* A parcela e o numero que a pessoa compara; o total a vista fica de nota.
+   O "3x/6x/12x" vem menor e colado, para o olho cair no valor. */
+.pg-plano__preco { display: flex; align-items: baseline; gap: 6px; }
+.pg-plano__x { font-size: 1.1rem; font-weight: 600; color: #6b5a65; }
+.pg-plano__val { font-size: inherit; font-weight: 700; }
 .pg-plano__mes { font-size: .85rem; color: #6b5a65; margin: 0 0 18px; }
+.pg-plano__total { font-weight: 600; color: #3C3C3C; }
 .pg-plano ul { margin: 0 0 22px; padding: 0; list-style: none; flex: 1; }
 .pg-plano li {
   position: relative;
