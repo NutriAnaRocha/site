@@ -90,7 +90,10 @@
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   margin-top: 30px;
-  align-items: start;
+  /* Cartoes com a mesma altura: como cada plano agora lista TUDO o que inclui
+     (em vez de "tudo o que tem no trimestral"), as listas tem tamanhos
+     diferentes — o stretch + o flex:1 do <ul> deixam os botoes alinhados. */
+  align-items: stretch;
 }
 .pg-plano {
   display: flex;
