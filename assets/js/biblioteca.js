@@ -47,12 +47,25 @@
       var user = r.data.session.user;
       var nome = nomeCurto(user);
       if (HI) HI.textContent = nome ? ("Olá, " + nome + " 🌸") : "Minha Biblioteca";
+      mostrarAtalhoPlataforma(c);
       return carregar(c, user);
     });
   }).catch(function (e) {
     if (LOADING) LOADING.textContent = "Não foi possível carregar sua biblioteca. Verifique sua conexão.";
     console.error(e);
   });
+
+  /* A nutri também tem biblioteca (ela lê os próprios e-books), mas o
+     trabalho dela é do outro lado. Sem este atalho ela entra pelo site e
+     fica sem caminho até os pacientes e o editor de plano. Só aparece para
+     tipo='nutri' — comprador não pode nem suspeitar que a porta existe. */
+  function mostrarAtalhoPlataforma(c) {
+    var link = document.getElementById("bib-plataforma");
+    if (!link) return;
+    c.from("profiles").select("tipo").maybeSingle().then(function (r) {
+      if (r && r.data && r.data.tipo === "nutri") link.hidden = false;
+    }).catch(function () { /* na dúvida, não mostra */ });
+  }
 
   function nomeCurto(user) {
     var n = (user.user_metadata && user.user_metadata.nome) || "";
