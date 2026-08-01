@@ -60,6 +60,7 @@
       <a href="#ebooks">E-books</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
+      <a href="#acompanhamento" class="nav-area">Área da paciente</a>
       <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
     </nav>
   </div>
@@ -218,6 +219,72 @@
   </div>
 </section>
 
+<!-- ===================== MEU ACOMPANHAMENTO (área da paciente) =====================
+     Porta de entrada para quem JÁ é paciente: leva ao entrar.html, que roteia por
+     papel (paciente -> portal, nutri -> dashboard). Ver assets/js/conta.js:80.
+     Não é divulgação de telenutrição — é acesso a um serviço já contratado. -->
+<section id="acompanhamento" class="bg-off acomp">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Já sou paciente</span>
+      <h2>Meu acompanhamento com a nutri Ana</h2>
+      <p class="lead">Se você já é minha paciente, tem uma área só sua. É por ali que você preenche a anamnese,
+        consulta o seu plano alimentar e registra o seu dia a dia — do celular, na hora que der.</p>
+    </div>
+
+    <div class="acomp__box reveal">
+      <div class="acomp__items">
+        <div class="acomp__item">
+          <span class="acomp__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 4h8a2 2 0 012 2v13a1 1 0 01-1.5.9L12 18l-4.5 1.9A1 1 0 016 19V6a2 2 0 012-2z"/><path d="M9 9h6M9 12.5h4"/></svg>
+          </span>
+          <div>
+            <b>Anamnese e histórico</b>
+            <small>Você preenche antes da consulta, com calma, no seu tempo.</small>
+          </div>
+        </div>
+
+        <div class="acomp__item">
+          <span class="acomp__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3v8a3 3 0 006 0V3"/><path d="M9 11v10"/><path d="M17 3c-1.3 1.6-2 3.6-2 5.6 0 1.6.7 2.6 2 2.9V21"/></svg>
+          </span>
+          <div>
+            <b>Seu plano alimentar</b>
+            <small>Cardápio, substituições e lista de compras sempre à mão.</small>
+          </div>
+        </div>
+
+        <div class="acomp__item">
+          <span class="acomp__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7l1.2-2.2A1 1 0 0111 4.3h2a1 1 0 01.9.5L15 7"/><circle cx="12" cy="13.5" r="3.2"/></svg>
+          </span>
+          <div>
+            <b>Diário do prato</b>
+            <small>Fotografe a refeição e receba um retorno na hora, sem cobrança.</small>
+          </div>
+        </div>
+
+        <div class="acomp__item">
+          <span class="acomp__ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/><path d="M12 4V2M12 22v-2M4 12H2M22 12h-2"/></svg>
+          </span>
+          <div>
+            <b>Metas e evolução</b>
+            <small>Acompanhe o que combinamos entre uma consulta e outra.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="acomp__cta">
+        <p class="acomp__chamada">Entre com o mesmo e-mail e senha da sua conta.</p>
+        <a class="btn btn-light btn-block" href="entrar.html?de=paciente">Entrar na minha área →</a>
+        <p class="acomp__nota">Ainda não tem acesso? Eu crio o seu depois da primeira consulta —
+          <a data-wa="area">me chame no WhatsApp</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== MEU PLANO (programa online) =====================
      ⚠️ DESLIGADO ATÉ A INSCRIÇÃO NO e-NUTRICIONISTA.
      O Art. 102 §2º da Res. CFN 856/2026 e a Res. CFN 760/2023 exigem essa
@@ -226,7 +293,8 @@
      anunciada em lugar nenhum.
 
      PARA LANÇAR, depois da inscrição sair:
-       1. remover este comentário de abertura e o "-->" no fim da seção;
+       1. remover este comentário de abertura e o fechamento de comentário
+          no fim da seção (o par que envolve o bloco <section id="meu-plano">);
        2. descomentar os dois links "Meu Plano" (menu do topo e rodapé);
        3. tirar a linha <meta name="robots" content="noindex"> de
           meu-plano.html e de termos-meu-plano.html;
@@ -560,6 +628,7 @@
         <li><a href="#vip">Comunidade VIP</a></li>
         <li><a href="#ebooks">E-books</a></li>
         <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="entrar.html?de=paciente">Área da paciente</a></li>
       </ul>
     </div>
     <div>
@@ -607,6 +676,11 @@
       <a class="guide__item" data-goto="#sobre">
         <span class="guide__ic">👩‍⚕️</span>
         <span><b>Conhecer a Ana</b><small>Minha história e como eu cuido de você</small></span>
+        <span class="guide__arw">→</span>
+      </a>
+      <a class="guide__item" data-goto="#acompanhamento">
+        <span class="guide__ic">🌿</span>
+        <span><b>Já sou paciente</b><small>Entrar na minha área: anamnese, plano e diário do prato</small></span>
         <span class="guide__arw">→</span>
       </a>
     </div>

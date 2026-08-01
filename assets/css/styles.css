@@ -579,3 +579,31 @@ body.intro-lock{overflow:hidden}
 /* Estado "enviando" para qualquer botão fora do modal (ex.: login da biblioteca). */
 .btn.is-loading{opacity:.7;pointer-events:none}
 body.lead-open{overflow:hidden}
+
+/* ---------- Meu acompanhamento (área da paciente) ---------- */
+.nav-area{color:var(--bordo) !important;font-weight:600 !important}
+.acomp__box{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center;
+  background:linear-gradient(150deg,var(--bordo),var(--bordo-escuro));border-radius:24px;
+  padding:40px 42px;box-shadow:var(--shadow)}
+.acomp__items{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px}
+.acomp__item{display:flex;gap:14px;align-items:flex-start}
+.acomp__ic{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.16);
+  color:#fff;display:flex;align-items:center;justify-content:center}
+.acomp__ic svg{width:22px;height:22px}
+.acomp__item b{display:block;color:#fff;font-size:1rem;margin-bottom:2px}
+.acomp__item small{display:block;color:rgba(255,255,255,.76);font-size:.85rem;line-height:1.42}
+.acomp__cta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:18px;padding:26px 24px;text-align:center}
+.acomp__chamada{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.12rem;
+  line-height:1.3;margin:0 0 16px}
+.acomp__cta .btn{white-space:nowrap}
+.acomp__nota{font-size:.82rem;color:rgba(255,255,255,.72);margin:14px 0 0;line-height:1.45}
+.acomp__nota a{color:#fff;text-decoration:underline;cursor:pointer}
+
+@media (max-width:900px){
+  .acomp__box{grid-template-columns:1fr;gap:28px;padding:32px 26px}
+}
+@media (max-width:560px){
+  .acomp__items{grid-template-columns:1fr;gap:18px}
+  .acomp__box{padding:28px 20px;border-radius:20px}
+}

@@ -93,6 +93,25 @@
     });
   }
 
+  /* ---------- casca da página conforme a origem ----------
+     A mesma tela serve à compradora de e-book e à paciente que vem da seção
+     "Meu acompanhamento" (index.html#acompanhamento -> entrar.html?de=paciente).
+     Falar em "e-books que você adquiriu" para quem só quer ver o plano confunde,
+     então o texto acompanha de onde ela veio. O login é o mesmo. */
+  if (new URLSearchParams(location.search).get("de") === "paciente") {
+    var eyebrow = document.querySelector("[data-entrar-eyebrow]");
+    var sub     = document.querySelector("[data-entrar-sub]");
+    var rodape  = document.querySelector("[data-entrar-rodape]");
+    document.title = "Minha área de acompanhamento — Nutri Ana Luísa Rocha";
+    if (eyebrow) eyebrow.textContent = "Minha área";
+    if (sub) sub.textContent = "Entre com o seu e-mail para ver a sua anamnese, o seu plano alimentar e o diário do prato.";
+    if (submit) submit.textContent = "Entrar na minha área →";
+    if (rodape) {
+      rodape.innerHTML = 'Ainda não tem acesso? A Ana cria o seu depois da primeira consulta — ' +
+                         '<a href="index.html#acompanhamento">saiba como funciona →</a>';
+    }
+  }
+
   function mostrarPasso(qual) {
     if (stepEntrar) stepEntrar.hidden = qual !== "entrar";
     if (stepSenha)  stepSenha.hidden  = qual !== "senha";

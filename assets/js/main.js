@@ -23,6 +23,7 @@ const MSG = {
   contato:  "Olá, Ana! Vim pelo seu site e gostaria de falar com você 🌸",
   programa: "Olá, Ana! Tenho interesse no Meu Plano e queria tirar uma dúvida antes 🌸",
   acesso:   "Olá, Ana! Entrei no Meu Plano mas não recebi o e-mail de acesso. Meu e-mail da compra é: ",
+  area:     "Olá, Ana! Sou sua paciente e queria acessar a minha área de acompanhamento 🌸",
 };
 
 /* Links de checkout do InfinitePay (pagamento Pix/cartão). A chave é o
