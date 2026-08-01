@@ -1,0 +1,285 @@
+/* =========================================================
+   NO MERCADO COM A NUTRI ANA — app de leitura de rótulo.
+
+   Contexto de uso que manda no design: a pessoa está DE PÉ no
+   corredor, uma mão no carrinho, a outra no celular, com pressa e
+   com o produto na mão. Daí as três decisões visuais:
+     1. tudo cabe no polegar — ações grandes e na metade de baixo;
+     2. o veredito precisa ser lido de relance, antes da leitura;
+     3. nada de layout de desktop — isto é um app, não uma página.
+
+   Marca: mesmos tokens do site (styles.css). Merienda só em peso
+   900 e Montserrat só de SemiBold para cima, como manda a
+   identidade — por isso a fonte é carregada só nesses pesos.
+   ========================================================= */
+
+@font-face{
+  font-family:"Merienda";
+  src:url("../assets/fonts/Merienda.ttf") format("truetype");
+  font-weight:900;
+  font-display:swap;
+}
+
+:root{
+  --bordo:#840B55;
+  --bordo-escuro:#5E0A3D;
+  --rosa:#F1B2DC;
+  --rosa-suave:#FCEFF7;
+  --rosa-borda:#F6D8EC;
+  --cinza:#63666A;
+  --cinza-claro:#8A8D92;
+  --branco:#fff;
+  --off:#FBF9FA;
+
+  /* Semáforo do veredito. Verde e âmbar puxados para o quente da
+     marca para não parecerem widget de outro app. */
+  --boa:#1F7A4D;
+  --boa-fundo:#E9F6EF;
+  --atencao:#9A6206;
+  --atencao-fundo:#FDF3E2;
+  --evitar:#A32020;
+  --evitar-fundo:#FBECEC;
+
+  --serif:"Merienda", Georgia, serif;
+  --sans:"Montserrat","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:16px;
+  --sombra:0 8px 26px rgba(94,10,61,.10);
+  --barra-h:66px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  font-family:var(--sans);
+  font-weight:600;              /* a identidade não usa Montserrat abaixo de SemiBold */
+  color:var(--cinza);
+  background:var(--off);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--barra-h) + env(safe-area-inset-bottom));
+}
+img{max-width:100%;display:block}
+ul{list-style:none}      /* as listas do resultado trazem o próprio marcador (✓ / !) */
+a{color:var(--bordo);text-decoration:none}
+button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* ---------- Cabeçalho ---------- */
+.topo{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;
+  background:var(--bordo);color:#fff;
+}
+.topo__marca{display:flex;align-items:center;gap:10px;min-width:0}
+.topo__mono{width:34px;height:34px;object-fit:contain;filter:brightness(0) invert(1)}
+.topo__nome{display:block;font-family:var(--serif);font-weight:900;font-size:1.12rem;line-height:1.1}
+.topo__sub{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.topo__conta{
+  border:1px solid rgba(255,255,255,.5);border-radius:999px;
+  padding:7px 14px;font-size:.76rem;color:#fff;white-space:nowrap;
+}
+
+/* ---------- Telas ---------- */
+.app{max-width:560px;margin:0 auto;padding:18px 16px 28px}
+.tela{display:none}
+.tela.is-on{display:block;animation:sobe .22s ease-out}
+@keyframes sobe{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tela__t{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.7rem;line-height:1.15;margin-bottom:8px}
+.tela__p{margin-bottom:18px}
+.sec{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.12rem;margin-bottom:8px;line-height:1.2}
+
+.hero{margin-bottom:20px}
+.hero__t{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.8rem;line-height:1.12;margin-bottom:8px}
+.hero__p{font-size:.95rem}
+
+/* ---------- Slots de foto ----------
+   Três alvos grandes. O da tabela e o dos ingredientes ganham borda
+   marcada porque são os que mudam a qualidade da leitura; a frente do
+   pacote é bônus. */
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+.slot{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:118px;padding:10px 6px;
+  background:var(--branco);border:1.5px dashed var(--rosa-borda);border-radius:var(--radius);
+  text-align:center;transition:border-color .15s,transform .1s;
+}
+.slot--chave{border-color:var(--rosa)}
+.slot:active{transform:scale(.97)}
+.slot__ico{font-size:1.4rem;line-height:1}
+.slot__t{font-size:.72rem;color:var(--bordo);line-height:1.2}
+.slot__h{font-size:.62rem;color:var(--cinza-claro);font-weight:600}
+.slot.tem{border-style:solid;border-color:var(--bordo)}
+.slot.tem .slot__ico,.slot.tem .slot__t,.slot.tem .slot__h{display:none}
+.slot__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot__x{
+  position:absolute;top:5px;right:5px;z-index:2;
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(0,0,0,.6);color:#fff;font-size:1rem;line-height:26px;text-align:center;
+}
+
+.dica{font-size:.8rem;color:var(--cinza-claro);margin-bottom:16px}
+.dica strong{color:var(--bordo)}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:block;width:100%;text-align:center;
+  padding:16px 20px;border-radius:999px;font-size:.95rem;
+  transition:opacity .15s,transform .1s;
+}
+.btn--go{background:var(--bordo);color:#fff;box-shadow:var(--sombra)}
+.btn--go:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.btn--go:not(:disabled):active{transform:scale(.98)}
+.btn--linha{border:1.5px solid var(--bordo);color:var(--bordo);background:var(--branco);margin-top:12px}
+.btn--peq{padding:11px 18px;font-size:.85rem}
+
+.restam{margin-top:10px;text-align:center;font-size:.76rem;color:var(--cinza-claro)}
+
+/* ---------- Cartões ---------- */
+.cartao{
+  background:var(--branco);border:1px solid var(--rosa-borda);border-radius:var(--radius);
+  padding:18px;margin-top:14px;box-shadow:var(--sombra);
+}
+.cartao p{font-size:.9rem;margin-bottom:10px}
+.cartao p:last-child{margin-bottom:0}
+.cartao--convite{background:var(--rosa-suave)}
+
+/* ---------- Resultado ---------- */
+.res{margin-top:20px;animation:sobe .25s ease-out}
+.res__topo{
+  border-radius:var(--radius) var(--radius) 0 0;padding:18px;
+  border:1px solid;border-bottom:0;
+}
+.res--boa .res__topo{background:var(--boa-fundo);border-color:#CBE7D8;color:var(--boa)}
+.res--atencao .res__topo{background:var(--atencao-fundo);border-color:#F0DDBB;color:var(--atencao)}
+.res--evitar .res__topo{background:var(--evitar-fundo);border-color:#F0C9C9;color:var(--evitar)}
+.res__selo{display:flex;align-items:center;gap:8px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.res__selo b{font-size:1.05rem}
+.res__prod{font-family:var(--serif);font-weight:900;font-size:1.25rem;line-height:1.2;color:var(--bordo)}
+.res__marca{font-size:.78rem;color:var(--cinza-claro);margin-top:2px}
+.res__corpo{
+  background:var(--branco);border:1px solid var(--rosa-borda);border-top:0;
+  border-radius:0 0 var(--radius) var(--radius);padding:18px;box-shadow:var(--sombra);
+}
+.res__resumo{font-size:.98rem;color:var(--bordo);margin-bottom:16px}
+
+.bloco{margin-bottom:18px}
+.bloco:last-child{margin-bottom:0}
+.bloco__t{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cinza-claro);margin-bottom:8px}
+.lista li{position:relative;padding-left:22px;font-size:.9rem;margin-bottom:7px}
+.lista li::before{position:absolute;left:0;top:0}
+.lista--bom li::before{content:"✓";color:var(--boa)}
+.lista--ruim li::before{content:"!";color:var(--evitar);font-weight:700}
+
+/* Tabela por 100 g — a comparação honesta. */
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:7px}
+.num{background:var(--off);border-radius:10px;padding:9px 6px;text-align:center}
+.num__v{display:block;font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.02rem;line-height:1.1}
+.num__k{display:block;font-size:.6rem;color:var(--cinza-claro);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
+.nums__nota{font-size:.7rem;color:var(--cinza-claro);margin-top:7px;text-align:center}
+
+/* Ingredientes explicados — o coração didático do app. */
+.ingr{border-left:3px solid var(--rosa);padding:2px 0 2px 12px;margin-bottom:13px}
+.ingr:last-child{margin-bottom:0}
+.ingr__t{display:block;color:var(--bordo);font-size:.86rem;margin-bottom:3px}
+.ingr__e{font-size:.86rem}
+
+/* Alternativas de marca. */
+.alt{display:flex;gap:11px;align-items:flex-start;background:var(--off);border-radius:12px;padding:12px;margin-bottom:9px}
+.alt__n{
+  flex:none;width:25px;height:25px;border-radius:50%;background:var(--bordo);color:#fff;
+  font-size:.78rem;line-height:25px;text-align:center;
+}
+.alt__nome{display:block;color:var(--bordo);font-size:.88rem;line-height:1.3}
+.alt__marca{display:block;font-size:.7rem;color:var(--cinza-claro);text-transform:uppercase;letter-spacing:.08em;margin:2px 0 5px}
+.alt__pq{font-size:.84rem}
+.alt-nota{font-size:.72rem;color:var(--cinza-claro);margin-top:10px}
+
+.aviso{
+  background:var(--rosa-suave);border:1px solid var(--rosa-borda);border-radius:12px;
+  padding:12px;font-size:.82rem;margin-bottom:16px;
+}
+.res__rodape{font-size:.72rem;color:var(--cinza-claro);margin-top:16px;padding-top:13px;border-top:1px solid var(--rosa-borda)}
+
+/* ---------- Estados ---------- */
+.carregando{text-align:center;padding:34px 18px}
+.carregando__p{
+  width:38px;height:38px;margin:0 auto 14px;border-radius:50%;
+  border:3px solid var(--rosa-borda);border-top-color:var(--bordo);
+  animation:gira .8s linear infinite;
+}
+@keyframes gira{to{transform:rotate(360deg)}}
+.carregando__t{font-size:.9rem;color:var(--bordo)}
+.erro{background:var(--evitar-fundo);border:1px solid #F0C9C9;color:var(--evitar);border-radius:12px;padding:15px;font-size:.88rem;margin-top:18px}
+.erro .btn{margin-top:12px}
+
+/* ---------- Histórico ---------- */
+.historico{margin-top:30px}
+.hist{
+  display:flex;align-items:center;gap:11px;
+  background:var(--branco);border:1px solid var(--rosa-borda);border-radius:12px;
+  padding:12px;margin-bottom:8px;width:100%;text-align:left;
+}
+.hist__p{flex:none;width:9px;height:34px;border-radius:5px}
+.hist--boa .hist__p{background:var(--boa)}
+.hist--atencao .hist__p{background:var(--atencao)}
+.hist--evitar .hist__p{background:var(--evitar)}
+.hist__t{display:block;color:var(--bordo);font-size:.86rem;line-height:1.25}
+.hist__d{display:block;font-size:.7rem;color:var(--cinza-claro)}
+
+/* ---------- Aprenda ---------- */
+.aula{background:var(--branco);border:1px solid var(--rosa-borda);border-radius:var(--radius);margin-bottom:10px;overflow:hidden}
+.aula summary{
+  padding:16px;font-size:.92rem;color:var(--bordo);cursor:pointer;list-style:none;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.aula summary::-webkit-details-marker{display:none}
+.aula summary::after{content:"＋";font-size:1.1rem;flex:none;opacity:.6}
+.aula[open] summary::after{content:"－"}
+.aula__c{padding:0 16px 16px}
+.aula__c p{font-size:.89rem;margin-bottom:10px}
+.aula__alerta{background:var(--rosa-suave);border-radius:10px;padding:11px}
+.aula__fecho{color:var(--bordo)}
+.aula__lei{font-size:.72rem;color:var(--cinza-claro);margin-bottom:0}
+
+.passo{font-size:.88rem}
+.tecla{display:inline-block;border:1px solid var(--rosa-borda);border-radius:6px;padding:0 6px;font-size:.8rem}
+
+.rodape-nota{font-size:.72rem;color:var(--cinza-claro);margin-top:20px;line-height:1.6}
+.rodape-nota a{text-decoration:underline}
+
+/* ---------- Formulário de conta ---------- */
+.campo{display:block;margin-bottom:11px}
+.campo span{display:block;font-size:.74rem;color:var(--cinza-claro);margin-bottom:4px}
+.campo input{
+  width:100%;padding:13px 14px;font-family:inherit;font-weight:600;font-size:.95rem;
+  border:1.5px solid var(--rosa-borda);border-radius:12px;background:var(--branco);color:var(--cinza);
+}
+.campo input:focus{outline:none;border-color:var(--bordo)}
+.msg{font-size:.82rem;margin-top:10px}
+.msg--erro{color:var(--evitar)}
+.msg--ok{color:var(--boa)}
+
+/* ---------- Barra inferior ---------- */
+.barra{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  background:var(--branco);border-top:1px solid var(--rosa-borda);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.barra__b{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  height:var(--barra-h);font-size:.66rem;color:var(--cinza-claro);
+}
+.barra__i{font-size:1.15rem;line-height:1}
+.barra__b.is-on{color:var(--bordo)}
+
+@media (min-width:620px){
+  .app{padding-top:26px}
+  .hero__t{font-size:2.1rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}

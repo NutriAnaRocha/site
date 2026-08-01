@@ -105,7 +105,10 @@ section{padding:96px 0}
 }
 .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .nav-logo img{height:38px;width:auto}
-.nav-links{display:flex;align-items:center;gap:26px}
+/* gap 20 e não 26: com a entrada do "App" o menu passou a quebrar em duas
+   linhas a partir de 1280px. 20px é o maior respiro que ainda cabe tudo
+   numa linha só — conferido em 1280 e 1440. */
+.nav-links{display:flex;align-items:center;gap:20px}
 .nav-links a{font-weight:500;font-size:.94rem;color:var(--cinza);transition:color .18s;position:relative}
 .nav-links a:hover{color:var(--bordo)}
 .nav-scrolled{background:var(--branco);box-shadow:0 4px 20px rgba(94,10,61,.08)}
@@ -606,4 +609,56 @@ body.lead-open{overflow:hidden}
 @media (max-width:560px){
   .acomp__items{grid-template-columns:1fr;gap:18px}
   .acomp__box{padding:28px 20px;border-radius:20px}
+}
+
+/* =========================================================
+   APP "NO MERCADO COM A NUTRI ANA" (seção #app da home)
+   A arte da direita é uma AMOSTRA da tela de resultado do app,
+   feita em CSS — de propósito, e não um print: print de app
+   envelhece a cada mudança de tela e ainda pesaria no
+   carregamento da home.
+   ========================================================= */
+.app-mercado{background:var(--rosa-suave)}
+.app-mercado__grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;
+}
+.app-mercado__lista{display:grid;gap:16px;margin-bottom:26px}
+.app-mercado__lista li{
+  position:relative;padding-left:30px;font-size:1rem;line-height:1.6;
+}
+.app-mercado__lista li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--rosa);border:3px solid var(--bordo);
+}
+.app-mercado__lista strong{color:var(--bordo)}
+.app-mercado__acoes{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.app-mercado__nota{font-size:.85rem;color:var(--cinza-claro);margin:16px 0 0}
+
+.app-mercado__arte{display:flex;justify-content:center}
+.app-mercado__tela{
+  width:100%;max-width:320px;background:var(--branco);
+  border:1px solid var(--rosa-borda);border-radius:22px;
+  box-shadow:var(--shadow);padding:24px;
+  display:grid;gap:10px;
+  transform:rotate(-1.6deg);
+}
+.app-mercado__selo{
+  display:inline-block;justify-self:start;
+  background:#FBECEC;color:#A32020;border:1px solid #F0C9C9;border-radius:999px;
+  padding:6px 14px;font-size:.72rem;font-weight:600;letter-spacing:.04em;
+}
+.app-mercado__prod{font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.3rem;line-height:1.2}
+.app-mercado__linha{font-size:.9rem;line-height:1.5}
+.app-mercado__troca{
+  font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--cinza-claro);border-top:1px solid var(--rosa-borda);padding-top:12px;
+}
+
+@media (max-width:900px){
+  .app-mercado__grid{grid-template-columns:1fr;gap:32px}
+  /* No celular a amostra vem ANTES do texto: ela é o que faz entender
+     em dois segundos o que o app entrega. */
+  .app-mercado__arte{order:-1}
+  .app-mercado__tela{transform:none;max-width:100%}
 }

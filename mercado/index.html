@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>No mercado com a Nutri Ana — leia o rótulo antes de levar</title>
+<meta name="description" content="Fotografe a tabela nutricional e a lista de ingredientes e descubra na hora se vale levar. Entenda diet, light e o que significam os ingredientes do rótulo. Grátis.">
+<meta name="theme-color" content="#840B55">
+<link rel="icon" href="../assets/img/monograma.png">
+<link rel="apple-touch-icon" href="icones/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mercado.css">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="No mercado com a Nutri Ana">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="No mercado com a Nutri Ana">
+<meta property="og:description" content="Fotografe o rótulo e descubra na hora se vale levar. Grátis.">
+<meta property="og:url" content="https://nutrianarocha.github.io/site/mercado/">
+<meta property="og:image" content="https://nutrianarocha.github.io/site/assets/img/og-site.jpg">
+</head>
+<body>
+
+<!-- ===================== CABEÇALHO ===================== -->
+<header class="topo">
+  <div class="topo__marca">
+    <img src="../assets/img/monograma.png" alt="" class="topo__mono">
+    <div>
+      <strong class="topo__nome">No mercado</strong>
+      <span class="topo__sub">com a Nutri Ana</span>
+    </div>
+  </div>
+  <button class="topo__conta" type="button" data-ir="conta" aria-label="Sua conta">
+    <span data-conta-chip>Entrar</span>
+  </button>
+</header>
+
+<main class="app">
+
+  <!-- ===================== 1. LER O RÓTULO ===================== -->
+  <section class="tela is-on" data-tela="ler">
+
+    <div class="hero">
+      <h1 class="hero__t">O que tem aí dentro?</h1>
+      <p class="hero__p">Fotografe o rótulo e eu leio com você — o que é bom, o que pesa contra
+        e, se não valer a pena, quais marcas levar no lugar.</p>
+    </div>
+
+    <!-- Três fotos do MESMO produto. A tabela sozinha não conta a história:
+         é a lista de ingredientes que denuncia açúcar disfarçado e fila de
+         aditivos, e é a frente que diz se o produto se vende como diet ou light. -->
+    <div class="slots">
+      <button class="slot" type="button" data-slot="0">
+        <span class="slot__ico">🛒</span>
+        <span class="slot__t">Frente do pacote</span>
+        <span class="slot__h">nome e marca</span>
+      </button>
+      <button class="slot slot--chave" type="button" data-slot="1">
+        <span class="slot__ico">🔢</span>
+        <span class="slot__t">Tabela nutricional</span>
+        <span class="slot__h">os números</span>
+      </button>
+      <button class="slot slot--chave" type="button" data-slot="2">
+        <span class="slot__ico">📃</span>
+        <span class="slot__t">Ingredientes</span>
+        <span class="slot__h">a lista miúda</span>
+      </button>
+    </div>
+
+    <p class="dica" data-dica>Dá para mandar só uma foto, mas com a <strong>tabela</strong> e os
+      <strong>ingredientes</strong> a leitura fica bem melhor. Aproxime e mantenha firme.</p>
+
+    <button class="btn btn--go" type="button" data-analisar disabled>Ler o rótulo</button>
+
+    <p class="restam" data-restam hidden></p>
+
+    <div data-resultado></div>
+
+    <!-- Enquanto não há resultado nem histórico, a tela ficaria com um vazio
+         grande embaixo do botão. Em vez de espaço morto, a primeira lição —
+         que é útil sem gastar análise e ensina o que o app faz. -->
+    <div class="cartao cartao--convite" data-isca>
+      <h2 class="sec">Enquanto isso: diet é diferente de light</h2>
+      <p><strong>Diet</strong> é isento de um nutriente — e muitas vezes tem <em>mais</em>
+        gordura, não menos caloria. <strong>Light</strong> é só 25% a menos de alguma coisa.</p>
+      <button class="btn btn--linha btn--peq" type="button" data-ir="aprenda">Ver as outras lições</button>
+    </div>
+
+    <div class="historico" data-historico hidden>
+      <h2 class="sec">Rótulos que você já leu</h2>
+      <div data-historico-lista></div>
+    </div>
+
+    <input type="file" accept="image/*" capture="environment" id="camera" hidden>
+  </section>
+
+  <!-- ===================== 2. APRENDA ===================== -->
+  <!-- Conteúdo fixo, escrito à mão e conferido: é a parte do app que
+       funciona sem internet, sem conta e sem gastar análise. Também é o
+       que faz a pessoa voltar quando não está no mercado. -->
+  <section class="tela" data-tela="aprenda">
+    <h1 class="tela__t">Aprenda a ler</h1>
+    <p class="tela__p">O rótulo não mente — ele só é escrito para não ser lido. Aqui está o que
+      importa saber antes de virar o pacote.</p>
+
+    <details class="aula" open>
+      <summary>Diet e light não são a mesma coisa</summary>
+      <div class="aula__c">
+        <p><strong>Diet</strong> quer dizer que o produto é <em>isento</em> de um nutriente —
+          quase sempre o açúcar, mas pode ser gordura, sódio ou proteína. Ele foi feito para quem
+          precisa <em>excluir</em> aquele nutriente, como a pessoa com diabetes.</p>
+        <p class="aula__alerta">Diet não quer dizer menos caloria. O chocolate diet tira o açúcar e
+          costuma repor com mais gordura — às vezes fica <strong>mais</strong> calórico que o comum.</p>
+        <p><strong>Light</strong> quer dizer redução de <strong>no mínimo 25%</strong> de um nutriente
+          ou das calorias, comparado ao produto convencional. Light não é isento: só tem menos. E o
+          "menos" pode ser de sódio ou de gordura, não necessariamente de caloria.</p>
+        <p class="aula__fecho">Diet é para quem <strong>precisa excluir</strong>. Light é para quem
+          quer <strong>reduzir</strong>. Nenhum dos dois é emagrecedor, e nos dois casos a única
+          forma de saber é virar o pacote.</p>
+        <p class="aula__lei">Portaria SVS/MS 29/1998 (diet) e RDC 54/2012 (light).</p>
+      </div>
+    </details>
+
+    <details class="aula">
+      <summary>"Farinha enriquecida com ferro e ácido fólico"</summary>
+      <div class="aula__c">
+        <p>Essa frase aparece em quase todo pão, macarrão e biscoito — e não é um diferencial da marca.
+          É <strong>farinha branca comum</strong>.</p>
+        <p>Desde 2002 a lei brasileira obriga <strong>toda</strong> farinha de trigo e de milho vendida
+          no país a receber ferro e ácido fólico. A medida é de saúde pública: prevenir anemia e
+          reduzir defeitos de formação do bebê no início da gestação.</p>
+        <p class="aula__alerta">Ou seja: "enriquecida" ali não significa integral, nem mais nutritiva
+          que a farinha da marca do lado. Todas são obrigadas a ter.</p>
+        <p>O que muda de verdade é ver <strong>farinha de trigo integral</strong> — e no
+          <strong>começo</strong> da lista. Muitos produtos que se vendem como integrais trazem
+          farinha branca em primeiro lugar e um pouco de integral lá no fim.</p>
+        <p class="aula__lei">RDC 344/2002, hoje RDC 150/2017.</p>
+      </div>
+    </details>
+
+    <details class="aula">
+      <summary>A ordem da lista de ingredientes é tudo</summary>
+      <div class="aula__c">
+        <p>Os ingredientes vêm em <strong>ordem decrescente de quantidade</strong>. O primeiro é o que
+          mais tem; o último, o que menos tem.</p>
+        <p>Por isso açúcar em segundo lugar num biscoito diz mais do que qualquer selo na frente da
+          embalagem.</p>
+        <p class="aula__alerta">O truque mais comum: dividir o açúcar em vários nomes. Açúcar, xarope
+          de glicose, maltodextrina, açúcar invertido e melado numa mesma lista são <em>todos</em>
+          açúcar — separados, nenhum chega ao topo. Somados, muitas vezes seriam o primeiro.</p>
+        <p>Regra prática: <strong>lista curta e com nomes de comida</strong> é bom sinal. Fila de
+          nomes que você não pronuncia é ultraprocessado.</p>
+      </div>
+    </details>
+
+    <details class="aula">
+      <summary>Compare sempre por 100 g, nunca pela porção</summary>
+      <div class="aula__c">
+        <p>A porção que aparece na tabela é escolha do fabricante — e ela existe justamente para o
+          número parecer pequeno. Uma marca declara 30 g, a outra 20 g, e de repente a segunda
+          "tem menos açúcar".</p>
+        <p>A coluna de <strong>100 g</strong> é a única em que duas marcas podem ser comparadas de
+          verdade. É por ela que este app compara.</p>
+      </div>
+    </details>
+
+    <details class="aula">
+      <summary>A lupa preta na frente da embalagem</summary>
+      <div class="aula__c">
+        <p>Desde 2022 os produtos com muito <strong>açúcar adicionado</strong>, <strong>gordura
+          saturada</strong> ou <strong>sódio</strong> são obrigados a trazer uma lupa preta no alto
+          da frente da embalagem.</p>
+        <p>Ela não diz "não coma". Diz que, naquele quesito, o produto está acima do limite que a
+          Anvisa considera alto. Se você está entre dois produtos parecidos e um tem lupa e o outro
+          não, já ganhou a comparação sem ler mais nada.</p>
+        <p class="aula__lei">RDC 429/2020 e IN 75/2020.</p>
+      </div>
+    </details>
+
+    <details class="aula">
+      <summary>"Zero", "sem adição de açúcar" e "integral"</summary>
+      <div class="aula__c">
+        <p><strong>Zero açúcar</strong> é isento de açúcar — mas pode ser cheio de gordura, e quase
+          sempre tem adoçante.</p>
+        <p><strong>Sem adição de açúcar</strong> quer dizer que não puseram açúcar <em>a mais</em>.
+          O açúcar natural do alimento continua lá: suco de uva sem adição de açúcar tem bastante
+          açúcar.</p>
+        <p><strong>Integral</strong> na frente do pacote não é garantia. Vá na lista: se a primeira
+          farinha for branca, o produto é branco com um toque de integral.</p>
+      </div>
+    </details>
+
+    <p class="rodape-nota">As explicações acima foram escritas e conferidas pela nutricionista
+      Ana Luísa Rocha, com base na legislação brasileira vigente.</p>
+  </section>
+
+  <!-- ===================== 3. CONTA ===================== -->
+  <section class="tela" data-tela="conta">
+    <h1 class="tela__t">Sua conta</h1>
+
+    <div data-conta-box></div>
+
+    <div class="cartao cartao--convite">
+      <h2 class="sec">Quer o acompanhamento de verdade?</h2>
+      <p>Este app lê rótulos. O que ele não faz — e nem deveria — é olhar para
+        <strong>você</strong>: sua rotina, seus exames, o seu momento.</p>
+      <p>Isso é consulta. Se você quiser ir além da prateleira, eu te atendo.</p>
+      <a class="btn btn--linha" href="../consultas.html">Conhecer o acompanhamento</a>
+    </div>
+
+    <div class="cartao">
+      <h2 class="sec">Instalar na tela inicial</h2>
+      <p>Este app não está em loja nenhuma — ele se instala direto pelo navegador, de graça e
+        sem ocupar espaço.</p>
+      <!-- Sem o glifo 􀈂 da Apple: ele é de uso privado da SF Symbols e vira
+           um quadradinho vazio em Android e no computador. -->
+      <p class="passo"><strong>iPhone:</strong> toque no botão de <strong>compartilhar</strong>
+        (o quadrado com a seta para cima, embaixo na barra do Safari) e depois em
+        <strong>Adicionar à Tela de Início</strong>.</p>
+      <p class="passo"><strong>Android:</strong> toque no menu <span class="tecla">⋮</span> e depois
+        em <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>.</p>
+      <button class="btn btn--linha" type="button" data-instalar hidden>Instalar agora</button>
+    </div>
+
+    <p class="rodape-nota">
+      Ana Luísa Rocha — Nutricionista, CRN 25100401.<br>
+      Este app faz <strong>orientação geral sobre leitura de rótulos</strong>. Não é avaliação
+      nutricional individualizada, não é prescrição e não substitui consulta.<br>
+      As leituras são geradas com apoio de inteligência artificial e podem conter erro — na dúvida,
+      o que vale é o que está impresso na embalagem.<br>
+      As marcas sugeridas vêm da base pública Open Food Facts. A Ana não recebe de nenhuma delas.
+    </p>
+    <p class="rodape-nota">
+      <a href="../index.html">Site da Ana</a> · <a href="../privacidade.html">Privacidade</a> ·
+      <a href="../termos.html">Termos</a>
+    </p>
+  </section>
+
+</main>
+
+<!-- ===================== BARRA INFERIOR ===================== -->
+<nav class="barra">
+  <button class="barra__b is-on" type="button" data-ir="ler">
+    <span class="barra__i">📷</span><span>Ler rótulo</span>
+  </button>
+  <button class="barra__b" type="button" data-ir="aprenda">
+    <span class="barra__i">💡</span><span>Aprenda</span>
+  </button>
+  <button class="barra__b" type="button" data-ir="conta">
+    <span class="barra__i">👤</span><span>Conta</span>
+  </button>
+</nav>
+
+<script src="../assets/js/supabase-client.js"></script>
+<script src="mercado.js"></script>
+</body>
+</html>
