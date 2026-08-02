@@ -189,6 +189,25 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 .num__k{display:block;font-size:.6rem;color:var(--cinza-claro);text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
 .nums__nota{font-size:.7rem;color:var(--cinza-claro);margin-top:7px;text-align:center}
 
+/* Produto x comida de verdade (TACO). Duas colunas de numero lado a lado:
+   a comparacao so convence se as duas colunas couberem na mesma tela, sem
+   rolar — por isso fonte menor e padding curto em vez de scroll lateral. */
+.tacos__intro{font-size:.82rem;margin-bottom:9px}
+.tacos{width:100%;border-collapse:collapse;font-size:.82rem}
+.tacos th,.tacos td{padding:7px 4px;text-align:right}
+.tacos thead th{
+  font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--cinza-claro);font-weight:600;border-bottom:1px solid var(--rosa-borda);
+  line-height:1.25;
+}
+.tacos tbody th{text-align:left;font-weight:600;color:var(--cinza)}
+.tacos tbody tr+tr th,.tacos tbody tr+tr td{border-top:1px solid var(--rosa-borda)}
+/* Cor de marca, nao verde: a coluna da TACO e a REGUA, nao o vencedor.
+   Azeite tem mais saturada que muito produto light, e castanha e mais
+   calorica que biscoito -- pintar de verde afirmaria o que nem sempre e
+   verdade e transformaria a regua em recomendacao. */
+.tacos tbody td:last-child{font-weight:700;color:var(--bordo)}
+
 /* Ingredientes explicados — o coração didático do app. */
 .ingr{border-left:3px solid var(--rosa);padding:2px 0 2px 12px;margin-bottom:13px}
 .ingr:last-child{margin-bottom:0}

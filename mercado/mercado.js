@@ -328,6 +328,42 @@
       '</div><p class="nums__nota">Comparamos por 100 g porque a porção do rótulo é escolha do fabricante.</p></div>';
   }
 
+  /* A comida de verdade, pela TACO.
+     Só compara o nutriente que EXISTE nos dois lados: célula vazia da TACO
+     quer dizer "não analisado", e mostrar isso como zero seria o mesmo erro
+     que o app já corrigiu no ranking da Open Food Facts. */
+  function referenciaHTML(t) {
+    var r = t && t.referencia;
+    if (!r || !r.por_100g) return "";
+    var p = (t && t.por_100g) || {};
+
+    var campos = [
+      ["kcal", "kcal", "kcal", ""],
+      ["Açúcar", "acucar_g", null, "g"],       // a TACO não tem açúcar em campo próprio
+      ["Gord. sat.", "sat_g", "sat_g", "g"],
+      ["Sódio", "sodio_mg", "sodio_mg", "mg"],
+      ["Fibra", "fibra_g", "fibra_g", "g"]
+    ].filter(function (c) {
+      return c[2] && p[c[1]] != null && r.por_100g[c[2]] != null;
+    });
+    if (!campos.length) return "";
+
+    return '<div class="bloco"><p class="bloco__t">A comida de verdade</p>' +
+      '<p class="tacos__intro">O mesmo peso, 100 g, de <strong>' + esc(r.nome) + '</strong>:</p>' +
+      // nome inteiro no cabecalho: cortar na virgula transformava
+      // "Pao, trigo, frances" em "Pao", que nao diz com o que se compara
+      '<table class="tacos"><thead><tr><th></th><th>Este produto</th><th>' +
+        esc(r.nome) + '</th></tr></thead><tbody>' +
+      campos.map(function (c) {
+        return '<tr><th>' + esc(c[0]) + '</th>' +
+          '<td>' + esc(p[c[1]]) + esc(c[3]) + '</td>' +
+          '<td>' + esc(r.por_100g[c[2]]) + esc(c[3]) + '</td></tr>';
+      }).join("") +
+      '</tbody></table>' +
+      '<p class="nums__nota">Coluna da direita: ' + esc(r.fonte) + '. É tabela de alimento ' +
+      'de verdade — não tem marca, e por isso serve de régua, não de sugestão de compra.</p></div>';
+  }
+
   function resultadoHTML(b) {
     var a = b.analise;
     var v = VEREDITOS[a.veredito] || VEREDITOS.atencao;
@@ -370,6 +406,7 @@
           : '') +
 
         numsHTML(a.tabela) +
+        referenciaHTML(a.tabela) +
 
         /* O que está bom vem ANTES do que pesa contra. A pessoa está
            decidindo uma compra, não sendo avaliada — começar pela cobrança
