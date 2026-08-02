@@ -4,6 +4,15 @@
 
 /* ===== EDITE AQUI ===== */
 const CONFIG = {
+  /* Endereço público do site. Fonte única da verdade para a URL.
+     O <head> de cada página carrega uma cópia build-time deste valor em
+     rel="canonical", og:url, og:image, twitter:image e no JSON-LD — HTML
+     estático não lê JS antes de o robô ler a meta tag, então a duplicação é
+     inevitável. Ao trocar de domínio, trocar aqui E rodar:
+       grep -rl "nutrianarocha.github.io" --include=*.html . | xargs sed -i "s|https://nutrianarocha.github.io/site|<NOVA_URL>|g"
+     e publicar um redirect 301 do endereço antigo, para não perder o que já
+     está indexado. */
+  SITE_URL: "https://nutrianarocha.github.io/site",
   WHATS: "5521994094557",
   INSTA: "https://www.instagram.com/nutrianaluisarocha",
   EMAIL: "nutrianalrocha@gmail.com",

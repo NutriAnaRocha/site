@@ -6,10 +6,14 @@
 <title>Nutri Ana Luísa Rocha — Nutrição Clínica e Saúde da Mulher</title>
 <meta name="description" content="Acompanhamento nutricional personalizado para mulheres. Fertilidade, gestação e saúde da mulher em todas as fases. Atendimento presencial e online. CRN 25100401.">
 <meta name="theme-color" content="#840B55">
+<link rel="canonical" href="https://nutrianarocha.github.io/site/">
 <link rel="icon" href="assets/img/monograma.png">
+<link rel="apple-touch-icon" href="assets/img/monograma.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- foto-hero.jpg é o elemento de LCP: pedir antes de o CSS ser lido. -->
+<link rel="preload" as="image" href="assets/img/foto-hero.jpg" fetchpriority="high">
 <!-- Abertura: decide antes de pintar (evita flash em quem já viu / prefere menos animação) -->
 <script>try{if('scrollRestoration'in history)history.scrollRestoration='manual';if(sessionStorage.getItem('introSeen')||matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('no-intro')}else{sessionStorage.setItem('introSeen','1')}}catch(e){document.documentElement.classList.add('no-intro')}</script>
 <link rel="stylesheet" href="assets/css/styles.css">
@@ -30,6 +34,68 @@
 <meta name="twitter:title" content="Nutri Ana Luísa Rocha — Nutrição Clínica e Saúde da Mulher">
 <meta name="twitter:description" content="Fertilidade, gestação e saúde da mulher em todas as fases — com base científica e um plano feito só para você.">
 <meta name="twitter:image" content="https://nutrianarocha.github.io/site/assets/img/og-site.jpg">
+<!-- Dados estruturados: é o que faz o Google entender quem atende, de quê e onde.
+     Maior ganho isolado para busca local. Validar em search.google.com/test/rich-results. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nutrianarocha.github.io/site/#ana",
+      "name": "Ana Luísa Rocha",
+      "jobTitle": "Nutricionista",
+      "description": "Nutricionista clínica com foco em saúde da mulher, fertilidade e gestação.",
+      "image": "https://nutrianarocha.github.io/site/assets/img/foto-hero.jpg",
+      "url": "https://nutrianarocha.github.io/site/",
+      "email": "nutrianalrocha@gmail.com",
+      "telephone": "+55-21-99409-4557",
+      "sameAs": ["https://www.instagram.com/nutrianaluisarocha"],
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Registro profissional",
+        "recognizedBy": {"@type": "Organization", "name": "Conselho Regional de Nutricionistas"},
+        "identifier": "CRN 25100401"
+      },
+      "knowsAbout": ["Nutrição clínica", "Saúde da mulher", "Fertilidade", "Gestação", "Nutrição materno-infantil"],
+      "worksFor": {"@id": "https://nutrianarocha.github.io/site/#consultorio"}
+    },
+    {
+      "@type": "MedicalBusiness",
+      "@id": "https://nutrianarocha.github.io/site/#consultorio",
+      "name": "Nutri Ana Luísa Rocha",
+      "description": "Acompanhamento nutricional personalizado para mulheres — fertilidade, gestação e saúde da mulher em todas as fases. Presencial e online.",
+      "url": "https://nutrianarocha.github.io/site/",
+      "image": "https://nutrianarocha.github.io/site/assets/img/og-site.jpg",
+      "logo": "https://nutrianarocha.github.io/site/assets/img/logo-ana.png",
+      "email": "nutrianalrocha@gmail.com",
+      "telephone": "+55-21-99409-4557",
+      "priceRange": "$$",
+      "medicalSpecialty": "Dietetics",
+      "address": {"@type": "PostalAddress", "addressLocality": "Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR"},
+      "areaServed": [
+        {"@type": "City", "name": "Rio de Janeiro"},
+        {"@type": "Country", "name": "Brasil"}
+      ],
+      "availableService": [
+        {"@type": "MedicalTherapy", "name": "Consulta nutricional presencial"},
+        {"@type": "MedicalTherapy", "name": "Consulta nutricional online"},
+        {"@type": "MedicalTherapy", "name": "Acompanhamento nutricional continuado"}
+      ],
+      "employee": {"@id": "https://nutrianarocha.github.io/site/#ana"},
+      "sameAs": ["https://www.instagram.com/nutrianaluisarocha"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nutrianarocha.github.io/site/#site",
+      "url": "https://nutrianarocha.github.io/site/",
+      "name": "Nutri Ana Luísa Rocha",
+      "inLanguage": "pt-BR",
+      "publisher": {"@id": "https://nutrianarocha.github.io/site/#consultorio"}
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -46,7 +112,7 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="nav-logo" href="#inicio" aria-label="Início — Ana Luísa Rocha">
-      <img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista">
+      <img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="564" height="252">
     </a>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
@@ -69,6 +135,8 @@
   </div>
 </header>
 
+<main>
+
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="inicio">
   <div class="wrap">
@@ -83,13 +151,13 @@
       <p class="hero-proof"><span class="dot"></span> Atendimento presencial e online · CRN 25100401</p>
     </div>
     <div class="hero-media reveal">
-      <img class="leaf" src="assets/img/folha.png" alt="" aria-hidden="true">
+      <img class="leaf" src="assets/img/folha.png" alt="" aria-hidden="true" width="83" height="210">
       <div class="frame">
         <!-- Troque foto-hero.jpg pela foto da Ana. Enquanto não existir, mostra o aviso. -->
         <img src="assets/img/foto-hero.jpg" alt="Ana Luísa Rocha, nutricionista"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="747" height="1024">
         <div class="ph" style="display:none">
-          <img src="assets/img/logo-branco.png" alt="">
+          <img src="assets/img/logo-branco.png" alt="" width="786" height="210">
           <div>foto da Ana entra aqui<br><small>(arquivo <b>assets/img/foto-hero.jpg</b>)</small></div>
         </div>
       </div>
@@ -98,7 +166,7 @@
 </section>
 
 <!-- ===================== COMO TE AJUDO ===================== -->
-<section id="ajuda" class="bg-off">
+<section id="ajuda" class="bg-alt">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Áreas de atuação</span>
@@ -226,7 +294,7 @@
      Porta de entrada para quem JÁ é paciente: leva ao entrar.html, que roteia por
      papel (paciente -> portal, nutri -> dashboard). Ver assets/js/conta.js:80.
      Não é divulgação de telenutrição — é acesso a um serviço já contratado. -->
-<section id="acompanhamento" class="bg-off acomp">
+<section id="acompanhamento" class="bg-alt acomp">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Já sou paciente</span>
@@ -305,7 +373,7 @@
           no assets/js/main.js.
 -->
 <!--
-<section id="meu-plano" class="bg-off">
+<section id="meu-plano" class="bg-alt">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Acompanhamento online</span>
@@ -347,7 +415,7 @@
 -->
 
 <!-- ===================== COMUNIDADE VIP ===================== -->
-<section id="vip" class="bg-rosa vip">
+<section id="vip" class="bg-acento vip">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Conteúdo gratuito</span>
@@ -438,7 +506,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy">
+              <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy" width="700" height="933">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -461,7 +529,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-gravidez.jpg" alt="Capa do e-book 5 Passos para Preparar seu Corpo para uma Gravidez Saudável" loading="lazy">
+              <img src="assets/img/capa-gravidez.jpg" alt="Capa do e-book 5 Passos para Preparar seu Corpo para uma Gravidez Saudável" loading="lazy" width="900" height="1200">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -472,7 +540,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-tentante.jpg" alt="Capa do e-book Guia Completo da Tentante" loading="lazy">
+              <img src="assets/img/capa-tentante.jpg" alt="Capa do e-book Guia Completo da Tentante" loading="lazy" width="1108" height="1478">
               <span class="nf-badge nf-badge--paid">R$ 47</span>
             </div>
             <div class="nf-card__info">
@@ -495,7 +563,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy">
+              <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy" width="700" height="933">
               <span class="nf-badge nf-badge--paid">R$ 27</span>
             </div>
             <div class="nf-card__info">
@@ -506,7 +574,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy">
+              <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy" width="700" height="933">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -529,7 +597,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-rotulos.jpg" alt="Capa do e-book Guia Completo de Rótulos" loading="lazy">
+              <img src="assets/img/capa-rotulos.jpg" alt="Capa do e-book Guia Completo de Rótulos" loading="lazy" width="1086" height="1448">
               <span class="nf-badge nf-badge--paid">R$ 7,90</span>
             </div>
             <div class="nf-card__info">
@@ -540,7 +608,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy">
+              <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy" width="1080" height="1440">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -557,7 +625,7 @@
     <!-- DESTAQUE — espaço reservado para o próximo produto -->
 
     <div class="reveal nf-footer">
-      <span class="selo"><img src="assets/img/crn.png" alt="Selo CRN"> Material desenvolvido por nutricionista · CRN 25100401</span>
+      <span class="selo"><img src="assets/img/crn.png" alt="Selo CRN" width="786" height="239"> Material desenvolvido por nutricionista · CRN 25100401</span>
       <p style="margin-top:1rem;font-size:.92rem;color:rgba(255,255,255,.7)">Já adquiriu um material?</p>
       <a data-biblioteca class="btn btn-light nf-biblio-cta" style="margin-top:.6rem">📚 Acessar minha biblioteca →</a>
     </div>
@@ -570,8 +638,8 @@
     <div class="sobre-media reveal">
       <div class="frame">
         <img src="assets/img/foto-sobre.jpg" alt="Ana Luísa Rocha"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="ph" style="display:none"><img src="assets/img/logo-branco.png" alt="" style="width:120px"></div>
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="935" height="1400">
+        <div class="ph" style="display:none"><img src="assets/img/logo-branco.png" alt="" style="width:120px" width="786" height="210"></div>
       </div>
     </div>
     <div class="sobre-text reveal">
@@ -590,7 +658,7 @@
 </section>
 
 <!-- ===================== DEPOIMENTOS ===================== -->
-<section id="depoimentos" class="bg-rosa">
+<section id="depoimentos" class="bg-acento">
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Prova social</span>
@@ -654,11 +722,13 @@
   </div>
 </section>
 
+</main>
+
 <!-- ===================== RODAPÉ ===================== -->
 <footer class="footer">
   <div class="wrap">
     <div>
-      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista">
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="786" height="210">
       <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher. Cuidado individualizado, com base científica e sem terrorismo alimentar.</p>
       <div class="social">
         <a data-insta aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
@@ -775,6 +845,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
