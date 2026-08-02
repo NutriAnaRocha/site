@@ -119,8 +119,18 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
   background:rgba(0,0,0,.6);color:#fff;font-size:1rem;line-height:26px;text-align:center;
 }
 
-.dica{font-size:.8rem;color:var(--cinza-claro);margin-bottom:16px}
+.dica{font-size:.8rem;color:var(--cinza-claro);margin-bottom:10px}
 .dica strong{color:var(--bordo)}
+
+/* Alterna câmera x galeria. Discreto de propósito — é a saída para quem já
+   fotografou o rótulo antes, não o caminho principal. Alvo de 44px mesmo
+   sendo texto: no mercado se toca com a mão ocupada. */
+.fonte-foto{
+  display:block;margin:0 auto 16px;padding:12px 8px;min-height:44px;
+  background:none;border:none;font-size:.8rem;color:var(--bordo);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;
+}
+.fonte-foto:active{opacity:.6}
 
 /* ---------- Botões ---------- */
 .btn{

@@ -192,6 +192,23 @@
     });
   });
 
+  // Câmera x galeria. O atributo capture é o que faz o celular ir direto para a
+  // câmera; tirá-lo devolve o seletor do sistema (onde a câmera ainda aparece,
+  // só que num toque a mais). Fica num link visível, e não num ajuste escondido,
+  // para a pessoa saber em que modo está.
+  var galeria = false;
+  var btFonte = $("[data-fonte]");
+  if (btFonte) {
+    btFonte.addEventListener("click", function () {
+      galeria = !galeria;
+      if (galeria) $("#camera").removeAttribute("capture");
+      else $("#camera").setAttribute("capture", "environment");
+      btFonte.textContent = galeria
+        ? "Voltar a fotografar com a câmera"
+        : "Prefiro escolher fotos já salvas";
+    });
+  }
+
   $("#camera").addEventListener("change", function () {
     var f = this.files && this.files[0];
     this.value = "";                              // permite reescolher a MESMA foto
