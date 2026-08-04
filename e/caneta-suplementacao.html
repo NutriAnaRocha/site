@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suplementação para quem usa Caneta Emagrecedora — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="Como proteger músculo, cabelo e energia durante o tratamento com caneta emagrecedora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700;900&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Suplementação na Caneta Emagrecedora">
+<meta property="og:description" content="Como proteger músculo, cabelo e energia durante o tratamento com caneta emagrecedora.">
+<meta property="og:image" content="https://nutrianarocha.github.io/site/assets/img/capa-caneta-suplementacao.jpg">
+<meta property="og:image:width" content="700"><meta property="og:image:height" content="933">
+<meta property="og:url" content="https://nutrianarocha.github.io/site/e/caneta-suplementacao.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nutrianarocha.github.io/site/assets/img/capa-caneta-suplementacao.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--mag:#830e56;--mag2:#6a0b46;--mag3:#520836;
+--pk:#f1b3db;--pk2:#fce8f3;--pk3:#fff5fa;
+--gr:#64686B;--gr2:#e8e8e9;
+--w:#ffffff;--bg:#faf7f9;--tx:#2d2d2d;
+--green:#27ae60;--amber:#e6a817;--red:#c0392b;
+--sh:0 4px 24px rgba(131,14,86,.10);
+--sh2:0 12px 40px rgba(131,14,86,.14);
+--r:18px;--r2:12px;
+}
+html{font-size:16px}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--tx);overflow:hidden;height:100vh;height:100dvh}
+
+/* ══════ BOOK CONTAINER ══════ */
+.book{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden}
+
+/* ══════ PAGES ══════ */
+.page{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;
+  transition:opacity .5s ease,transform .5s ease;
+  transform:translateX(60px);
+  overflow-y:auto;overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+.page.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.page.exit-left{opacity:0;transform:translateX(-60px)}
+
+/* ══════ PAGE INNER ══════ */
+.pi{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:2rem 1.5rem 5rem;
+  min-height:100vh;min-height:100dvh;
+}
+
+/* ══════ COVER PAGE ══════ */
+.pg-cover{background:linear-gradient(155deg,var(--mag) 0%,var(--mag2) 50%,var(--mag3) 100%)}
+.pg-cover{color:var(--w);text-align:center;position:relative}
+.pg-cover .deco{position:absolute;width:320px;height:320px;border-radius:50%;border:1px solid rgba(241,179,219,.1);top:-80px;right:-100px}
+.pg-cover .deco2{position:absolute;width:220px;height:220px;border-radius:50%;border:1px solid rgba(241,179,219,.07);bottom:-60px;left:-60px}
+.cover-icon{font-size:3.2rem;margin-bottom:1rem}
+.cover-title{font-family:'Merienda',cursive;font-weight:900;font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.18;margin-bottom:.6rem}
+.cover-title em{font-style:normal;color:var(--pk)}
+.cover-sub{font-weight:300;font-size:clamp(.85rem,2.2vw,1.05rem);max-width:480px;opacity:.85;margin-bottom:2rem;line-height:1.6}
+.cover-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:40px;padding:.5rem 1.3rem;font-size:.78rem;font-weight:500}
+.cover-start{margin-top:2rem;background:var(--pk);color:var(--mag);border:none;padding:.7rem 2rem;border-radius:40px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;transition:.3s}
+.cover-start:hover{transform:scale(1.06);box-shadow:0 6px 20px rgba(241,179,219,.4)}
+
+/* ══════ TOC PAGE ══════ */
+.pg-toc{background:var(--w)}
+.toc-title{font-family:'Merienda',cursive;font-weight:900;color:var(--mag);font-size:1.4rem;margin-bottom:1.5rem;text-align:center}
+.toc-list{display:flex;flex-direction:column;gap:.5rem;width:100%;max-width:420px}
+.toc-item{
+  display:flex;align-items:center;gap:.7rem;
+  background:var(--pk2);border-radius:var(--r2);
+  padding:.75rem 1rem;cursor:pointer;transition:.3s;
+  border:2px solid transparent;
+}
+.toc-item:hover{border-color:var(--mag);transform:translateX(4px)}
+.toc-item .ti-num{width:28px;height:28px;border-radius:50%;background:var(--mag);color:var(--w);display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:800;flex-shrink:0}
+.toc-item .ti-emoji{font-size:1.2rem;flex-shrink:0}
+.toc-item .ti-text{font-weight:600;font-size:.8rem;color:var(--mag);flex:1}
+.toc-item .ti-prio{font-size:.55rem;font-weight:700;padding:.12rem .4rem;border-radius:10px;flex-shrink:0}
+.tp-alta{background:#fdeaea;color:var(--red)}
+.tp-media{background:#fff8e1;color:#b8860b}
+.tp-comp{background:#e8f8ef;color:var(--green)}
+
+/* ══════ CONTENT PAGES ══════ */
+.pg-content{background:var(--w)}
+.pg-content{justify-content:flex-start;padding-top:1.5rem}
+
+/* Page number strip */
+.page-strip{
+  width:100%;max-width:560px;
+  display:flex;align-items:center;gap:.6rem;
+  margin-bottom:1.2rem;
+}
+.page-strip .ps-num{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--mag);color:var(--w);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:800;flex-shrink:0;
+}
+.page-strip .ps-line{flex:1;height:2px;background:var(--pk);border-radius:2px}
+.page-strip .ps-prio{font-size:.58rem;font-weight:700;padding:.15rem .5rem;border-radius:10px;flex-shrink:0}
+
+/* Content header */
+.c-head{
+  width:100%;max-width:560px;
+  display:flex;align-items:center;gap:.6rem;
+  margin-bottom:1.2rem;
+}
+.c-head .ch-icon{font-size:1.8rem}
+.c-head h2{font-family:'Merienda',cursive;font-weight:900;color:var(--mag);font-size:clamp(1.2rem,3.5vw,1.55rem)}
+
+/* Content cards */
+.c-body{width:100%;max-width:560px;display:flex;flex-direction:column;gap:.7rem}
+
+.ccard{
+  background:var(--pk3);border-radius:var(--r2);
+  padding:1rem 1.1rem;position:relative;
+  border-left:3px solid var(--pk);
+  transition:.3s;
+}
+.ccard.expandable{cursor:pointer}
+.ccard.expandable::after{
+  content:'▸';position:absolute;right:12px;top:12px;
+  color:var(--mag);font-size:.8rem;transition:.3s;
+}
+.ccard.expandable.open::after{transform:rotate(90deg)}
+.ccard h4{font-weight:700;color:var(--mag);font-size:.82rem;margin-bottom:.3rem;display:flex;align-items:center;gap:.3rem;padding-right:1.2rem}
+.ccard p,.ccard li{font-size:.8rem;line-height:1.6;color:#444}
+.ccard ul{padding-left:1rem;margin-top:.2rem}
+.ccard li{margin-bottom:.15rem}
+.ccard .detail{display:none;margin-top:.5rem;padding-top:.5rem;border-top:1px dashed var(--pk)}
+.ccard.open .detail{display:block}
+
+/* Special cards */
+.ccard.alert-c{background:#fff5f5;border-left-color:var(--red)}
+.ccard.alert-c h4{color:var(--red)}
+.ccard.recipe-c{background:#f0faf4;border-left-color:var(--green)}
+.ccard.recipe-c h4{color:var(--green)}
+.ccard.tip-c{background:#fffbee;border-left-color:var(--amber)}
+.ccard.tip-c h4{color:#9a7000}
+
+/* ══════ PRIORITY PAGE ══════ */
+.pg-priority{background:linear-gradient(160deg,var(--pk2),var(--w))}
+.prio-cols{width:100%;max-width:560px;display:flex;flex-direction:column;gap:.8rem}
+.prio-col{border-radius:var(--r2);padding:1rem 1.1rem;box-shadow:var(--sh)}
+.prio-col.pa{background:var(--w);border-top:4px solid var(--red)}
+.prio-col.pb{background:var(--w);border-top:4px solid var(--amber)}
+.prio-col.pc{background:var(--w);border-top:4px solid var(--green)}
+.prio-col h4{font-size:.82rem;font-weight:700;margin-bottom:.4rem}
+.prio-col.pa h4{color:var(--red)}
+.prio-col.pb h4{color:#9a7000}
+.prio-col.pc h4{color:var(--green)}
+.prio-col ul{padding-left:1rem;font-size:.78rem}
+.prio-col li{margin-bottom:.15rem}
+
+/* ══════ TABLE PAGE ══════ */
+.pg-table{background:var(--w)}
+.tbl-wrap{width:100%;max-width:600px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.68rem;border-radius:var(--r2);overflow:hidden;box-shadow:var(--sh)}
+thead{background:var(--mag);color:var(--w)}
+th{padding:.55rem .4rem;font-weight:600;text-align:left;font-size:.65rem}
+td{padding:.5rem .4rem;border-bottom:1px solid var(--gr2)}
+tbody tr:nth-child(even){background:var(--pk2)}
+
+/* ══════ CTA PAGE ══════ */
+.pg-cta{background:linear-gradient(155deg,var(--mag),var(--mag2),var(--mag3))}
+.pg-cta{color:var(--w);text-align:center}
+.cta-icon{font-size:2.8rem;margin-bottom:.8rem}
+.cta-h{font-family:'Merienda',cursive;font-weight:900;font-size:clamp(1.3rem,4vw,1.8rem);margin-bottom:.5rem;line-height:1.25}
+.cta-p{font-weight:300;font-size:.9rem;max-width:440px;opacity:.85;margin-bottom:1.8rem;line-height:1.6}
+.cta-btn{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:var(--w);font-weight:700;padding:.8rem 1.8rem;border-radius:40px;text-decoration:none;font-size:.92rem;transition:.3s;box-shadow:0 4px 18px rgba(37,211,102,.35)}
+.cta-btn:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(37,211,102,.45)}
+.cta-btn svg{width:20px;height:20px;fill:currentColor}
+.cta-footer{margin-top:2rem;font-size:.68rem;opacity:.55}
+
+/* ══════ BOTTOM NAV ══════ */
+.nav-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-top:1px solid var(--gr2);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 1rem;
+  box-shadow:0 -2px 12px rgba(0,0,0,.05);
+}
+.nav-btn{
+  display:flex;align-items:center;gap:.3rem;
+  background:none;border:2px solid var(--mag);
+  color:var(--mag);font-family:'Montserrat',sans-serif;
+  font-weight:700;font-size:.72rem;padding:.4rem .8rem;
+  border-radius:30px;cursor:pointer;transition:.3s;
+}
+.nav-btn:hover{background:var(--mag);color:var(--w)}
+.nav-btn:disabled{opacity:.3;cursor:default}
+.nav-btn:disabled:hover{background:none;color:var(--mag)}
+.nav-center{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center;max-width:55%}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--pk);transition:.3s;cursor:pointer;
+  border:none;padding:0;
+}
+.dot.on{background:var(--mag);transform:scale(1.4)}
+.dot:hover{background:var(--mag);opacity:.7}
+.pg-label{
+  position:absolute;bottom:52px;left:50%;transform:translateX(-50%);
+  background:var(--mag);color:var(--w);font-size:.65rem;font-weight:600;
+  padding:.25rem .8rem;border-radius:20px;white-space:nowrap;
+  opacity:0;transition:.3s;pointer-events:none;
+}
+.pg-label.show{opacity:1}
+
+/* ══════ SWIPE HINT ══════ */
+.swipe-hint{
+  position:fixed;bottom:60px;left:50%;transform:translateX(-50%);
+  background:var(--mag);color:var(--w);font-size:.7rem;font-weight:500;
+  padding:.4rem 1rem;border-radius:20px;
+  opacity:0;transition:.5s;pointer-events:none;z-index:50;
+}
+.swipe-hint.show{opacity:.8}
+
+/* ══════ RESPONSIVE ══════ */
+@media(max-width:500px){
+  .pi{padding:1.5rem 1.1rem 4.5rem}
+  .c-body{gap:.5rem}
+  .ccard{padding:.8rem .9rem}
+  .nav-center{max-width:50%}
+  .dot{width:6px;height:6px}
+  th,td{padding:.4rem .3rem;font-size:.6rem}
+}
+@media(min-width:768px){
+  .pi{padding:2.5rem 2rem 5rem}
+  .prio-cols{flex-direction:row}
+  .prio-col{flex:1}
+}
+</style>
+</head>
+<body>
+
+<div class="book" id="book">
+
+<!-- ══ PG 0 — CAPA ══ -->
+<div class="page active" data-pg="0">
+  <div class="pi pg-cover">
+    <div class="deco"></div><div class="deco2"></div>
+    <div class="cover-icon">💉✨</div>
+    <h1 class="cover-title">Suplementação para<br>quem usa <em>Caneta<br>Emagrecedora</em></h1>
+    <p class="cover-sub">Vitaminas, minerais e suplementos essenciais para proteger sua saúde e potencializar seus resultados com GLP-1.</p>
+    <div class="cover-badge"><span>📋</span> Nutri Ana Luisa Rocha · CRN 25100401</div>
+    <button class="cover-start" onclick="goTo(1)">Começar a ler →</button>
+  </div>
+</div>
+
+<!-- ══ PG 1 — SUMÁRIO ══ -->
+<div class="page" data-pg="1">
+  <div class="pi pg-toc">
+    <h2 class="toc-title">📑 Sumário</h2>
+    <div class="toc-list">
+      <div class="toc-item" onclick="goTo(2)"><span class="ti-num">01</span><span class="ti-emoji">🔍</span><span class="ti-text">Por quê suplementar?</span></div>
+      <div class="toc-item" onclick="goTo(3)"><span class="ti-num">02</span><span class="ti-emoji">🥩</span><span class="ti-text">Proteína</span><span class="ti-prio tp-alta">ALTA</span></div>
+      <div class="toc-item" onclick="goTo(4)"><span class="ti-num">03</span><span class="ti-emoji">☀️</span><span class="ti-text">Vitamina D</span><span class="ti-prio tp-alta">ALTA</span></div>
+      <div class="toc-item" onclick="goTo(5)"><span class="ti-num">04</span><span class="ti-emoji">🔴</span><span class="ti-text">Vitamina B12</span><span class="ti-prio tp-alta">ALTA</span></div>
+      <div class="toc-item" onclick="goTo(6)"><span class="ti-num">05</span><span class="ti-emoji">🩸</span><span class="ti-text">Ferro</span><span class="ti-prio tp-media">ESPECIAL</span></div>
+      <div class="toc-item" onclick="goTo(7)"><span class="ti-num">06</span><span class="ti-emoji">💎</span><span class="ti-text">Magnésio</span><span class="ti-prio tp-media">ESPECIAL</span></div>
+      <div class="toc-item" onclick="goTo(8)"><span class="ti-num">07</span><span class="ti-emoji">🐟</span><span class="ti-text">Ômega-3</span><span class="ti-prio tp-media">ESPECIAL</span></div>
+      <div class="toc-item" onclick="goTo(9)"><span class="ti-num">08</span><span class="ti-emoji">✨</span><span class="ti-text">Colágeno</span><span class="ti-prio tp-comp">COMPLEM.</span></div>
+      <div class="toc-item" onclick="goTo(10)"><span class="ti-num">09</span><span class="ti-emoji">🦠</span><span class="ti-text">Probióticos</span><span class="ti-prio tp-comp">COMPLEM.</span></div>
+      <div class="toc-item" onclick="goTo(11)"><span class="ti-num">10</span><span class="ti-emoji">🛡️</span><span class="ti-text">Zinco e Cálcio</span><span class="ti-prio tp-comp">COMPLEM.</span></div>
+      <div class="toc-item" onclick="goTo(12)"><span class="ti-num">📊</span><span class="ti-emoji">🎯</span><span class="ti-text">Prioridades e Resumo</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 2 — POR QUÊ SUPLEMENTAR ══ -->
+<div class="page" data-pg="2">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">01</span><span class="ps-line"></span></div>
+    <div class="c-head"><span class="ch-icon">🔍</span><h2>Por quê suplementar?</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>💡 O cenário nutricional com a caneta</h4>
+        <p>Os medicamentos injetáveis à base de GLP-1 (semaglutida, tirzepatida) reduzem drasticamente o apetite e retardam o esvaziamento gástrico. Isso leva a uma <strong>queda significativa no volume de comida ingerida</strong> — e, junto, na ingestão de nutrientes essenciais.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>⚠️ Riscos sem acompanhamento</h4>
+        <p>A perda de peso sem estratégia nutricional pode trazer consequências:</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Perda de massa muscular:</strong> até 40% do peso perdido pode vir de músculo quando a proteína é inadequada</li>
+            <li><strong>Deficiências nutricionais:</strong> ferro, B12, vitamina D, cálcio, zinco e magnésio ficam abaixo do mínimo</li>
+            <li><strong>Flacidez cutânea:</strong> a pele não acompanha o emagrecimento rápido</li>
+            <li><strong>Fadiga, queda de cabelo, unhas fracas:</strong> sinais clássicos de carências</li>
+            <li><strong>Desconforto gastrointestinal:</strong> náusea, constipação, refluxo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard tip-c">
+        <h4>🎯 A boa notícia</h4>
+        <p>Com uma <strong>suplementação orientada</strong>, é possível emagrecer preservando saúde, massa muscular, pele e energia. Nas próximas páginas, veja cada suplemento recomendado em ordem de prioridade.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 3 — PROTEÍNA ══ -->
+<div class="page" data-pg="3">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">02</span><span class="ps-line"></span><span class="ps-prio tp-alta">PRIORIDADE ALTA</span></div>
+    <div class="c-head"><span class="ch-icon">🥩</span><h2>Proteína</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que é a nº 1?</h4>
+        <p>A maior preocupação clínica com as canetas é a <strong>perda de massa magra</strong>. Preservar músculo é essencial para manter o metabolismo ativo e evitar o reganho de peso.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Dosagem e fontes</h4>
+        <p><strong>Meta:</strong> 1,2 a 2,0g por kg de peso/dia.</p>
+        <div class="detail">
+          <p><strong>Exemplo:</strong> pessoa de 80kg → 96 a 160g/dia de proteína total. Se a alimentação entrega apenas 50-60g (comum com a caneta), suplementar 1-2 doses de 25-30g.</p>
+          <ul>
+            <li><strong>Whey Isolado:</strong> rápida absorção, menos náusea</li>
+            <li><strong>Proteína vegetal:</strong> ervilha + arroz para intolerantes</li>
+            <li><strong>Caseína:</strong> absorção lenta, ideal na ceia</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>🕐 Melhores horários</h4>
+        <p>Distribuir 20-30g por refeição ao longo do dia.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Café da manhã:</strong> momento crítico — shake leve garante o mínimo</li>
+            <li><strong>Pós-treino:</strong> até 2h após o exercício</li>
+            <li><strong>Ceia:</strong> caseína para síntese noturna</li>
+          </ul>
+          <p style="margin-top:.3rem"><strong>Dica:</strong> se a náusea for forte, prefira shakes gelados — são melhor tolerados.</p>
+        </div>
+      </div>
+      <div class="ccard recipe-c expandable" onclick="this.classList.toggle('open')">
+        <h4>🥤 Shake Anti-Náusea</h4>
+        <p>1 scoop whey isolado + 150ml água de coco gelada + hortelã + ½ limão + gelo.</p>
+        <div class="detail">
+          <p>Bata tudo no liquidificador. O limão e a hortelã reduzem a náusea. Leve, refrescante, fácil de consumir mesmo em dias difíceis.</p>
+        </div>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Nunca substitua todas as refeições por shakes. Pacientes com doença renal devem ter a dose ajustada pelo médico.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 4 — VITAMINA D ══ -->
+<div class="page" data-pg="4">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">03</span><span class="ps-line"></span><span class="ps-prio tp-alta">PRIORIDADE ALTA</span></div>
+    <div class="c-head"><span class="ch-icon">☀️</span><h2>Vitamina D</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que é essencial?</h4>
+        <p>A deficiência de vitamina D é epidêmica no Brasil e piora com a redução alimentar. Ela é fundamental para absorção de cálcio, saúde óssea, imunidade e metabolismo muscular. Níveis baixos estão ligados a maior perda de músculo e dificuldade na queima de gordura.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Dosagem</h4>
+        <p><strong>Manutenção:</strong> 1.000 a 2.000 UI/dia (se níveis ≥30 ng/mL).</p>
+        <div class="detail">
+          <p><strong>Deficiência:</strong> 5.000 a 50.000 UI/semana sob prescrição médica.</p>
+          <p><strong>Forma preferida:</strong> D3 (colecalciferol) — mais eficaz que D2.</p>
+        </div>
+      </div>
+      <div class="ccard tip-c">
+        <h4>🕐 Melhor horário</h4>
+        <p>Junto à <strong>maior refeição do dia</strong> — é lipossolúvel e precisa de gordura para ser absorvida. Se o almoço é sua maior refeição, tome no almoço.</p>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Doses acima de 4.000 UI/dia sem acompanhamento podem causar hipercalcemia (excesso de cálcio), com náusea, fraqueza e cálculos renais. Sempre dosar antes de suplementar em altas doses.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 5 — B12 ══ -->
+<div class="page" data-pg="5">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">04</span><span class="ps-line"></span><span class="ps-prio tp-alta">PRIORIDADE ALTA</span></div>
+    <div class="c-head"><span class="ch-icon">🔴</span><h2>Vitamina B12</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que é essencial?</h4>
+        <p>Participa da formação de glóbulos vermelhos, função neurológica e energia. Com menos carnes e ovos na dieta, e a interferência no esvaziamento gástrico, os níveis caem. Sintomas: fadiga extrema, formigamento, falhas de memória, anemia.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Dosagem</h4>
+        <p><strong>Manutenção:</strong> 250 a 500 mcg/dia (metilcobalamina).</p>
+        <div class="detail">
+          <p><strong>Deficiência:</strong> 1.000 a 5.000 mcg/dia ou aplicação intramuscular.</p>
+          <p><strong>Dica:</strong> a forma sublingual é boa para quem tem náusea com comprimidos — absorve pela mucosa bucal.</p>
+        </div>
+      </div>
+      <div class="ccard tip-c">
+        <h4>🕐 Melhor horário</h4>
+        <p><strong>Pela manhã, em jejum.</strong> Tem efeito energizante leve, por isso é preferível de manhã.</p>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Se usar metformina concomitantemente, a necessidade de B12 pode ser ainda maior. Monitore os níveis a cada 6 meses durante o tratamento.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 6 — FERRO ══ -->
+<div class="page" data-pg="6">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">05</span><span class="ps-line"></span><span class="ps-prio tp-media">ATENÇÃO ESPECIAL</span></div>
+    <div class="c-head"><span class="ch-icon">🩸</span><h2>Ferro</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que merece atenção?</h4>
+        <p>Mulheres em idade fértil já têm risco elevado de deficiência. Com menos carne vermelha na dieta, o risco sobe. Causa fadiga, queda de cabelo, unhas quebradiças e anemia.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Dosagem</h4>
+        <p><strong>Somente com exame de ferritina e prescrição.</strong></p>
+        <div class="detail">
+          <p><strong>Dose terapêutica:</strong> 30 a 60mg de ferro elementar/dia.</p>
+          <p><strong>Formas:</strong> ferro bisglicinato ou quelato — menos desconforto que sulfato ferroso.</p>
+        </div>
+      </div>
+      <div class="ccard tip-c expandable" onclick="this.classList.toggle('open')">
+        <h4>💡 Potencialize a absorção</h4>
+        <p>Tome com <strong>vitamina C</strong> — pode aumentar a absorção em até 3x.</p>
+        <div class="detail">
+          <p>Combinação simples: cápsula de ferro + suco de 1 limão em meio copo d'água. Tomar em jejum ou 1h antes das refeições.</p>
+          <p><strong>Evitar junto:</strong> café, chá, leite, cálcio ou antiácidos — inibem a absorção.</p>
+        </div>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Nunca suplemente ferro sem exames — o excesso é tóxico. Efeitos colaterais (constipação, náusea) podem intensificar os da caneta. Espaçar do cálcio em pelo menos 2h.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 7 — MAGNÉSIO ══ -->
+<div class="page" data-pg="7">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">06</span><span class="ps-line"></span><span class="ps-prio tp-media">ATENÇÃO ESPECIAL</span></div>
+    <div class="c-head"><span class="ch-icon">💎</span><h2>Magnésio</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que suplementar?</h4>
+        <p>Participa de +300 reações enzimáticas. Câimbras, insônia, irritabilidade e constipação podem ser sinais de deficiência — comuns em quem usa a caneta.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>🧪 Tipos de Magnésio</h4>
+        <p>Cada forma tem uma indicação principal.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Bisglicinato:</strong> sono e ansiedade, boa tolerância</li>
+            <li><strong>Dimalato:</strong> energia e fadiga muscular</li>
+            <li><strong>L-treonato:</strong> função cognitiva e memória</li>
+            <li><strong>Citrato:</strong> efeito laxativo — útil se a caneta causar constipação</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard">
+        <h4>📏 Dosagem e horário</h4>
+        <p><strong>200 a 400mg/dia</strong> de magnésio elementar. À noite para formas relaxantes (bisglicinato); pela manhã para energéticas (dimalato).</p>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Doses altas podem causar diarreia. Insuficiência renal: evitar sem acompanhamento. Separar do ferro e cálcio em 2h.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 8 — ÔMEGA-3 ══ -->
+<div class="page" data-pg="8">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">07</span><span class="ps-line"></span><span class="ps-prio tp-media">ATENÇÃO ESPECIAL</span></div>
+    <div class="c-head"><span class="ch-icon">🐟</span><h2>Ômega-3</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que suplementar?</h4>
+        <p>Ácido graxo essencial com potente ação anti-inflamatória. Durante o emagrecimento acelerado, a inflamação subclínica pode aumentar. O ômega-3 também protege o coração, o cérebro, as articulações e ajuda a preservar massa muscular em déficit calórico.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Dosagem</h4>
+        <p><strong>1.000 a 2.000mg de EPA + DHA combinados/dia.</strong></p>
+        <div class="detail">
+          <p><strong>Atenção:</strong> "1.000mg de óleo de peixe" ≠ 1.000mg de EPA+DHA. Verifique a concentração real no rótulo. Prefira versões com &gt;60% de concentração.</p>
+        </div>
+      </div>
+      <div class="ccard tip-c">
+        <h4>🕐 Melhor horário</h4>
+        <p>Junto à <strong>refeição com gordura</strong> (almoço ou jantar). Guardar na geladeira reduz o refluxo com gosto de peixe.</p>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Pode causar refluxo — versões com revestimento entérico ajudam. Em uso de anticoagulantes, consultar o médico (efeito antiagregante plaquetário).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 9 — COLÁGENO ══ -->
+<div class="page" data-pg="9">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">08</span><span class="ps-line"></span><span class="ps-prio tp-comp">COMPLEMENTAR</span></div>
+    <div class="c-head"><span class="ch-icon">✨</span><h2>Colágeno</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que considerar?</h4>
+        <p>A perda de peso rápida é o maior desafio estético da caneta. O colágeno hidrolisado fornece peptídeos que estimulam a produção de colágeno, elastina e ácido hialurônico na pele, minimizando a flacidez.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>📏 Tipos e dosagem</h4>
+        <p><strong>Tipo I (pele):</strong> 2,5 a 10g/dia. <strong>Verisol®:</strong> 2,5g/dia.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Tipo I:</strong> pele, cabelo, unhas — o mais indicado para flacidez</li>
+            <li><strong>Tipo II (UC-II):</strong> cartilagens — 40mg/dia</li>
+            <li><strong>Resultados:</strong> aparecem após 8 a 12 semanas de uso contínuo</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard recipe-c expandable" onclick="this.classList.toggle('open')">
+        <h4>🍊 Suco Renovador de Colágeno</h4>
+        <p>200ml suco de laranja + 10g colágeno + cúrcuma + pimenta-do-reino.</p>
+        <div class="detail">
+          <p>A vitamina C do suco é cofator na síntese de colágeno. A cúrcuma tem ação anti-inflamatória. Tome pela manhã ou à tarde.</p>
+        </div>
+      </div>
+      <div class="ccard tip-c">
+        <h4>💡 Importante</h4>
+        <p>Colágeno <strong>não substitui</strong> proteína completa (whey, carne, ovo) — faltam aminoácidos essenciais como o triptofano. Use como complemento.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 10 — PROBIÓTICOS ══ -->
+<div class="page" data-pg="10">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">09</span><span class="ps-line"></span><span class="ps-prio tp-comp">COMPLEMENTAR</span></div>
+    <div class="c-head"><span class="ch-icon">🦠</span><h2>Probióticos</h2></div>
+    <div class="c-body">
+      <div class="ccard">
+        <h4>🎯 Por que considerar?</h4>
+        <p>Náusea, constipação, diarreia e estufamento são efeitos colaterais comuns da caneta. Probióticos ajudam a equilibrar a microbiota, melhorar o trânsito intestinal e a absorção de nutrientes.</p>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>🧪 Cepas mais estudadas</h4>
+        <p>Prefira formulações com múltiplas cepas e ≥10 bilhões de UFC.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>L. acidophilus:</strong> saúde digestiva geral</li>
+            <li><strong>L. rhamnosus GG:</strong> diarreia e imunidade</li>
+            <li><strong>B. lactis:</strong> constipação e regularidade</li>
+            <li><strong>S. boulardii:</strong> proteção durante antibióticos</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard">
+        <h4>📏 Dosagem e horário</h4>
+        <p><strong>10 a 30 bilhões de UFC/dia.</strong> Tomar 20-30 min antes do café da manhã (estômago menos ácido).</p>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alerta</h4>
+        <p>Nos primeiros dias pode haver mais gases — é adaptação. Muitas cepas exigem refrigeração. Imunossuprimidos devem consultar o médico.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 11 — ZINCO E CÁLCIO ══ -->
+<div class="page" data-pg="11">
+  <div class="pi pg-content">
+    <div class="page-strip"><span class="ps-num">10</span><span class="ps-line"></span><span class="ps-prio tp-comp">COMPLEMENTAR</span></div>
+    <div class="c-head"><span class="ch-icon">🛡️</span><h2>Zinco e Cálcio</h2></div>
+    <div class="c-body">
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>🛡️ Zinco</h4>
+        <p>Essencial para imunidade, pele, cabelo e função hormonal.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Dose:</strong> 15 a 30mg/dia (bisglicinato ou picolinato)</li>
+            <li><strong>Horário:</strong> com refeição para evitar náusea</li>
+            <li><strong>Separar:</strong> do ferro e cálcio em 2h</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard expandable" onclick="this.classList.toggle('open')">
+        <h4>🦴 Cálcio</h4>
+        <p>Fundamental para saúde óssea — especialmente em mulheres com emagrecimento rápido.</p>
+        <div class="detail">
+          <ul>
+            <li><strong>Dose:</strong> 500 a 1.000mg/dia (dividir em 2 tomadas)</li>
+            <li><strong>Citrato:</strong> absorve com ou sem alimento</li>
+            <li><strong>Carbonato:</strong> precisa de meio ácido (tomar com refeição)</li>
+            <li><strong>Sempre associar com vitamina D</strong></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ccard alert-c">
+        <h4>⚠️ Alertas</h4>
+        <p><strong>Zinco:</strong> &gt;40mg/dia por tempo prolongado pode causar deficiência de cobre. Não tomar em jejum.<br><strong>Cálcio:</strong> &gt;1.500mg/dia associa-se a risco cardiovascular. Não tomar junto com levotiroxina.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 12 — PRIORIDADES + TABELA ══ -->
+<div class="page" data-pg="12">
+  <div class="pi pg-content pg-priority">
+    <div class="c-head"><span class="ch-icon">🎯</span><h2>Mapa de Prioridades</h2></div>
+    <div class="prio-cols">
+      <div class="prio-col pa">
+        <h4>🔴 Prioridade Alta</h4>
+        <p style="font-size:.72rem;margin-bottom:.3rem">Desde o início do tratamento:</p>
+        <ul><li><strong>Proteína</strong> — massa muscular</li><li><strong>Vitamina D</strong> — ossos e imunidade</li><li><strong>Vitamina B12</strong> — energia e neurologia</li></ul>
+      </div>
+      <div class="prio-col pb">
+        <h4>🟡 Atenção Especial</h4>
+        <p style="font-size:.72rem;margin-bottom:.3rem">Avaliar com exames:</p>
+        <ul><li><strong>Ferro</strong> — especialmente mulheres</li><li><strong>Magnésio</strong> — sono e intestino</li><li><strong>Ômega-3</strong> — inflamação</li></ul>
+      </div>
+      <div class="prio-col pc">
+        <h4>🟢 Complementar</h4>
+        <p style="font-size:.72rem;margin-bottom:.3rem">Conforme objetivo individual:</p>
+        <ul><li><strong>Colágeno</strong> — pele e flacidez</li><li><strong>Probióticos</strong> — intestino</li><li><strong>Zinco e Cálcio</strong> — imunidade e ossos</li></ul>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem;width:100%;max-width:560px">
+      <div style="background:#fff8e1;border-left:4px solid #e6a817;border-radius:10px;padding:.8rem 1rem;font-size:.75rem;color:#6d5a00;margin-bottom:1rem">
+        <strong>Importante:</strong> Material educativo. A suplementação deve ser individualizada por nutricionista, com base em exames e quadro clínico.
+      </div>
+    </div>
+
+    <div class="tbl-wrap" style="width:100%;max-width:560px">
+      <table>
+        <thead><tr><th>Suplemento</th><th>Dose</th><th>Horário</th><th>Prioridade</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Proteína</strong></td><td>25–30g 1–2x/dia</td><td>Café / Pós-treino</td><td><span class="ps-prio tp-alta" style="font-size:.55rem">ALTA</span></td></tr>
+          <tr><td><strong>Vitamina D3</strong></td><td>1.000–2.000 UI</td><td>Refeição c/ gordura</td><td><span class="ps-prio tp-alta" style="font-size:.55rem">ALTA</span></td></tr>
+          <tr><td><strong>Vitamina B12</strong></td><td>250–500 mcg</td><td>Manhã (jejum)</td><td><span class="ps-prio tp-alta" style="font-size:.55rem">ALTA</span></td></tr>
+          <tr><td><strong>Ferro</strong></td><td>30–60mg*</td><td>Jejum + vit C</td><td><span class="ps-prio tp-media" style="font-size:.55rem">ESPECIAL</span></td></tr>
+          <tr><td><strong>Magnésio</strong></td><td>200–400mg</td><td>Noite</td><td><span class="ps-prio tp-media" style="font-size:.55rem">ESPECIAL</span></td></tr>
+          <tr><td><strong>Ômega-3</strong></td><td>1–2g EPA+DHA</td><td>Refeição c/ gordura</td><td><span class="ps-prio tp-media" style="font-size:.55rem">ESPECIAL</span></td></tr>
+          <tr><td><strong>Colágeno</strong></td><td>2,5–10g</td><td>Qualquer</td><td><span class="ps-prio tp-comp" style="font-size:.55rem">COMPLEM.</span></td></tr>
+          <tr><td><strong>Probióticos</strong></td><td>10–30 bi UFC</td><td>Antes do café</td><td><span class="ps-prio tp-comp" style="font-size:.55rem">COMPLEM.</span></td></tr>
+          <tr><td><strong>Zinco</strong></td><td>15–30mg</td><td>Com refeição</td><td><span class="ps-prio tp-comp" style="font-size:.55rem">COMPLEM.</span></td></tr>
+          <tr><td><strong>Cálcio</strong></td><td>500–1.000mg</td><td>2 doses/dia</td><td><span class="ps-prio tp-comp" style="font-size:.55rem">COMPLEM.</span></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.62rem;color:var(--gr);margin-top:.3rem;text-align:center">* Somente com exame e prescrição profissional.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PG 13 — CTA ══ -->
+<div class="page" data-pg="13">
+  <div class="pi pg-cta">
+    <div class="cta-icon">💬</div>
+    <h2 class="cta-h">Quer um plano de suplementação personalizado?</h2>
+    <p class="cta-p">Cada organismo responde de forma diferente. Agende sua consulta e receba um protocolo feito sob medida, com base nos seus exames e objetivos.</p>
+    <a class="cta-btn" href="https://wa.me/message/MKAWDGILVCXCI1" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.106 1.518 5.833L0 24l6.335-1.488A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.91 0-3.716-.507-5.283-1.392l-.378-.224-3.917.921.987-3.832-.252-.394A9.698 9.698 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg>
+      Fale comigo no WhatsApp
+    </a>
+    <p class="cta-footer">© 2026 · Nutri Ana Luisa Rocha · CRN 25100401<br>Material educativo. Não substitui orientação profissional.</p>
+  </div>
+</div>
+
+</div><!-- /book -->
+
+<!-- ══ BOTTOM NAV ══ -->
+<div class="nav-bar">
+  <button class="nav-btn" id="prevBtn" onclick="prev()" disabled>← Anterior</button>
+  <div class="nav-center" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" onclick="next()">Próxima →</button>
+</div>
+<div class="pg-label" id="pgLabel"></div>
+<div class="swipe-hint" id="swipeHint">← Deslize para navegar →</div>
+
+<script>
+const TOTAL=14;
+let cur=0;
+const pages=document.querySelectorAll('.page');
+const dotsC=document.getElementById('dots');
+const prevB=document.getElementById('prevBtn');
+const nextB=document.getElementById('nextBtn');
+const label=document.getElementById('pgLabel');
+const names=['Capa','Sumário','Por quê?','Proteína','Vitamina D','B12','Ferro','Magnésio','Ômega-3','Colágeno','Probióticos','Zinco e Cálcio','Prioridades','Contato'];
+
+// Build dots
+for(let i=0;i<TOTAL;i++){
+  const d=document.createElement('button');
+  d.className='dot'+(i===0?' on':'');
+  d.title=names[i];
+  d.onclick=()=>goTo(i);
+  dotsC.appendChild(d);
+}
+const dots=dotsC.querySelectorAll('.dot');
+
+function goTo(n){
+  if(n<0||n>=TOTAL||n===cur)return;
+  pages[cur].classList.remove('active');
+  pages[cur].classList.add('exit-left');
+  setTimeout(()=>pages[cur].classList.remove('exit-left'),500);
+  cur=n;
+  pages[cur].classList.add('active');
+  pages[cur].scrollTop=0;
+  dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  prevB.disabled=cur===0;
+  nextB.disabled=cur===TOTAL-1;
+  // flash label
+  label.textContent=names[cur];
+  label.classList.add('show');
+  clearTimeout(label._t);
+  label._t=setTimeout(()=>label.classList.remove('show'),1500);
+}
+function next(){goTo(cur+1)}
+function prev(){goTo(cur-1)}
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')next();
+  if(e.key==='ArrowLeft')prev();
+});
+
+// Touch swipe
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;ty=e.changedTouches[0].screenY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].screenX-tx;
+  const dy=e.changedTouches[0].screenY-ty;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>50){
+    if(dx<0)next();else prev();
+  }
+},{passive:true});
+
+// Swipe hint
+setTimeout(()=>{document.getElementById('swipeHint').classList.add('show')},2000);
+setTimeout(()=>{document.getElementById('swipeHint').classList.remove('show')},5500);
+</script>
+</body>
+</html>

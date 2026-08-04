@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Completo de Suplementação — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="O que suplementar, quando e por quê — com base científica e sem enrolação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Guia Completo de Suplementação">
+<meta property="og:description" content="O que suplementar, quando e por quê — com base científica e sem enrolação.">
+<meta property="og:image" content="https://nutrianarocha.github.io/site/assets/img/capa-suplementacao.jpg">
+<meta property="og:image:width" content="700"><meta property="og:image:height" content="933">
+<meta property="og:url" content="https://nutrianarocha.github.io/site/e/suplementacao.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nutrianarocha.github.io/site/assets/img/capa-suplementacao.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --mag:#830e56;
+  --mag-dark:#6a0b46;
+  --accent:#f1b3db;
+  --accent-light:#fce8f3;
+  --gray:#64686B;
+  --gray-light:#e8e8e9;
+  --white:#ffffff;
+  --bg:#fefcfd;
+  --text:#333;
+  --shadow:0 2px 16px rgba(131,14,86,.10);
+  --shadow-lg:0 8px 32px rgba(131,14,86,.13);
+  --radius:14px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Montserrat',sans-serif;color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden}
+
+/* ═══ COVER ═══ */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(160deg,var(--mag) 0%,var(--mag-dark) 50%,#520836 100%);
+  color:var(--white);padding:2rem 1.5rem;position:relative;overflow:hidden;
+}
+.cover::before{
+  content:'';position:absolute;width:600px;height:600px;
+  border-radius:50%;background:rgba(241,179,219,.07);
+  top:-200px;right:-200px;
+}
+.cover::after{
+  content:'';position:absolute;width:400px;height:400px;
+  border-radius:50%;background:rgba(241,179,219,.05);
+  bottom:-150px;left:-150px;
+}
+.cover-icon{font-size:3.5rem;margin-bottom:1rem;opacity:.9}
+.cover h1{
+  font-family:'Merienda',cursive;font-weight:900;
+  font-size:clamp(1.8rem,5vw,2.8rem);line-height:1.2;
+  margin-bottom:.5rem;position:relative;z-index:1;
+}
+.cover h1 span{color:var(--accent)}
+.cover .subtitle{
+  font-size:clamp(.95rem,2.5vw,1.15rem);font-weight:300;
+  max-width:520px;margin:0 auto 2rem;opacity:.9;position:relative;z-index:1;
+}
+.cover .author-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.12);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.18);border-radius:40px;
+  padding:.55rem 1.4rem;font-size:.82rem;font-weight:500;
+  position:relative;z-index:1;
+}
+.cover .author-badge img{width:32px;height:32px;border-radius:50%;object-fit:cover}
+
+/* ═══ NAV DOTS ═══ */
+.side-nav{
+  position:fixed;right:12px;top:50%;transform:translateY(-50%);
+  z-index:100;display:flex;flex-direction:column;gap:10px;
+}
+.side-nav a{
+  width:11px;height:11px;border-radius:50%;
+  background:var(--accent);opacity:.4;transition:.3s;
+  display:block;border:2px solid transparent;
+}
+.side-nav a:hover,.side-nav a.active{
+  opacity:1;background:var(--mag);border-color:var(--accent);
+  transform:scale(1.3);
+}
+
+/* ═══ TOC ═══ */
+.toc-section{padding:3.5rem 1.5rem;background:var(--white)}
+.toc-section h2{
+  font-family:'Merienda',cursive;font-weight:900;
+  color:var(--mag);text-align:center;font-size:1.6rem;margin-bottom:2rem;
+}
+.toc-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1rem;max-width:700px;margin:0 auto;
+}
+.toc-card{
+  background:var(--accent-light);border-radius:var(--radius);
+  padding:1.2rem 1rem;text-align:center;cursor:pointer;
+  transition:.3s;border:2px solid transparent;text-decoration:none;color:var(--text);
+}
+.toc-card:hover{border-color:var(--mag);transform:translateY(-3px);box-shadow:var(--shadow)}
+.toc-card .toc-emoji{font-size:1.8rem;display:block;margin-bottom:.4rem}
+.toc-card .toc-label{font-weight:600;font-size:.82rem;color:var(--mag)}
+
+/* ═══ SECTIONS ═══ */
+.section{padding:3rem 1.5rem;position:relative}
+.section:nth-child(even){background:var(--white)}
+.section:nth-child(odd){background:var(--accent-light)}
+.section-inner{max-width:720px;margin:0 auto}
+
+.section-header{
+  display:flex;align-items:center;gap:.8rem;margin-bottom:1.8rem;
+  flex-wrap:wrap;
+}
+.section-header .sec-icon{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--mag);color:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;flex-shrink:0;
+}
+.section-header h2{
+  font-family:'Merienda',cursive;font-weight:900;
+  color:var(--mag);font-size:clamp(1.3rem,3.5vw,1.7rem);
+}
+
+/* Tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.tab-btn{
+  padding:.5rem 1rem;border-radius:30px;border:2px solid var(--mag);
+  background:transparent;color:var(--mag);font-family:'Montserrat',sans-serif;
+  font-weight:600;font-size:.78rem;cursor:pointer;transition:.3s;
+}
+.tab-btn.active,.tab-btn:hover{background:var(--mag);color:var(--white)}
+.tab-content{display:none;animation:fadeUp .4s ease}
+.tab-content.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* Cards inside tabs */
+.info-card{
+  background:var(--white);border-radius:var(--radius);
+  padding:1.3rem 1.4rem;margin-bottom:1rem;
+  box-shadow:var(--shadow);border-left:4px solid var(--mag);
+}
+.info-card h4{
+  font-weight:700;color:var(--mag);font-size:.95rem;margin-bottom:.4rem;
+  display:flex;align-items:center;gap:.4rem;
+}
+.info-card p,.info-card li{font-size:.88rem;line-height:1.65;color:#444}
+.info-card ul{padding-left:1.1rem;margin-top:.3rem}
+.info-card li{margin-bottom:.25rem}
+
+/* Alert */
+.alert-box{
+  background:#fff3f3;border:2px solid #e74c3c;border-radius:var(--radius);
+  padding:1.1rem 1.3rem;margin-top:1rem;
+}
+.alert-box h4{color:#c0392b}
+.alert-box p{font-size:.85rem;color:#7a1a1a}
+
+/* Recipe */
+.recipe-box{
+  background:linear-gradient(135deg,var(--accent-light),#fff);
+  border:2px dashed var(--accent);border-radius:var(--radius);
+  padding:1.3rem 1.4rem;margin-top:1rem;
+}
+.recipe-box h4{color:var(--mag);margin-bottom:.4rem}
+.recipe-box p{font-size:.85rem}
+
+/* ═══ COMPARISON TABLE ═══ */
+.compare-section{padding:3rem 1.5rem;background:var(--white)}
+.compare-section h2{
+  font-family:'Merienda',cursive;font-weight:900;
+  color:var(--mag);text-align:center;font-size:1.5rem;margin-bottom:1.5rem;
+}
+.table-wrap{overflow-x:auto;max-width:750px;margin:0 auto}
+table{
+  width:100%;border-collapse:collapse;font-size:.78rem;
+  box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden;
+}
+thead{background:var(--mag);color:var(--white)}
+th{padding:.7rem .6rem;font-weight:600;text-align:left;font-size:.76rem}
+td{padding:.65rem .6rem;border-bottom:1px solid var(--gray-light)}
+tbody tr:nth-child(even){background:var(--accent-light)}
+tbody tr:hover{background:var(--accent)}
+
+/* ═══ DISCLAIMER ═══ */
+.disclaimer{
+  max-width:700px;margin:0 auto 2rem;
+  background:#fff8e1;border-left:4px solid #f0a500;border-radius:var(--radius);
+  padding:1.1rem 1.4rem;font-size:.82rem;color:#6d5a00;
+}
+
+/* ═══ CTA ═══ */
+.cta-section{
+  padding:3rem 1.5rem;
+  background:linear-gradient(160deg,var(--mag),var(--mag-dark));
+  text-align:center;color:var(--white);
+}
+.cta-section h2{
+  font-family:'Merienda',cursive;font-weight:900;
+  font-size:1.5rem;margin-bottom:.6rem;
+}
+.cta-section p{font-weight:300;font-size:.95rem;max-width:500px;margin:0 auto 1.5rem;opacity:.9}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:#25D366;color:var(--white);font-weight:700;
+  padding:.85rem 2rem;border-radius:40px;text-decoration:none;
+  font-size:1rem;transition:.3s;box-shadow:0 4px 18px rgba(37,211,102,.35);
+}
+.cta-btn:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(37,211,102,.45)}
+.cta-btn svg{width:22px;height:22px;fill:currentColor}
+
+/* ═══ FOOTER ═══ */
+footer{
+  padding:1.5rem;text-align:center;font-size:.72rem;
+  color:var(--gray);background:var(--accent-light);
+}
+footer span{color:var(--mag);font-weight:600}
+
+/* ═══ SCROLL TOP ═══ */
+.scroll-top{
+  position:fixed;bottom:20px;right:20px;width:44px;height:44px;
+  border-radius:50%;background:var(--mag);color:var(--white);
+  border:none;cursor:pointer;font-size:1.2rem;box-shadow:var(--shadow-lg);
+  display:none;z-index:99;transition:.3s;
+}
+.scroll-top:hover{transform:scale(1.1)}
+.scroll-top.show{display:flex;align-items:center;justify-content:center}
+
+/* ═══ PROGRESS BAR ═══ */
+.progress-bar{
+  position:fixed;top:0;left:0;height:3px;background:var(--accent);
+  z-index:200;transition:width .15s;width:0;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:600px){
+  .side-nav{display:none}
+  .section{padding:2rem 1.2rem}
+  .tabs{gap:.3rem}
+  .tab-btn{font-size:.72rem;padding:.4rem .7rem}
+  th,td{padding:.5rem .4rem;font-size:.7rem}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══ COVER ═══ -->
+<section class="cover" id="capa">
+  <div class="cover-icon">💊</div>
+  <h1>Guia Completo de<br><span>Suplementação</span></h1>
+  <p class="subtitle">Tudo o que você precisa saber sobre os suplementos mais populares: benefícios, dosagens, melhores horários e receitas práticas.</p>
+  <div class="author-badge">
+    <span>📋</span>
+    <span>Nutri Ana Luisa Rocha · CRN 25100401</span>
+  </div>
+</section>
+
+<!-- ═══ SIDE NAV ═══ -->
+<nav class="side-nav" id="sideNav">
+  <a href="#capa" title="Capa"></a>
+  <a href="#sumario" title="Sumário"></a>
+  <a href="#creatina" title="Creatina"></a>
+  <a href="#whey" title="Whey Protein"></a>
+  <a href="#albumina" title="Albumina"></a>
+  <a href="#pretreino" title="Pré-Treino"></a>
+  <a href="#cafeina" title="Cafeína"></a>
+  <a href="#comparativo" title="Comparativo"></a>
+  <a href="#contato" title="Contato"></a>
+</nav>
+
+<!-- ═══ SUMÁRIO ═══ -->
+<section class="toc-section" id="sumario">
+  <h2>📑 Sumário</h2>
+  <div class="toc-grid">
+    <a class="toc-card" href="#creatina"><span class="toc-emoji">⚡</span><span class="toc-label">Creatina</span></a>
+    <a class="toc-card" href="#whey"><span class="toc-emoji">🥛</span><span class="toc-label">Whey Protein</span></a>
+    <a class="toc-card" href="#albumina"><span class="toc-emoji">🥚</span><span class="toc-label">Albumina</span></a>
+    <a class="toc-card" href="#pretreino"><span class="toc-emoji">🔥</span><span class="toc-label">Pré-Treino</span></a>
+    <a class="toc-card" href="#cafeina"><span class="toc-emoji">☕</span><span class="toc-label">Cafeína</span></a>
+    <a class="toc-card" href="#comparativo"><span class="toc-emoji">📊</span><span class="toc-label">Comparativo</span></a>
+  </div>
+</section>
+
+<!-- ═══ 1 · CREATINA ═══ -->
+<section class="section" id="creatina">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="sec-icon">⚡</div>
+      <h2>Creatina</h2>
+    </div>
+
+    <div class="tabs" data-group="creatina">
+      <button class="tab-btn active" data-tab="creatina-oque">O que é</button>
+      <button class="tab-btn" data-tab="creatina-beneficios">Benefícios</button>
+      <button class="tab-btn" data-tab="creatina-dose">Dosagem</button>
+      <button class="tab-btn" data-tab="creatina-horario">Horário</button>
+      <button class="tab-btn" data-tab="creatina-receita">Receita</button>
+      <button class="tab-btn" data-tab="creatina-alerta">Alertas</button>
+    </div>
+
+    <div class="tab-content active" id="creatina-oque">
+      <div class="info-card">
+        <h4>🔬 O que é a Creatina?</h4>
+        <p>A creatina é um aminoácido naturalmente produzido pelo corpo (fígado, rins e pâncreas) e também encontrado em carnes e peixes. No organismo, é convertida em fosfocreatina, que serve como reserva rápida de energia para os músculos. É o suplemento mais estudado pela ciência, com eficácia e segurança comprovadas.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="creatina-beneficios">
+      <div class="info-card">
+        <h4>✅ Benefícios</h4>
+        <ul>
+          <li>Aumento de força e potência muscular</li>
+          <li>Melhora da performance em exercícios de alta intensidade</li>
+          <li>Auxilia no ganho de massa muscular</li>
+          <li>Pode beneficiar funções cognitivas (memória e raciocínio)</li>
+          <li>Contribui para a recuperação muscular pós-treino</li>
+          <li>Potencial efeito de retenção hídrica intramuscular (volume muscular)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="creatina-dose">
+      <div class="info-card">
+        <h4>📏 Dosagem Recomendada</h4>
+        <p><strong>Manutenção:</strong> 3 a 5g por dia (dose mais utilizada e segura para uso contínuo).</p>
+        <p style="margin-top:.4rem"><strong>Saturação (opcional):</strong> 20g/dia divididos em 4 doses por 5–7 dias, seguido de 3–5g/dia. A saturação acelera os resultados, mas não é obrigatória — a dose contínua de 3–5g atinge o mesmo efeito em cerca de 3–4 semanas.</p>
+        <p style="margin-top:.4rem"><strong>Formato:</strong> Creatina monohidratada é a forma mais estudada e com melhor custo-benefício.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="creatina-horario">
+      <div class="info-card">
+        <h4>🕐 Melhor Horário</h4>
+        <p>A creatina funciona por saturação muscular, então <strong>o horário não é decisivo</strong>. O mais importante é tomar todos os dias, com ou sem treino. Algumas estratégias:</p>
+        <ul>
+          <li><strong>Pós-treino:</strong> pode haver melhor absorção quando combinada com carboidratos e proteínas (janela de recuperação).</li>
+          <li><strong>Qualquer horário:</strong> junto de uma refeição para facilitar a rotina.</li>
+          <li><strong>Dias sem treino:</strong> manter a dose normalmente.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="creatina-receita">
+      <div class="recipe-box">
+        <h4>🍌 Receita: Smoothie Pós-Treino com Creatina</h4>
+        <p><strong>Ingredientes:</strong> 1 banana congelada + 200ml de leite (ou bebida vegetal) + 1 col. sopa de aveia + 5g de creatina + canela a gosto.</p>
+        <p><strong>Modo de preparo:</strong> Bata tudo no liquidificador até ficar homogêneo. Sirva gelado. A combinação com carboidrato e proteína favorece a absorção da creatina.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="creatina-alerta">
+      <div class="alert-box">
+        <h4>⚠️ Alertas de Saúde</h4>
+        <p>Pessoas com doenças renais pré-existentes devem consultar o médico antes de usar creatina. A retenção hídrica inicial é normal e intramuscular (não é inchaço patológico). Mantenha boa hidratação (mínimo 2L de água/dia). Não há necessidade de ciclar creatina — o uso contínuo é seguro conforme a literatura atual.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 2 · WHEY PROTEIN ═══ -->
+<section class="section" id="whey">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="sec-icon">🥛</div>
+      <h2>Whey Protein</h2>
+    </div>
+
+    <div class="tabs" data-group="whey">
+      <button class="tab-btn active" data-tab="whey-oque">O que é</button>
+      <button class="tab-btn" data-tab="whey-beneficios">Benefícios</button>
+      <button class="tab-btn" data-tab="whey-dose">Dosagem</button>
+      <button class="tab-btn" data-tab="whey-horario">Horário</button>
+      <button class="tab-btn" data-tab="whey-receita">Receita</button>
+      <button class="tab-btn" data-tab="whey-alerta">Alertas</button>
+    </div>
+
+    <div class="tab-content active" id="whey-oque">
+      <div class="info-card">
+        <h4>🔬 O que é o Whey Protein?</h4>
+        <p>É a proteína do soro do leite, obtida durante o processo de fabricação de queijos. Contém todos os aminoácidos essenciais e possui alto valor biológico, sendo rapidamente absorvida pelo organismo. Existem três tipos principais:</p>
+        <ul>
+          <li><strong>Concentrado (WPC):</strong> ~80% proteína, contém lactose e gordura. Melhor custo-benefício.</li>
+          <li><strong>Isolado (WPI):</strong> ~90% proteína, baixa lactose. Indicado para intolerantes leves.</li>
+          <li><strong>Hidrolisado (WPH):</strong> proteína pré-digerida, absorção ultrarrápida. Mais caro.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="whey-beneficios">
+      <div class="info-card">
+        <h4>✅ Benefícios</h4>
+        <ul>
+          <li>Auxilia no ganho e manutenção de massa muscular</li>
+          <li>Favorece a recuperação muscular pós-exercício</li>
+          <li>Alto poder de saciedade — aliado no controle do apetite</li>
+          <li>Fonte prática de proteína de alta qualidade</li>
+          <li>Pode contribuir para a saúde óssea e imunológica</li>
+          <li>Versatilidade de uso em receitas do dia a dia</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="whey-dose">
+      <div class="info-card">
+        <h4>📏 Dosagem Recomendada</h4>
+        <p><strong>Porção típica:</strong> 20 a 40g por dose (equivale a 1–2 scoops, dependendo da marca).</p>
+        <p style="margin-top:.4rem">A dose ideal depende da necessidade proteica total do dia — o whey complementa a alimentação, não substitui refeições. A recomendação geral de proteína para praticantes de atividade física é de 1,4 a 2,0g por kg de peso corporal/dia.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="whey-horario">
+      <div class="info-card">
+        <h4>🕐 Melhor Horário</h4>
+        <ul>
+          <li><strong>Pós-treino:</strong> janela clássica para maximizar a síntese proteica muscular.</li>
+          <li><strong>Café da manhã:</strong> para complementar a proteína da primeira refeição.</li>
+          <li><strong>Lanche intermediário:</strong> entre refeições para manter o aporte proteico.</li>
+          <li><strong>Importante:</strong> a distribuição proteica ao longo do dia importa mais do que um horário único.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="whey-receita">
+      <div class="recipe-box">
+        <h4>🥞 Receita: Panqueca Proteica de Whey</h4>
+        <p><strong>Ingredientes:</strong> 1 banana amassada + 1 ovo + 1 scoop de whey (sabor de sua preferência) + 2 col. sopa de aveia.</p>
+        <p><strong>Modo de preparo:</strong> Misture tudo até formar uma massa homogênea. Aqueça uma frigideira antiaderente com um fio de óleo de coco. Despeje pequenas porções e doure dos dois lados. Sirva com frutas ou pasta de amendoim.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="whey-alerta">
+      <div class="alert-box">
+        <h4>⚠️ Alertas de Saúde</h4>
+        <p>Pessoas com alergia à proteína do leite de vaca (APLV) não devem consumir whey protein — opte por proteínas vegetais. Em caso de intolerância à lactose, prefira a versão isolada ou hidrolisada. O excesso de proteína sem orientação pode sobrecarregar os rins em pessoas com predisposição. Sempre respeite a dose indicada pelo seu nutricionista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3 · ALBUMINA ═══ -->
+<section class="section" id="albumina">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="sec-icon">🥚</div>
+      <h2>Albumina</h2>
+    </div>
+
+    <div class="tabs" data-group="albumina">
+      <button class="tab-btn active" data-tab="albumina-oque">O que é</button>
+      <button class="tab-btn" data-tab="albumina-beneficios">Benefícios</button>
+      <button class="tab-btn" data-tab="albumina-dose">Dosagem</button>
+      <button class="tab-btn" data-tab="albumina-horario">Horário</button>
+      <button class="tab-btn" data-tab="albumina-receita">Receita</button>
+      <button class="tab-btn" data-tab="albumina-alerta">Alertas</button>
+    </div>
+
+    <div class="tab-content active" id="albumina-oque">
+      <div class="info-card">
+        <h4>🔬 O que é a Albumina?</h4>
+        <p>A albumina é a proteína extraída da clara do ovo, desidratada e transformada em pó. É uma proteína de alto valor biológico, rica em aminoácidos essenciais, com digestão mais lenta que o whey. É uma das fontes proteicas mais acessíveis do mercado de suplementos.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="albumina-beneficios">
+      <div class="info-card">
+        <h4>✅ Benefícios</h4>
+        <ul>
+          <li>Fonte proteica de alto valor biológico e baixo custo</li>
+          <li>Digestão mais lenta — fornece aminoácidos de forma gradual</li>
+          <li>Auxilia no ganho e manutenção da massa muscular</li>
+          <li>Naturalmente livre de gordura</li>
+          <li>Boa opção para quem não tolera proteínas do leite</li>
+          <li>Versátil para uso culinário</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="albumina-dose">
+      <div class="info-card">
+        <h4>📏 Dosagem Recomendada</h4>
+        <p><strong>Porção típica:</strong> 20 a 40g por dose (equivale a aproximadamente 2–4 colheres de sopa).</p>
+        <p style="margin-top:.4rem">A dosagem deve ser ajustada de acordo com a necessidade proteica individual e o plano alimentar. Pode substituir ou complementar o whey na dieta.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="albumina-horario">
+      <div class="info-card">
+        <h4>🕐 Melhor Horário</h4>
+        <ul>
+          <li><strong>Antes de dormir (ceia):</strong> por ter absorção lenta, mantém o fornecimento de aminoácidos durante o sono — período de recuperação muscular.</li>
+          <li><strong>Entre refeições:</strong> como lanche proteico de liberação gradual.</li>
+          <li><strong>Pós-treino:</strong> pode ser usada, mas o whey é mais indicado para esse momento pela absorção mais rápida.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="albumina-receita">
+      <div class="recipe-box">
+        <h4>🍫 Receita: Brigadeiro Proteico de Albumina</h4>
+        <p><strong>Ingredientes:</strong> 30g de albumina + 2 col. sopa de cacau em pó + 1 col. sopa de leite em pó + adoçante a gosto + água (o suficiente para dar liga).</p>
+        <p><strong>Modo de preparo:</strong> Misture os secos, acrescente água aos poucos até virar uma massa moldável. Faça bolinhas e passe no cacau. Leve à geladeira por 30 min. Rende cerca de 8 unidades.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="albumina-alerta">
+      <div class="alert-box">
+        <h4>⚠️ Alertas de Saúde</h4>
+        <p>Pessoas com alergia a ovo não devem consumir albumina. O sabor e o odor podem ser desagradáveis para algumas pessoas — combinar com cacau ou frutas ajuda. Consumir a versão em pó (pasteurizada) é seguro; não substitua por claras cruas devido ao risco de salmonelose e à presença de avidina, que interfere na absorção de biotina.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 4 · PRÉ-TREINO ═══ -->
+<section class="section" id="pretreino">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="sec-icon">🔥</div>
+      <h2>Pré-Treino</h2>
+    </div>
+
+    <div class="tabs" data-group="pretreino">
+      <button class="tab-btn active" data-tab="pre-oque">O que é</button>
+      <button class="tab-btn" data-tab="pre-beneficios">Benefícios</button>
+      <button class="tab-btn" data-tab="pre-composicao">Composição</button>
+      <button class="tab-btn" data-tab="pre-horario">Horário</button>
+      <button class="tab-btn" data-tab="pre-receita">Alternativa</button>
+      <button class="tab-btn" data-tab="pre-alerta">Alertas</button>
+    </div>
+
+    <div class="tab-content active" id="pre-oque">
+      <div class="info-card">
+        <h4>🔬 O que é o Pré-Treino?</h4>
+        <p>Pré-treino é uma categoria de suplementos formulados para aumentar a energia, o foco e a performance durante o exercício. Geralmente vem em pó para diluir em água. A composição varia bastante entre marcas, mas a maioria combina estimulantes, aminoácidos e vasodilatadores.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pre-beneficios">
+      <div class="info-card">
+        <h4>✅ Benefícios</h4>
+        <ul>
+          <li>Aumento da disposição e energia para o treino</li>
+          <li>Melhora do foco e concentração</li>
+          <li>Pode retardar a fadiga muscular (se contiver beta-alanina)</li>
+          <li>Efeito vasodilatador — sensação de "pump" muscular</li>
+          <li>Pode aumentar a performance em treinos intensos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pre-composicao">
+      <div class="info-card">
+        <h4>🧪 Ingredientes Comuns e Dosagens de Referência</h4>
+        <ul>
+          <li><strong>Cafeína:</strong> 150–300mg (principal estimulante)</li>
+          <li><strong>Beta-alanina:</strong> 2–5g (reduz fadiga; pode causar formigamento temporário)</li>
+          <li><strong>Citrulina malato:</strong> 6–8g (vasodilatação e pump)</li>
+          <li><strong>Taurina:</strong> 1–2g (neuroproteção e foco)</li>
+          <li><strong>Arginina:</strong> 3–6g (precursora de óxido nítrico)</li>
+        </ul>
+        <p style="margin-top:.5rem">Dica: sempre confira o rótulo. Evite fórmulas com "blend proprietário" que não informam a dose de cada ingrediente.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pre-horario">
+      <div class="info-card">
+        <h4>🕐 Melhor Horário</h4>
+        <p><strong>20 a 40 minutos antes do treino.</strong></p>
+        <p style="margin-top:.4rem">Esse é o tempo que a cafeína leva para atingir o pico plasmático. Evite tomar à noite ou próximo ao horário de dormir — a cafeína tem meia-vida de 5–6 horas e pode comprometer seriamente a qualidade do sono.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pre-receita">
+      <div class="recipe-box">
+        <h4>🍋 Alternativa Natural: Pré-Treino Caseiro</h4>
+        <p><strong>Ingredientes:</strong> 200ml de água gelada + suco de ½ limão + 1 col. chá de mel + 1 pitada de sal rosa + 80mg de cafeína (1 cápsula ou café forte ~100ml).</p>
+        <p><strong>Modo de preparo:</strong> Misture tudo e tome 30 min antes do treino. O mel fornece energia rápida, o limão hidrata e o sal repõe eletrólitos.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pre-alerta">
+      <div class="alert-box">
+        <h4>⚠️ Alertas de Saúde</h4>
+        <p>Pré-treinos com doses elevadas de cafeína podem causar taquicardia, ansiedade, insônia e aumento da pressão arterial. Pessoas com problemas cardiovasculares, hipertensão ou transtornos de ansiedade devem evitar ou usar sob supervisão médica. Não combine com outras fontes de cafeína no mesmo período. O uso contínuo gera tolerância — considere pausas periódicas. Menores de 18 anos não devem consumir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · CAFEÍNA ═══ -->
+<section class="section" id="cafeina">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="sec-icon">☕</div>
+      <h2>Cafeína</h2>
+    </div>
+
+    <div class="tabs" data-group="cafeina">
+      <button class="tab-btn active" data-tab="caf-oque">O que é</button>
+      <button class="tab-btn" data-tab="caf-beneficios">Benefícios</button>
+      <button class="tab-btn" data-tab="caf-dose">Dosagem</button>
+      <button class="tab-btn" data-tab="caf-horario">Horário</button>
+      <button class="tab-btn" data-tab="caf-receita">Receita</button>
+      <button class="tab-btn" data-tab="caf-alerta">Alertas</button>
+    </div>
+
+    <div class="tab-content active" id="caf-oque">
+      <div class="info-card">
+        <h4>🔬 O que é a Cafeína?</h4>
+        <p>A cafeína é um estimulante natural do sistema nervoso central, presente no café, chá verde, chá mate, guaraná e cacau. Como suplemento, está disponível em cápsulas, pó ou como ingrediente de pré-treinos e termogênicos. É um dos ergogênicos (potencializadores de performance) mais estudados e comprovados.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="caf-beneficios">
+      <div class="info-card">
+        <h4>✅ Benefícios</h4>
+        <ul>
+          <li>Aumenta o estado de alerta e reduz a percepção de fadiga</li>
+          <li>Melhora a performance em exercícios de endurance e força</li>
+          <li>Efeito termogênico — pode favorecer a oxidação de gordura</li>
+          <li>Melhora funções cognitivas: foco, tempo de reação, memória</li>
+          <li>Pode aumentar a motivação para treinar</li>
+          <li>Ação antioxidante (quando consumida via café e chás)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="caf-dose">
+      <div class="info-card">
+        <h4>📏 Dosagem Recomendada</h4>
+        <p><strong>Performance esportiva:</strong> 3 a 6mg por kg de peso corporal (ex.: pessoa de 70kg → 210 a 420mg).</p>
+        <p style="margin-top:.4rem"><strong>Limite diário seguro (adultos):</strong> até 400mg/dia (equivale a ~4 xícaras de café filtrado).</p>
+        <p style="margin-top:.4rem"><strong>Referência em alimentos:</strong></p>
+        <ul>
+          <li>1 xícara de café (200ml): ~80–100mg</li>
+          <li>1 espresso: ~60–80mg</li>
+          <li>1 xícara de chá verde: ~30–50mg</li>
+          <li>1 cápsula de cafeína: geralmente 100 ou 200mg</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="caf-horario">
+      <div class="info-card">
+        <h4>🕐 Melhor Horário</h4>
+        <ul>
+          <li><strong>Pré-treino:</strong> 30 a 60 minutos antes do exercício.</li>
+          <li><strong>Pela manhã:</strong> após o café da manhã (evite em jejum se tiver sensibilidade gástrica).</li>
+          <li><strong>Limite:</strong> evite após as 14h–15h para não prejudicar o sono. A meia-vida da cafeína é de ~5 horas — ou seja, se tomar 200mg às 16h, às 21h ainda terá ~100mg no organismo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="caf-receita">
+      <div class="recipe-box">
+        <h4>☕ Receita: Café Proteico Gelado</h4>
+        <p><strong>Ingredientes:</strong> 150ml de café forte resfriado + 1 scoop de whey sabor chocolate ou baunilha + 100ml de leite + gelo a gosto.</p>
+        <p><strong>Modo de preparo:</strong> Bata tudo no liquidificador. Sirva em copo alto com gelo. Prático, delicioso e combina a cafeína com proteína — ideal para o pré-treino matinal ou lanche da tarde.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="caf-alerta">
+      <div class="alert-box">
+        <h4>⚠️ Alertas de Saúde</h4>
+        <p>A cafeína pode causar insônia, nervosismo, taquicardia e problemas digestivos em doses elevadas ou em pessoas sensíveis. Gestantes devem limitar o consumo a no máximo 200mg/dia. O uso crônico gera tolerância, reduzindo os efeitos ao longo do tempo. Não combine múltiplas fontes de cafeína sem contabilizar a dose total. Pessoas com arritmias, GERD ou transtornos de ansiedade devem usar com cautela e orientação profissional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPARATIVO ═══ -->
+<section class="compare-section" id="comparativo">
+  <h2>📊 Tabela Comparativa</h2>
+  <div class="disclaimer">
+    <strong>Importante:</strong> Este material tem caráter educativo e não substitui a orientação individualizada de um profissional nutricionista. Dosagens e indicações podem variar conforme suas necessidades e condições de saúde.
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suplemento</th>
+          <th>Principal Função</th>
+          <th>Dose Comum</th>
+          <th>Melhor Momento</th>
+          <th>Precisa Ciclar?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Creatina</strong></td>
+          <td>Força e energia muscular</td>
+          <td>3–5g/dia</td>
+          <td>Qualquer horário (diário)</td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td><strong>Whey Protein</strong></td>
+          <td>Aporte proteico e recuperação</td>
+          <td>20–40g/dose</td>
+          <td>Pós-treino ou entre refeições</td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td><strong>Albumina</strong></td>
+          <td>Proteína de absorção lenta</td>
+          <td>20–40g/dose</td>
+          <td>Ceia ou entre refeições</td>
+          <td>Não</td>
+        </tr>
+        <tr>
+          <td><strong>Pré-Treino</strong></td>
+          <td>Energia e foco para o treino</td>
+          <td>Conforme rótulo</td>
+          <td>20–40 min pré-treino</td>
+          <td>Sim (pausas recomendadas)</td>
+        </tr>
+        <tr>
+          <td><strong>Cafeína</strong></td>
+          <td>Estímulo e performance</td>
+          <td>3–6mg/kg/dia (máx 400mg)</td>
+          <td>30–60 min pré-treino</td>
+          <td>Sim (pausas recomendadas)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section" id="contato">
+  <h2>Quer montar sua suplementação de forma personalizada?</h2>
+  <p>Cada corpo é único. Agende sua consulta e receba um plano de suplementação feito sob medida para os seus objetivos.</p>
+  <a class="cta-btn" href="https://wa.me/message/MKAWDGILVCXCI1" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.553 4.106 1.518 5.833L0 24l6.335-1.488A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75c-1.91 0-3.716-.507-5.283-1.392l-.378-.224-3.917.921.987-3.832-.252-.394A9.698 9.698 0 012.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75z"/></svg>
+    Fale comigo no WhatsApp
+  </a>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© 2026 · <span>Nutri Ana Luisa Rocha</span> · CRN 25100401</p>
+  <p style="margin-top:.3rem">Material educativo. Não substitui orientação profissional individualizada.</p>
+</footer>
+
+<!-- ═══ SCROLL TOP ═══ -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const group=btn.closest('.tabs').dataset.group;
+    const target=btn.dataset.tab;
+    btn.closest('.section').querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.closest('.section').querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(target).classList.add('active');
+  });
+});
+
+// Progress bar
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progressBar').style.width=pct+'%';
+  // Scroll top button
+  document.getElementById('scrollTop').classList.toggle('show',h.scrollTop>600);
+});
+
+// Side nav active state
+const sections=document.querySelectorAll('section[id]');
+const dots=document.querySelectorAll('.side-nav a');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      dots.forEach(d=>d.classList.remove('active'));
+      const dot=document.querySelector('.side-nav a[href="#'+e.target.id+'"]');
+      if(dot)dot.classList.add('active');
+    }
+  });
+},{threshold:.35});
+sections.forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>
