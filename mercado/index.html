@@ -49,6 +49,21 @@
         e, se não valer a pena, quais marcas levar no lugar.</p>
     </div>
 
+    <!-- Convite de instalação no iOS.
+         No iPhone a Apple não permite que site nenhum ofereça um botão de
+         instalar: `beforeinstallprompt` simplesmente não existe lá, então o
+         botão "Instalar agora" da aba Conta nunca aparece para quem mais
+         precisa dele. O único caminho é o menu Compartilhar, e ninguém
+         adivinha isso — a própria Ana não achou. Por isso o passo a passo
+         sobe para a tela principal, no iOS e só nele. -->
+    <div class="instalar" data-ios-instalar hidden>
+      <button class="instalar__x" type="button" data-ios-fechar aria-label="Fechar">×</button>
+      <p class="instalar__t">Deixe o app na tela do seu iPhone</p>
+      <p class="instalar__p">Toque em <strong>Compartilhar</strong> — o quadrado com a seta para
+        cima, na barra de baixo do Safari — e depois em <strong>Adicionar à Tela de Início</strong>.</p>
+      <p class="instalar__n">Não ocupa espaço e abre direto, sem procurar o endereço.</p>
+    </div>
+
     <!-- Três fotos do MESMO produto. A tabela sozinha não conta a história:
          é a lista de ingredientes que denuncia açúcar disfarçado e fila de
          aditivos, e é a frente que diz se o produto se vende como diet ou light. -->

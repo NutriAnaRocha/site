@@ -119,6 +119,24 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
   background:rgba(0,0,0,.6);color:#fff;font-size:1rem;line-height:26px;text-align:center;
 }
 
+/* Convite de instalação no iOS. Fica acima das fotos porque é a primeira
+   coisa que a pessoa precisa saber, mas em tom baixo (fundo rosa suave, sem
+   sombra) para não competir com o botão de ler o rótulo, que é o que o app
+   faz. */
+.instalar{
+  position:relative;background:var(--rosa-suave);border:1px solid var(--rosa-borda);
+  border-radius:14px;padding:14px 40px 14px 15px;margin-bottom:16px;
+}
+.instalar__t{font-weight:700;color:var(--bordo);font-size:.88rem;margin-bottom:5px}
+.instalar__p{font-size:.82rem;line-height:1.45}
+.instalar__n{font-size:.72rem;color:var(--cinza-claro);margin-top:6px}
+.instalar__x{
+  position:absolute;top:0;right:0;width:44px;height:44px;
+  background:none;border:none;color:var(--cinza-claro);font-size:1.3rem;line-height:1;
+  cursor:pointer;
+}
+.instalar__x:active{opacity:.5}
+
 .dica{font-size:.8rem;color:var(--cinza-claro);margin-bottom:10px}
 .dica strong{color:var(--bordo)}
 

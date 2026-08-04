@@ -578,6 +578,33 @@
 
   /* ---------- instalação (PWA) ---------- */
 
+  /* No iPhone não existe `beforeinstallprompt`: a Apple não deixa site nenhum
+     oferecer instalação, só o menu Compartilhar do Safari resolve. Como
+     ninguém adivinha isso, o passo a passo aparece na tela principal — mas só
+     para quem está no iOS, fora do app já instalado, e some quando a pessoa
+     fecha ou instala. */
+  (function conviteIOS() {
+    var el = $("[data-ios-instalar]");
+    if (!el) return;
+
+    var ua = navigator.userAgent || "";
+    // iPad com iPadOS 13+ se anuncia como Mac; o toque é o que o denuncia.
+    var ehIOS = /iphone|ipad|ipod/i.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    // `standalone` é a bandeira do próprio iOS; o media query cobre o resto.
+    var jaInstalado = navigator.standalone === true ||
+      (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+
+    var CHAVE = "mercado_convite_ios";
+    if (!ehIOS || jaInstalado || localStorage.getItem(CHAVE) === "fechado") return;
+
+    el.hidden = false;
+    el.querySelector("[data-ios-fechar]").addEventListener("click", function () {
+      el.hidden = true;
+      try { localStorage.setItem(CHAVE, "fechado"); } catch (e) { /* modo privado */ }
+    });
+  }());
+
   var promptInstalar = null;
   window.addEventListener("beforeinstallprompt", function (e) {
     e.preventDefault();
