@@ -473,6 +473,9 @@
           'trocar de celular ou limpar o navegador.</p>'
         : '<p>Guarde esse código: é ele que devolve as suas leituras em outro aparelho.</p>') +
       (op.recibo ? '<p><a href="' + esc(op.recibo) + '" target="_blank" rel="noopener">Ver o recibo</a></p>' : '') +
+      '<button class="btn btn--go btn--peq" type="button" data-guardar-codigo>' +
+      (temCompartilhar() ? 'Guardar meu código' : 'Copiar meu código') + '</button>' +
+      '<p class="msg" data-msg-guardar hidden></p>' +
       '<button class="btn btn--linha btn--peq" type="button" data-trocar-codigo>Usar outro código</button>' +
       '</div>';
 
@@ -519,6 +522,61 @@
       msg.className = "msg msg--erro";
       msg.textContent = "Sem conexão para conferir agora.";
     });
+  });
+
+  /* Guardar o código fora do navegador. O saldo vive no servidor, então o
+     código é a única coisa que a pessoa precisa não perder: no celular
+     abrimos o compartilhar do sistema (ela manda pro próprio WhatsApp ou
+     salva nas notas); no desktop, cópia para a área de transferência. */
+  function temCompartilhar() {
+    return typeof navigator !== "undefined" && typeof navigator.share === "function";
+  }
+
+  function copiarTexto(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(txt);
+    }
+    // Safari antigo / contexto sem clipboard API
+    return new Promise(function (ok, falha) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = txt;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        var deu = document.execCommand("copy");
+        document.body.removeChild(ta);
+        deu ? ok() : falha();
+      } catch (err) { falha(err); }
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("[data-guardar-codigo]")) return;
+    var cod = codigoGuardado();
+    if (!cod) return;
+    var msg = $("[data-msg-guardar]");
+    var texto = "Meu código de leituras do app No mercado com a Nutri Ana: " + cod +
+      "\nUse em " + location.origin + location.pathname;
+
+    function aviso(txt, erro) {
+      if (!msg) return;
+      msg.hidden = false;
+      msg.className = "msg" + (erro ? " msg--erro" : " msg--ok");
+      msg.textContent = txt;
+    }
+
+    if (temCompartilhar()) {
+      navigator.share({ title: "Meu código de leituras", text: texto })
+        .then(function () { aviso("Pronto — guarde essa mensagem."); })
+        .catch(function () { /* ela cancelou; nada a dizer */ });
+      return;
+    }
+    copiarTexto(texto)
+      .then(function () { aviso("Código copiado. Cole onde não se perca."); })
+      .catch(function () { aviso("Não consegui copiar — anote o código acima.", true); });
   });
 
   document.addEventListener("click", function (e) {

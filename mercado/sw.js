@@ -16,7 +16,7 @@
 
    Ao mudar qualquer arquivo do app, incremente CACHE.
    ========================================================= */
-var CACHE = "mercado-v5";
+var CACHE = "mercado-v6";
 
 var ARQUIVOS = [
   "./",
