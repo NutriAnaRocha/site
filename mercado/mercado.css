@@ -323,6 +323,19 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 }
 .credito-saldo{font-weight:700;color:var(--cinza);margin-bottom:10px}
 
+/* Passo a passo da compra: quem está no corredor do mercado precisa
+   saber ANTES de pagar que vai receber um código e que é ele que
+   guarda as leituras — senão fecha a aba achando que perdeu. */
+.passos{margin:10px 0 14px;padding-left:1.35em;color:var(--cinza);line-height:1.5}
+.passos li{margin-bottom:8px}
+.passos li::marker{color:var(--bordo);font-weight:700}
+.credito-exemplo{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  letter-spacing:.08em;color:var(--bordo);white-space:nowrap;
+}
+.socorro{margin-top:12px;font-size:.9rem;text-align:center}
+.socorro a{color:var(--cinza)}
+
 /* ---------- Barra inferior ---------- */
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:30;

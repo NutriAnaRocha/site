@@ -49,6 +49,19 @@
   var PACOTE_LEITURAS = 50;
   var PACOTE_PRECO = "R$ 9,90";
 
+  /* Socorro de quem perdeu o código. Não existe recuperação automática de
+     propósito: a única coisa que a compradora tem na mão depois de perder
+     o código é o comprovante do pagamento, e conferir comprovante é
+     trabalho de gente. Uma tela que devolvesse o código a quem digitasse
+     um e-mail entregaria as leituras de qualquer uma para qualquer uma. */
+  var WHATS_ANA = "5521994094557";
+  function linkSocorro() {
+    var msg = "Oi Ana! Comprei o pacote de leituras do app No mercado com a Nutri Ana " +
+      "e perdi meu código. Vou te mandar o comprovante do pagamento (com a data e o valor) " +
+      "para você achar meu código. 🌸";
+    return "https://wa.me/" + WHATS_ANA + "?text=" + encodeURIComponent(msg);
+  }
+
   var VEREDITOS = {
     boa:     { rotulo: "Pode levar",     icone: "✓" },
     atencao: { rotulo: "Dá para levar, mas…", icone: "!" },
@@ -451,6 +464,16 @@
         '<p>O app é gratuito com limite diário. Se você faz uma compra grande de uma vez, ' +
         'dá para levar um pacote de <strong>' + PACOTE_LEITURAS + ' leituras</strong> por ' +
         PACOTE_PRECO + ' — elas <strong>não vencem</strong> e você usa quando quiser.</p>' +
+        '<ol class="passos">' +
+          '<li>Você paga por Pix ou cartão, na página segura da InfinitePay.</li>' +
+          '<li>Assim que o pagamento cai, <strong>o app abre sozinho</strong> e mostra o seu ' +
+            'código — algo como <span class="credito-exemplo">R7QK-3M9F</span>.</li>' +
+          '<li><strong>Guarde esse código.</strong> Tem um botão na tela para você mandar ' +
+            'para o seu WhatsApp ou salvar nas suas notas.</li>' +
+          '<li>É ele que libera as leituras. Se você trocar de celular ou limpar o navegador, ' +
+            'digita o código de novo aqui e as suas leituras voltam — elas ficam guardadas ' +
+            'comigo, não no aparelho.</li>' +
+        '</ol>' +
         '<a class="btn btn--go" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
         'Comprar ' + PACOTE_LEITURAS + ' leituras — ' + PACOTE_PRECO + '</a>' +
         '<form data-codigo-form>' +
@@ -460,6 +483,8 @@
           '<button class="btn btn--linha btn--peq" type="submit">Usar este código</button>' +
           '<p class="msg" data-msg-codigo hidden></p>' +
         '</form>' +
+        '<p class="socorro"><a href="' + linkSocorro() + '" target="_blank" rel="noopener">' +
+        'Comprou e perdeu o código?</a></p>' +
         '</div>';
       return;
     }
@@ -477,6 +502,8 @@
       (temCompartilhar() ? 'Guardar meu código' : 'Copiar meu código') + '</button>' +
       '<p class="msg" data-msg-guardar hidden></p>' +
       '<button class="btn btn--linha btn--peq" type="button" data-trocar-codigo>Usar outro código</button>' +
+      '<p class="socorro"><a href="' + linkSocorro() + '" target="_blank" rel="noopener">' +
+      'Perdeu um código de outra compra?</a></p>' +
       '</div>';
 
     chamarCreditos({ acao: "saldo", codigo: cod }).then(function (res) {
