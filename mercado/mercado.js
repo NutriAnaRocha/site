@@ -466,8 +466,11 @@
         PACOTE_PRECO + ' — elas <strong>não vencem</strong> e você usa quando quiser.</p>' +
         '<ol class="passos">' +
           '<li>Você paga por Pix ou cartão, na página segura da InfinitePay.</li>' +
-          '<li>Assim que o pagamento cai, <strong>o app abre sozinho</strong> e mostra o seu ' +
-            'código — algo como <span class="credito-exemplo">R7QK-3M9F</span>.</li>' +
+          '<li>Depois de alguns segundos, a página do pagamento mostra um botão para ' +
+            '<strong>voltar para o app</strong>. <strong>Toque nele e não feche a aba antes</strong> ' +
+            '— é essa volta que traz o seu código.</li>' +
+          '<li>De volta ao app, ele carrega um pouquinho e mostra o seu código — algo como ' +
+            '<span class="credito-exemplo">R7QK-3M9F</span>.</li>' +
           '<li><strong>Guarde esse código.</strong> Tem um botão na tela para você mandar ' +
             'para o seu WhatsApp ou salvar nas suas notas.</li>' +
           '<li>É ele que libera as leituras. Se você trocar de celular ou limpar o navegador, ' +
