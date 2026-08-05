@@ -296,7 +296,23 @@ document.addEventListener("DOMContentLoaded", () => {
     next && next.addEventListener("click", () => row.scrollBy({ left:  step(), behavior: "smooth" }));
     row.addEventListener("scroll", updateArrows, { passive: true });
     window.addEventListener("resize", updateArrows);
-    updateArrows();
+
+    /* A primeira medida NÃO pode sair no DOMContentLoaded: ler scrollWidth
+       ali obriga o navegador a diagramar a página inteira na hora (era parte
+       do Layout de 716ms do carregamento). Além disso, a seção dos e-books
+       agora tem content-visibility:auto — fora da tela ela nem foi
+       diagramada, e a medida voltaria zerada. Então medimos quando a
+       prateleira se aproxima da tela, que é quando a seta importa. */
+    if ("IntersectionObserver" in window) {
+      const ioShelf = new IntersectionObserver((entries, obs) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        obs.disconnect();
+        updateArrows();
+      }, { rootMargin: "200px" });
+      ioShelf.observe(scroller);
+    } else {
+      updateArrows();
+    }
   });
   // Clicar na capa aciona o botão do card (Netflix-like)
   document.querySelectorAll(".nf-card__poster").forEach(poster => {
@@ -341,7 +357,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.scrollY > 40) nav.classList.add("nav-scrolled");
     else nav.classList.remove("nav-scrolled");
   };
-  if (nav) { onScroll(); window.addEventListener("scroll", onScroll, { passive:true }); }
+  /* O estado inicial espera o primeiro quadro: ler window.scrollY aqui dentro
+     obrigaria o navegador a diagramar a página na hora, dentro desta mesma
+     tarefa (foi o que sobrou do Layout longo do carregamento). No primeiro
+     quadro a conta já foi feita de graça, junto da pintura. */
+  if (nav) {
+    requestAnimationFrame(onScroll);
+    window.addEventListener("scroll", onScroll, { passive:true });
+  }
 
   /* ---- Menu mobile (hambúrguer) ---- */
   const toggle = document.querySelector(".nav-toggle");

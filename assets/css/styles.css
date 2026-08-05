@@ -802,3 +802,44 @@ body.lead-open{overflow:hidden}
   .guide__skip{min-height:44px}
   .guide-fab{min-height:44px}
 }
+
+/* =========================================================
+   RENDERIZAÇÃO ADIADA (content-visibility)
+   Medido no celular emulado: o navegador diagramava as 913 caixas
+   da página inteira numa tacada só — um Layout de 716ms, o maior
+   custo do carregamento. Quem chega vê só a primeira dobra, então
+   pagar o layout das 10 seções de baixo antes da hora é desperdício.
+
+   `content-visibility:auto` faz o navegador pular layout e pintura
+   do que está fora da tela e fazer na hora que a seção se aproxima.
+   `contain-intrinsic-size: auto <altura>` reserva o espaço enquanto
+   isso — sem ele a barra de rolagem pularia (CLS). O `auto` manda o
+   navegador guardar a altura real depois da primeira renderização;
+   o número é só o palpite inicial, medido em 412px de largura.
+
+   A primeira dobra (#inicio) e a seção seguinte (#ajuda) ficam de
+   fora de propósito: entram na tela cedo demais para valer a pena.
+   ========================================================= */
+.home #como-funciona,.home #consultas,.home #acompanhamento,.home #meu-plano,.home #vip,.home #app,.home #ebooks,.home #sobre,.home #depoimentos,.home #faq,.home #contato{
+  content-visibility:auto;
+  contain-intrinsic-size:auto var(--cv-h,900px);
+}
+.home #como-funciona{--cv-h:1167px} .home #consultas{--cv-h:1443px}
+.home #acompanhamento{--cv-h:1080px} .home #vip{--cv-h:773px}
+.home #app{--cv-h:1163px}            .home #ebooks{--cv-h:2516px}
+.home #sobre{--cv-h:1504px}          .home #depoimentos{--cv-h:1500px}
+.home #faq{--cv-h:1216px}            .home #contato{--cv-h:558px}
+
+/* No desktop as seções são bem mais baixas (uma coluna vira três). */
+@media (min-width:900px){
+  .home #como-funciona{--cv-h:864px} .home #consultas{--cv-h:752px}
+  .home #acompanhamento{--cv-h:774px} .home #vip{--cv-h:812px}
+  .home #app{--cv-h:749px}            .home #ebooks{--cv-h:2735px}
+  .home #sobre{--cv-h:827px}          .home #depoimentos{--cv-h:778px}
+  .home #faq{--cv-h:1002px}           .home #contato{--cv-h:556px}
+}
+
+/* Imprimir tem que sair inteiro: nada pode ficar "não renderizado". */
+@media print{
+  .home #como-funciona,.home #consultas,.home #acompanhamento,.home #meu-plano,.home #vip,.home #app,.home #ebooks,.home #sobre,.home #depoimentos,.home #faq,.home #contato{content-visibility:visible}
+}
