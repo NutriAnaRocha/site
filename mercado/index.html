@@ -218,7 +218,36 @@
       Ana Luísa Rocha, com base na legislação brasileira vigente.</p>
   </section>
 
-  <!-- ===================== 3. CONTA ===================== -->
+  <!-- ===================== 3. COMPARAR ===================== -->
+  <!-- Compara duas leituras que JÁ estão no aparelho: não chama o servidor,
+       não gasta leitura e funciona sem sinal — que é a situação real de quem
+       está parada no corredor com dois pacotes na mão. -->
+  <section class="tela" data-tela="comparar">
+    <h1 class="tela__t">Qual dos dois?</h1>
+    <p class="tela__p">Escolha dois rótulos que você já leu. Comparo por <strong>100 g</strong>,
+      que é a única coluna em que duas marcas podem ser comparadas de verdade — e isso não
+      gasta leitura nenhuma.</p>
+
+    <div class="cmp-slots">
+      <button class="cmp-slot" type="button" data-cmp="0"></button>
+      <span class="cmp-vs">×</span>
+      <button class="cmp-slot" type="button" data-cmp="1"></button>
+    </div>
+
+    <div data-cmp-res></div>
+  </section>
+
+  <!-- Escolha do produto: abre por cima, listando só as leituras que trazem
+       tabela nutricional — sem números não há o que comparar. -->
+  <div class="folha" data-cmp-folha hidden>
+    <div class="folha__topo">
+      <strong class="folha__t">Escolha um rótulo</strong>
+      <button class="folha__x" type="button" data-cmp-fechar aria-label="Fechar">×</button>
+    </div>
+    <div class="folha__c" data-cmp-lista></div>
+  </div>
+
+  <!-- ===================== 4. CONTA ===================== -->
   <section class="tela" data-tela="conta">
     <h1 class="tela__t">Sua conta</h1>
 
@@ -275,6 +304,9 @@
   </button>
   <button class="barra__b" type="button" data-ir="aprenda">
     <span class="barra__i">💡</span><span>Aprenda</span>
+  </button>
+  <button class="barra__b" type="button" data-ir="comparar">
+    <span class="barra__i">⚖️</span><span>Comparar</span>
   </button>
   <button class="barra__b" type="button" data-ir="conta">
     <span class="barra__i">👤</span><span>Conta</span>

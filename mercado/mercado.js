@@ -156,6 +156,12 @@
         b.classList.toggle("is-on", b.getAttribute("data-ir") === tela);
       }
     });
+    // O comparador se repinta ao entrar: entre uma visita e outra a pessoa
+    // pode ter lido mais um rótulo, e a lista precisa refletir isso.
+    if (tela === "comparar" && typeof pintarComparacao === "function") {
+      pintarCmpSlots();
+      pintarComparacao();
+    }
     window.scrollTo(0, 0);
   }
 
@@ -365,7 +371,7 @@
 
       $("[data-resultado]").innerHTML = resultadoHTML(b);
       esconderIsca();
-      guardarNoHistorico(b.analise);
+      guardarNoHistorico(b.analise, b.tabela);
       pintarRestam(b);
       $("[data-resultado]").scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -787,12 +793,15 @@
      dispositivo criaria um histórico sem dono — que é justamente o tipo
      de dado que não se deve guardar. */
 
-  function guardarNoHistorico(a) {
+  function guardarNoHistorico(a, tabela) {
     var h = ler(CHAVE_HIST, []);
     if (!Array.isArray(h)) h = [];
     h.unshift({
       produto: a.produto, marca: a.marca, veredito: a.veredito,
-      criado_em: a.criado_em, dados: a
+      criado_em: a.criado_em, dados: a,
+      // A tabela por 100 g fica gravada junto: sem ela, reabrir uma leitura
+      // antiga perdia os números, e o comparador não teria o que comparar.
+      tabela: tabela || null
     });
     gravar(CHAVE_HIST, h.slice(0, MAX_HIST));
     pintarHistorico();
@@ -826,8 +835,200 @@
     var h = ler(CHAVE_HIST, []);
     var x = h[Number(b.getAttribute("data-hist"))];
     if (!x || !x.dados) return;
-    $("[data-resultado]").innerHTML = resultadoHTML({ analise: x.dados, falta: [] });
+    $("[data-resultado]").innerHTML = resultadoHTML({ analise: x.dados, tabela: x.tabela, falta: [] });
     $("[data-resultado]").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  /* ---------- comparador ----------
+     Duas leituras que já estão no aparelho, lado a lado, por 100 g. Não
+     chama servidor e não debita crédito: os números já foram pagos quando
+     cada rótulo foi lido, e cobrar de novo para somar 1 e 1 seria cobrar
+     por conta de chegar.
+
+     Só entra no comparador quem tem tabela por 100 g gravada — leitura
+     antiga (antes desta versão) e leitura sem foto da tabela não têm
+     número, e comparar sem número é chute. */
+
+  var NUTRI = [
+    { rot: "Calorias",      campo: "kcal",     un: " kcal", melhor: "menor" },
+    { rot: "Açúcar",        campo: "acucar_g", un: " g",    melhor: "menor" },
+    { rot: "Gord. saturada", campo: "sat_g",   un: " g",    melhor: "menor" },
+    { rot: "Sódio",         campo: "sodio_mg", un: " mg",   melhor: "menor" },
+    { rot: "Fibra",         campo: "fibra_g",  un: " g",    melhor: "maior" }
+  ];
+
+  // Diferença menor que 5% é ruído: rótulo é declarado com arredondamento e
+  // a própria lei aceita margem. Abaixo disso a resposta honesta é "igual".
+  var MARGEM = 0.05;
+
+  var cmpEscolha = [null, null];   // índices no histórico
+  var cmpAlvo = 0;                 // qual slot a folha está preenchendo
+
+  function num(v) {
+    if (v == null || v === "") return null;
+    var n = parseFloat(String(v).replace(",", "."));
+    return isNaN(n) ? null : n;
+  }
+
+  function fmt(n) {
+    var s = (Math.round(n * 10) / 10).toFixed(1).replace(".", ",");
+    return s.replace(",0", "");
+  }
+
+  function cmpHistorico() {
+    var h = ler(CHAVE_HIST, []);
+    if (!Array.isArray(h)) return [];
+    return h.map(function (x, i) { return { i: i, x: x }; })
+      .filter(function (e) { return e.x && e.x.tabela && e.x.tabela.por_100g; });
+  }
+
+  function pintarCmpSlots() {
+    [0, 1].forEach(function (s) {
+      var el = document.querySelector('[data-cmp="' + s + '"]');
+      if (!el) return;
+      var h = ler(CHAVE_HIST, []);
+      var x = cmpEscolha[s] == null ? null : h[cmpEscolha[s]];
+      el.classList.toggle("tem", !!x);
+      el.innerHTML = x
+        ? '<strong class="cmp-slot__t">' + esc(x.produto || "Produto") + '</strong>' +
+          '<span class="cmp-slot__m">' + esc(x.marca || "") + '</span>' +
+          '<span class="cmp-slot__tr">trocar</span>'
+        : '<span class="cmp-slot__mais">+</span>' +
+          '<span class="cmp-slot__m">Produto ' + (s + 1) + '</span>';
+    });
+  }
+
+  function cmpLinhas(ta, tb) {
+    var pa = ta.por_100g || {}, pb = tb.por_100g || {};
+    return NUTRI.map(function (n) {
+      var a = num(pa[n.campo]), b = num(pb[n.campo]);
+      if (a == null || b == null) return null;
+      var maior = Math.max(Math.abs(a), Math.abs(b));
+      var ganha = 0;   // 0 = empate, 1 = produto 1, 2 = produto 2
+      if (maior > 0 && Math.abs(a - b) / maior >= MARGEM) {
+        if (n.melhor === "menor") ganha = a < b ? 1 : 2;
+        else ganha = a > b ? 1 : 2;
+      }
+      return { n: n, a: a, b: b, ganha: ganha };
+    }).filter(Boolean);
+  }
+
+  /* O fecho é aritmética declarada, não opinião clínica: diz quantos itens
+     cada um ganhou e manda olhar a lista de ingredientes, que é onde mora o
+     que a tabela não conta. Frase de nutricionista neste app é sempre fixa. */
+  function cmpFecho(linhas, na, nb) {
+    var a = 0, b = 0;
+    linhas.forEach(function (l) { if (l.ganha === 1) a++; else if (l.ganha === 2) b++; });
+    var total = linhas.length;
+    if (a === b) {
+      return "Pelos números, os dois se equivalem — ganham e perdem nos mesmos itens. " +
+        "Aqui quem decide é a lista de ingredientes: prefira a mais curta e com nome de comida.";
+    }
+    var vence = a > b ? na : nb;
+    var q = Math.max(a, b);
+    return "Pelos números, " + vence + " leva vantagem: ganha em " + q + " de " + total +
+      " itens comparados. Ainda assim, olhe a lista de ingredientes dos dois — a tabela não " +
+      "mostra açúcar dividido em vários nomes nem fila de aditivos.";
+  }
+
+  function pintarComparacao() {
+    var caixa = $("[data-cmp-res]");
+    if (!caixa) return;
+    var h = ler(CHAVE_HIST, []);
+    var disp = cmpHistorico();
+
+    if (!disp.length) {
+      caixa.innerHTML = '<div class="cartao cartao--convite">' +
+        '<h2 class="sec">Leia dois rótulos primeiro</h2>' +
+        '<p>O comparador usa os números das suas próprias leituras — por isso ele só ' +
+        'funciona depois que você fotografou a tabela de pelo menos dois produtos.</p>' +
+        '<button class="btn btn--linha btn--peq" type="button" data-ir="ler">Ler um rótulo</button></div>';
+      return;
+    }
+    if (disp.length < 2 && cmpEscolha[0] == null && cmpEscolha[1] == null) {
+      caixa.innerHTML = '<div class="cartao cartao--convite">' +
+        '<h2 class="sec">Falta o segundo</h2>' +
+        '<p>Você tem uma leitura com tabela nutricional guardada. Leia o rótulo do concorrente ' +
+        'que está na prateleira do lado e eu comparo os dois aqui.</p>' +
+        '<button class="btn btn--linha btn--peq" type="button" data-ir="ler">Ler o outro rótulo</button></div>';
+      return;
+    }
+    if (cmpEscolha[0] == null || cmpEscolha[1] == null) { caixa.innerHTML = ""; return; }
+
+    var xa = h[cmpEscolha[0]], xb = h[cmpEscolha[1]];
+    var linhas = cmpLinhas(xa.tabela, xb.tabela);
+    var na = xa.produto || "Produto 1", nb = xb.produto || "Produto 2";
+
+    if (!linhas.length) {
+      caixa.innerHTML = '<div class="cartao"><p>Esses dois não têm nenhum nutriente em comum na ' +
+        'tabela lida — não dá para comparar sem inventar número.</p></div>';
+      return;
+    }
+
+    caixa.innerHTML = '<div class="cartao">' +
+      '<div class="bloco"><p class="bloco__t">Por 100 g</p>' +
+      '<table class="cmp"><thead><tr>' +
+        '<th></th>' +
+        '<th class="cmp--' + esc(xa.veredito || "atencao") + '">' + esc(na) + '</th>' +
+        '<th class="cmp--' + esc(xb.veredito || "atencao") + '">' + esc(nb) + '</th>' +
+      '</tr></thead><tbody>' +
+      linhas.map(function (l) {
+        return '<tr><th>' + esc(l.n.rot) + '</th>' +
+          '<td class="' + (l.ganha === 1 ? "vence" : "") + '">' + fmt(l.a) + esc(l.n.un) +
+            (l.ganha === 1 ? ' <span class="cmp__ok">✓</span>' : '') + '</td>' +
+          '<td class="' + (l.ganha === 2 ? "vence" : "") + '">' + fmt(l.b) + esc(l.n.un) +
+            (l.ganha === 2 ? ' <span class="cmp__ok">✓</span>' : '') + '</td></tr>';
+      }).join("") +
+      '</tbody></table>' +
+      '<p class="nums__nota">O ✓ marca quem está melhor naquele item: menos calorias, açúcar, ' +
+      'gordura saturada e sódio; mais fibra. Diferença abaixo de 5% conta como empate, porque ' +
+      'o rótulo já é declarado com arredondamento.</p></div>' +
+      '<div class="bloco troca"><p class="bloco__t">A leitura da Ana</p>' +
+      '<p class="troca__t">' + esc(cmpFecho(linhas, na, nb)) + '</p></div>' +
+      '</div>';
+  }
+
+  function abrirCmpFolha(slot) {
+    cmpAlvo = slot;
+    var folha = $("[data-cmp-folha]");
+    var lista = $("[data-cmp-lista]");
+    var outro = cmpEscolha[slot === 0 ? 1 : 0];
+    var disp = cmpHistorico().filter(function (e) { return e.i !== outro; });
+
+    lista.innerHTML = disp.length
+      ? disp.map(function (e) {
+          return '<button class="hist hist--' + esc(e.x.veredito || "atencao") + '" type="button" ' +
+            'data-cmp-pick="' + e.i + '">' +
+            '<span class="hist__p"></span><span>' +
+            '<strong class="hist__t">' + esc(e.x.produto || "Produto") + '</strong>' +
+            '<span class="hist__d">' + esc([e.x.marca, dataBR(e.x.criado_em)].filter(Boolean).join(" · ")) + '</span>' +
+            '</span></button>';
+        }).join("")
+      : '<p class="dica">Nenhuma outra leitura com tabela nutricional guardada.</p>';
+
+    folha.hidden = false;
+    document.body.classList.add("travado");
+  }
+
+  function fecharCmpFolha() {
+    $("[data-cmp-folha]").hidden = true;
+    document.body.classList.remove("travado");
+  }
+
+  document.addEventListener("click", function (e) {
+    var slot = e.target.closest("[data-cmp]");
+    if (slot) { abrirCmpFolha(Number(slot.getAttribute("data-cmp"))); return; }
+
+    var pick = e.target.closest("[data-cmp-pick]");
+    if (pick) {
+      cmpEscolha[cmpAlvo] = Number(pick.getAttribute("data-cmp-pick"));
+      fecharCmpFolha();
+      pintarCmpSlots();
+      pintarComparacao();
+      return;
+    }
+
+    if (e.target.closest("[data-cmp-fechar]")) fecharCmpFolha();
   });
 
   /* ---------- conta ----------
@@ -977,6 +1178,8 @@
   /* ---------- início ---------- */
   [0, 1, 2].forEach(pintarSlot);
   pintarHistorico();
+  pintarCmpSlots();
+  pintarComparacao();
   pintarConta();
   pintarCreditos();
   resgatarDaURL();
