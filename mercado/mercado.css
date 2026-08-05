@@ -308,6 +308,21 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 .msg--erro{color:var(--evitar)}
 .msg--ok{color:var(--boa)}
 
+/* ---------- Pacote de leituras ----------
+   O código é a única prova de compra que a pessoa tem, e muita gente
+   vai copiar de um print ou anotar num papel. Por isso ele é grande,
+   monoespaçado e com as letras espaçadas: aqui a legibilidade vale
+   mais do que a elegância. */
+.credito-codigo{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:1.5rem;font-weight:700;letter-spacing:.16em;
+  color:var(--bordo);background:var(--rosa-suave);
+  border:1.5px dashed var(--rosa-borda);border-radius:12px;
+  padding:14px 10px;text-align:center;margin:6px 0 10px;
+  user-select:all;   /* um toque longo seleciona o código inteiro */
+}
+.credito-saldo{font-weight:700;color:var(--cinza);margin-bottom:10px}
+
 /* ---------- Barra inferior ---------- */
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:30;

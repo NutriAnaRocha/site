@@ -36,7 +36,18 @@
 
   var CHAVE_DISP = "mercado.dispositivo";
   var CHAVE_HIST = "mercado.historico";
+  var CHAVE_CODIGO = "mercado.codigo";
   var MAX_HIST = 20;
+
+  /* Pacote de leituras. O app é grátis com limite diário; quem quer ler
+     mais compra um pacote que não vence. Não é assinatura — ninguém no
+     corredor do mercado quer assinar nada, e cobrança recorrente pediria
+     cadastro, cartão guardado e tela de cancelamento para um produto de
+     R$ 9,90. Ver mercado-creditos/index.ts. */
+  var CREDITOS = "https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/mercado-creditos";
+  var LINK_COMPRA = "https://checkout.infinitepay.io/analuisarocha?lenc=G-sAQIyUqJ2vCr3_79QkJfkgHet5QQJ6WfuvO6ACVWBt8T7P0zMNxIsKgrYwyEtCOejBjw_qhsskpfuXDBbuF4nJlRnU_Vb8c7pddHltncR6cjqf8RDP9IwF0yo-ksZhf-mH-Ueq8z95B-hxtV1AqQ2yHASt6xCmEOIx4ZtiDzGEzkoNuyE-malfPHSk0NmHyLwYJ904_R8VBmelJrJ1Vta2csmsxrnWNp8L4jk.v1.4afce9393915732d";
+  var PACOTE_LEITURAS = 50;
+  var PACOTE_PRECO = "R$ 9,90";
 
   var VEREDITOS = {
     boa:     { rotulo: "Pode levar",     icone: "✓" },
@@ -223,11 +234,21 @@
 
   /* ---------- análise ---------- */
 
-  function mostrarErro(msg, comBotao) {
+  /* acao: "entrar" (paciente da Ana lê mais), "comprar" (pacote de
+     leituras) ou nada. Quem bateu o limite precisa de uma saída na
+     mesma tela — mandar a pessoa procurar sozinha o que fazer depois
+     de um "não" é o jeito mais rápido de perdê-la. */
+  function mostrarErro(msg, acao) {
+    var extra = "";
+    if (acao === "entrar") {
+      extra = '<button class="btn btn--linha btn--peq" type="button" data-ir="conta">Entrar na minha conta</button>';
+    } else if (acao === "comprar") {
+      extra = '<a class="btn btn--go btn--peq" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
+              'Comprar ' + PACOTE_LEITURAS + ' leituras — ' + PACOTE_PRECO + '</a>' +
+              '<button class="btn btn--linha btn--peq" type="button" data-ir="conta">Entrar ou usar um código</button>';
+    }
     $("[data-resultado]").innerHTML =
-      '<div class="erro"><p>' + esc(msg) + '</p>' +
-      (comBotao ? '<button class="btn btn--linha btn--peq" type="button" data-ir="conta">Entrar na minha conta</button>' : '') +
-      '</div>';
+      '<div class="erro"><p>' + esc(msg) + '</p>' + extra + '</div>';
     var b = $("[data-resultado] [data-ir]");
     if (b) b.addEventListener("click", function () { irPara("conta"); });
     $("[data-resultado]").scrollIntoView({ behavior: "smooth", block: "center" });
@@ -256,10 +277,14 @@
       var h = { "Content-Type": "application/json", "apikey": ANON };
       // O token só amplia o limite. Sem ele a chamada funciona igual.
       h.Authorization = "Bearer " + (token || ANON);
+      var corpo = { fotos: envio, dispositivo: dispositivo };
+      // O código só diz QUAL pacote é; quem confere o saldo é o servidor.
+      var cod = codigoGuardado();
+      if (cod) corpo.codigo = cod;
       return fetch(FUNCAO, {
         method: "POST",
         headers: h,
-        body: JSON.stringify({ fotos: envio, dispositivo: dispositivo })
+        body: JSON.stringify(corpo)
       });
     }).then(function (r) {
       return r.json().then(function (j) { return { status: r.status, body: j }; });
@@ -268,8 +293,20 @@
       atualizarBotao();
       var b = res.body || {};
 
+      // Créditos acabaram, ou o código não existe: a saída é comprar (ou
+      // corrigir o código na tela de conta).
+      if (res.status === 402 || b.error === "codigo_invalido") {
+        if (b.error === "codigo_invalido") esquecerCodigo();
+        mostrarErro(b.detail || "Não consegui usar o seu pacote de leituras.", "comprar");
+        pintarCreditos();
+        return;
+      }
       if (res.status === 429) {
-        mostrarErro(b.detail || "Você chegou ao limite de hoje.", b.liberado !== true);
+        // Quem já pagou e bateu o teto diário do código não recebe oferta
+        // de compra: ela já comprou, o que falta é o dia virar.
+        var acao = b.error === "limite_codigo_dia" ? null
+          : (b.liberado === true ? null : "comprar");
+        mostrarErro(b.detail || "Você chegou ao limite de hoje.", acao);
         return;
       }
       if (b.nao_e_rotulo) { mostrarErro(b.error); return; }
@@ -303,10 +340,192 @@
     var el = $("[data-restam]");
     if (typeof b.restam !== "number") { el.hidden = true; return; }
     el.hidden = false;
+
+    // Pagante e visitante contam coisas diferentes: um tem leituras que
+    // sobraram do pacote (não vencem), o outro tem leituras do dia (que
+    // voltam amanhã). Dizer "hoje" para quem comprou daria a impressão
+    // de que o pacote expira à meia-noite.
+    if (b.pagante) {
+      el.textContent = b.restam > 0
+        ? "Restam " + b.restam + (b.restam === 1 ? " leitura" : " leituras") + " no seu pacote."
+        : "Essa foi a última leitura do seu pacote. 🌸";
+      pintarCreditos();
+      return;
+    }
     el.textContent = b.restam > 0
       ? "Você ainda pode ler " + b.restam + (b.restam === 1 ? " rótulo hoje" : " rótulos hoje") + "."
       : "Foi a sua última leitura de hoje. Amanhã o app abre de novo. 🌸";
   }
+
+  /* ---------- pacote de leituras ----------
+     O código é a identidade mínima de quem comprou. Ele mora no
+     localStorage como qualquer outra coisa do app, mas com uma
+     diferença importante: se sumir, a pessoa PERDEU DINHEIRO. Por isso
+     ele aparece escrito na tela de conta, para ela poder anotar, e
+     pode ser digitado de novo em qualquer aparelho. */
+
+  function codigoGuardado() {
+    var c = ler(CHAVE_CODIGO, null);
+    return typeof c === "string" && c.length >= 6 ? c : null;
+  }
+  function guardarCodigo(c) { gravar(CHAVE_CODIGO, String(c).toUpperCase()); }
+  function esquecerCodigo() {
+    try { localStorage.removeItem(CHAVE_CODIGO); } catch (e) { /* modo privado */ }
+  }
+
+  function chamarCreditos(corpo) {
+    return fetch(CREDITOS, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": ANON,
+                 "Authorization": "Bearer " + ANON },
+      body: JSON.stringify(corpo)
+    }).then(function (r) {
+      return r.json().then(function (j) { return { status: r.status, body: j || {} }; });
+    });
+  }
+
+  /* Volta do checkout: a InfinitePay devolve a pessoa aqui com os dados
+     do pagamento na URL. Não confiamos neles — quem confere é o
+     servidor, contra a API deles. É idempotente: recarregar a página
+     dez vezes devolve o mesmo código, não dez pacotes. */
+  function resgatarDaURL() {
+    var q = new URLSearchParams(window.location.search);
+    var nsu = q.get("transaction_nsu");
+    var slug = q.get("slug");
+    if (!nsu || !slug) return;
+
+    // Tira os dados de pagamento da barra de endereço: recarregar não
+    // deve reprocessar, e ninguém precisa compartilhar isso sem querer.
+    try {
+      window.history.replaceState({}, "", window.location.pathname);
+    } catch (e) { /* navegador antigo */ }
+
+    irPara("conta");
+    var box = $("[data-creditos-box]");
+    if (box) box.innerHTML = '<div class="cartao carregando"><div class="carregando__p"></div>' +
+      '<p class="carregando__t">Confirmando seu pagamento…</p></div>';
+
+    chamarCreditos({
+      acao: "resgatar",
+      transaction_nsu: nsu,
+      slug: slug,
+      order_nsu: q.get("order_nsu") || ""
+    }).then(function (res) {
+      if (res.body.ok && res.body.codigo) {
+        guardarCodigo(res.body.codigo);
+        pintarCreditos({ novo: true, recibo: q.get("receipt_url") || "" });
+        return;
+      }
+      // Pagou e algo deu errado: a mensagem tem que dizer o que fazer,
+      // e o recibo é a prova que ela tem na mão.
+      if (box) {
+        box.innerHTML = '<div class="cartao"><h2 class="sec">Quase lá</h2>' +
+          '<p>' + esc(res.body.detail || "Não consegui confirmar o pagamento agora.") + '</p>' +
+          (q.get("receipt_url")
+            ? '<p><a href="' + esc(q.get("receipt_url")) + '" target="_blank" rel="noopener">Ver meu recibo</a></p>'
+            : '') +
+          '<button class="btn btn--linha btn--peq" type="button" data-tentar-resgate>Tentar de novo</button>' +
+          '</div>';
+        var bt = box.querySelector("[data-tentar-resgate]");
+        if (bt) bt.addEventListener("click", function () {
+          window.location.search = "?transaction_nsu=" + encodeURIComponent(nsu) +
+            "&slug=" + encodeURIComponent(slug) +
+            "&order_nsu=" + encodeURIComponent(q.get("order_nsu") || "");
+        });
+      }
+    }).catch(function () {
+      if (box) box.innerHTML = '<div class="cartao"><p>Sem conexão para confirmar o pagamento. ' +
+        'Abra o app de novo daqui a pouco — seu pagamento está guardado. 🌸</p></div>';
+    });
+  }
+
+  function pintarCreditos(opcoes) {
+    var box = $("[data-creditos-box]");
+    if (!box) return;
+    var op = opcoes || {};
+    var cod = codigoGuardado();
+
+    if (!cod) {
+      box.innerHTML = '<div class="cartao">' +
+        '<h2 class="sec">Precisa ler mais rótulos?</h2>' +
+        '<p>O app é gratuito com limite diário. Se você faz uma compra grande de uma vez, ' +
+        'dá para levar um pacote de <strong>' + PACOTE_LEITURAS + ' leituras</strong> por ' +
+        PACOTE_PRECO + ' — elas <strong>não vencem</strong> e você usa quando quiser.</p>' +
+        '<a class="btn btn--go" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
+        'Comprar ' + PACOTE_LEITURAS + ' leituras — ' + PACOTE_PRECO + '</a>' +
+        '<form data-codigo-form>' +
+          '<label class="campo"><span>Já comprou? Digite seu código</span>' +
+            '<input name="codigo" placeholder="XXXX-XXXX" autocapitalize="characters" ' +
+            'autocomplete="off" spellcheck="false" maxlength="16" required></label>' +
+          '<button class="btn btn--linha btn--peq" type="submit">Usar este código</button>' +
+          '<p class="msg" data-msg-codigo hidden></p>' +
+        '</form>' +
+        '</div>';
+      return;
+    }
+
+    box.innerHTML = '<div class="cartao">' +
+      (op.novo ? '<h2 class="sec">Pagamento confirmado 🌸</h2>' : '<h2 class="sec">Seu pacote de leituras</h2>') +
+      '<p class="credito-codigo" data-codigo-mostra>' + esc(cod) + '</p>' +
+      '<p class="credito-saldo" data-saldo>Conferindo o saldo…</p>' +
+      (op.novo
+        ? '<p><strong>Anote esse código.</strong> É ele que devolve as suas leituras se você ' +
+          'trocar de celular ou limpar o navegador.</p>'
+        : '<p>Guarde esse código: é ele que devolve as suas leituras em outro aparelho.</p>') +
+      (op.recibo ? '<p><a href="' + esc(op.recibo) + '" target="_blank" rel="noopener">Ver o recibo</a></p>' : '') +
+      '<button class="btn btn--linha btn--peq" type="button" data-trocar-codigo>Usar outro código</button>' +
+      '</div>';
+
+    chamarCreditos({ acao: "saldo", codigo: cod }).then(function (res) {
+      var el = box.querySelector("[data-saldo]");
+      if (!el) return;
+      if (res.body.ok) {
+        el.textContent = res.body.restam > 0
+          ? "Restam " + res.body.restam + " de " + res.body.total + " leituras."
+          : "Suas leituras acabaram. Você pode comprar outro pacote quando quiser.";
+        if (!res.body.restam) {
+          el.insertAdjacentHTML("afterend",
+            '<a class="btn btn--go btn--peq" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
+            'Comprar mais ' + PACOTE_LEITURAS + ' leituras</a>');
+        }
+      } else {
+        el.textContent = "Não encontrei esse código.";
+      }
+    }).catch(function () {
+      var el = box.querySelector("[data-saldo]");
+      if (el) el.textContent = "Não consegui conferir o saldo agora.";
+    });
+  }
+
+  document.addEventListener("submit", function (e) {
+    var f = e.target.closest("[data-codigo-form]");
+    if (!f) return;
+    e.preventDefault();
+    var msg = f.querySelector("[data-msg-codigo]");
+    var cod = f.codigo.value.trim().toUpperCase();
+    msg.hidden = true;
+
+    chamarCreditos({ acao: "saldo", codigo: cod }).then(function (res) {
+      if (res.body.ok) {
+        guardarCodigo(cod);
+        pintarCreditos();
+        return;
+      }
+      msg.hidden = false;
+      msg.className = "msg msg--erro";
+      msg.textContent = "Não encontrei esse código. Confira as letras — ele tem o formato XXXX-XXXX.";
+    }).catch(function () {
+      msg.hidden = false;
+      msg.className = "msg msg--erro";
+      msg.textContent = "Sem conexão para conferir agora.";
+    });
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("[data-trocar-codigo]")) return;
+    esquecerCodigo();
+    pintarCreditos();
+  });
 
   /* ---------- resultado ---------- */
 
@@ -629,4 +848,6 @@
   [0, 1, 2].forEach(pintarSlot);
   pintarHistorico();
   pintarConta();
+  pintarCreditos();
+  resgatarDaURL();
 })();
