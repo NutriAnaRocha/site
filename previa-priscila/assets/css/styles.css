@@ -177,13 +177,13 @@
      fonte de display de peso único some em corpo pequeno — e pedir um peso que o
      arquivo não tem faz o navegador FALSIFICAR o negrito. Por padrão repete a serif. */
   --sub:"Raleway", "Segoe UI", system-ui, sans-serif;
-  --serif-peso:400;
+  --serif-peso:900;
   --serif-ls:.02em;
   --sub-peso:600;
   /* --serif-contorno: engrossa o traço da fonte de display por contorno, na
      medida exata e igual em todo navegador. É o jeito honesto de dar peso a
      uma face que só existe em um peso. 0 = desligado (padrão). */
-  --serif-contorno:.015em;
+  --serif-contorno:0;
 
   /* Layout */
   --max:1200px;
