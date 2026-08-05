@@ -162,6 +162,7 @@
       pintarCmpSlots();
       pintarComparacao();
     }
+    if (tela === "lista" && typeof pintarLista === "function") pintarLista();
     window.scrollTo(0, 0);
   }
 
@@ -780,6 +781,14 @@
                 esc(b.sem_alternativa) + '</p></div>'
               : '')) +
 
+        /* Botar na lista sai daqui de dentro porque é aqui que a decisão é
+           tomada. Aparece em qualquer veredito: se ela vai levar mesmo assim,
+           é melhor que leve com a tarja do que sem. */
+        '<button class="btn btn--linha btn--peq" type="button" data-lista-add ' +
+          'data-nome="' + esc(a.produto || "Produto") + '" ' +
+          'data-marca="' + esc(a.marca || "") + '" ' +
+          'data-veredito="' + esc(a.veredito || "") + '">Botar na lista de mercado</button>' +
+
         '<p class="res__rodape">Leitura gerada com apoio de inteligência artificial a partir das suas ' +
         'fotos — pode conter erro; o que vale é o que está impresso na embalagem. Isto é orientação ' +
         'geral sobre rótulos, não avaliação nutricional individualizada. Ana Luísa Rocha, CRN 25100401.</p>' +
@@ -1150,6 +1159,206 @@
     if (e.target.closest("[data-cmp-fechar]")) fecharCmpFolha();
   });
 
+  /* ---------- lista de mercado ----------
+     No aparelho, como o histórico: quem anota o que falta comprar não deveria
+     precisar de conta para isso, e a lista tem que abrir com o sinal caindo no
+     corredor.
+
+     O que ela tem a mais que um papel é a TARJA: item trazido de uma leitura
+     guarda o veredito daquele rótulo, então na hora de pegar na prateleira a
+     pessoa vê de novo o que o rótulo dizia. Item digitado à mão não tem tarja
+     nenhuma — o app não sabe nada sobre ele e não vai fingir que sabe.
+
+     Não existe "compras finalizadas": o app não tem como saber o que de fato
+     foi para o carrinho, e essa tela viveria vazia. */
+
+  var CHAVE_LISTA = "mercado.lista";
+
+  function lerLista() {
+    var l = ler(CHAVE_LISTA, []);
+    return Array.isArray(l) ? l : [];
+  }
+
+  function gravarLista(l) { gravar(CHAVE_LISTA, l); pintarLista(); }
+
+  function mesmoItem(x, nome, marca) {
+    return (x.nome || "").toLowerCase() === String(nome || "").toLowerCase().trim() &&
+           (x.marca || "").toLowerCase() === String(marca || "").toLowerCase().trim();
+  }
+
+  function recadoLista(txt) {
+    var m = $("[data-lista-msg]");
+    if (!m) return;
+    m.hidden = false;
+    m.className = "msg";
+    m.textContent = txt;
+    clearTimeout(recadoLista.t);
+    recadoLista.t = setTimeout(function () { m.hidden = true; }, 3000);
+  }
+
+  /* Devolve false quando o item já estava lá e pendente — quem chamou avisa em
+     vez de deixar a mesma coisa duas vezes na lista. */
+  function addItem(nome, marca, veredito) {
+    nome = String(nome || "").trim();
+    if (!nome) return false;
+    var l = lerLista();
+    var j = -1;
+    l.forEach(function (x, i) { if (mesmoItem(x, nome, marca)) j = i; });
+    if (j >= 0) {
+      if (!l[j].feito) return false;
+      // Já estava, mas marcado como comprado: pedir de novo é dizer que
+      // precisa outra vez — volta para os pendentes.
+      l[j].feito = false;
+      gravarLista(l);
+      return true;
+    }
+    l.push({
+      id: uuid(), nome: nome, marca: String(marca || "").trim(),
+      veredito: veredito || null, feito: false, criado_em: new Date().toISOString()
+    });
+    gravarLista(l);
+    return true;
+  }
+
+  function itemHTML(x) {
+    return '<div class="item' + (x.veredito ? " item--" + esc(x.veredito) : "") +
+        (x.feito ? " is-feito" : "") + '">' +
+      '<button class="item__ok" type="button" data-lista-ok="' + esc(x.id) + '" ' +
+        'aria-pressed="' + (x.feito ? "true" : "false") + '" ' +
+        'aria-label="' + (x.feito ? "Tirar do carrinho" : "Marcar como pego") + '">' +
+        (x.feito ? "✓" : "") + '</button>' +
+      '<span class="item__c"><strong class="item__t">' + esc(x.nome) + '</strong>' +
+        (x.marca ? '<span class="item__d">' + esc(x.marca) + '</span>' : '') + '</span>' +
+      '<button class="item__x" type="button" data-lista-x="' + esc(x.id) + '" ' +
+        'aria-label="Tirar da lista">×</button>' +
+      '</div>';
+  }
+
+  function pintarLista() {
+    var caixa = $("[data-lista-res]");
+    if (!caixa) return;
+
+    var l = lerLista();
+    if (!l.length) {
+      caixa.innerHTML = '<div class="cartao cartao--convite">' +
+        '<h2 class="sec">Sua lista está vazia</h2>' +
+        '<p>Escreva aí em cima o que falta comprar — ou traga um produto de um rótulo que você ' +
+        'já leu, para levar o veredito junto até a prateleira.</p>' +
+        '<button class="btn btn--linha btn--peq" type="button" data-ir="ler">Ler um rótulo</button>' +
+        '</div>';
+      return;
+    }
+
+    var falta = l.filter(function (x) { return !x.feito; });
+    var feitos = l.filter(function (x) { return x.feito; });
+
+    caixa.innerHTML =
+      '<p class="lista-cont">' + feitos.length + ' de ' + l.length + ' já no carrinho</p>' +
+      (falta.length
+        ? falta.map(itemHTML).join("")
+        : '<p class="dica">Tudo o que você anotou já está no carrinho. 🌸</p>') +
+      (feitos.length
+        ? '<p class="sec sec--peq">Já no carrinho</p>' + feitos.map(itemHTML).join("") +
+          '<button class="btn btn--linha btn--peq" type="button" data-lista-limpar>' +
+          'Tirar os comprados da lista</button>'
+        : '');
+  }
+
+  /* A folha lista TODAS as leituras guardadas — diferente do comparador, aqui
+     não é preciso ter tabela por 100 g: não há número para contar, só o nome
+     do produto e a tarja. */
+  function pintarListaHist() {
+    var caixa = $("[data-lista-hist]");
+    if (!caixa) return;
+    var h = ler(CHAVE_HIST, []);
+    if (!Array.isArray(h) || !h.length) {
+      caixa.innerHTML = '<p class="dica">Você ainda não leu nenhum rótulo. Assim que ler, ' +
+        'os produtos aparecem aqui para entrar na lista com um toque.</p>';
+      return;
+    }
+    caixa.innerHTML = h.map(function (x, i) {
+      return '<button class="hist hist--' + esc(x.veredito || "atencao") + '" type="button" ' +
+        'data-lista-pick="' + i + '">' +
+        '<span class="hist__p"></span><span>' +
+        '<strong class="hist__t">' + esc(x.produto || "Produto") + '</strong>' +
+        '<span class="hist__d">' + esc([x.marca, dataBR(x.criado_em)].filter(Boolean).join(" · ")) + '</span>' +
+        '</span></button>';
+    }).join("");
+  }
+
+  function abrirListaFolha() {
+    pintarListaHist();
+    $("[data-lista-folha]").hidden = false;
+    document.body.classList.add("travado");
+  }
+  function fecharListaFolha() {
+    $("[data-lista-folha]").hidden = true;
+    document.body.classList.remove("travado");
+  }
+
+  var formLista = $("[data-lista-form]");
+  if (formLista) {
+    formLista.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var campo = $("[data-lista-campo]");
+      var nome = campo.value;
+      if (!nome.trim()) return;
+      if (!addItem(nome, "", null)) recadoLista("“" + nome.trim() + "” já está na sua lista.");
+      campo.value = "";
+      campo.focus();
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    var ok = e.target.closest("[data-lista-ok]");
+    if (ok) {
+      var id = ok.getAttribute("data-lista-ok");
+      var l = lerLista();
+      l.forEach(function (x) { if (x.id === id) x.feito = !x.feito; });
+      gravarLista(l);
+      return;
+    }
+
+    var rem = e.target.closest("[data-lista-x]");
+    if (rem) {
+      var idr = rem.getAttribute("data-lista-x");
+      gravarLista(lerLista().filter(function (x) { return x.id !== idr; }));
+      return;
+    }
+
+    if (e.target.closest("[data-lista-limpar]")) {
+      gravarLista(lerLista().filter(function (x) { return !x.feito; }));
+      return;
+    }
+
+    if (e.target.closest("[data-lista-abrir]")) { abrirListaFolha(); return; }
+    if (e.target.closest("[data-lista-fechar]")) { fecharListaFolha(); return; }
+
+    var pick = e.target.closest("[data-lista-pick]");
+    if (pick) {
+      var h = ler(CHAVE_HIST, []);
+      var x = h[Number(pick.getAttribute("data-lista-pick"))];
+      if (x) {
+        var novo = addItem(x.produto || "Produto", x.marca || "", x.veredito || null);
+        fecharListaFolha();
+        if (!novo) recadoLista("Esse produto já está na sua lista.");
+      }
+      return;
+    }
+
+    /* Botão que sai dentro do resultado da leitura. Vale para qualquer
+       veredito, inclusive "eu deixaria na prateleira": a decisão é dela, e a
+       tarja vermelha vai junto para o corredor. */
+    var add = e.target.closest("[data-lista-add]");
+    if (add) {
+      var entrou = addItem(add.getAttribute("data-nome"), add.getAttribute("data-marca"),
+                           add.getAttribute("data-veredito"));
+      add.disabled = true;
+      add.textContent = entrou ? "Na sua lista ✓" : "Já estava na lista ✓";
+      return;
+    }
+  });
+
   /* ---------- conta ----------
      Entrar é OPCIONAL e serve para uma coisa só: paciente da Ana lê mais
      rótulos por dia. Por isso a tela não empurra cadastro — quem não tem
@@ -1299,6 +1508,7 @@
   pintarHistorico();
   pintarCmpSlots();
   pintarComparacao();
+  pintarLista();
   pintarConta();
   pintarCreditos();
   resgatarDaURL();

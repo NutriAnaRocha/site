@@ -254,7 +254,41 @@
     <div class="folha__c" data-cmp-lista></div>
   </div>
 
-  <!-- ===================== 4. CONTA ===================== -->
+  <!-- ===================== 4. LISTA DE MERCADO ===================== -->
+  <!-- Fica no aparelho, como o histórico: quem anota o que falta comprar não
+       deveria precisar de conta para isso. O que a lista tem de diferente de
+       um papel é a tarja: item que veio de uma leitura carrega o veredito
+       daquele rótulo até a hora de pegar na prateleira. -->
+  <section class="tela" data-tela="lista">
+    <h1 class="tela__t">Sua lista de mercado</h1>
+    <p class="tela__p">Anote o que falta e vá marcando o que já pegou. Fica só no seu aparelho —
+      não precisa de conta e funciona sem sinal.</p>
+
+    <form class="lista-add" data-lista-form>
+      <input type="text" class="lista-add__c" data-lista-campo autocomplete="off"
+             placeholder="O que falta comprar?" aria-label="Item da lista">
+      <button class="lista-add__b" type="submit" aria-label="Adicionar à lista">+</button>
+    </form>
+    <p class="msg" data-lista-msg hidden></p>
+
+    <button class="btn btn--linha btn--peq" type="button" data-lista-abrir>
+      Trazer de um rótulo que eu já li
+    </button>
+
+    <div data-lista-res></div>
+  </section>
+
+  <!-- Escolha a partir do histórico: aqui não é preciso ter tabela nutricional
+       (não há número para comparar), basta a leitura existir. -->
+  <div class="folha" data-lista-folha hidden>
+    <div class="folha__topo">
+      <strong class="folha__t">Botar na lista</strong>
+      <button class="folha__x" type="button" data-lista-fechar aria-label="Fechar">×</button>
+    </div>
+    <div class="folha__c" data-lista-hist></div>
+  </div>
+
+  <!-- ===================== 5. CONTA ===================== -->
   <section class="tela" data-tela="conta">
     <h1 class="tela__t">Sua conta</h1>
 
@@ -314,6 +348,9 @@
   </button>
   <button class="barra__b" type="button" data-ir="comparar">
     <span class="barra__i">⚖️</span><span>Comparar</span>
+  </button>
+  <button class="barra__b" type="button" data-ir="lista">
+    <span class="barra__i">📝</span><span>Lista</span>
   </button>
   <button class="barra__b" type="button" data-ir="conta">
     <span class="barra__i">👤</span><span>Conta</span>

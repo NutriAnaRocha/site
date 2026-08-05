@@ -411,15 +411,57 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 .cmp thead th.cmp--regua{color:var(--bordo)}
 body.travado{overflow:hidden}
 
+/* ---------- Lista de mercado ---------- */
+.lista-add{display:flex;gap:8px;margin-bottom:10px}
+.lista-add__c{
+  flex:1;min-width:0;padding:13px 14px;font:inherit;font-size:.9rem;color:var(--cinza);
+  background:var(--branco);border:1.5px solid var(--rosa-borda);border-radius:12px;
+}
+.lista-add__c:focus{outline:none;border-color:var(--bordo)}
+.lista-add__b{
+  flex:none;width:48px;border:none;border-radius:12px;
+  background:var(--bordo);color:#fff;font-size:1.5rem;line-height:1;box-shadow:var(--sombra);
+}
+.lista-add__b:active{transform:scale(.97)}
+.lista-cont{font-size:.75rem;color:var(--cinza-claro);margin:18px 0 8px}
+.sec--peq{font-size:.95rem;margin-top:22px}
+
+.item{
+  display:flex;align-items:center;gap:11px;
+  background:var(--branco);border:1px solid var(--rosa-borda);border-left:4px solid var(--rosa-borda);
+  border-radius:12px;padding:10px 10px 10px 12px;margin-bottom:8px;
+}
+.item--boa{border-left-color:var(--boa)}
+.item--atencao{border-left-color:var(--atencao)}
+.item--evitar{border-left-color:var(--evitar)}
+.item__ok{
+  flex:none;width:28px;height:28px;border-radius:50%;
+  border:1.5px solid var(--rosa);background:var(--branco);
+  color:#fff;font-size:.85rem;line-height:1;
+}
+.item__c{flex:1;min-width:0}
+.item__t{display:block;color:var(--bordo);font-size:.88rem;line-height:1.25;word-break:break-word}
+.item__d{display:block;font-size:.7rem;color:var(--cinza-claro)}
+.item__x{flex:none;width:30px;background:none;border:none;color:var(--cinza-claro);font-size:1.3rem;line-height:1}
+.item.is-feito{opacity:.55}
+.item.is-feito .item__ok{background:var(--boa);border-color:var(--boa)}
+.item.is-feito .item__t{text-decoration:line-through}
+
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:30;
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(5,1fr);
   background:var(--branco);border-top:1px solid var(--rosa-borda);
   padding-bottom:env(safe-area-inset-bottom);
 }
 .barra__b{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   height:var(--barra-h);font-size:.66rem;color:var(--cinza-claro);
+  padding:0 2px;text-align:center;
+}
+/* Com cinco abas, celular estreito (iPhone SE, 320 px) não cabe "Ler rótulo"
+   inteiro na mesma linha. */
+@media (max-width:360px){
+  .barra__b{font-size:.6rem}
 }
 .barra__i{font-size:1.15rem;line-height:1}
 .barra__b.is-on{color:var(--bordo)}
