@@ -397,7 +397,18 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 }
 .folha__t{font-family:var(--serif);font-weight:900;font-size:1.05rem}
 .folha__x{background:none;border:none;color:#fff;font-size:1.6rem;line-height:1}
+.folha__b{padding:14px 16px 0;max-width:560px;width:100%;margin:0 auto}
+.folha__busca{
+  width:100%;padding:12px 14px;font:inherit;font-size:.9rem;color:var(--cinza);
+  background:var(--branco);border:1.5px solid var(--rosa-borda);border-radius:12px;
+}
+.folha__busca:focus{outline:none;border-color:var(--bordo)}
+.folha__n{font-size:.72rem;color:var(--cinza-claro);margin-top:7px;line-height:1.45}
 .folha__c{flex:1;overflow-y:auto;padding:16px;max-width:560px;width:100%;margin:0 auto}
+/* Alimento da TACO na lista: cor de marca, não verde. Ele é régua, não
+   vencedor — a mesma regra da tabela de referência no resultado. */
+.hist--taco .hist__p{background:var(--rosa)}
+.cmp thead th.cmp--regua{color:var(--bordo)}
 body.travado{overflow:hidden}
 
 .barra{

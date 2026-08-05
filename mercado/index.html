@@ -241,8 +241,15 @@
        tabela nutricional — sem números não há o que comparar. -->
   <div class="folha" data-cmp-folha hidden>
     <div class="folha__topo">
-      <strong class="folha__t">Escolha um rótulo</strong>
+      <strong class="folha__t">Escolha o que comparar</strong>
       <button class="folha__x" type="button" data-cmp-fechar aria-label="Fechar">×</button>
+    </div>
+    <div class="folha__b">
+      <input type="search" class="folha__busca" data-cmp-busca
+             placeholder="Ou busque um alimento: arroz, feijão…" autocomplete="off">
+      <p class="folha__n">A TACO é a tabela oficial brasileira de composição de alimentos
+        (NEPA/Unicamp): mede o alimento sem marca. Serve de régua para ver a que distância o
+        produto do pacote está.</p>
     </div>
     <div class="folha__c" data-cmp-lista></div>
   </div>

@@ -861,8 +861,12 @@
   // a própria lei aceita margem. Abaixo disso a resposta honesta é "igual".
   var MARGEM = 0.05;
 
-  var cmpEscolha = [null, null];   // índices no histórico
+  /* Cada lado é um objeto já normalizado — de onde ele veio deixa de
+     importar depois da escolha:
+       { nome, marca, veredito, fonte: "leitura"|"taco", por_100g } */
+  var cmpEscolha = [null, null];
   var cmpAlvo = 0;                 // qual slot a folha está preenchendo
+  var cmpBuscaT = null;            // timer do "digitou e parou"
 
   function num(v) {
     if (v == null || v === "") return null;
@@ -882,16 +886,36 @@
       .filter(function (e) { return e.x && e.x.tabela && e.x.tabela.por_100g; });
   }
 
+  // De leitura guardada para o formato do comparador.
+  function daLeitura(x) {
+    return {
+      nome: x.produto || "Produto", marca: x.marca || "",
+      veredito: x.veredito || "atencao", fonte: "leitura",
+      por_100g: x.tabela.por_100g
+    };
+  }
+
+  /* Da TACO. A TACO não tem campo de açúcar (a 4ª edição não analisou açúcar
+     separado do carboidrato total), então essa linha simplesmente não entra
+     na comparação — inventar zero ali seria dizer que a comida de verdade
+     não tem açúcar nenhum. */
+  function daTaco(t) {
+    return {
+      nome: t.nome, marca: "TACO · referência",
+      veredito: null, fonte: "taco",
+      por_100g: { kcal: t.kcal, sat_g: t.sat_g, sodio_mg: t.sodio_mg, fibra_g: t.fibra }
+    };
+  }
+
   function pintarCmpSlots() {
     [0, 1].forEach(function (s) {
       var el = document.querySelector('[data-cmp="' + s + '"]');
       if (!el) return;
-      var h = ler(CHAVE_HIST, []);
-      var x = cmpEscolha[s] == null ? null : h[cmpEscolha[s]];
+      var x = cmpEscolha[s];
       el.classList.toggle("tem", !!x);
       el.innerHTML = x
-        ? '<strong class="cmp-slot__t">' + esc(x.produto || "Produto") + '</strong>' +
-          '<span class="cmp-slot__m">' + esc(x.marca || "") + '</span>' +
+        ? '<strong class="cmp-slot__t">' + esc(x.nome) + '</strong>' +
+          '<span class="cmp-slot__m">' + esc(x.marca) + '</span>' +
           '<span class="cmp-slot__tr">trocar</span>'
         : '<span class="cmp-slot__mais">+</span>' +
           '<span class="cmp-slot__m">Produto ' + (s + 1) + '</span>';
@@ -916,15 +940,34 @@
   /* O fecho é aritmética declarada, não opinião clínica: diz quantos itens
      cada um ganhou e manda olhar a lista de ingredientes, que é onde mora o
      que a tabela não conta. Frase de nutricionista neste app é sempre fixa. */
-  function cmpFecho(linhas, na, nb) {
+  function cmpFecho(linhas, xa, xb) {
     var a = 0, b = 0;
     linhas.forEach(function (l) { if (l.ganha === 1) a++; else if (l.ganha === 2) b++; });
     var total = linhas.length;
+
+    /* Item da TACO num dos lados não é sugestão de compra: ele é a RÉGUA.
+       E cuidado com a palavra "alimento": a TACO tem biscoito recheado e
+       macarrão instantâneo também. Dizer "do outro lado está a comida de
+       verdade" seria mentira em boa parte das buscas — a frase fala em
+       referência, que é o que a TACO de fato é. */
+    if (xa.fonte === "taco" || xb.fonte === "taco") {
+      var alim = xa.fonte === "taco" ? xa : xb;
+      var prod = xa.fonte === "taco" ? xb : xa;
+      var pAlim = xa.fonte === "taco" ? 1 : 2;
+      var venceProd = (pAlim === 1 ? b : a) > (pAlim === 1 ? a : b);
+      return "Do outro lado não está uma marca concorrente: é " + alim.nome +
+        ", pela TACO — a tabela oficial brasileira, que mede o alimento sem marca. " +
+        (venceProd
+          ? "Em número, " + prod.nome + " até leva vantagem em alguns itens. Isso é bom sinal, " +
+            "mas não decide sozinho: a TACO não mostra lista de ingredientes nem aditivo."
+          : "É essa a distância entre " + prod.nome + " e a referência.");
+    }
+
     if (a === b) {
       return "Pelos números, os dois se equivalem — ganham e perdem nos mesmos itens. " +
         "Aqui quem decide é a lista de ingredientes: prefira a mais curta e com nome de comida.";
     }
-    var vence = a > b ? na : nb;
+    var vence = a > b ? xa.nome : xb.nome;
     var q = Math.max(a, b);
     return "Pelos números, " + vence + " leva vantagem: ganha em " + q + " de " + total +
       " itens comparados. Ainda assim, olhe a lista de ingredientes dos dois — a tabela não " +
@@ -934,30 +977,26 @@
   function pintarComparacao() {
     var caixa = $("[data-cmp-res]");
     if (!caixa) return;
-    var h = ler(CHAVE_HIST, []);
-    var disp = cmpHistorico();
 
-    if (!disp.length) {
+    if (!cmpHistorico().length && !cmpEscolha[0] && !cmpEscolha[1]) {
       caixa.innerHTML = '<div class="cartao cartao--convite">' +
-        '<h2 class="sec">Leia dois rótulos primeiro</h2>' +
-        '<p>O comparador usa os números das suas próprias leituras — por isso ele só ' +
-        'funciona depois que você fotografou a tabela de pelo menos dois produtos.</p>' +
+        '<h2 class="sec">Leia um rótulo primeiro</h2>' +
+        '<p>O comparador usa os números das suas próprias leituras. Depois de ler um rótulo, ' +
+        'você compara com outro que já leu — ou com a referência da tabela TACO.</p>' +
         '<button class="btn btn--linha btn--peq" type="button" data-ir="ler">Ler um rótulo</button></div>';
       return;
     }
-    if (disp.length < 2 && cmpEscolha[0] == null && cmpEscolha[1] == null) {
-      caixa.innerHTML = '<div class="cartao cartao--convite">' +
-        '<h2 class="sec">Falta o segundo</h2>' +
-        '<p>Você tem uma leitura com tabela nutricional guardada. Leia o rótulo do concorrente ' +
-        'que está na prateleira do lado e eu comparo os dois aqui.</p>' +
-        '<button class="btn btn--linha btn--peq" type="button" data-ir="ler">Ler o outro rótulo</button></div>';
-      return;
-    }
-    if (cmpEscolha[0] == null || cmpEscolha[1] == null) { caixa.innerHTML = ""; return; }
+    if (!cmpEscolha[0] || !cmpEscolha[1]) { caixa.innerHTML = ""; return; }
 
-    var xa = h[cmpEscolha[0]], xb = h[cmpEscolha[1]];
-    var linhas = cmpLinhas(xa.tabela, xb.tabela);
-    var na = xa.produto || "Produto 1", nb = xb.produto || "Produto 2";
+    var xa = cmpEscolha[0], xb = cmpEscolha[1];
+    var linhas = cmpLinhas(xa, xb);
+
+    /* Com a TACO de um dos lados o ✓ sai de cena: ali não há disputa de
+       prateleira, e um ✓ verde no alimento (ou pior, no produto) leria como
+       "leve este". A coluna da TACO é régua, não sugestão de compra. */
+    var regua = xa.fonte === "taco" || xb.fonte === "taco";
+    var fecho = linhas.length ? cmpFecho(linhas, xa, xb) : "";
+    if (regua) linhas.forEach(function (l) { l.ganha = 0; });
 
     if (!linhas.length) {
       caixa.innerHTML = '<div class="cartao"><p>Esses dois não têm nenhum nutriente em comum na ' +
@@ -969,8 +1008,8 @@
       '<div class="bloco"><p class="bloco__t">Por 100 g</p>' +
       '<table class="cmp"><thead><tr>' +
         '<th></th>' +
-        '<th class="cmp--' + esc(xa.veredito || "atencao") + '">' + esc(na) + '</th>' +
-        '<th class="cmp--' + esc(xb.veredito || "atencao") + '">' + esc(nb) + '</th>' +
+        '<th class="cmp--' + esc(xa.veredito || "regua") + '">' + esc(xa.nome) + '</th>' +
+        '<th class="cmp--' + esc(xb.veredito || "regua") + '">' + esc(xb.nome) + '</th>' +
       '</tr></thead><tbody>' +
       linhas.map(function (l) {
         return '<tr><th>' + esc(l.n.rot) + '</th>' +
@@ -980,20 +1019,27 @@
             (l.ganha === 2 ? ' <span class="cmp__ok">✓</span>' : '') + '</td></tr>';
       }).join("") +
       '</tbody></table>' +
-      '<p class="nums__nota">O ✓ marca quem está melhor naquele item: menos calorias, açúcar, ' +
-      'gordura saturada e sódio; mais fibra. Diferença abaixo de 5% conta como empate, porque ' +
-      'o rótulo já é declarado com arredondamento.</p></div>' +
+      '<p class="nums__nota">' +
+      (regua
+        ? 'A TACO — Tabela Brasileira de Composição de Alimentos, 4ª ed. (NEPA/Unicamp) — não ' +
+          'analisou o açúcar separado do carboidrato, por isso essa linha fica de fora. Aqui não ' +
+          'há vencedor marcado: a TACO entra como régua, não como sugestão de compra.'
+        : 'O ✓ marca quem está melhor naquele item: menos calorias, açúcar, gordura saturada e ' +
+          'sódio; mais fibra. Diferença abaixo de 5% conta como empate, porque o rótulo já é ' +
+          'declarado com arredondamento.') +
+      '</p></div>' +
       '<div class="bloco troca"><p class="bloco__t">A leitura da Ana</p>' +
-      '<p class="troca__t">' + esc(cmpFecho(linhas, na, nb)) + '</p></div>' +
+      '<p class="troca__t">' + esc(fecho) + '</p></div>' +
       '</div>';
   }
 
-  function abrirCmpFolha(slot) {
-    cmpAlvo = slot;
-    var folha = $("[data-cmp-folha]");
+  function pintarCmpLeituras() {
     var lista = $("[data-cmp-lista]");
-    var outro = cmpEscolha[slot === 0 ? 1 : 0];
-    var disp = cmpHistorico().filter(function (e) { return e.i !== outro; });
+    var outro = cmpEscolha[cmpAlvo === 0 ? 1 : 0];
+    var disp = cmpHistorico().filter(function (e) {
+      return !(outro && outro.fonte === "leitura" && outro.nome === (e.x.produto || "Produto") &&
+               outro.marca === (e.x.marca || ""));
+    });
 
     lista.innerHTML = disp.length
       ? disp.map(function (e) {
@@ -1004,9 +1050,57 @@
             '<span class="hist__d">' + esc([e.x.marca, dataBR(e.x.criado_em)].filter(Boolean).join(" · ")) + '</span>' +
             '</span></button>';
         }).join("")
-      : '<p class="dica">Nenhuma outra leitura com tabela nutricional guardada.</p>';
+      : '<p class="dica">Nenhuma outra leitura com tabela nutricional guardada. ' +
+        'Use a busca acima para comparar com o alimento de verdade.</p>';
+  }
 
-    folha.hidden = false;
+  /* Busca na TACO. A tabela é pública (leitura liberada para todos), então a
+     consulta sai direto daqui — sem edge function no meio, sem crédito, e
+     falha silenciosa vira recado, porque no mercado o sinal cai mesmo. */
+  function buscarTaco(termo) {
+    var lista = $("[data-cmp-lista]");
+    if (!window.NutriDBReady) {
+      lista.innerHTML = '<p class="dica">Sem conexão com a base agora. Suas leituras continuam ' +
+        'disponíveis — apague a busca para vê-las.</p>';
+      return;
+    }
+    lista.innerHTML = '<p class="dica">Procurando…</p>';
+    window.NutriDBReady.then(function (c) {
+      return c.from("taco_alimentos")
+        .select("id,nome,grupo,kcal,fibra,sodio_mg,sat_g")
+        .ilike("busca", "%" + termo.toLowerCase() + "%")
+        .order("nome")
+        .limit(15);
+    }).then(function (r) {
+      if (r.error) throw r.error;
+      var itens = r.data || [];
+      if (!itens.length) {
+        lista.innerHTML = '<p class="dica">Não achei esse alimento na TACO. Tente o nome mais ' +
+          'simples: "arroz", "feijão", "pão".</p>';
+        return;
+      }
+      cmpTaco = itens;
+      lista.innerHTML = itens.map(function (t, i) {
+        return '<button class="hist hist--taco" type="button" data-cmp-taco="' + i + '">' +
+          '<span class="hist__p"></span><span>' +
+          '<strong class="hist__t">' + esc(t.nome) + '</strong>' +
+          '<span class="hist__d">' + esc(t.grupo) + ' · TACO</span>' +
+          '</span></button>';
+      }).join("");
+    }).catch(function () {
+      lista.innerHTML = '<p class="dica">Não consegui buscar agora — o sinal aqui pode estar ruim. ' +
+        'Apague a busca para ver as suas leituras.</p>';
+    });
+  }
+
+  var cmpTaco = [];   // resultado da última busca, para o clique achar de novo
+
+  function abrirCmpFolha(slot) {
+    cmpAlvo = slot;
+    var busca = $("[data-cmp-busca]");
+    if (busca) busca.value = "";
+    pintarCmpLeituras();
+    $("[data-cmp-folha]").hidden = false;
     document.body.classList.add("travado");
   }
 
@@ -1015,16 +1109,41 @@
     document.body.classList.remove("travado");
   }
 
+  function escolherNoCmp(item) {
+    cmpEscolha[cmpAlvo] = item;
+    fecharCmpFolha();
+    pintarCmpSlots();
+    pintarComparacao();
+  }
+
+  // "Digitou e parou": buscar a cada tecla castigaria justamente quem está
+  // com sinal ruim no corredor do mercado.
+  var campoBusca = $("[data-cmp-busca]");
+  if (campoBusca) {
+    campoBusca.addEventListener("input", function () {
+      var termo = campoBusca.value.trim();
+      clearTimeout(cmpBuscaT);
+      if (termo.length < 3) { pintarCmpLeituras(); return; }
+      cmpBuscaT = setTimeout(function () { buscarTaco(termo); }, 350);
+    });
+  }
+
   document.addEventListener("click", function (e) {
     var slot = e.target.closest("[data-cmp]");
     if (slot) { abrirCmpFolha(Number(slot.getAttribute("data-cmp"))); return; }
 
     var pick = e.target.closest("[data-cmp-pick]");
     if (pick) {
-      cmpEscolha[cmpAlvo] = Number(pick.getAttribute("data-cmp-pick"));
-      fecharCmpFolha();
-      pintarCmpSlots();
-      pintarComparacao();
+      var h = ler(CHAVE_HIST, []);
+      var x = h[Number(pick.getAttribute("data-cmp-pick"))];
+      if (x && x.tabela) escolherNoCmp(daLeitura(x));
+      return;
+    }
+
+    var pt = e.target.closest("[data-cmp-taco]");
+    if (pt) {
+      var t = cmpTaco[Number(pt.getAttribute("data-cmp-taco"))];
+      if (t) escolherNoCmp(daTaco(t));
       return;
     }
 
