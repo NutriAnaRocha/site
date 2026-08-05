@@ -1,0 +1,41 @@
+# Apaga sozinho a página temporária de briefing depois do prazo.
+#
+# A pasta briefing-priscila/ é um formulário temporário mandado para uma cliente.
+# Depois de 11/08/2026 este workflow remove a pasta, remove a si mesmo e commita.
+# Não precisa de ninguém lembrar de limpar.
+name: Apagar briefing temporário da Priscila
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # todo dia, 9h17 UTC (6h17 em Brasília)
+  workflow_dispatch:        # e dá para forçar antes do prazo pelo painel do GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  apagar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apagar se o prazo venceu
+        run: |
+          set -euo pipefail
+          VENCE="2026-08-11"
+          HOJE=$(date -u +%F)
+          if [[ "$HOJE" < "$VENCE" ]]; then
+            echo "Hoje é $HOJE; o prazo vence em $VENCE. Nada a fazer."
+            exit 0
+          fi
+          if [[ ! -d briefing-priscila ]]; then
+            echo "A pasta já não existe. Nada a fazer."
+            exit 0
+          fi
+          echo "Prazo vencido ($HOJE >= $VENCE). Removendo."
+          git rm -r --quiet briefing-priscila
+          git rm --quiet .github/workflows/apagar-briefing-priscila.yml
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove a página temporária de briefing (prazo de 7 dias vencido)"
+          git push

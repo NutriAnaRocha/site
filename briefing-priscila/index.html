@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Briefing do seu site — Nutri Ana Luísa Rocha</title>
+<link rel="icon" href="../assets/img/monograma.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{
+  font-family:"Merienda";
+  src:url("../assets/fonts/Merienda.woff2") format("woff2"),
+      url("../assets/fonts/Merienda.ttf") format("truetype");
+  font-weight:300 900; font-display:swap;
+}
+:root{
+  --marca:#840B55; --marca-escuro:#5E0A3D; --marca-hover:#6F0947;
+  --acento:#F1B2DC; --acento-suave:#FCEFF7; --acento-borda:#F6D8EC;
+  --texto:#63666A; --texto-suave:#6C6E72; --branco:#fff; --fundo-alt:#FBF9FA;
+  --marca-rgb:132,11,85;
+  --serif:"Merienda", Georgia, serif;
+  --sans:"Montserrat","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:14px; --radius-sm:10px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; font-family:var(--sans); font-weight:400; font-size:16px;
+  line-height:1.65; color:var(--texto); background:var(--fundo-alt);
+}
+.wrap{max-width:720px; margin:0 auto; padding:0 20px}
+
+/* ---------- topo ---------- */
+header{
+  background:linear-gradient(160deg,var(--marca) 0%,var(--marca-escuro) 100%);
+  color:#fff; padding:36px 0 40px; text-align:center;
+}
+header img{width:150px; height:auto; margin-bottom:18px}
+header h1{
+  font-family:var(--serif); font-weight:900; font-size:clamp(1.6rem,6vw,2.2rem);
+  line-height:1.2; margin:0 0 10px;
+}
+header p{margin:0 auto; max-width:46ch; font-size:.98rem; color:#f4e2ee}
+
+/* ---------- progresso ---------- */
+.barra{position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--acento-borda)}
+.barra .wrap{display:flex; align-items:center; gap:12px; padding-top:10px; padding-bottom:10px}
+.trilho{flex:1; height:8px; background:var(--acento-suave); border-radius:99px; overflow:hidden}
+.preenchido{height:100%; width:0; background:var(--marca); border-radius:99px; transition:width .25s ease}
+.barra span{font-size:.82rem; font-weight:600; color:var(--marca); white-space:nowrap}
+
+/* ---------- blocos ---------- */
+main{padding:28px 0 60px}
+section{
+  background:#fff; border:1px solid var(--acento-borda); border-radius:var(--radius);
+  padding:22px; margin-bottom:18px;
+}
+section h2{
+  font-family:var(--serif); font-weight:900; color:var(--marca);
+  font-size:1.22rem; line-height:1.25; margin:0 0 4px;
+}
+section .sub{margin:0 0 18px; font-size:.9rem; color:var(--texto-suave)}
+.campo{margin-bottom:18px}
+.campo:last-child{margin-bottom:0}
+label{display:block; font-weight:600; font-size:.95rem; color:#4a2d3e; margin-bottom:6px}
+.dica{display:block; font-weight:400; font-size:.84rem; color:var(--texto-suave); margin-top:2px}
+input[type=text], textarea, select{
+  width:100%; font-family:var(--sans); font-size:16px; color:var(--texto);
+  padding:12px 14px; border:1px solid #e4d4de; border-radius:var(--radius-sm);
+  background:#fff; transition:border-color .18s ease, box-shadow .18s ease;
+}
+textarea{min-height:96px; resize:vertical; line-height:1.6}
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, .op:focus-within{
+  outline:none; border-color:var(--marca); box-shadow:0 0 0 3px rgba(var(--marca-rgb),.18);
+}
+.linha{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:520px){ .linha{grid-template-columns:1fr} }
+
+/* opções sim/não */
+.ops{display:flex; flex-wrap:wrap; gap:8px}
+.op{
+  display:flex; align-items:center; gap:8px; padding:10px 14px; min-height:44px;
+  border:1px solid #e4d4de; border-radius:99px; cursor:pointer; font-size:.92rem;
+  background:#fff; transition:border-color .18s ease, background-color .18s ease;
+}
+.op input{accent-color:var(--marca); width:18px; height:18px; margin:0}
+.op:hover{border-color:var(--marca)}
+.op.marcada{border-color:var(--marca); background:var(--acento-suave); font-weight:600; color:var(--marca)}
+
+/* checklist de arquivos */
+.arquivos{list-style:none; margin:0; padding:0}
+.arquivos li{margin-bottom:10px}
+.arquivos .op{width:100%; border-radius:var(--radius-sm); align-items:flex-start}
+.arquivos b{font-weight:600; color:#4a2d3e}
+.arquivos small{display:block; color:var(--texto-suave); font-size:.82rem; line-height:1.5}
+
+.aviso{
+  background:var(--acento-suave); border-left:3px solid var(--acento);
+  padding:12px 14px; border-radius:var(--radius-sm); font-size:.88rem; margin-top:16px;
+}
+
+/* ---------- final ---------- */
+.final{background:linear-gradient(160deg,var(--marca) 0%,var(--marca-escuro) 100%); color:#fff; border:0}
+.final h2{color:#fff}
+.final .sub{color:#f4e2ee}
+#saida{
+  width:100%; min-height:200px; font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;
+  font-size:13px; line-height:1.6; color:#3a2230; background:#fff;
+  border:0; border-radius:var(--radius-sm); padding:14px; margin-bottom:14px;
+}
+.botoes{display:flex; flex-wrap:wrap; gap:10px}
+button{
+  font-family:var(--sans); font-weight:600; font-size:.95rem; min-height:48px;
+  padding:0 22px; border-radius:99px; border:0; cursor:pointer;
+  transition:background-color .18s ease, transform .12s ease;
+}
+.b1{background:#fff; color:var(--marca); flex:1; min-width:180px}
+.b1:hover{background:var(--acento-suave)}
+.b2{background:rgba(255,255,255,.14); color:#fff; border:1px solid rgba(255,255,255,.5)}
+.b2:hover{background:rgba(255,255,255,.24)}
+button:active{transform:translateY(1px)}
+.ok{font-size:.88rem; color:#f4e2ee; margin-top:12px; min-height:1.2em}
+
+footer{text-align:center; padding:0 20px 44px; font-size:.82rem; color:var(--texto-suave)}
+footer strong{color:var(--marca)}
+
+@media (prefers-reduced-motion:reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="../assets/img/logo-branco.png" alt="Nutri Ana Luísa Rocha">
+    <h1>Vamos montar o seu site</h1>
+    <p>Pri, responde com calma — o que você escrever aqui vira o texto das telas.
+       No final aparece um resumo pronto pra você me mandar. 🌿</p>
+  </div>
+</header>
+
+<div class="barra">
+  <div class="wrap">
+    <div class="trilho"><div class="preenchido" id="preenchido"></div></div>
+    <span id="contador">0%</span>
+  </div>
+</div>
+
+<main class="wrap">
+<form id="form" autocomplete="off">
+
+  <section>
+    <h2>1. Quem é você no site</h2>
+    <p class="sub">Isso aparece no topo, no rodapé e no Google.</p>
+
+    <div class="campo">
+      <label for="nome">Seu nome, do jeito que quer aparecer
+        <span class="dica">Ex.: Priscila Melo</span></label>
+      <input type="text" id="nome" name="Nome">
+    </div>
+
+    <div class="campo">
+      <label for="profissao">Sua profissão
+        <span class="dica">Ex.: Nutricionista, Psicóloga, Fisioterapeuta…</span></label>
+      <input type="text" id="profissao" name="Profissão">
+    </div>
+
+    <div class="linha">
+      <div class="campo">
+        <label for="conselho">Conselho + número
+          <span class="dica">Ex.: CRN 12345</span></label>
+        <input type="text" id="conselho" name="Conselho e número">
+      </div>
+      <div class="campo">
+        <label for="orgao">Órgão / região
+          <span class="dica">Ex.: CRN-4</span></label>
+        <input type="text" id="orgao" name="Órgão do conselho">
+      </div>
+    </div>
+
+    <div class="linha">
+      <div class="campo">
+        <label for="cidade">Cidade onde atende</label>
+        <input type="text" id="cidade" name="Cidade">
+      </div>
+      <div class="campo">
+        <label for="uf">Estado</label>
+        <input type="text" id="uf" name="Estado">
+      </div>
+    </div>
+    <p class="aviso">A cidade é o que faz o seu site aparecer pra quem procura profissional na
+      sua região. Vale a pena preencher mesmo se você atende só online.</p>
+  </section>
+
+  <section>
+    <h2>2. Quem você atende</h2>
+    <p class="sub">Esta é a parte mais importante de todas. Quanto mais específica, mais o
+      site conversa com a pessoa certa — e menos parece site de qualquer um.</p>
+
+    <div class="campo">
+      <label for="ideal">Descreve a sua paciente ideal
+        <span class="dica">Ex.: "mulher de 30 a 45 anos que já tentou de tudo pro intestino e
+          continua no mesmo lugar" — evita "todo mundo que quer saúde"</span></label>
+      <textarea id="ideal" name="Paciente ideal"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="dor">O que ela sente ANTES de te procurar?
+        <span class="dica">Com as palavras dela, não com termo técnico. É isso que vai na
+          primeira frase do site.</span></label>
+      <textarea id="dor" name="A dor dela antes de procurar"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="diferencial">Em uma frase: por que você, e não outra profissional?</label>
+      <textarea id="diferencial" name="Diferencial"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="naoatende">Tem alguém que você prefere <em>não</em> atrair?
+        <span class="dica">Opcional, mas ajuda muito a afinar o texto.</span></label>
+      <textarea id="naoatende" name="Quem você não quer atrair"></textarea>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Seus atendimentos</h2>
+
+    <div class="campo">
+      <label for="servicos">Que tipos de atendimento você oferece?
+        <span class="dica">Ex.: primeira consulta, retorno, pacote de acompanhamento…
+          Se puder, escreve o que cada um inclui e quanto dura.</span></label>
+      <textarea id="servicos" name="Serviços"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Você atende:</label>
+      <div class="ops" data-grupo="Formato de atendimento">
+        <label class="op"><input type="radio" name="formato" value="Só online"> Só online</label>
+        <label class="op"><input type="radio" name="formato" value="Só presencial"> Só presencial</label>
+        <label class="op"><input type="radio" name="formato" value="Online e presencial"> Os dois</label>
+      </div>
+    </div>
+
+    <div class="campo" id="box-enutri" hidden>
+      <label>Você já está inscrita no e-Nutricionista (CFN)?
+        <span class="dica">É exigência do conselho pra divulgar atendimento online. Se você não
+          for nutricionista, responde "não se aplica" que eu confiro a regra do seu conselho.</span></label>
+      <div class="ops" data-grupo="Inscrita no e-Nutricionista">
+        <label class="op"><input type="radio" name="enutri" value="Sim"> Sim</label>
+        <label class="op"><input type="radio" name="enutri" value="Ainda não"> Ainda não</label>
+        <label class="op"><input type="radio" name="enutri" value="Não se aplica"> Não se aplica</label>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="agenda">Como você agenda hoje?
+        <span class="dica">WhatsApp, link de agendamento, telefone…</span></label>
+      <input type="text" id="agenda" name="Como agenda hoje">
+    </div>
+
+    <div class="campo">
+      <label>Quer mostrar o preço no site?
+        <span class="dica">Hoje é permitido pelo conselho. É decisão sua — dos dois jeitos funciona.</span></label>
+      <div class="ops" data-grupo="Mostrar preço">
+        <label class="op"><input type="radio" name="preco" value="Sim, quero mostrar"> Sim</label>
+        <label class="op"><input type="radio" name="preco" value="Não, prefiro falar no WhatsApp"> Não</label>
+        <label class="op"><input type="radio" name="preco" value="Ainda estou em dúvida"> Em dúvida</label>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="valores">Se sim, quais valores?</label>
+      <textarea id="valores" name="Valores"></textarea>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Dúvidas e provas</h2>
+
+    <div class="campo">
+      <label for="faq">As 5 perguntas que mais te fazem no direct
+        <span class="dica">Uma por linha. Viram uma seção de dúvidas — é o que tira o medo de
+          quem está quase agendando.</span></label>
+      <textarea id="faq" name="Perguntas frequentes" style="min-height:130px"></textarea>
+    </div>
+
+    <div class="campo">
+      <label>Tem depoimentos de pacientes?</label>
+      <div class="ops" data-grupo="Tem depoimentos">
+        <label class="op"><input type="radio" name="depo" value="Sim, com autorização por escrito"> Sim, com autorização</label>
+        <label class="op"><input type="radio" name="depo" value="Tenho, mas sem autorização"> Tenho, sem autorização</label>
+        <label class="op"><input type="radio" name="depo" value="Ainda não tenho"> Ainda não</label>
+      </div>
+      <p class="aviso">Importante: depoimento só entra com autorização, e não pode mostrar
+        resultado (nada de peso, medidas, exame ou foto de antes e depois). Pode falar de como
+        a pessoa se sentiu no acompanhamento — isso é permitido e converte mais.</p>
+    </div>
+
+    <div class="campo">
+      <label for="depotexto">Se tiver, cola aqui os depoimentos</label>
+      <textarea id="depotexto" name="Depoimentos"></textarea>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Contato e endereço na internet</h2>
+
+    <div class="linha">
+      <div class="campo">
+        <label for="zap">WhatsApp com DDD</label>
+        <input type="text" id="zap" name="WhatsApp" inputmode="tel">
+      </div>
+      <div class="campo">
+        <label for="insta">@ do Instagram</label>
+        <input type="text" id="insta" name="Instagram">
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="email">E-mail profissional</label>
+      <input type="text" id="email" name="E-mail" inputmode="email">
+    </div>
+
+    <div class="campo">
+      <label for="endereco">Endereço do consultório
+        <span class="dica">Só se você atende presencial e quer que apareça no site.</span></label>
+      <input type="text" id="endereco" name="Endereço do consultório">
+    </div>
+
+    <div class="campo">
+      <label for="dominio">3 nomes que você gostaria pro endereço do site
+        <span class="dica">Ex.: priscilamelo.com.br — em ordem de preferência. Eu confiro quais
+          estão livres e te falo. Se você já tem um domínio, me diz qual.</span></label>
+      <textarea id="dominio" name="Nomes de domínio"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="redes">Outras redes ou links</label>
+      <input type="text" id="redes" name="Outras redes">
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Referências visuais</h2>
+    <p class="sub">A identidade já está fechada (as suas cores e as fontes que a gente
+      aprovou). Isso aqui é só pra eu acertar o clima.</p>
+
+    <div class="campo">
+      <label for="gosta">2 ou 3 sites que você gosta — e o que exatamente você gosta em cada
+        <span class="dica">"Gosto do site da fulana, mas acho a foto grande demais" me ajuda
+          muito mais do que "gosto de algo elegante".</span></label>
+      <textarea id="gosta" name="Sites que gosta"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="odeia">E algum que você detesta? Por quê?</label>
+      <textarea id="odeia" name="Sites que não gosta"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="tom">Como o seu site deve soar? <span class="dica">Escolhe até dois.</span></label>
+      <div class="ops" data-grupo="Tom">
+        <label class="op"><input type="checkbox" name="tom" value="Acolhedor"> Acolhedor</label>
+        <label class="op"><input type="checkbox" name="tom" value="Técnico"> Técnico</label>
+        <label class="op"><input type="checkbox" name="tom" value="Direto"> Direto</label>
+        <label class="op"><input type="checkbox" name="tom" value="Sofisticado"> Sofisticado</label>
+        <label class="op"><input type="checkbox" name="tom" value="Leve e descontraído"> Leve</label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. E-books</h2>
+    <div class="campo">
+      <label for="ebooks">Quais materiais você já tem?
+        <span class="dica">Título e assunto de cada um, e em que estado está (PDF pronto, Word,
+          só a ideia).</span></label>
+      <textarea id="ebooks" name="E-books"></textarea>
+    </div>
+    <div class="campo">
+      <label for="isca">Qual deles pode ser o material gratuito?
+        <span class="dica">É o que a pessoa recebe em troca do nome e do WhatsApp — como você
+          começa a formar a sua lista.</span></label>
+      <input type="text" id="isca" name="Material gratuito">
+    </div>
+  </section>
+
+  <section>
+    <h2>8. O que você precisa me enviar</h2>
+    <p class="sub">Vai por WhatsApp mesmo — aqui é só pra marcar o que já separou e não esquecer nada.</p>
+    <ul class="arquivos" data-grupo="Materiais">
+      <li><label class="op"><input type="checkbox" name="mat" value="Foto do topo"><span><b>Foto pro topo do site</b>
+        <small>Horizontal, boa luz, você olhando pra câmera. É a primeira coisa que a pessoa vê — capricha nessa.</small></span></label></li>
+      <li><label class="op"><input type="checkbox" name="mat" value="Foto do Sobre"><span><b>Foto mais informal</b>
+        <small>Pra seção "Sobre mim". Pode ser mais espontânea.</small></span></label></li>
+      <li><label class="op"><input type="checkbox" name="mat" value="Logo claro"><span><b>Logo em versão clara</b>
+        <small>Pra usar sobre fundo escuro, se existir no seu manual.</small></span></label></li>
+      <li><label class="op"><input type="checkbox" name="mat" value="E-books"><span><b>Os e-books e as capas</b>
+        <small>Do jeito que estiverem.</small></span></label></li>
+      <li><label class="op"><input type="checkbox" name="mat" value="Autorizações"><span><b>Autorizações dos depoimentos</b>
+        <small>Só se você for usar depoimento no site.</small></span></label></li>
+    </ul>
+    <p class="aviso">Lembrete do que a gente combinou em contrato: fotografia e textos técnicos
+      não estão inclusos. Quanto melhor o material, melhor o site fica. 💛</p>
+  </section>
+
+  <section>
+    <h2>9. Mais alguma coisa?</h2>
+    <div class="campo">
+      <label for="extra">Alguma ideia, preferência ou preocupação que eu não perguntei</label>
+      <textarea id="extra" name="Observações"></textarea>
+    </div>
+    <div class="campo">
+      <label for="prazo">Você tem alguma data em mente pra colocar no ar?</label>
+      <input type="text" id="prazo" name="Prazo desejado">
+    </div>
+  </section>
+
+  <section class="final">
+    <h2>Pronto! Agora é só me mandar</h2>
+    <p class="sub">Clica em <b>Gerar meu resumo</b>, depois em <b>Copiar</b> e cola numa mensagem
+      pra mim no WhatsApp. Não precisa preencher tudo — o que faltar a gente conversa.</p>
+    <textarea id="saida" readonly placeholder="Seu resumo aparece aqui…"></textarea>
+    <div class="botoes">
+      <button type="button" class="b1" id="gerar">Gerar meu resumo</button>
+      <button type="button" class="b2" id="copiar">Copiar</button>
+      <button type="button" class="b2" id="zapbtn">Abrir no WhatsApp</button>
+    </div>
+    <p class="ok" id="ok"></p>
+  </section>
+
+</form>
+</main>
+
+<footer>
+  Suas respostas ficam salvas <strong>só neste aparelho</strong> enquanto você preenche —
+  nada é enviado sozinho.<br>
+  Página temporária, criada por <strong>Nutri Ana Luísa Rocha</strong> para o seu projeto.
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var WHATSAPP_ANA = "5521994094557";
+  var CHAVE = "briefing-priscila-v1";
+  var form = document.getElementById("form");
+
+  /* ---------- salvar e restaurar (só neste aparelho) ---------- */
+  function salvar(){
+    var dados = {};
+    form.querySelectorAll("input, textarea, select").forEach(function(c){
+      var id = c.id || (c.name + "|" + c.value);
+      if (c.type === "radio" || c.type === "checkbox") { if (c.checked) dados[id] = 1; }
+      else if (c.value) dados[id] = c.value;
+    });
+    try { localStorage.setItem(CHAVE, JSON.stringify(dados)); } catch(e){}
+  }
+  function restaurar(){
+    var dados;
+    try { dados = JSON.parse(localStorage.getItem(CHAVE) || "{}"); } catch(e){ return; }
+    form.querySelectorAll("input, textarea, select").forEach(function(c){
+      var id = c.id || (c.name + "|" + c.value);
+      if (!(id in dados)) return;
+      if (c.type === "radio" || c.type === "checkbox") c.checked = true;
+      else c.value = dados[id];
+    });
+  }
+
+  /* ---------- estado visual das opções ---------- */
+  function pintar(){
+    form.querySelectorAll(".op").forEach(function(op){
+      var c = op.querySelector("input");
+      op.classList.toggle("marcada", !!(c && c.checked));
+    });
+  }
+
+  /* ---------- progresso ---------- */
+  var campos = Array.prototype.slice.call(
+    form.querySelectorAll("input[type=text], textarea:not(#saida)")
+  );
+  var grupos = ["formato","preco","depo","tom"];
+  function progresso(){
+    var total = campos.length + grupos.length, feitos = 0;
+    campos.forEach(function(c){ if (c.value.trim()) feitos++; });
+    grupos.forEach(function(g){ if (form.querySelector("[name="+g+"]:checked")) feitos++; });
+    var pct = Math.round(feitos / total * 100);
+    document.getElementById("preenchido").style.width = pct + "%";
+    document.getElementById("contador").textContent = pct + "%";
+  }
+
+  /* ---------- e-Nutricionista só aparece se atende online ---------- */
+  function online(){
+    var f = form.querySelector("[name=formato]:checked");
+    var mostra = !!f && f.value !== "Só presencial";
+    document.getElementById("box-enutri").hidden = !mostra;
+  }
+
+  form.addEventListener("input", function(){ salvar(); progresso(); });
+  form.addEventListener("change", function(){ salvar(); pintar(); progresso(); online(); });
+
+  /* ---------- o resumo ---------- */
+  function marcados(nome, sep){
+    var vs = [];
+    form.querySelectorAll("[name="+nome+"]:checked").forEach(function(c){ vs.push(c.value); });
+    return vs.join(sep || ", ");
+  }
+  function v(id){ var e = document.getElementById(id); return e ? e.value.trim() : ""; }
+
+  function montar(){
+    var L = [], pendente = null;
+    // O título só entra na lista quando o primeiro item do bloco chega —
+    // assim o resumo nunca mostra seção vazia de quem pulou a pergunta.
+    function bloco(titulo){ pendente = "── " + titulo.toUpperCase() + " ──"; }
+    function item(rotulo, valor){
+      if (!valor) return;
+      if (pendente){ L.push("", pendente); pendente = null; }
+      L.push(valor.indexOf("\n") === -1 ? rotulo + ": " + valor
+                                        : rotulo + ":\n" + valor);
+    }
+
+    L.push("BRIEFING DO MEU SITE — " + (v("nome") || "(sem nome)"));
+    L.push("Preenchido em " + new Date().toLocaleDateString("pt-BR"));
+
+    bloco("Quem sou");
+    item("Nome", v("nome"));
+    item("Profissão", v("profissao"));
+    item("Conselho", [v("conselho"), v("orgao")].filter(Boolean).join(" · "));
+    item("Cidade", [v("cidade"), v("uf")].filter(Boolean).join("/"));
+
+    bloco("Quem eu atendo");
+    item("Paciente ideal", v("ideal"));
+    item("O que ela sente antes", v("dor"));
+    item("Meu diferencial", v("diferencial"));
+    item("Quem eu não quero atrair", v("naoatende"));
+
+    bloco("Atendimentos");
+    item("Serviços", v("servicos"));
+    item("Formato", marcados("formato"));
+    item("e-Nutricionista", marcados("enutri"));
+    item("Como agendo hoje", v("agenda"));
+    item("Mostrar preço", marcados("preco"));
+    item("Valores", v("valores"));
+
+    bloco("Dúvidas e provas");
+    item("Perguntas frequentes", v("faq"));
+    item("Depoimentos", marcados("depo"));
+    item("Textos dos depoimentos", v("depotexto"));
+
+    bloco("Contato e domínio");
+    item("WhatsApp", v("zap"));
+    item("Instagram", v("insta"));
+    item("E-mail", v("email"));
+    item("Consultório", v("endereco"));
+    item("Nomes de domínio", v("dominio"));
+    item("Outras redes", v("redes"));
+
+    bloco("Referências visuais");
+    item("Sites que gosto", v("gosta"));
+    item("Sites que não gosto", v("odeia"));
+    item("Tom", marcados("tom"));
+
+    bloco("E-books");
+    item("Materiais que tenho", v("ebooks"));
+    item("Material gratuito", v("isca"));
+
+    bloco("Materiais separados");
+    item("Já separei", marcados("mat", "\n· ") ? "· " + marcados("mat", "\n· ") : "");
+    var faltando = [];
+    form.querySelectorAll("[name=mat]").forEach(function(c){
+      if (!c.checked) faltando.push(c.value);
+    });
+    if (faltando.length) item("Ainda falta separar", faltando.join(", "));
+
+    bloco("Outras coisas");
+    item("Observações", v("extra"));
+    item("Prazo desejado", v("prazo"));
+
+    return L.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  }
+
+  var saida = document.getElementById("saida");
+  var ok = document.getElementById("ok");
+  function recado(msg){ ok.textContent = msg; setTimeout(function(){ ok.textContent = ""; }, 4000); }
+
+  document.getElementById("gerar").addEventListener("click", function(){
+    saida.value = montar();
+    saida.scrollIntoView({ behavior: "smooth", block: "center" });
+    recado("Resumo gerado! Agora é só copiar. ✓");
+  });
+
+  document.getElementById("copiar").addEventListener("click", function(){
+    if (!saida.value) saida.value = montar();
+    saida.select();
+    saida.setSelectionRange(0, 999999);
+    var feito = false;
+    try { feito = document.execCommand("copy"); } catch(e){}
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(saida.value).then(function(){
+        recado("Copiado! Agora é só colar na conversa comigo. ✓");
+      }, function(){
+        recado(feito ? "Copiado! ✓" : "Seleciona o texto e copia na mão, por favor.");
+      });
+    } else {
+      recado(feito ? "Copiado! ✓" : "Seleciona o texto e copia na mão, por favor.");
+    }
+  });
+
+  document.getElementById("zapbtn").addEventListener("click", function(){
+    if (!saida.value) saida.value = montar();
+    window.open("https://wa.me/" + WHATSAPP_ANA + "?text=" + encodeURIComponent(saida.value), "_blank");
+  });
+
+  restaurar(); pintar(); progresso(); online();
+})();
+</script>
+
+</body>
+</html>
