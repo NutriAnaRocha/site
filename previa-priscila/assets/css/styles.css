@@ -180,6 +180,10 @@
   --serif-peso:400;
   --serif-ls:.02em;
   --sub-peso:600;
+  /* --serif-contorno: engrossa o traço da fonte de display por contorno, na
+     medida exata e igual em todo navegador. É o jeito honesto de dar peso a
+     uma face que só existe em um peso. 0 = desligado (padrão). */
+  --serif-contorno:.015em;
 
   /* Layout */
   --max:1200px;
@@ -210,7 +214,8 @@ ul{list-style:none}
 
 /* ---------- Tipografia ---------- */
 h1,h2,.serif{font-family:var(--serif);font-weight:var(--serif-peso);letter-spacing:var(--serif-ls);
-  color:var(--marca);line-height:1.15}
+  color:var(--marca);line-height:1.15;
+  -webkit-text-stroke:var(--serif-contorno) currentColor;paint-order:stroke fill}
 h1{font-size:clamp(2.1rem,5vw,3.4rem)}
 h2{font-size:clamp(1.7rem,3.6vw,2.5rem)}
 /* h3 é título pequeno: vai na --sub (que por padrão é a própria serif). */
@@ -661,7 +666,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .intro{--intro-dur:1200ms}
 .intro__logo{position:relative;text-align:center;padding:0 6vw;
   animation:introZoom calc(var(--intro-dur) * .29) ease-in calc(var(--intro-dur) * .79) forwards}
-.intro__word{font-family:var(--serif);color:#fff;font-weight:var(--serif-peso);white-space:nowrap;
+.intro__word{font-family:var(--serif);color:#fff;font-weight:var(--serif-peso);
+  -webkit-text-stroke:var(--serif-contorno) currentColor;paint-order:stroke fill;white-space:nowrap;
   font-size:clamp(2rem,7vw,3.4rem);line-height:1;filter:drop-shadow(0 8px 30px rgba(0,0,0,.4))}
 .intro__word span{display:inline-block;opacity:0;transform:translateY(.4em) scale(.85);
   animation:letterIn calc(var(--intro-dur) * .23) cubic-bezier(.2,.8,.2,1) forwards;
@@ -693,7 +699,8 @@ body.intro-lock{overflow:visible}
 .previa__cover{width:100%;max-width:300px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/4;background:var(--acento-suave)}
 .previa__cover img{width:100%;height:100%;object-fit:cover;display:block}
 .previa__eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--marca);opacity:.85}
-.previa h1{font-family:var(--serif);font-weight:var(--serif-peso);letter-spacing:var(--serif-ls);color:var(--marca);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
+.previa h1{font-family:var(--serif);font-weight:var(--serif-peso);letter-spacing:var(--serif-ls);
+  -webkit-text-stroke:var(--serif-contorno) currentColor;paint-order:stroke fill;color:var(--marca);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
 .previa__sub{color:var(--texto);font-size:1.02rem;margin-bottom:18px}
 .previa__resumo{margin-bottom:20px;line-height:1.6}
 .previa__list{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:10px;text-align:left}
