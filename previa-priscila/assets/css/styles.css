@@ -173,6 +173,13 @@
   /* Tipografia */
   --serif:"Italiana", Georgia, serif;
   --sans:"Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* --sub: fonte dos títulos pequenos (cards, preços, chamadas). Existe porque
+     fonte de display de peso único some em corpo pequeno — e pedir um peso que o
+     arquivo não tem faz o navegador FALSIFICAR o negrito. Por padrão repete a serif. */
+  --sub:"Raleway", "Segoe UI", system-ui, sans-serif;
+  --serif-peso:400;
+  --serif-ls:.02em;
+  --sub-peso:600;
 
   /* Layout */
   --max:1200px;
@@ -202,10 +209,13 @@ a{color:inherit;text-decoration:none}
 ul{list-style:none}
 
 /* ---------- Tipografia ---------- */
-h1,h2,h3,.serif{font-family:var(--serif);font-weight:900;color:var(--marca);line-height:1.15}
+h1,h2,.serif{font-family:var(--serif);font-weight:var(--serif-peso);letter-spacing:var(--serif-ls);
+  color:var(--marca);line-height:1.15}
 h1{font-size:clamp(2.1rem,5vw,3.4rem)}
 h2{font-size:clamp(1.7rem,3.6vw,2.5rem)}
-h3{font-size:clamp(1.15rem,2vw,1.4rem)}
+/* h3 é título pequeno: vai na --sub (que por padrão é a própria serif). */
+h3{font-family:var(--sub);font-weight:var(--sub-peso);color:var(--marca);line-height:1.2;
+  font-size:clamp(1.15rem,2vw,1.4rem)}
 p{margin:0 0 1rem}
 .eyebrow{
   font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.22em;
@@ -371,7 +381,7 @@ section{padding:96px 0}
   gap:14px;color:var(--marca);text-align:center;padding:28px 22px;position:relative}
 .ebook-cover::after{content:"";position:absolute;inset:14px;border:1px solid rgba(var(--marca-rgb),.22);border-radius:8px;pointer-events:none}
 .ebook-cover .ec-tag{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.7}
-.ebook-cover .ec-title{font-family:var(--serif);font-weight:900;font-size:1.18rem;line-height:1.22}
+.ebook-cover .ec-title{font-family:var(--sub);font-weight:var(--sub-peso);font-size:1.18rem;line-height:1.22}
 .ebook-cover .ec-logo{width:46px;height:46px;object-fit:contain;opacity:.9}
 .ebook-cover .ec-author{font-family:var(--serif);font-size:.75rem;font-style:italic;opacity:.75}
 .ebook-cover--full{padding:0}
@@ -379,7 +389,7 @@ section{padding:96px 0}
 .ebook-cover--full img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .ebook-body{padding:24px 22px;display:flex;flex-direction:column;flex:1}
 .ebook-body h3{margin-bottom:.3rem}
-.ebook-body .price{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:1.35rem;margin:6px 0 16px}
+.ebook-body .price{font-family:var(--sub);font-weight:var(--sub-peso);color:var(--marca);font-size:1.35rem;margin:6px 0 16px}
 .ebook-body ul{margin:0 0 18px;display:flex;flex-direction:column;gap:7px}
 .ebook-body ul li{font-size:.9rem;display:flex;gap:8px;align-items:flex-start}
 .ebook-body ul li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acento);margin-top:7px;flex:none}
@@ -546,7 +556,7 @@ section{padding:96px 0}
 .paywall ul.inside li{position:relative;padding-left:30px;font-size:.96rem}
 .paywall ul.inside li::before{content:"✓";position:absolute;left:0;top:0;color:var(--marca);font-weight:800}
 .paywall .price-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px}
-.paywall .price-now{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:2.2rem}
+.paywall .price-now{font-family:var(--sub);font-weight:var(--sub-peso);color:var(--marca);font-size:2.2rem}
 .paywall .price-was{color:var(--texto-suave);text-decoration:line-through;font-size:1.05rem}
 .paywall .price-note{font-size:.82rem;color:var(--texto-suave);margin-bottom:22px}
 .paywall .guarantee{font-size:.85rem;color:var(--texto-suave);margin-top:16px;display:flex;
@@ -578,7 +588,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nf-biblio-cta:hover{transform:translateY(-2px)}
 .nf-footer .nf-biblio-cta{margin-top:.6rem}
 .shelf{margin-top:38px;position:relative}
-.shelf__title{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.3rem;margin:0 0 16px}
+.shelf__title{font-family:var(--sub);font-weight:var(--sub-peso);color:#fff;font-size:1.3rem;margin:0 0 16px}
 .shelf__scroller{position:relative}
 .shelf__row{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;
   padding:8px 2px 20px;-ms-overflow-style:none;scrollbar-width:none}
@@ -591,7 +601,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nf-card__poster--soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
   text-align:center;padding:26px 20px;background:linear-gradient(150deg,var(--acento-suave),var(--acento))}
 .nf-card__poster--soon .ec-tag{font-family:var(--sans);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--marca);opacity:.75}
-.nf-card__poster--soon .ec-title{font-family:var(--serif);font-weight:900;font-size:1.05rem;color:var(--marca);line-height:1.2}
+.nf-card__poster--soon .ec-title{font-family:var(--sub);font-weight:var(--sub-peso);font-size:1.05rem;color:var(--marca);line-height:1.2}
 .nf-card__poster--soon .ec-logo{width:42px;height:42px;object-fit:contain;opacity:.9}
 .nf-badge{position:absolute;top:10px;right:10px;font-family:var(--sans);font-weight:700;font-size:.72rem;
   padding:5px 11px;border-radius:999px;backdrop-filter:blur(4px)}
@@ -627,7 +637,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .nf-plano__text{flex:1 1 auto;min-width:0}
 .nf-plano__tag{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
   color:var(--marca);opacity:.75}
-.nf-plano__text h3{font-family:var(--serif);font-weight:900;font-size:1.42rem;line-height:1.2;color:var(--marca);margin:.35rem 0 .45rem}
+.nf-plano__text h3{font-family:var(--sub);font-weight:var(--sub-peso);font-size:1.42rem;line-height:1.2;color:var(--marca);margin:.35rem 0 .45rem}
 .nf-plano__text p{font-size:.94rem;line-height:1.5;color:rgba(74,14,55,.85);margin:0}
 .nf-plano__cta{flex:0 0 auto;white-space:nowrap}
 @media (max-width:760px){
@@ -651,7 +661,7 @@ a:focus-visible,button:focus-visible,input:focus-visible{
 .intro{--intro-dur:1200ms}
 .intro__logo{position:relative;text-align:center;padding:0 6vw;
   animation:introZoom calc(var(--intro-dur) * .29) ease-in calc(var(--intro-dur) * .79) forwards}
-.intro__word{font-family:var(--serif);color:#fff;font-weight:900;white-space:nowrap;
+.intro__word{font-family:var(--serif);color:#fff;font-weight:var(--serif-peso);white-space:nowrap;
   font-size:clamp(2rem,7vw,3.4rem);line-height:1;filter:drop-shadow(0 8px 30px rgba(0,0,0,.4))}
 .intro__word span{display:inline-block;opacity:0;transform:translateY(.4em) scale(.85);
   animation:letterIn calc(var(--intro-dur) * .23) cubic-bezier(.2,.8,.2,1) forwards;
@@ -683,7 +693,7 @@ body.intro-lock{overflow:visible}
 .previa__cover{width:100%;max-width:300px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/4;background:var(--acento-suave)}
 .previa__cover img{width:100%;height:100%;object-fit:cover;display:block}
 .previa__eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--marca);opacity:.85}
-.previa h1{font-family:var(--serif);color:var(--marca);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
+.previa h1{font-family:var(--serif);font-weight:var(--serif-peso);letter-spacing:var(--serif-ls);color:var(--marca);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
 .previa__sub{color:var(--texto);font-size:1.02rem;margin-bottom:18px}
 .previa__resumo{margin-bottom:20px;line-height:1.6}
 .previa__list{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:10px;text-align:left}
@@ -763,7 +773,7 @@ body.lead-open{overflow:hidden}
 .acomp__item small{display:block;color:rgba(255,255,255,.76);font-size:.85rem;line-height:1.42}
 .acomp__cta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
   border-radius:18px;padding:26px 24px;text-align:center}
-.acomp__chamada{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.12rem;
+.acomp__chamada{font-family:var(--sub);font-weight:var(--sub-peso);color:#fff;font-size:1.12rem;
   line-height:1.3;margin:0 0 16px}
 .acomp__cta .btn{white-space:nowrap}
 .acomp__nota{font-size:.82rem;color:rgba(255,255,255,.72);margin:14px 0 0;line-height:1.45}
@@ -814,7 +824,7 @@ body.lead-open{overflow:hidden}
   background:#FBECEC;color:#A32020;border:1px solid #F0C9C9;border-radius:999px;
   padding:6px 14px;font-size:.72rem;font-weight:600;letter-spacing:.04em;
 }
-.app-mercado__prod{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:1.3rem;line-height:1.2}
+.app-mercado__prod{font-family:var(--sub);font-weight:var(--sub-peso);color:var(--marca);font-size:1.3rem;line-height:1.2}
 .app-mercado__linha{font-size:.9rem;line-height:1.5}
 .app-mercado__troca{
   font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
@@ -847,7 +857,7 @@ body.lead-open{overflow:hidden}
   flex:0 0 auto;width:44px;height:44px;border-radius:50%;
   display:grid;place-items:center;
   background:var(--marca);color:var(--branco);
-  font-family:var(--serif);font-weight:900;font-size:1.25rem;line-height:1;
+  font-family:var(--sub);font-weight:var(--sub-peso);font-size:1.25rem;line-height:1;
   box-shadow:0 6px 18px rgba(var(--marca-rgb),.28);
 }
 .passos__item h3{margin-bottom:.35rem}
