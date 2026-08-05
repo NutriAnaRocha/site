@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar na minha biblioteca — Priscila Melo · Nutricionista</title>
+<meta name="description" content="Acesse a sua biblioteca de materiais de Priscila Melo · Nutricionista.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#856051">
+<link rel="canonical" href="https://nutripriscilamelo.com.br/entrar.html">
+<link rel="icon" href="assets/img/simbolo.png">
+<link rel="apple-touch-icon" href="assets/img/simbolo.png">
+<!-- Fontes hospedadas no próprio site: sem CSS render-blocking de outro domínio
+     e sem mandar o IP de cada visitante para o Google (LGPD). O preload pede o
+     arquivo junto com o CSS, em vez de só depois de o navegador lê-lo.
+     Se o gerador não tiver conseguido baixar as fontes, cai no <link> do Google. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Italiana-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Raleway-latin.woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/css/styles.css">
+<!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Priscila Melo · Nutricionista">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Entrar na minha biblioteca — Priscila Melo · Nutricionista">
+<meta property="og:description" content="Acesse a sua biblioteca de materiais de Priscila Melo · Nutricionista.">
+<meta property="og:url" content="https://nutripriscilamelo.com.br/entrar.html">
+<meta property="og:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:secure_url" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Priscila Melo — Nutricionista">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Entrar na minha biblioteca — Priscila Melo · Nutricionista">
+<meta name="twitter:description" content="Acesse a sua biblioteca de materiais de Priscila Melo · Nutricionista.">
+<meta name="twitter:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<link rel="stylesheet" href="assets/css/biblioteca.css">
+</head>
+<body>
+
+<header class="nav nav-scrolled" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo.png" alt="Priscila Melo — Nutricionista" width="700" height="205"></a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="menu">
+      <a href="#inicio">Início</a>
+      <a href="#ajuda">Como te ajudo</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="bg-acento vip" style="padding-top:calc(var(--nav-h) + 60px)">
+  <div class="wrap">
+    <div class="box">
+
+      <!-- ---------- Passo: entrar ---------- -->
+      <div data-step="entrar">
+        <span class="eyebrow" data-entrar-eyebrow>Minha biblioteca</span>
+        <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem">Que bom te ver de novo 🌸</h1>
+        <p class="lead" style="margin-bottom:22px" data-entrar-sub>Entre com o seu e-mail para ler os materiais que você já tem.</p>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="email">Seu e-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@email.com" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="senha">Sua senha</label>
+            <input type="password" id="senha" name="senha" placeholder="Sua senha" autocomplete="current-password" required>
+          </div>
+          <p class="lead-modal__err" data-err hidden></p>
+          <button type="submit" class="btn btn-primary btn-block" data-submit>Entrar na minha biblioteca →</button>
+        </form>
+
+        <p class="microcopy" style="margin-top:14px">
+          <a href="#" id="link-esqueci">Esqueci minha senha</a>
+        </p>
+        <p class="microcopy" style="margin-top:18px;border-top:1px solid var(--acento-borda);padding-top:16px" data-entrar-rodape>
+          Ainda não tem conta? <a href="#" data-ir-passo="cadastro">Criar a minha conta →</a>
+        </p>
+      </div>
+
+      <!-- ---------- Passo: criar conta ----------
+           Criar conta não libera material nenhum: quem entra novo vê só o que
+           é gratuito. O resto a Priscila libera à mão no painel. -->
+      <div data-step="cadastro" hidden>
+        <span class="eyebrow">Criar conta</span>
+        <!-- h2 e não h1: os três passos convivem no mesmo documento e só um fica visível.
+             Três <h1> na mesma página confundem leitor de tela e buscador. -->
+        <h2 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem">Criar a minha conta 🌸</h2>
+        <p class="lead" style="margin-bottom:22px">Leva um minuto. Depois é só entrar sempre que quiser ler.</p>
+
+        <form id="cadastro-form" novalidate>
+          <div class="field">
+            <label for="c-nome">Como você quer ser chamada?</label>
+            <input type="text" id="c-nome" placeholder="Seu nome" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="c-email">Seu e-mail</label>
+            <input type="email" id="c-email" placeholder="voce@email.com" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="c-senha">Crie uma senha</label>
+            <input type="password" id="c-senha" placeholder="Mínimo de 6 caracteres" autocomplete="new-password" required>
+          </div>
+          <p class="lead-modal__err" data-err-cadastro hidden></p>
+          <button type="submit" class="btn btn-primary btn-block" data-submit-cadastro>Criar a minha conta →</button>
+        </form>
+
+        <p class="microcopy" style="margin-top:18px">
+          Já tem conta? <a href="#" data-ir-passo="entrar">Entrar →</a>
+        </p>
+        <p class="microcopy" style="margin-top:10px">
+          Ao criar a conta você concorda com os <a href="termos.html">Termos de Uso</a>
+          e a <a href="privacidade.html">Política de Privacidade</a>.
+        </p>
+      </div>
+
+      <!-- ---------- Passo: criar senha (convite / recuperação) ---------- -->
+      <div data-step="senha" hidden>
+        <span class="eyebrow">Quase lá</span>
+        <h2 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem" data-senha-titulo>Crie a sua senha 🌸</h2>
+        <p class="lead" style="margin-bottom:22px" data-senha-sub>Escolha uma senha para acessar a sua biblioteca sempre que quiser.</p>
+
+        <form id="senha-form" novalidate>
+          <div class="field">
+            <label for="senha1">Nova senha</label>
+            <input type="password" id="senha1" placeholder="Mínimo de 6 caracteres" autocomplete="new-password" required>
+          </div>
+          <div class="field">
+            <label for="senha2">Confirmar nova senha</label>
+            <input type="password" id="senha2" placeholder="Repita a senha" autocomplete="new-password" required>
+          </div>
+          <p class="lead-modal__err" data-err2 hidden></p>
+          <button type="submit" class="btn btn-primary btn-block" data-submit2>Salvar e entrar →</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Priscila Melo — Nutricionista" width="700" height="205">
+      <p style="font-size:.9rem;max-width:34ch">Nutrição para a saúde da mulher.</p>
+    </div>
+    <div>
+      <h2>Navegação</h2>
+      <ul>
+        <li><a href="#ajuda">Como te ajudo</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#consultas">Consultas</a></li>
+        <li><a href="#ebooks">Materiais</a></li>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Institucional</h2>
+      <ul>
+        <li><a href="privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos.html">Termos de Uso</a></li>
+        <li><a data-wa="agendar">Agendar Consulta</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar">© <span data-year>2026</span> Priscila Melo — Nutricionista · CRN-4 26100670.</div></div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/supabase-client.js" defer></script>
+<script src="assets/js/conta.js" defer></script>
+</body>
+</html>

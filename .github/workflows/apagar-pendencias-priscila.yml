@@ -1,0 +1,48 @@
+# Apaga sozinha a página temporária de pendências e a prévia do site da Priscila.
+#
+# `pendencias-priscila/` é um formulário mandado para a cliente e `previa-priscila/` é o
+# site dela em rascunho, hospedado aqui só até sair do ar para o domínio próprio.
+# Depois de 15/09/2026 este workflow remove as duas pastas, remove a si mesmo e commita.
+# Não precisa de ninguém lembrar de limpar.
+name: Apagar pendências e prévia da Priscila
+
+on:
+  schedule:
+    - cron: "23 9 * * *"   # todo dia, 9h23 UTC (6h23 em Brasília)
+  workflow_dispatch:        # e dá para forçar antes do prazo pelo painel do GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  apagar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apagar se o prazo venceu
+        run: |
+          set -euo pipefail
+          VENCE="2026-09-15"
+          HOJE=$(date -u +%F)
+          if [[ "$HOJE" < "$VENCE" ]]; then
+            echo "Hoje é $HOJE; o prazo vence em $VENCE. Nada a fazer."
+            exit 0
+          fi
+          ALGO=0
+          for PASTA in pendencias-priscila previa-priscila; do
+            if [[ -d "$PASTA" ]]; then
+              git rm -r --quiet "$PASTA"
+              ALGO=1
+            fi
+          done
+          if [[ "$ALGO" == "0" ]]; then
+            echo "As pastas já não existem. Nada a fazer."
+            exit 0
+          fi
+          echo "Prazo vencido ($HOJE >= $VENCE). Removendo."
+          git rm --quiet .github/workflows/apagar-pendencias-priscila.yml
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Remove a pagina de pendencias e a previa da Priscila (prazo vencido)"
+          git push

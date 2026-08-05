@@ -1,0 +1,351 @@
+/* =========================================================
+   Priscila Melo · Nutricionista — configuração e interações
+
+   ⚠️ Gerado por Gerar-Site-Nutri a partir de site.json.
+      O bloco CONFIG/MSG abaixo é reescrito a cada geração —
+      mudanças de conteúdo vão no site.json, não aqui.
+   ========================================================= */
+
+/* ===== EDITE AQUI ===== */
+const CONFIG = {
+  /* Endereço público do site. Fonte única da verdade para a URL.
+     O <head> de cada página carrega uma cópia build-time deste valor em
+     rel="canonical", og:url, og:image, twitter:image e no JSON-LD — HTML
+     estático não lê JS antes de o robô ler a meta tag, então a duplicação é
+     inevitável. Ao trocar de domínio: mudar `site_url` no site.json, regerar
+     e publicar um redirect 301 do endereço antigo, para não perder o que já
+     está indexado. */
+  SITE_URL: "https://nutripriscilamelo.com.br",
+  WHATS: "5522999221386",
+  INSTA: "https://www.instagram.com/priscilamelonutri_",
+  EMAIL: "priscilasilvamelo2025@gmail.com",
+  LOCAL: "",   // link do Google Maps do consultório (opcional; some se vazio)
+};
+
+/* Mensagens pré-preenchidas de cada ação (WhatsApp) */
+const MSG = {
+  agendar: "Olá, Priscila! Gostaria de agendar uma consulta.",
+  consulta: "Olá, Priscila! Gostaria de agendar a consulta nutricional individual.",
+  programa: "Olá, Priscila! Tenho interesse no programa de acompanhamento trimestral.",
+  online: "Olá, Priscila! Quero agendar uma consulta online.",
+  presencial: "Olá, Priscila! Quero agendar uma consulta presencial em Nova Friburgo.",
+  vip: (nome) => `Oi, Priscila! ${nome ? nome + ", " : ""}quero receber o Arsenal de receitas e os materiais gratuitos.`,
+  ebook: (titulo) => `Olá, Priscila! Tenho interesse no material "${titulo}".`,
+  contato: "Olá, Priscila! Vim pelo seu site e gostaria de falar com você.",
+  acompanhamento: "Olá, Priscila! Tenho interesse no acompanhamento nutricional.",
+  comprar: (titulo) => `Olá, Priscila! Quero pedir acesso ao material "${titulo}".`,
+};
+
+/* Módulo de vendas DESLIGADO neste site: nada de pagamento é montado, e o
+   objeto sequer existe — quem usa ele também sai do arquivo. Para ligar,
+   é aditivo contratual — ver escopo-contrato.md na skill. */
+
+const PROGRAMA = {};
+
+/* Biblioteca de materiais: onde quem JÁ tem acesso faz login e lê.
+   É uma página do próprio site (biblioteca.html + entrar.html), com a marca
+   da nutri. Se vazio, os links "Acessar minha biblioteca" somem. Caminho
+   relativo: só use [data-biblioteca] em páginas da raiz. */
+const PLATAFORMA_URL = "biblioteca.html";
+
+/* Captura de leads dos materiais gratuitos (grava telefone no Supabase).
+   Depois de deixar nome + WhatsApp, a pessoa lê o material na hora. */
+const LEADS = {
+  SUPABASE_URL: "",
+  SUPABASE_ANON_KEY: "",
+  TABLE: "leads",
+};
+
+const wa = (msg) => `https://wa.me/${CONFIG.WHATS}?text=${encodeURIComponent(msg)}`;
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---- Começa no topo (scrollRestoration=manual já evita cair no meio) ---- */
+  if (!location.hash) window.scrollTo(0, 0);
+
+  /* ---- Guia de boas-vindas: mostra o que o site oferece (1x por sessão) ---- */
+  const guide = document.getElementById("guide");
+  const openGuide = () => {
+    if (!guide) return;
+    guide.classList.add("open");
+    document.body.classList.add("lead-open");
+  };
+  const closeGuide = () => {
+    if (!guide) return;
+    guide.classList.remove("open");
+    document.body.classList.remove("lead-open");
+  };
+  const maybeShowGuide = () => {
+    if (!guide || location.hash) return;
+    try { if (sessionStorage.getItem("guideSeen")) return; sessionStorage.setItem("guideSeen", "1"); } catch (e) {}
+    openGuide();
+  };
+  if (guide) {
+    guide.querySelectorAll("[data-guide-close]").forEach(el => el.addEventListener("click", closeGuide));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && guide.classList.contains("open")) closeGuide(); });
+    // Botões de destino: rola suave até a seção e fecha o guia
+    guide.querySelectorAll("[data-goto]").forEach(el => {
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        const alvo = document.querySelector(el.getAttribute("data-goto"));
+        closeGuide();
+        if (alvo) setTimeout(() => alvo.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+      });
+    });
+    // Botão flutuante que reabre o guia a qualquer momento
+    const fab = document.getElementById("guide-fab");
+    if (fab) fab.addEventListener("click", openGuide);
+  }
+
+  /* ---- Abertura (splash): fecha após a animação; pode pular clicando ---- */
+  const intro = document.getElementById("intro");
+  if (intro && !document.documentElement.classList.contains("no-intro")) {
+    let ended = false;
+    const finish = () => {
+      if (ended) return; ended = true;
+      intro.classList.add("hide");
+      setTimeout(() => intro.classList.add("done"), 600);
+      setTimeout(maybeShowGuide, 700); // guia entra quando a abertura sai
+    };
+    // O tempo mora no CSS (--intro-dur, gerado de marca.layout.intro_ms), para
+    // animação e permanência nunca saírem de sincronia.
+    const dur = parseFloat(getComputedStyle(intro).getPropertyValue("--intro-dur"))
+                || 1200;
+    setTimeout(finish, dur);
+    intro.addEventListener("click", finish);
+  } else {
+    // Sem abertura (revisita na sessão / menos animação): mostra o guia logo
+    setTimeout(maybeShowGuide, 500);
+  }
+
+  /* ---- Botões dos planos do programa ----
+     Uso no HTML: <a data-programa="trimestral">. Sem link cadastrado,
+     manda para o WhatsApp com o plano já escrito na mensagem. */
+  document.querySelectorAll("[data-programa]").forEach(el => {
+    const plano = el.getAttribute("data-programa");
+    const link = PROGRAMA[plano];
+    if (link) {
+      el.href = link;
+    } else {
+      el.href = wa(MSG.programa_plano(plano));
+    }
+    el.target = "_blank";
+    el.rel = "noopener";
+  });
+
+  /* ---- Preenche links de WhatsApp por data-attribute ----
+     Uso no HTML: <a data-wa="agendar"> ou <a data-wa="ebook" data-titulo="..."> */
+  document.querySelectorAll("[data-wa]").forEach(el => {
+    const key = el.getAttribute("data-wa");
+    const titulo = el.getAttribute("data-titulo") || "";
+
+    let text;
+    if (key === "vip")        text = MSG.vip("");
+    else if (key === "ebook") text = MSG.ebook(titulo);
+    else if (key === "comprar") text = MSG.comprar(titulo);
+    else text = MSG[key] || MSG.contato;
+    el.href = wa(text);
+    el.target = "_blank";
+    el.rel = "noopener";
+  });
+
+  /* ---- E-books grátis: captura nome + WhatsApp (lead) e libera a leitura ----
+     Uso no HTML: <a data-lead data-titulo="Nome do e-book" data-reader="ebooks/x.html">
+     Se data-reader estiver vazio, o material ainda não existe: só captura o lead. */
+  const modal = document.getElementById("lead-modal");
+  if (modal) {
+    const form      = document.getElementById("lead-form");
+    const inNome    = document.getElementById("lead-nome");
+    const inTel     = document.getElementById("lead-tel");
+    const elErr     = modal.querySelector("[data-lead-err]");
+    const elTitulo  = modal.querySelector("[data-lead-titulo]");
+    const stepForm  = modal.querySelector('[data-lead-step="form"]');
+    const stepOk    = modal.querySelector('[data-lead-step="ok"]');
+    const okMsg     = modal.querySelector("[data-lead-okmsg]");
+    const okCta     = modal.querySelector("[data-lead-cta]");
+    const btn       = modal.querySelector("[data-lead-submit]");
+    let ctx = { titulo: "", reader: "" };
+
+    const openModal = (titulo, reader) => {
+      ctx = { titulo, reader };
+      elTitulo.textContent = titulo;
+      elErr.hidden = true; elErr.textContent = "";
+      form.reset();
+      stepOk.hidden = true; stepForm.hidden = false;
+      btn.classList.remove("is-loading"); btn.textContent = "Liberar meu e-book →";
+      modal.classList.add("open"); modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("lead-open");
+      setTimeout(() => inNome.focus(), 60);
+    };
+    const closeModal = () => {
+      modal.classList.remove("open"); modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("lead-open");
+    };
+
+    document.querySelectorAll("[data-lead]").forEach(el => {
+      el.style.cursor = "pointer";
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal(el.getAttribute("data-titulo") || "e-book", el.getAttribute("data-reader") || "");
+      });
+    });
+    modal.querySelectorAll("[data-lead-close]").forEach(el => el.addEventListener("click", closeModal));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.classList.contains("open")) closeModal(); });
+
+    const showErro = (msg) => { elErr.textContent = msg; elErr.hidden = false; };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nome = inNome.value.trim();
+      const tel  = inTel.value.trim();
+      const digitos = tel.replace(/\D/g, "");
+      if (nome.length < 2)   return showErro("Por favor, digite seu nome.");
+      if (digitos.length < 10) return showErro("Digite um WhatsApp válido, com DDD.");
+      elErr.hidden = true;
+      btn.classList.add("is-loading"); btn.textContent = "Enviando…";
+
+      // Grava o lead no Supabase. Se falhar (rede/config), NÃO bloqueia a
+      // pessoa: liberamos o e-book do mesmo jeito e registramos o erro no
+      // console — a captura nunca deve custar o material a quem se cadastrou.
+      try {
+        if (!LEADS) throw new Error("captura de lead desligada neste site");
+        const resp = await fetch(`${LEADS.SUPABASE_URL}/rest/v1/${LEADS.TABLE}`, {
+          method: "POST",
+          headers: {
+            "apikey": LEADS.SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${LEADS.SUPABASE_ANON_KEY}`,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal",
+          },
+          body: JSON.stringify({ nome, telefone: tel, telefone_digitos: digitos, ebook: ctx.titulo, origem: "site" }),
+        });
+        if (!resp.ok) console.error("[lead] Supabase respondeu", resp.status, await resp.text().catch(() => ""));
+      } catch (err) {
+        console.error("[lead] falha ao gravar lead:", err);
+      }
+
+      // Passo final (sempre mostrado após o envio)
+      stepForm.hidden = true; stepOk.hidden = false;
+      if (ctx.reader) {
+        okMsg.textContent = "Seu e-book está liberado — é só clicar no botão abaixo. Obrigada! 🌸";
+        okCta.href = ctx.reader; okCta.hidden = false;
+      } else {
+        okMsg.textContent = "Pronto! A Priscila te envia o material no WhatsApp.";
+        okCta.hidden = true;
+      }
+    });
+  }
+
+  /* ---- Compartilhar / copiar link (páginas de prévia) ---- */
+  const shareMsg = (url) => encodeURIComponent("Olha esse material da nutricionista Priscila Melo" + "\n" + url);
+  document.querySelectorAll("[data-share-wa]").forEach(el => {
+    el.href = `https://wa.me/?text=${shareMsg(location.href)}`;
+    el.target = "_blank"; el.rel = "noopener";
+  });
+  document.querySelectorAll("[data-copy]").forEach(el => {
+    el.addEventListener("click", async () => {
+      const original = el.textContent;
+      try { await navigator.clipboard.writeText(location.href); }
+      catch (e) { prompt("Copie o link:", location.href); return; }
+      el.textContent = "Link copiado ✓";
+      setTimeout(() => { el.textContent = original; }, 1800);
+    });
+  });
+
+  /* ---- Prateleiras Netflix: setas + capa clicável ---- */
+  document.querySelectorAll(".shelf__scroller").forEach(scroller => {
+    const row  = scroller.querySelector(".shelf__row");
+    const prev = scroller.querySelector("[data-shelf-prev]");
+    const next = scroller.querySelector("[data-shelf-next]");
+    if (!row) return;
+    const step = () => Math.max(220, row.clientWidth * 0.8);
+    const updateArrows = () => {
+      const overflow = row.scrollWidth - row.clientWidth > 8;
+      const atStart = row.scrollLeft <= 4;
+      const atEnd   = row.scrollLeft >= row.scrollWidth - row.clientWidth - 4;
+      prev && prev.classList.toggle("show", overflow && !atStart);
+      next && next.classList.toggle("show", overflow && !atEnd);
+    };
+    prev && prev.addEventListener("click", () => row.scrollBy({ left: -step(), behavior: "smooth" }));
+    next && next.addEventListener("click", () => row.scrollBy({ left:  step(), behavior: "smooth" }));
+    row.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    updateArrows();
+  });
+  // Clicar na capa aciona o botão do card (Netflix-like)
+  document.querySelectorAll(".nf-card__poster").forEach(poster => {
+    poster.addEventListener("click", () => {
+      const cta = poster.closest(".nf-card")?.querySelector(".nf-card__cta");
+      if (cta) cta.click();
+    });
+  });
+
+  /* ---- Biblioteca de e-books (p/ quem já comprou) ----
+     Uso: <a data-biblioteca>Acessar minha biblioteca</a>.
+     Se PLATAFORMA_URL estiver vazio, o link é removido.
+     Link externo abre em nova aba; interno (a biblioteca do site) abre na
+     mesma aba — é navegação dentro do próprio site. */
+  document.querySelectorAll("[data-biblioteca]").forEach(el => {
+    if (!PLATAFORMA_URL) { el.remove(); return; }
+    el.href = PLATAFORMA_URL;
+    if (/^https?:\/\//i.test(PLATAFORMA_URL)) { el.target = "_blank"; el.rel = "noopener"; }
+  });
+
+  /* ---- Links diretos (Instagram / e-mail / localização) ---- */
+  document.querySelectorAll("[data-insta]").forEach(el => { el.href = CONFIG.INSTA; el.target="_blank"; el.rel="noopener"; });
+  document.querySelectorAll("[data-email]").forEach(el => { el.href = "mailto:" + CONFIG.EMAIL; });
+  document.querySelectorAll("[data-local]").forEach(el => {
+    if (CONFIG.LOCAL) { el.href = CONFIG.LOCAL; el.target="_blank"; el.rel="noopener"; }
+    else { el.style.display = "none"; }
+  });
+
+  /* ---- Formulário VIP: nome (opcional) monta a mensagem ---- */
+  const vipForm = document.getElementById("vip-form");
+  if (vipForm) {
+    const send = () => {
+      const nome = (document.getElementById("vip-nome")?.value || "").trim();
+      window.open(wa(MSG.vip(nome)), "_blank", "noopener");
+    };
+    vipForm.addEventListener("submit", (e) => { e.preventDefault(); send(); });
+  }
+
+  /* ---- Nav: fundo ao rolar ---- */
+  const nav = document.querySelector(".nav");
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add("nav-scrolled");
+    else nav.classList.remove("nav-scrolled");
+  };
+  if (nav) { onScroll(); window.addEventListener("scroll", onScroll, { passive:true }); }
+
+  /* ---- Menu mobile (hambúrguer) ---- */
+  const toggle = document.querySelector(".nav-toggle");
+  const links  = document.querySelector(".nav-links");
+  if (toggle && links) {
+    toggle.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      toggle.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      links.classList.remove("open");
+      toggle.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }));
+  }
+
+  /* ---- Reveal ao rolar (respeita prefers-reduced-motion) ---- */
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reveals = document.querySelectorAll(".reveal");
+  if (prefersReduced || !("IntersectionObserver" in window)) {
+    reveals.forEach(el => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => { if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold:0.14, rootMargin:"0px 0px -40px 0px" });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  /* ---- Ano no rodapé ---- */
+  document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
+});

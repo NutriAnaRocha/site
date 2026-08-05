@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minha Biblioteca — Priscila Melo · Nutricionista</title>
+<meta name="description" content="Seus materiais de Priscila Melo · Nutricionista, para ler quando quiser.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#856051">
+<link rel="canonical" href="https://nutripriscilamelo.com.br/biblioteca.html">
+<link rel="icon" href="assets/img/simbolo.png">
+<link rel="apple-touch-icon" href="assets/img/simbolo.png">
+<!-- Fontes hospedadas no próprio site: sem CSS render-blocking de outro domínio
+     e sem mandar o IP de cada visitante para o Google (LGPD). O preload pede o
+     arquivo junto com o CSS, em vez de só depois de o navegador lê-lo.
+     Se o gerador não tiver conseguido baixar as fontes, cai no <link> do Google. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Italiana-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Raleway-latin.woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/css/styles.css">
+<!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Priscila Melo · Nutricionista">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Minha Biblioteca — Priscila Melo · Nutricionista">
+<meta property="og:description" content="Seus materiais de Priscila Melo · Nutricionista, para ler quando quiser.">
+<meta property="og:url" content="https://nutripriscilamelo.com.br/biblioteca.html">
+<meta property="og:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:secure_url" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Priscila Melo — Nutricionista">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Minha Biblioteca — Priscila Melo · Nutricionista">
+<meta name="twitter:description" content="Seus materiais de Priscila Melo · Nutricionista, para ler quando quiser.">
+<meta name="twitter:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<link rel="stylesheet" href="assets/css/biblioteca.css">
+</head>
+<body>
+
+<header class="nav nav-scrolled" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo.png" alt="Priscila Melo — Nutricionista" width="700" height="205"></a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="menu">
+      <a href="#inicio">Início</a>
+      <a href="#ajuda">Como te ajudo</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section style="padding-top:calc(var(--nav-h) + 56px)">
+  <div class="wrap">
+    <div class="bib-head">
+      <div>
+        <span class="eyebrow">Minha biblioteca</span>
+        <h1 style="font-size:clamp(1.9rem,4vw,2.6rem);margin:.2rem 0 .3rem" id="bib-hi">Minha Biblioteca</h1>
+        <p class="lead" style="margin:0">Seus materiais, para ler quando quiser.</p>
+      </div>
+      <div class="bib-head__acoes">
+        <!-- Só a Priscila vê (painel.js confere o papel no banco): daqui ela
+             chega ao painel sem ter de digitar a URL na mão. -->
+        <a class="bib-sair bib-sair--forte" id="bib-painel" hidden href="painel.html">Liberar acesso →</a>
+        <button class="bib-sair" type="button" data-logout>Sair</button>
+      </div>
+    </div>
+
+    <p id="bib-loading">Carregando a sua biblioteca…</p>
+    <div id="bib-catalogo"></div>
+  </div>
+</section>
+
+<!-- Leitor em tela cheia -->
+<div class="bib-reader" id="bib-reader" hidden>
+  <div class="bib-reader__bar">
+    <strong id="bib-reader-title">Material</strong>
+    <button class="bib-reader__close" type="button" data-fechar-leitor>Fechar ✕</button>
+  </div>
+  <iframe id="bib-frame" title="Leitor de material" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Priscila Melo — Nutricionista" width="700" height="205">
+      <p style="font-size:.9rem;max-width:34ch">Nutrição para a saúde da mulher.</p>
+    </div>
+    <div>
+      <h2>Navegação</h2>
+      <ul>
+        <li><a href="#ajuda">Como te ajudo</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#consultas">Consultas</a></li>
+        <li><a href="#ebooks">Materiais</a></li>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Institucional</h2>
+      <ul>
+        <li><a href="privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos.html">Termos de Uso</a></li>
+        <li><a data-wa="agendar">Agendar Consulta</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar">© <span data-year>2026</span> Priscila Melo — Nutricionista · CRN-4 26100670.</div></div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/supabase-client.js" defer></script>
+<script src="assets/js/biblioteca.js" defer></script>
+</body>
+</html>

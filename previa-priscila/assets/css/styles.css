@@ -1,0 +1,925 @@
+/* =========================================================
+   Priscila Melo · Nutricionista — Site Institucional
+   Sistema de design (tokens reais da marca)
+
+   ⚠️ Gerado por Gerar-Site-Nutri a partir de site.json.
+      Editar aqui é seguro para regras novas, mas o bloco :root
+      e o @font-face abaixo são reescritos a cada geração.
+   ========================================================= */
+
+/* ---------- Fontes ---------- */
+/* A fonte de display vem do Google Fonts — não há @font-face local.
+   Se a marca usar fonte licenciada, declare marca.fontes.serif_arquivos. */
+
+@font-face{
+  font-family: 'Italiana';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Italiana-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Montserrat-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face{
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Raleway-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root{
+  /* Paleta — os tokens são nomeados pelo PAPEL, não pela cor.
+     Trocar os valores aqui reveste o site inteiro de outra marca. */
+  --marca:#856051;   /* cor principal da marca */
+  --marca-escuro:#5E443A;   /* profundidade / rodapé */
+  --marca-hover:#705144;
+  --marca-fundo:#443731;   /* fundo do brilho da abertura */
+  --acento:#989588;   /* cor de apoio */
+  --acento-suave:#F5EEEC;   /* fundo de seções especiais */
+  --acento-borda:#F0ECEA;
+  --texto:#63666A;   /* texto de leitura */
+  --texto-suave:#6A6C70;   /* texto secundário — precisa passar em 4,5:1 */
+  --branco:#ffffff;
+  --fundo-alt:#FCFBFB;   /* branco quente para fundos alternados */
+
+  /* Bordas e superfícies derivadas */
+  --borda:#F3EFEE;
+  --borda-campo:#E7DFDC;
+  --borda-menu:#F5F2F1;
+  --listra-1:#F9F7F6;
+  --listra-2:#F5F2F1;
+  --moldura-1:#E2D9D5;
+  --moldura-2:#C9B9B2;
+  --nav-texto:#453732;
+
+  /* Rodapé e biblioteca escura */
+  --rodape-texto:#F0ECEA;
+  --rodape-link:#E9E2E0;
+  --rodape-bar:#E3DAD7;
+  --escuro-1:#312926;
+  --escuro-2:#272220;
+  --escuro-3:#211E1C;
+  --card-escuro:#2D2623;
+
+  /* Canais RGB — para montar rgba() sem repetir o hex */
+  --marca-rgb:133,96,81;
+  --marca-escuro-rgb:94,68,58;
+
+  /* Tipografia */
+  --serif:"Italiana", Georgia, serif;
+  --sans:"Montserrat", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --max:1200px;
+  --radius:14px;
+  --radius-sm:10px;
+  --shadow:0 10px 34px rgba(var(--marca-escuro-rgb),.12);
+  --shadow-hover:0 18px 44px rgba(var(--marca-escuro-rgb),.20);
+  --nav-h:74px;
+}
+
+/* ---------- Reset ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px)}
+html,body{max-width:100%;overflow-x:hidden}
+body{
+  font-family:var(--sans);
+  color:var(--texto);
+  background:var(--branco);
+  line-height:1.65;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+/* height:auto é obrigatório agora que as <img> carregam width/height explícitos
+   (contra CLS): sem ele o atributo height vira altura real e distorce a imagem. */
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ---------- Tipografia ---------- */
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:900;color:var(--marca);line-height:1.15}
+h1{font-size:clamp(2.1rem,5vw,3.4rem)}
+h2{font-size:clamp(1.7rem,3.6vw,2.5rem)}
+h3{font-size:clamp(1.15rem,2vw,1.4rem)}
+p{margin:0 0 1rem}
+.eyebrow{
+  font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--marca);opacity:.85;margin-bottom:.9rem;
+  display:inline-block;
+}
+.lead{font-size:1.08rem;color:var(--texto)}
+.center{text-align:center}
+
+/* ---------- Layout helpers ---------- */
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.section-head{max-width:680px;margin:0 auto 56px;text-align:center}
+.section-head p{margin-top:.6rem}
+.bg-acento{background:var(--acento-suave)}
+.bg-alt{background:var(--fundo-alt)}
+
+/* ---------- Botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  font-family:var(--sans);font-weight:600;font-size:.98rem;line-height:1;
+  padding:15px 30px;border-radius:var(--radius-sm);border:2px solid transparent;
+  cursor:pointer;transition:transform .18s ease, background .18s ease, box-shadow .18s ease, color .18s ease;
+  text-align:center;
+}
+.btn-primary{background:var(--marca);color:var(--branco);box-shadow:0 8px 22px rgba(var(--marca-rgb),.28)}
+.btn-primary:hover{background:var(--marca-hover);transform:translateY(-2px);box-shadow:0 12px 28px rgba(var(--marca-rgb),.36)}
+.btn-outline{background:transparent;color:var(--marca);border-color:var(--marca)}
+.btn-outline:hover{background:var(--marca);color:var(--branco);transform:translateY(-2px)}
+.btn-light{background:var(--branco);color:var(--marca)}
+.btn-light:hover{background:var(--acento-suave);transform:translateY(-2px)}
+.btn-block{width:100%}
+.link-cta{
+  font-weight:600;color:var(--marca);border-bottom:2px solid var(--acento);
+  padding-bottom:2px;transition:border-color .18s}
+.link-cta:hover{border-color:var(--marca)}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:100;
+  display:flex;align-items:center;
+  transition:background .3s ease, box-shadow .3s ease;
+}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo img{height:38px;width:auto}
+/* gap 20 e não 26: com a entrada do "App" o menu passou a quebrar em duas
+   linhas a partir de 1280px. 20px é o maior respiro que ainda cabe tudo
+   numa linha só — conferido em 1280 e 1440. */
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-links a{font-weight:500;font-size:.94rem;color:var(--texto);transition:color .18s;position:relative}
+.nav-links a:hover{color:var(--marca)}
+.nav-scrolled{background:var(--branco);box-shadow:0 4px 20px rgba(var(--marca-escuro-rgb),.08)}
+.nav:not(.nav-scrolled) .nav-links a{color:var(--nav-texto)}
+.nav-cta{padding:11px 22px !important;font-size:.9rem !important}
+.nav .nav-links a.nav-cta,.nav:not(.nav-scrolled) .nav-links a.nav-cta{color:var(--branco)}
+.nav-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.nav-toggle span{display:block;width:26px;height:2px;background:var(--marca);transition:.25s;border-radius:2px}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;padding:calc(var(--nav-h) + 70px) 0 90px;
+  background:
+    radial-gradient(1100px 500px at 80% -10%, var(--acento-suave), transparent 60%),
+    linear-gradient(180deg,#fff, #fff);
+  overflow:hidden;
+}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-text h1{margin-bottom:1rem}
+.hero-text .sub{font-size:1.13rem;max-width:34ch;margin-bottom:1.9rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1.4rem}
+.hero-proof{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--texto-suave);font-weight:500}
+.hero-proof .dot{width:6px;height:6px;border-radius:50%;background:var(--acento)}
+
+.hero-media{position:relative}
+.hero-media .frame{
+  position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/5;
+  box-shadow:var(--shadow);background:linear-gradient(135deg,var(--moldura-1),var(--moldura-2));
+  z-index:2;
+}
+.hero-media .frame img{width:100%;height:100%;object-fit:cover}
+.hero-media .frame .ph{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;color:#fff;text-align:center;font-size:.9rem;letter-spacing:.04em;padding:20px}
+.hero-media .frame .ph img{width:74px;height:auto;opacity:.9}
+.hero-media .leaf{
+  position:absolute;width:120px;opacity:.16;z-index:1;
+  top:-46px;right:-30px;transform:rotate(14deg)}
+
+/* =========================================================
+   CARDS — Áreas de atuação
+   ========================================================= */
+.grid{display:grid;gap:22px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-auto{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.span-all{grid-column:1/-1}
+
+.card{
+  background:var(--branco);border:1px solid var(--borda);border-radius:var(--radius);
+  padding:30px 26px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:var(--acento)}
+.card .ico{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:var(--acento-suave);color:var(--marca);margin-bottom:16px}
+.card .ico svg{width:26px;height:26px}
+.card h3{margin-bottom:.4rem}
+.card p{font-size:.95rem;margin:0}
+.card.feature{background:linear-gradient(160deg,var(--marca),var(--marca-escuro));border-color:transparent}
+.card.feature h3,.card.feature p{color:#fff}
+.card.feature .ico{background:rgba(255,255,255,.16);color:#fff}
+.card.feature .tag{
+  display:inline-block;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--marca);background:var(--acento);padding:4px 10px;border-radius:20px;margin-bottom:14px}
+.card.feature-wide{grid-column:1/-1;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.card.feature-wide .ico{margin-bottom:0;flex:none;width:60px;height:60px}
+.card.feature-wide .fw-text{flex:1;min-width:220px}
+.card.feature-wide h3{font-size:1.6rem;margin-bottom:.35rem}
+
+/* =========================================================
+   CONSULTAS
+   ========================================================= */
+.consulta-card{display:flex;flex-direction:column;height:100%}
+.consulta-card .ico{margin-bottom:18px}
+.consulta-card p{flex:0 0 auto}
+.consulta-card .foot{margin-top:auto;padding-top:18px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+
+/* =========================================================
+   COMUNIDADE VIP
+   ========================================================= */
+.vip{text-align:center}
+.vip .box{
+  max-width:560px;margin:0 auto;background:var(--branco);border-radius:22px;
+  padding:44px 38px;box-shadow:var(--shadow);border:1px solid var(--acento-borda)}
+.vip-benefits{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;margin:20px 0 28px;
+  font-size:.92rem;font-weight:500;color:var(--texto)}
+.vip-benefits li{display:flex;align-items:center;gap:7px}
+.vip-benefits svg{width:17px;height:17px;color:var(--marca);flex:none}
+.field{text-align:left;margin-bottom:16px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--texto);margin-bottom:6px}
+.field input{
+  width:100%;padding:14px 16px;border:1.5px solid var(--borda-campo);border-radius:var(--radius-sm);
+  font-family:var(--sans);font-size:1rem;color:var(--texto);transition:border-color .18s, box-shadow .18s}
+.field input:focus{outline:none;border-color:var(--marca);box-shadow:0 0 0 3px rgba(var(--marca-rgb),.14)}
+.microcopy{font-size:.8rem;color:var(--texto-suave);margin-top:14px}
+.microcopy a{color:var(--marca);text-decoration:underline}
+
+/* =========================================================
+   E-BOOKS
+   ========================================================= */
+.ebook-card{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.ebook-cover{
+  aspect-ratio:3/4;background:linear-gradient(150deg,var(--acento-suave),var(--acento));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;color:var(--marca);text-align:center;padding:28px 22px;position:relative}
+.ebook-cover::after{content:"";position:absolute;inset:14px;border:1px solid rgba(var(--marca-rgb),.22);border-radius:8px;pointer-events:none}
+.ebook-cover .ec-tag{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.7}
+.ebook-cover .ec-title{font-family:var(--serif);font-weight:900;font-size:1.18rem;line-height:1.22}
+.ebook-cover .ec-logo{width:46px;height:46px;object-fit:contain;opacity:.9}
+.ebook-cover .ec-author{font-family:var(--serif);font-size:.75rem;font-style:italic;opacity:.75}
+.ebook-cover--full{padding:0}
+.ebook-cover--full::after{display:none}
+.ebook-cover--full img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ebook-body{padding:24px 22px;display:flex;flex-direction:column;flex:1}
+.ebook-body h3{margin-bottom:.3rem}
+.ebook-body .price{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:1.35rem;margin:6px 0 16px}
+.ebook-body ul{margin:0 0 18px;display:flex;flex-direction:column;gap:7px}
+.ebook-body ul li{font-size:.9rem;display:flex;gap:8px;align-items:flex-start}
+.ebook-body ul li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acento);margin-top:7px;flex:none}
+.ebook-body .foot{margin-top:auto}
+.selo{
+  display:inline-flex;align-items:center;gap:10px;background:var(--branco);border:1px solid var(--acento-borda);
+  border-radius:40px;padding:10px 20px;font-size:.82rem;font-weight:500;color:var(--texto);margin-top:36px}
+.selo img{height:30px;width:auto}
+
+/* =========================================================
+   SOBRE
+   ========================================================= */
+.sobre .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.sobre-media .frame{border-radius:24px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow);
+  background:linear-gradient(135deg,var(--moldura-1),var(--moldura-2))}
+.sobre-media .frame img{width:100%;height:100%;object-fit:cover}
+.sobre-media .frame .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff}
+.sobre-media{position:relative}
+.creds{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0}
+.cred{background:var(--acento-suave);border-radius:12px;padding:14px 20px;flex:1;min-width:130px}
+.cred b{display:block;font-family:var(--serif);color:var(--marca);font-size:1.35rem;line-height:1}
+.cred span{font-size:.82rem}
+.placeholder-note{
+  background:repeating-linear-gradient(45deg,var(--listra-1),var(--listra-1) 10px,var(--listra-2) 10px,var(--listra-2) 20px);
+  border:1px dashed var(--acento);border-radius:10px;padding:16px 18px;font-size:.9rem;color:var(--marca);margin:1rem 0}
+
+/* =========================================================
+   DEPOIMENTOS
+   ========================================================= */
+.depo-card{position:relative;padding-top:44px}
+.depo-card .quote{position:absolute;top:14px;left:24px;font-family:var(--serif);font-size:3.6rem;color:var(--acento);line-height:1}
+.depo-card p{font-style:italic;font-size:.98rem}
+.depo-card .who{font-weight:600;color:var(--marca);font-style:normal;font-size:.9rem;margin-top:10px}
+
+/* =========================================================
+   CONTATO + RODAPÉ
+   ========================================================= */
+.contato{text-align:center}
+.contato-links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin:28px 0 32px}
+.contato-links a{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--acento-borda);font-weight:500;color:var(--texto);transition:.18s;background:#fff}
+.contato-links a:hover{border-color:var(--marca);color:var(--marca);transform:translateY(-2px)}
+.contato-links svg{width:20px;height:20px}
+
+.footer{background:var(--marca-escuro);color:var(--rodape-texto);padding:60px 0 30px}
+.footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+.footer img.flogo{height:42px;width:auto;margin-bottom:14px}
+/* Título de coluna do rodapé. É <h2> por hierarquia (h4 pulava dois níveis),
+   e o line-height volta ao do corpo: a regra h1,h2,h3 acima impõe 1.15, que
+   encolheria a linha e mexeria no layout. */
+.footer h2{font-family:var(--sans);font-weight:600;color:#fff;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.65;margin-bottom:14px}
+.footer a{color:var(--rodape-link);font-size:.92rem;transition:color .18s}
+.footer a:hover{color:#fff}
+.footer ul{display:flex;flex-direction:column;gap:9px}
+.footer .social{display:flex;gap:12px;margin-top:6px}
+.footer .social a{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+.footer .social a:hover{background:#fff;color:var(--marca)}
+.footer .social svg{width:19px;height:19px}
+.footer .bar{margin-top:40px;border-top:1px solid rgba(255,255,255,.16);padding-top:22px;text-align:center;font-size:.82rem;color:var(--rodape-bar)}
+
+/* =========================================================
+   BARRA FIXA MOBILE
+   ========================================================= */
+.mobile-bar{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;padding:12px 16px;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-top:1px solid var(--acento-borda)}
+.mobile-bar .btn{width:100%}
+
+/* =========================================================
+   PÁGINAS DE APOIO (conteúdo/texto)
+   ========================================================= */
+.page-head{padding:calc(var(--nav-h) + 60px) 0 40px;background:var(--acento-suave);text-align:center}
+.doc{max-width:820px;margin:0 auto;padding:60px 24px}
+.doc h2{margin:34px 0 12px;font-size:1.5rem}
+.doc h3{margin:24px 0 8px}
+.doc p,.doc li{color:var(--texto)}
+.doc ul{list-style:disc;padding-left:22px;margin-bottom:1rem}
+.doc ul li{margin-bottom:6px}
+.doc .back{display:inline-block;margin-top:30px}
+/* Tabela de condições nas páginas legais. No celular ela rola sozinha
+   dentro do próprio bloco, em vez de empurrar a página inteira. */
+.doc-table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:.92rem;display:block;overflow-x:auto}
+.doc-table th,.doc-table td{border:1px solid var(--borda);padding:10px 12px;text-align:left;white-space:nowrap}
+.doc-table th{background:var(--acento-suave);font-weight:600}
+.doc-table td{color:var(--texto)}
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+@media (max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .hero-media{max-width:420px;margin:0 auto;width:100%}
+  .sobre .wrap{grid-template-columns:1fr;gap:36px}
+  .sobre-media{max-width:400px;margin:0 auto;width:100%}
+  .footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media (max-width:768px){
+  body{font-size:16px}
+  section{padding:64px 0}
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;background:#fff;flex-direction:column;
+    gap:0;padding:8px 0;box-shadow:0 12px 24px rgba(var(--marca-escuro-rgb),.12);
+    transform:translateY(-140%);transition:transform .3s ease;pointer-events:none;
+  }
+  .nav-links.open{transform:translateY(0);pointer-events:auto}
+  .nav-links a{width:100%;padding:14px 24px;border-bottom:1px solid var(--borda-menu)}
+  .nav-links .nav-cta{margin:12px 24px;width:calc(100% - 48px)}
+  .nav:not(.nav-scrolled) .nav-links a{color:var(--texto)}
+  .nav-toggle{display:flex}
+  .nav{background:#fff;box-shadow:0 4px 20px rgba(var(--marca-escuro-rgb),.08)}
+  .mobile-bar{display:block}
+  body{padding-bottom:76px}
+  .footer .wrap{grid-template-columns:1fr;gap:28px;text-align:center}
+  .footer .social{justify-content:center}
+  .hero-actions .btn{flex:1 1 100%}
+}
+@media (max-width:460px){
+  .grid-3,.grid-4{grid-template-columns:1fr}
+  .vip .box{padding:32px 22px}
+}
+
+/* ---------- Leitor de e-book (vitrine / teaser) ---------- */
+.reader{max-width:720px;margin:0 auto;padding:0 24px}
+.reader .kicker{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.tag{font-family:var(--sans);font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--acento-suave);color:var(--marca);border:1px solid var(--acento-borda);padding:5px 12px;border-radius:999px}
+.tag.free{background:#eaf6ee;color:#217a49;border-color:#c7e8d3}
+.reader h1{margin-bottom:.5rem}
+.reader .lead{font-size:1.18rem;margin-bottom:1.6rem}
+.reader .meta{font-size:.85rem;color:var(--texto-suave);margin-bottom:2.4rem;
+  padding-bottom:1.4rem;border-bottom:1px solid var(--borda)}
+.reader-body{position:relative}
+.reader-body h2{font-size:clamp(1.4rem,3vw,1.9rem);margin:2rem 0 .8rem}
+.reader-body h3{margin:1.4rem 0 .5rem}
+.reader-body p{margin:0 0 1.1rem}
+.reader-body ul.dots{list-style:none;padding-left:0;margin:0 0 1.2rem;display:flex;flex-direction:column;gap:9px}
+.reader-body ul.dots li{position:relative;padding-left:20px}
+.reader-body ul.dots li::before{content:"";position:absolute;left:0;top:11px;width:7px;height:7px;
+  border-radius:50%;background:var(--acento)}
+
+/* trecho que "desaparece" antes do portão */
+.fade-out{position:relative}
+.fade-out::after{content:"";position:absolute;left:0;right:0;bottom:0;height:180px;
+  background:linear-gradient(to bottom,rgba(251,249,250,0),var(--fundo-alt) 92%);pointer-events:none}
+
+/* Portão de pagamento */
+.paywall{max-width:720px;margin:0 auto;padding:0 24px 40px}
+.paywall .gate{background:#fff;border:1px solid var(--acento-borda);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:40px 34px;text-align:center;margin-top:-40px;position:relative;z-index:2}
+.paywall .lock{width:56px;height:56px;border-radius:50%;background:var(--acento-suave);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.5rem}
+.paywall h2{font-size:clamp(1.5rem,3.4vw,2rem);margin-bottom:.5rem}
+.paywall .sub{color:var(--texto);margin-bottom:22px}
+.paywall ul.inside{list-style:none;padding-left:0;text-align:left;max-width:440px;margin:0 auto 26px;display:flex;flex-direction:column;gap:11px}
+.paywall ul.inside li{position:relative;padding-left:30px;font-size:.96rem}
+.paywall ul.inside li::before{content:"✓";position:absolute;left:0;top:0;color:var(--marca);font-weight:800}
+.paywall .price-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:6px}
+.paywall .price-now{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:2.2rem}
+.paywall .price-was{color:var(--texto-suave);text-decoration:line-through;font-size:1.05rem}
+.paywall .price-note{font-size:.82rem;color:var(--texto-suave);margin-bottom:22px}
+.paywall .guarantee{font-size:.85rem;color:var(--texto-suave);margin-top:16px;display:flex;
+  align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
+.paywall .btn-lg{font-size:1.05rem;padding:16px 28px}
+
+@media (max-width:560px){
+  .paywall .gate{padding:32px 22px}
+  .paywall .price-now{font-size:1.9rem}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto !important}
+  .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  .btn,.card,.contato-links a{transition:none !important}
+}
+
+/* ---------- Foco acessível ---------- */
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:3px solid var(--marca);outline-offset:2px;border-radius:4px}
+
+/* ---------- Vitrine de materiais em prateleiras (estilo streaming) ---------- */
+.ebooks-nf{background:linear-gradient(180deg,var(--escuro-1) 0%,var(--escuro-2) 55%,var(--escuro-3) 100%);color:#fff;overflow:hidden}
+.ebooks-nf .eyebrow{color:var(--acento);opacity:1}
+.ebooks-nf h2{color:#fff}
+.ebooks-nf .lead{color:rgba(255,255,255,.72)}
+.nf-biblio-cta{display:inline-flex;align-items:center;gap:6px;margin-top:20px;box-shadow:0 8px 22px rgba(0,0,0,.28)}
+.nf-biblio-cta:hover{transform:translateY(-2px)}
+.nf-footer .nf-biblio-cta{margin-top:.6rem}
+.shelf{margin-top:38px;position:relative}
+.shelf__title{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.3rem;margin:0 0 16px}
+.shelf__scroller{position:relative}
+.shelf__row{display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;
+  padding:8px 2px 20px;-ms-overflow-style:none;scrollbar-width:none}
+.shelf__row::-webkit-scrollbar{display:none}
+.nf-card{flex:0 0 auto;width:212px;scroll-snap-align:start;background:var(--card-escuro);border-radius:16px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.09);transition:transform .25s ease,box-shadow .25s ease}
+.nf-card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 20px 44px rgba(0,0,0,.55);z-index:2}
+.nf-card__poster{position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer}
+.nf-card__poster img{width:100%;height:100%;object-fit:cover;display:block}
+.nf-card__poster--soon{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  text-align:center;padding:26px 20px;background:linear-gradient(150deg,var(--acento-suave),var(--acento))}
+.nf-card__poster--soon .ec-tag{font-family:var(--sans);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--marca);opacity:.75}
+.nf-card__poster--soon .ec-title{font-family:var(--serif);font-weight:900;font-size:1.05rem;color:var(--marca);line-height:1.2}
+.nf-card__poster--soon .ec-logo{width:42px;height:42px;object-fit:contain;opacity:.9}
+.nf-badge{position:absolute;top:10px;right:10px;font-family:var(--sans);font-weight:700;font-size:.72rem;
+  padding:5px 11px;border-radius:999px;backdrop-filter:blur(4px)}
+.nf-badge--free{background:rgba(33,122,73,.94);color:#fff}
+
+.nf-badge--soon{background:rgba(var(--marca-escuro-rgb),.85);color:#fff}
+/* Material que existe mas não é vendido pelo site: a pessoa pede pelo WhatsApp.
+   É o caso de quem não contratou o módulo de vendas e mesmo assim tem e-books —
+   sem isso o único selo disponível seria o de material pago, que a trava de
+   escopo (com razão) barra. */
+.nf-badge--wa{background:rgba(255,255,255,.94);color:var(--marca)}
+.nf-card__info{padding:13px 15px 17px}
+.nf-card__info h3{font-size:.98rem;line-height:1.28;margin:0 0 12px;color:#fff;min-height:2.5em}
+.nf-card__cta{width:100%;font-size:.86rem;padding:9px 12px}
+.nf-card__cta.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff}
+.nf-card__cta.ghost:hover{background:#fff;color:var(--marca);border-color:#fff;transform:translateY(-1px)}
+.shelf__arrow{position:absolute;top:calc(50% - 34px);transform:translateY(-50%);z-index:3;width:46px;height:46px;
+  border-radius:50%;border:none;background:rgba(0,0,0,.55);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;
+  display:none;align-items:center;justify-content:center;transition:background .2s}
+.shelf__arrow:hover{background:rgba(0,0,0,.82)}
+.shelf__arrow--left{left:-8px}
+.shelf__arrow--right{right:-8px}
+.shelf__arrow.show{display:flex}
+.nf-footer{margin-top:40px;text-align:center}
+.ebooks-nf .selo{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.82)}
+
+/* Destaque da assinatura, abaixo das prateleiras */
+.nf-plano{margin-top:46px;display:flex;align-items:center;gap:24px;padding:26px 30px;border-radius:20px;
+  background:linear-gradient(120deg,var(--acento-suave),var(--acento));border:1px solid rgba(255,255,255,.22)}
+.nf-plano__art{flex:0 0 auto;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.5)}
+.nf-plano__art img{width:44px;height:44px;object-fit:contain}
+.nf-plano__text{flex:1 1 auto;min-width:0}
+.nf-plano__tag{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;
+  color:var(--marca);opacity:.75}
+.nf-plano__text h3{font-family:var(--serif);font-weight:900;font-size:1.42rem;line-height:1.2;color:var(--marca);margin:.35rem 0 .45rem}
+.nf-plano__text p{font-size:.94rem;line-height:1.5;color:rgba(74,14,55,.85);margin:0}
+.nf-plano__cta{flex:0 0 auto;white-space:nowrap}
+@media (max-width:760px){
+  .nf-plano{flex-direction:column;align-items:flex-start;gap:16px;padding:24px 22px}
+  .nf-plano__cta{width:100%;justify-content:center}
+}
+
+@media (max-width:560px){.nf-card{width:158px}.shelf__title{font-size:1.12rem}.nf-plano__text h3{font-size:1.24rem}}
+
+/* ---------- Abertura / splash estilo Netflix ---------- */
+.intro{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 42%, var(--marca) 0%, var(--marca-escuro) 55%, var(--marca-fundo) 100%)}
+.no-intro .intro{display:none !important}
+.intro.hide{opacity:0;transform:scale(1.06);pointer-events:none;transition:opacity .55s ease, transform .55s ease}
+.intro.done{display:none !important}
+/* Toda a coreografia é uma fração de --intro-dur: mudar esse número aqui
+   reencaixa letras, brilho e zoom sem tocar em mais nada. O main.js lê o
+   mesmo valor, então o tempo de tela acompanha automaticamente.
+   1200ms e não 2800: a abertura atrasa o LCP, e quase 3 segundos parada
+   antes de poder ler é onde parte das visitas de celular desiste. */
+.intro{--intro-dur:1200ms}
+.intro__logo{position:relative;text-align:center;padding:0 6vw;
+  animation:introZoom calc(var(--intro-dur) * .29) ease-in calc(var(--intro-dur) * .79) forwards}
+.intro__word{font-family:var(--serif);color:#fff;font-weight:900;white-space:nowrap;
+  font-size:clamp(2rem,7vw,3.4rem);line-height:1;filter:drop-shadow(0 8px 30px rgba(0,0,0,.4))}
+.intro__word span{display:inline-block;opacity:0;transform:translateY(.4em) scale(.85);
+  animation:letterIn calc(var(--intro-dur) * .23) cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:calc(var(--i,0) * var(--intro-dur) * .029)}
+.intro__word .sp{width:.26em;opacity:1;animation:none}
+.intro__sub{font-family:var(--sans);color:rgba(255,255,255,.85);text-transform:uppercase;
+  letter-spacing:.34em;font-size:.8rem;margin-top:.7rem;opacity:0;
+  animation:subIn calc(var(--intro-dur) * .25) ease calc(var(--intro-dur) * .42) forwards}
+.intro__shine{position:absolute;top:-20%;bottom:-20%;left:-45%;width:36%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.85),transparent);
+  transform:skewX(-18deg);opacity:0;
+  animation:introShine calc(var(--intro-dur) * .46) ease-in-out calc(var(--intro-dur) * .38)}
+@keyframes letterIn{to{opacity:1;transform:none}}
+@keyframes subIn{to{opacity:1}}
+@keyframes introShine{0%{left:-45%;opacity:0}18%{opacity:.85}100%{left:130%;opacity:0}}
+@keyframes introZoom{to{transform:scale(1.5);opacity:0}}
+/* A abertura não trava mais o scroll: a classe ficou aqui só para não quebrar
+   nada que ainda a referencie. Quem quiser começar a ler, toca e ela sai. */
+body.intro-lock{overflow:visible}
+@media (prefers-reduced-motion:reduce){.intro{display:none !important}}
+
+/* ---------- Página de prévia do e-book (compartilhável) ---------- */
+.previa-top{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--acento-borda);
+  display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.previa-top img{height:34px;width:auto}
+.previa-wrap{max-width:940px;margin:0 auto;padding:44px 24px 70px}
+.previa{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:start}
+@media (max-width:720px){.previa{grid-template-columns:1fr;gap:26px;text-align:center;justify-items:center}}
+.previa__cover{width:100%;max-width:300px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/4;background:var(--acento-suave)}
+.previa__cover img{width:100%;height:100%;object-fit:cover;display:block}
+.previa__eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--marca);opacity:.85}
+.previa h1{font-family:var(--serif);color:var(--marca);font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:.35rem 0 .5rem}
+.previa__sub{color:var(--texto);font-size:1.02rem;margin-bottom:18px}
+.previa__resumo{margin-bottom:20px;line-height:1.6}
+.previa__list{list-style:none;padding:0;margin:0 0 26px;display:flex;flex-direction:column;gap:10px;text-align:left}
+.previa__list li{display:flex;gap:10px;align-items:flex-start}
+.previa__list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--acento);margin-top:8px;flex:none}
+.previa__cta{margin-bottom:8px}
+.previa__share{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center;justify-content:inherit}
+.previa__share small{width:100%;color:var(--texto);font-size:.85rem;margin-bottom:-6px}
+.previa__free{display:inline-block;background:#eaf6ee;color:#217a49;border:1px solid #c7e8d3;font-weight:700;
+  font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+.previa__paid{display:inline-block;background:var(--acento-suave);color:var(--marca);border:1px solid var(--acento-borda);font-weight:700;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:8px}
+
+/* ---------- Guia de boas-vindas + botão flutuante ---------- */
+.guide{position:fixed;inset:0;z-index:1500;display:none;align-items:center;justify-content:center;padding:20px}
+.guide.open{display:flex}
+.guide__backdrop{position:absolute;inset:0;background:rgba(60,20,40,.5);backdrop-filter:blur(3px)}
+.guide__box{position:relative;background:var(--branco);border-radius:24px;max-width:480px;width:100%;
+  padding:32px 28px 22px;box-shadow:0 26px 70px rgba(60,20,40,.42);text-align:left;
+  max-height:calc(100vh - 40px);overflow-y:auto;animation:leadPop .28s ease}
+.guide__close{position:absolute;top:14px;right:16px;width:34px;height:34px;border:none;background:transparent;
+  font-size:1.7rem;line-height:1;color:var(--texto);cursor:pointer;border-radius:50%}
+.guide__close:hover{background:var(--acento-suave);color:var(--marca)}
+.guide__box h3{margin:.15rem 0 .4rem}
+.guide__sub{color:var(--texto);font-size:.95rem;margin-bottom:18px}
+.guide__grid{display:flex;flex-direction:column;gap:10px}
+.guide__item{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--acento-borda);
+  border-radius:14px;background:var(--acento-suave);cursor:pointer;text-decoration:none;color:inherit;transition:.18s}
+.guide__item:hover{background:#fff;border-color:var(--marca);transform:translateX(3px);box-shadow:0 8px 20px rgba(var(--marca-rgb),.12)}
+.guide__ic{font-size:1.5rem;flex:none;line-height:1}
+.guide__item>span:nth-child(2){display:flex;flex-direction:column;flex:1;gap:2px}
+.guide__item b{color:var(--marca);font-size:1rem}
+.guide__item small{color:var(--texto);font-size:.82rem;line-height:1.3}
+.guide__arw{color:var(--marca);font-weight:700;flex:none;font-size:1.1rem}
+.guide__skip{display:block;margin:16px auto 2px;background:transparent;border:none;color:var(--texto);
+  font-size:.9rem;cursor:pointer;text-decoration:underline;font-family:var(--sans)}
+.guide__skip:hover{color:var(--marca)}
+.guide-fab{position:fixed;left:16px;bottom:16px;z-index:95;border:none;cursor:pointer;
+  background:var(--marca);color:#fff;font-family:var(--sans);font-weight:600;font-size:.85rem;
+  padding:11px 16px;border-radius:999px;box-shadow:0 10px 26px rgba(var(--marca-rgb),.35);transition:.2s}
+.guide-fab:hover{background:var(--marca-hover);transform:translateY(-2px)}
+@media (max-width:768px){.guide-fab{bottom:86px;font-size:.8rem;padding:10px 14px}}
+
+/* ---------- Modal de captura de lead (e-book grátis) ---------- */
+.lead-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.lead-modal.open{display:flex}
+.lead-modal__backdrop{position:absolute;inset:0;background:rgba(60,20,40,.55);backdrop-filter:blur(3px)}
+.lead-modal__box{position:relative;background:var(--branco);border-radius:22px;max-width:420px;width:100%;
+  padding:34px 30px 26px;box-shadow:0 26px 70px rgba(60,20,40,.4);text-align:left;
+  max-height:calc(100vh - 40px);overflow-y:auto;animation:leadPop .28s ease}
+@keyframes leadPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.lead-modal__close{position:absolute;top:14px;right:16px;width:34px;height:34px;border:none;background:transparent;
+  font-size:1.7rem;line-height:1;color:var(--texto);cursor:pointer;border-radius:50%}
+.lead-modal__close:hover{background:var(--acento-suave);color:var(--marca)}
+.lead-modal__box h3{margin:.15rem 0 .5rem}
+.lead-modal__sub{color:var(--texto);font-size:.95rem;margin-bottom:18px}
+.lead-modal .field{margin-bottom:14px}
+.lead-modal__err{color:#b3261e;font-size:.88rem;margin:0 0 12px;background:#fdeceb;border:1px solid #f6c9c5;
+  border-radius:10px;padding:9px 12px}
+.lead-modal__check{width:60px;height:60px;border-radius:50%;background:#eaf6ee;color:#217a49;
+  display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:700;margin:4px 0 12px}
+.lead-modal [data-lead-submit].is-loading{opacity:.7;pointer-events:none}
+/* Estado "enviando" para qualquer botão fora do modal (ex.: login da biblioteca). */
+.btn.is-loading{opacity:.7;pointer-events:none}
+body.lead-open{overflow:hidden}
+
+/* ---------- Meu acompanhamento (área da paciente) ---------- */
+.nav-area{color:var(--marca) !important;font-weight:600 !important}
+.acomp__box{display:grid;grid-template-columns:1.15fr .85fr;gap:38px;align-items:center;
+  background:linear-gradient(150deg,var(--marca),var(--marca-escuro));border-radius:24px;
+  padding:40px 42px;box-shadow:var(--shadow)}
+.acomp__items{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px}
+.acomp__item{display:flex;gap:14px;align-items:flex-start}
+.acomp__ic{flex:none;width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.16);
+  color:#fff;display:flex;align-items:center;justify-content:center}
+.acomp__ic svg{width:22px;height:22px}
+.acomp__item b{display:block;color:#fff;font-size:1rem;margin-bottom:2px}
+.acomp__item small{display:block;color:rgba(255,255,255,.76);font-size:.85rem;line-height:1.42}
+.acomp__cta{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:18px;padding:26px 24px;text-align:center}
+.acomp__chamada{font-family:var(--serif);font-weight:900;color:#fff;font-size:1.12rem;
+  line-height:1.3;margin:0 0 16px}
+.acomp__cta .btn{white-space:nowrap}
+.acomp__nota{font-size:.82rem;color:rgba(255,255,255,.72);margin:14px 0 0;line-height:1.45}
+.acomp__nota a{color:#fff;text-decoration:underline;cursor:pointer}
+
+@media (max-width:900px){
+  .acomp__box{grid-template-columns:1fr;gap:28px;padding:32px 26px}
+}
+@media (max-width:560px){
+  .acomp__items{grid-template-columns:1fr;gap:18px}
+  .acomp__box{padding:28px 20px;border-radius:20px}
+}
+
+/* =========================================================
+   APP "NO MERCADO COM A NUTRI ANA" (seção #app da home)
+   A arte da direita é uma AMOSTRA da tela de resultado do app,
+   feita em CSS — de propósito, e não um print: print de app
+   envelhece a cada mudança de tela e ainda pesaria no
+   carregamento da home.
+   ========================================================= */
+.app-mercado{background:var(--acento-suave)}
+.app-mercado__grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;
+}
+.app-mercado__lista{display:grid;gap:16px;margin-bottom:26px}
+.app-mercado__lista li{
+  position:relative;padding-left:30px;font-size:1rem;line-height:1.6;
+}
+.app-mercado__lista li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--acento);border:3px solid var(--marca);
+}
+.app-mercado__lista strong{color:var(--marca)}
+.app-mercado__acoes{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.app-mercado__nota{font-size:.85rem;color:var(--texto-suave);margin:16px 0 0}
+
+.app-mercado__arte{display:flex;justify-content:center}
+.app-mercado__tela{
+  width:100%;max-width:320px;background:var(--branco);
+  border:1px solid var(--acento-borda);border-radius:22px;
+  box-shadow:var(--shadow);padding:24px;
+  display:grid;gap:10px;
+  transform:rotate(-1.6deg);
+}
+.app-mercado__selo{
+  display:inline-block;justify-self:start;
+  background:#FBECEC;color:#A32020;border:1px solid #F0C9C9;border-radius:999px;
+  padding:6px 14px;font-size:.72rem;font-weight:600;letter-spacing:.04em;
+}
+.app-mercado__prod{font-family:var(--serif);font-weight:900;color:var(--marca);font-size:1.3rem;line-height:1.2}
+.app-mercado__linha{font-size:.9rem;line-height:1.5}
+.app-mercado__troca{
+  font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--texto-suave);border-top:1px solid var(--acento-borda);padding-top:12px;
+}
+
+@media (max-width:900px){
+  .app-mercado__grid{grid-template-columns:1fr;gap:32px}
+  /* No celular a amostra vem ANTES do texto: ela é o que faz entender
+     em dois segundos o que o app entrega. */
+  .app-mercado__arte{order:-1}
+  .app-mercado__tela{transform:none;max-width:100%}
+}
+
+/* =========================================================
+   COMO FUNCIONA — passos numerados
+   Seção do template (não existe no site da Ana). Responde
+   "o que acontece numa consulta?", a objeção nº 1 de quem
+   nunca foi a um profissional da área.
+   ========================================================= */
+.passos__lista{
+  /* 210px e não 240: com 240 cabiam só 3 colunas nos 1000px do bloco e o
+     quarto passo caía sozinho numa segunda linha — além de bagunçar a linha
+     que costura os passos, que pressupõe uma fila só. */
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:26px;max-width:1000px;margin:0 auto;counter-reset:passo;
+}
+.passos__item{display:flex;gap:16px;align-items:flex-start;text-align:left}
+.passos__n{
+  flex:0 0 auto;width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;
+  background:var(--marca);color:var(--branco);
+  font-family:var(--serif);font-weight:900;font-size:1.25rem;line-height:1;
+  box-shadow:0 6px 18px rgba(var(--marca-rgb),.28);
+}
+.passos__item h3{margin-bottom:.35rem}
+.passos__item p{margin:0;font-size:.96rem}
+
+/* Linha que costura os passos no desktop; some no empilhamento. */
+@media (min-width:980px){
+  .passos__lista{position:relative}
+  .passos__item{position:relative}
+  .passos__item:not(:last-child)::after{
+    content:"";position:absolute;left:44px;right:-26px;top:22px;height:1px;
+    background:var(--acento-borda);
+  }
+}
+
+/* =========================================================
+   FAQ — <details> nativo, sem JavaScript
+   Além da conversão, é o que libera o schema FAQPage.
+   ========================================================= */
+.faq__lista{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.faq__item{
+  background:var(--branco);border:1px solid var(--acento-borda);
+  border-radius:var(--radius);overflow:hidden;
+}
+.faq__item summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 22px;cursor:pointer;list-style:none;
+  font-weight:600;color:var(--marca);
+  transition:background .2s ease;
+}
+.faq__item summary::-webkit-details-marker{display:none}
+.faq__item summary:hover{background:var(--acento-suave)}
+.faq__item summary:focus-visible{outline:2px solid var(--marca);outline-offset:-2px}
+.faq__mais{
+  flex:0 0 auto;width:18px;height:18px;position:relative;
+}
+.faq__mais::before,.faq__mais::after{
+  content:"";position:absolute;inset:0;margin:auto;
+  background:var(--marca);border-radius:2px;
+}
+.faq__mais::before{width:18px;height:2px}
+.faq__mais::after{width:2px;height:18px;transition:transform .2s ease}
+.faq__item[open] .faq__mais::after{transform:rotate(90deg)}
+.faq__resp{padding:0 22px 20px;font-size:.97rem}
+.faq__resp p:last-child{margin-bottom:0}
+
+@media (prefers-reduced-motion:reduce){
+  .faq__mais::after,.faq__item summary{transition:none}
+}
+
+/* =========================================================
+   ALVOS DE TOQUE (≥44px)
+   Só em tela de toque: no desktop, com mouse, o alvo pequeno não
+   atrapalha e o layout continua exatamente como foi desenhado.
+   44px é a régua da WCAG 2.5.5 e a média da polpa do dedo.
+   Links dentro de parágrafo ficam de fora de propósito — aumentá-los
+   descolaria as linhas do texto, e a própria norma os dispensa.
+   ========================================================= */
+@media (max-width:768px), (pointer:coarse){
+  .btn{min-height:44px}
+  .nav-cta{padding-top:11px !important;padding-bottom:11px !important}
+
+  .nav-logo{display:flex;align-items:center;min-height:44px}
+  .nav-toggle{min-width:44px;min-height:44px;align-items:center;justify-content:center}
+
+  /* O sublinhado continua colado no texto; o que cresce é só a área clicável. */
+  .link-cta{display:inline-flex;align-items:center;min-height:44px}
+
+  .footer .social a{min-width:44px;min-height:44px}
+  .footer nav a,.footer ul a{display:inline-flex;align-items:center;min-height:44px}
+
+  .guide__close{min-width:44px;min-height:44px}
+  .guide__skip{min-height:44px}
+  .guide-fab{min-height:44px}
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Priscila Melo · Nutricionista</title>
+<meta name="description" content="Liberação de acesso aos materiais.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#856051">
+<link rel="canonical" href="https://nutripriscilamelo.com.br/painel.html">
+<link rel="icon" href="assets/img/simbolo.png">
+<link rel="apple-touch-icon" href="assets/img/simbolo.png">
+<!-- Fontes hospedadas no próprio site: sem CSS render-blocking de outro domínio
+     e sem mandar o IP de cada visitante para o Google (LGPD). O preload pede o
+     arquivo junto com o CSS, em vez de só depois de o navegador lê-lo.
+     Se o gerador não tiver conseguido baixar as fontes, cai no <link> do Google. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Italiana-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Raleway-latin.woff2" crossorigin>
+
+<link rel="stylesheet" href="assets/css/styles.css">
+<!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Priscila Melo · Nutricionista">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Painel — Priscila Melo · Nutricionista">
+<meta property="og:description" content="Liberação de acesso aos materiais.">
+<meta property="og:url" content="https://nutripriscilamelo.com.br/painel.html">
+<meta property="og:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:secure_url" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Priscila Melo — Nutricionista">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Painel — Priscila Melo · Nutricionista">
+<meta name="twitter:description" content="Liberação de acesso aos materiais.">
+<meta name="twitter:image" content="https://nutripriscilamelo.com.br/assets/img/og-site.jpg">
+<link rel="stylesheet" href="assets/css/biblioteca.css">
+</head>
+<body>
+
+<header class="nav nav-scrolled" id="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo.png" alt="Priscila Melo — Nutricionista" width="700" height="205"></a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <nav class="nav-links" id="menu">
+      <a href="#inicio">Início</a>
+      <a href="#ajuda">Como te ajudo</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section style="padding-top:calc(var(--nav-h) + 56px)">
+  <div class="wrap">
+    <div class="bib-head">
+      <div>
+        <span class="eyebrow">Painel</span>
+        <h1 style="font-size:clamp(1.9rem,4vw,2.6rem);margin:.2rem 0 .3rem">Quem tem acesso ao quê</h1>
+        <p class="lead" style="margin:0">Libere e retire o acesso aos seus materiais sem depender de ninguém.</p>
+      </div>
+      <div class="bib-head__acoes">
+        <a class="bib-sair" href="biblioteca.html">Ver a biblioteca</a>
+        <button class="bib-sair" type="button" data-logout>Sair</button>
+      </div>
+    </div>
+
+    <p id="pn-loading">Carregando…</p>
+
+    <div id="pn-corpo" hidden>
+      <div class="pn-abas" role="tablist">
+        <button class="pn-aba is-ativa" type="button" data-aba="pessoas">Cadastradas</button>
+        <button class="pn-aba" type="button" data-aba="materiais">Materiais</button>
+        <button class="pn-aba" type="button" data-aba="leads">Contatos do site</button>
+      </div>
+
+      <!-- ---------- Cadastradas ---------- -->
+      <div data-painel="pessoas">
+        <p class="pn-nota">
+          Quem se cadastra no site entra vendo só o que é gratuito. Para liberar um material,
+          clique em <strong>Liberar acesso</strong> na linha da pessoa e marque o que ela pode ler.
+          A mudança vale na hora — ela só precisa recarregar a biblioteca.
+        </p>
+        <div class="pn-tabela-wrap">
+          <table class="pn-tabela">
+            <thead>
+              <tr><th>Nome</th><th>E-mail</th><th>Cadastro</th><th>Materiais</th><th></th></tr>
+            </thead>
+            <tbody id="pn-pessoas"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ---------- Materiais ---------- -->
+      <div data-painel="materiais" hidden>
+        <p class="pn-nota">
+          <strong>Liberado para todo mundo</strong> deixa o material aberto a qualquer pessoa cadastrada —
+          é o caso dos brindes. <strong>Aparece na biblioteca</strong> desligado tira o material da vitrine
+          sem apagar nada nem tirar o acesso de quem já tem.
+        </p>
+        <div class="pn-tabela-wrap">
+          <table class="pn-tabela">
+            <thead>
+              <tr><th>Material</th><th>Categoria</th><th>Formato</th><th>Como aparece</th></tr>
+            </thead>
+            <tbody id="pn-materiais"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ---------- Contatos deixados no site ---------- -->
+      <div data-painel="leads" hidden>
+        <p class="pn-nota">
+          Quem deixou nome e WhatsApp para receber um material gratuito. Clique no número para
+          abrir a conversa. Esses contatos são seus: use com responsabilidade e só para o que
+          a pessoa autorizou ao deixar os dados.
+        </p>
+        <div class="pn-tabela-wrap">
+          <table class="pn-tabela">
+            <thead>
+              <tr><th>Nome</th><th>WhatsApp</th><th>Veio de</th><th>Quando</th></tr>
+            </thead>
+            <tbody id="pn-leads"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal: o que esta pessoa pode ler -->
+<div class="pn-modal" id="pn-modal" hidden>
+  <div class="pn-modal__box" role="dialog" aria-modal="true" aria-labelledby="pn-modal-titulo">
+    <div class="pn-modal__head">
+      <h2 id="pn-modal-titulo">Liberar acesso</h2>
+      <p>Marcando e desmarcando você libera e retira o acesso de <strong id="pn-modal-nome"></strong>. Salva sozinho.</p>
+    </div>
+    <div class="pn-modal__lista" id="pn-modal-lista"></div>
+    <div class="pn-modal__foot">
+      <button class="btn btn-primary" type="button" data-fechar-modal>Concluir</button>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Priscila Melo — Nutricionista" width="700" height="205">
+      <p style="font-size:.9rem;max-width:34ch">Nutrição para a saúde da mulher.</p>
+    </div>
+    <div>
+      <h2>Navegação</h2>
+      <ul>
+        <li><a href="#ajuda">Como te ajudo</a></li>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#consultas">Consultas</a></li>
+        <li><a href="#ebooks">Materiais</a></li>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#faq">Dúvidas frequentes</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Institucional</h2>
+      <ul>
+        <li><a href="privacidade.html">Política de Privacidade</a></li>
+        <li><a href="termos.html">Termos de Uso</a></li>
+        <li><a data-wa="agendar">Agendar Consulta</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar">© <span data-year>2026</span> Priscila Melo — Nutricionista · CRN-4 26100670.</div></div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/supabase-client.js" defer></script>
+<script src="assets/js/painel.js" defer></script>
+</body>
+</html>
