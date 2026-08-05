@@ -768,9 +768,7 @@
         troca +
 
         (alts
-          ? '<div class="bloco"><p class="bloco__t">Se quiser trocar, olhe estas</p>' + alts +
-            '<p class="alt-nota">Três marcas diferentes, escolhidas por comparação de tabela na base ' +
-            'pública Open Food Facts. A Ana não recebe de nenhuma delas — e nunca indica só uma.</p></div>'
+          ? '<div class="bloco"><p class="bloco__t">Se quiser trocar, olhe estas</p>' + alts + '</div>'
           : (b.sem_alternativa
               ? '<div class="bloco"><p class="bloco__t">E as alternativas?</p><p class="alt__pq">' +
                 esc(b.sem_alternativa) + '</p></div>'
