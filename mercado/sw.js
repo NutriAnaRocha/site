@@ -16,7 +16,7 @@
 
    Ao mudar qualquer arquivo do app, incremente CACHE.
    ========================================================= */
-var CACHE = "mercado-v8";
+var CACHE = "mercado-v9";
 
 var ARQUIVOS = [
   "./",
@@ -27,7 +27,8 @@ var ARQUIVOS = [
   "icones/icon-192.png",
   "icones/icon-512.png",
   "../assets/img/monograma.png",
-  "../assets/fonts/Merienda.ttf"
+  "../assets/fonts/Merienda-latin.woff2",
+  "../assets/fonts/Montserrat-latin.woff2"
 ];
 
 self.addEventListener("install", function (e) {

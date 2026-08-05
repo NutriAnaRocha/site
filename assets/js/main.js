@@ -121,16 +121,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---- Abertura (splash): fecha após a animação; pode pular clicando ---- */
   const intro = document.getElementById("intro");
   if (intro && !document.documentElement.classList.contains("no-intro")) {
-    document.body.classList.add("intro-lock");
     let ended = false;
     const finish = () => {
       if (ended) return; ended = true;
       intro.classList.add("hide");
-      document.body.classList.remove("intro-lock");
       setTimeout(() => intro.classList.add("done"), 600);
       setTimeout(maybeShowGuide, 700); // guia entra quando a abertura sai
     };
-    setTimeout(finish, 2800);
+    // O tempo mora no CSS (--intro-dur), para animação e permanência
+    // nunca saírem de sincronia. Se a leitura falhar, 1200ms.
+    const dur = parseFloat(getComputedStyle(intro).getPropertyValue("--intro-dur")) || 1200;
+    setTimeout(finish, dur);
     intro.addEventListener("click", finish);
   } else {
     // Sem abertura (revisita na sessão / menos animação): mostra o guia logo

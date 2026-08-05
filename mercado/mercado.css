@@ -13,10 +13,19 @@
    identidade — por isso a fonte é carregada só nesses pesos.
    ========================================================= */
 
+/* woff2 recortado no latim (53KB) e não o .ttf completo (226KB): este app
+   abre dentro de supermercado, onde o sinal é ruim e cada KB pesa. */
+@font-face{
+  font-family:"Montserrat";
+  src:url("../assets/fonts/Montserrat-latin.woff2") format("woff2");
+  font-weight:300 900;
+  font-display:swap;
+}
 @font-face{
   font-family:"Merienda";
-  src:url("../assets/fonts/Merienda.ttf") format("truetype");
-  font-weight:900;
+  src:url("../assets/fonts/Merienda-latin.woff2") format("woff2"),
+      url("../assets/fonts/Merienda.ttf") format("truetype");
+  font-weight:300 900;
   font-display:swap;
 }
 

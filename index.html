@@ -9,13 +9,13 @@
 <link rel="canonical" href="https://nutrianarocha.github.io/site/">
 <link rel="icon" href="assets/img/monograma.png">
 <link rel="apple-touch-icon" href="assets/img/monograma.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- foto-hero.jpg é o elemento de LCP: pedir antes de o CSS ser lido. -->
 <link rel="preload" as="image" href="assets/img/foto-hero.jpg" fetchpriority="high">
 <!-- Abertura: decide antes de pintar (evita flash em quem já viu / prefere menos animação) -->
 <script>try{if('scrollRestoration'in history)history.scrollRestoration='manual';if(sessionStorage.getItem('introSeen')||matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('no-intro')}else{sessionStorage.setItem('introSeen','1')}}catch(e){document.documentElement.classList.add('no-intro')}</script>
+<!-- Fontes locais (nada vem do Google): pedir junto com o CSS, nao depois dele. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Merienda-latin.woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/styles.css">
 <!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
 <meta property="og:type" content="website">
@@ -86,6 +86,43 @@
       "sameAs": ["https://www.instagram.com/nutrianaluisarocha"]
     },
     {
+      "@type": "FAQPage",
+      "@id": "https://nutrianarocha.github.io/site/#faq",
+      "isPartOf": {"@id": "https://nutrianarocha.github.io/site/#site"},
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Você atende online?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Atendo, de qualquer lugar do Brasil. A chamada acontece do jeito que for melhor para você: pelo vídeo do WhatsApp ou por um link que eu envio — basta um celular ou computador com internet. É a mesma escuta e a mesma profundidade da consulta presencial."}
+        },
+        {
+          "@type": "Question",
+          "name": "Vou sair da consulta com o plano pronto?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sim. O plano alimentar é montado ali, na consulta, junto com você — e você sai com ele em mãos e com os próximos passos combinados. Na consulta online, ele chega em formato digital, sempre à mão no celular, para consultar na hora do mercado ou da refeição."}
+        },
+        {
+          "@type": "Question",
+          "name": "E se eu tiver dúvida entre uma consulta e outra?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Você me manda quando surgir, quantas precisar — aquela dúvida no meio do caminho não precisa esperar o próximo retorno. Eu atendo em hospital e consultório, então nem sempre respondo na hora, mas te respondo assim que consigo."}
+        },
+        {
+          "@type": "Question",
+          "name": "O acompanhamento é só pelo peso?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Não. A gente acompanha a sua evolução por inteiro — energia, sono, intestino, humor, sintomas — e não só pelo número da balança."}
+        },
+        {
+          "@type": "Question",
+          "name": "Na consulta online, como são feitas as medidas?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Eu te oriento a fazer as suas próprias medidas em casa, com um passo a passo simples, para acompanharmos a sua evolução mesmo à distância."}
+        },
+        {
+          "@type": "Question",
+          "name": "Vou precisar cortar tudo o que eu gosto?",
+          "acceptedAnswer": {"@type": "Answer", "text": "Não é assim que eu trabalho. O cuidado é individualizado, com base científica e sem terrorismo alimentar: o plano é construído para a sua rotina e ajustado conforme o seu corpo responde e a sua vida muda. E recaída não é motivo para desistir nem para culpa — a gente entende o que aconteceu e recomeça de onde parou."}
+        }
+      ]
+    },
+    {
       "@type": "WebSite",
       "@id": "https://nutrianarocha.github.io/site/#site",
       "url": "https://nutrianarocha.github.io/site/",
@@ -112,21 +149,23 @@
 <header class="nav" id="nav">
   <div class="wrap">
     <a class="nav-logo" href="#inicio" aria-label="Início — Ana Luísa Rocha">
-      <img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="564" height="252">
+      <img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="200" height="89">
     </a>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav-links" id="menu">
-      <a href="#inicio">Início</a>
-      <a href="#ajuda">Como te ajudo</a>
+      <!-- Seis itens, não nove. "Início" (o logo já leva lá), "Como te ajudo"
+           e "Comunidade VIP" saíram do topo e vivem no rodapé — as âncoras
+           #inicio, #ajuda e #vip continuam existindo, inclusive para os links
+           que já estão publicados no Instagram. Isso também devolve o espaço
+           que o "Meu Plano" vai precisar quando voltar. -->
       <a href="#consultas">Consultas</a>
       <!-- <a href="#meu-plano">Meu Plano</a> --> <!-- ver aviso do e-Nutricionista na seção #meu-plano -->
-      <a href="#vip">Comunidade VIP</a>
-      <!-- "App" e não "Aplicativo": o menu já está no limite e a palavra
-           inteira empurrava a navegação para duas linhas no desktop. -->
-      <a href="#app">App</a>
       <a href="#ebooks">E-books</a>
+      <!-- "App" e não "Aplicativo": a palavra inteira empurrava a navegação
+           para duas linhas no desktop. -->
+      <a href="#app">App</a>
       <a href="#sobre">Sobre</a>
       <a href="#contato">Contato</a>
       <a href="#acompanhamento" class="nav-area">Área da paciente</a>
@@ -157,7 +196,7 @@
         <img src="assets/img/foto-hero.jpg" alt="Ana Luísa Rocha, nutricionista"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="747" height="1024">
         <div class="ph" style="display:none">
-          <img src="assets/img/logo-branco.png" alt="" width="786" height="210">
+          <img src="assets/img/logo-branco.png" alt="" width="360" height="96">
           <div>foto da Ana entra aqui<br><small>(arquivo <b>assets/img/foto-hero.jpg</b>)</small></div>
         </div>
       </div>
@@ -237,6 +276,55 @@
 
     <p class="center reveal" style="margin-top:36px">
       Não sabe por onde começar? <a class="link-cta" data-wa="agendar">Agende uma avaliação.</a>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== COMO FUNCIONA =====================
+     Responde "o que acontece depois que eu marco?", a objeção nº 1 de quem
+     nunca foi a um nutricionista. Os quatro passos são os mesmos descritos
+     em consultas.html — aqui em versão curta, para quem não abre a página. -->
+<section id="como-funciona" class="passos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Passo a passo</span>
+      <h2>Como funciona</h2>
+      <p class="lead">Do primeiro "oi" no WhatsApp até o acompanhamento — sem surpresa nenhuma pelo caminho.</p>
+    </div>
+
+    <ol class="passos__lista reveal">
+      <li class="passos__item">
+        <span class="passos__n" aria-hidden="true">1</span>
+        <div>
+          <h3>Você me chama</h3>
+          <p>Me manda uma mensagem no WhatsApp e a gente encontra juntas o melhor dia e horário — no consultório ou por vídeo, de qualquer lugar do Brasil.</p>
+        </div>
+      </li>
+      <li class="passos__item">
+        <span class="passos__n" aria-hidden="true">2</span>
+        <div>
+          <h3>A gente conversa</h3>
+          <p>Falamos da sua história, dos seus hábitos, dos seus sintomas e dos seus exames. Depois vem a avaliação física e antropométrica — na consulta online, eu te oriento a fazer as medidas em casa, com um passo a passo simples.</p>
+        </div>
+      </li>
+      <li class="passos__item">
+        <span class="passos__n" aria-hidden="true">3</span>
+        <div>
+          <h3>Você sai com o plano em mãos</h3>
+          <p>O plano alimentar é montado ali, junto com você, pensado para a sua rotina. Nada de dieta pronta entregue depois — você já sai da consulta sabendo os próximos passos.</p>
+        </div>
+      </li>
+      <li class="passos__item">
+        <span class="passos__n" aria-hidden="true">4</span>
+        <div>
+          <h3>A gente continua junta</h3>
+          <p>Marcamos retornos para reavaliar e ajustar o que a vida real mostrou. E entre um retorno e outro você me manda as dúvidas quando surgirem, quantas precisar.</p>
+        </div>
+      </li>
+    </ol>
+
+    <p class="center reveal" style="margin-top:36px">
+      <a class="btn btn-primary" data-wa="agendar">Quero começar</a>
     </p>
   </div>
 </section>
@@ -506,7 +594,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy" width="700" height="933">
+              <img src="assets/img/capa-caldos.jpg" alt="Capa do e-book Caldos & Sopas Fit" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -529,7 +617,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-gravidez.jpg" alt="Capa do e-book 5 Passos para Preparar seu Corpo para uma Gravidez Saudável" loading="lazy" width="900" height="1200">
+              <img src="assets/img/capa-gravidez.jpg" alt="Capa do e-book 5 Passos para Preparar seu Corpo para uma Gravidez Saudável" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -540,7 +628,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-tentante.jpg" alt="Capa do e-book Guia Completo da Tentante" loading="lazy" width="1108" height="1478">
+              <img src="assets/img/capa-tentante.jpg" alt="Capa do e-book Guia Completo da Tentante" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--paid">R$ 47</span>
             </div>
             <div class="nf-card__info">
@@ -563,7 +651,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy" width="700" height="933">
+              <img src="assets/img/capa-guia-canetas.jpg" alt="Capa do e-book Guia Completo das Canetas Emagrecedoras" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--paid">R$ 27</span>
             </div>
             <div class="nf-card__info">
@@ -574,7 +662,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy" width="700" height="933">
+              <img src="assets/img/capa-5-erros.jpg" alt="Capa do e-book 5 Erros na Caneta Emagrecedora" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -585,7 +673,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-caneta-suplementacao.jpg" alt="Capa do e-book Suplementação para quem usa Caneta Emagrecedora" loading="lazy" width="1152" height="1536">
+              <img src="assets/img/capa-caneta-suplementacao.jpg" alt="Capa do e-book Suplementação para quem usa Caneta Emagrecedora" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -608,7 +696,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-rotulos.jpg" alt="Capa do e-book Guia Completo de Rótulos" loading="lazy" width="1086" height="1448">
+              <img src="assets/img/capa-rotulos.jpg" alt="Capa do e-book Guia Completo de Rótulos" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--paid">R$ 7,90</span>
             </div>
             <div class="nf-card__info">
@@ -619,7 +707,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy" width="1080" height="1440">
+              <img src="assets/img/capa-imunidade.jpg" alt="Capa do e-book Imunidade Natural — Guia de Inverno" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -630,7 +718,7 @@
 
           <article class="nf-card">
             <div class="nf-card__poster">
-              <img src="assets/img/capa-suplementacao.jpg" alt="Capa do e-book Guia Completo de Suplementação" loading="lazy" width="1152" height="1536">
+              <img src="assets/img/capa-suplementacao.jpg" alt="Capa do e-book Guia Completo de Suplementação" loading="lazy" width="600" height="800">
               <span class="nf-badge nf-badge--free">Grátis</span>
             </div>
             <div class="nf-card__info">
@@ -647,7 +735,7 @@
     <!-- DESTAQUE — espaço reservado para o próximo produto -->
 
     <div class="reveal nf-footer">
-      <span class="selo"><img src="assets/img/crn.png" alt="Selo CRN" width="786" height="239"> Material desenvolvido por nutricionista · CRN 25100401</span>
+      <span class="selo"><img src="assets/img/crn.png" alt="Selo CRN" width="240" height="73"> Material desenvolvido por nutricionista · CRN 25100401</span>
       <p style="margin-top:1rem;font-size:.92rem;color:rgba(255,255,255,.7)">Já adquiriu um material?</p>
       <a data-biblioteca class="btn btn-light nf-biblio-cta" style="margin-top:.6rem">📚 Acessar minha biblioteca →</a>
     </div>
@@ -661,7 +749,7 @@
       <div class="frame">
         <img src="assets/img/foto-sobre.jpg" alt="Ana Luísa Rocha"
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" width="935" height="1400">
-        <div class="ph" style="display:none"><img src="assets/img/logo-branco.png" alt="" style="width:120px" width="786" height="210"></div>
+        <div class="ph" style="display:none"><img src="assets/img/logo-branco.png" alt="" style="width:120px" width="360" height="96"></div>
       </div>
     </div>
     <div class="sobre-text reveal">
@@ -714,6 +802,69 @@
   </div>
 </section>
 
+<!-- ===================== FAQ =====================
+     <details> nativo: abre e fecha sem uma linha de JavaScript.
+     As respostas espelham o que já está em consultas.html — se mudar lá,
+     mudar aqui e no JSON-LD do <head> (schema FAQPage), que precisa bater
+     palavra por palavra com o que aparece na tela. -->
+<section id="faq" class="bg-alt faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+      <p class="lead">As que mais me chegam no WhatsApp antes da primeira consulta.</p>
+    </div>
+
+    <div class="faq__lista reveal">
+      <details class="faq__item" open>
+        <summary>Você atende online?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Atendo, de qualquer lugar do Brasil. A chamada acontece do jeito que for melhor para você: pelo vídeo do WhatsApp ou por um link que eu envio — basta um celular ou computador com internet. É a mesma escuta e a mesma profundidade da consulta presencial.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Vou sair da consulta com o plano pronto?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Sim. O plano alimentar é montado ali, na consulta, junto com você — e você sai com ele em mãos e com os próximos passos combinados. Na consulta online, ele chega em formato digital, sempre à mão no celular, para consultar na hora do mercado ou da refeição.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>E se eu tiver dúvida entre uma consulta e outra?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Você me manda quando surgir, quantas precisar — aquela dúvida no meio do caminho não precisa esperar o próximo retorno. Eu atendo em hospital e consultório, então nem sempre respondo na hora, mas te respondo assim que consigo.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>O acompanhamento é só pelo peso?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Não. A gente acompanha a sua evolução por inteiro — energia, sono, intestino, humor, sintomas — e não só pelo número da balança.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Na consulta online, como são feitas as medidas?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Eu te oriento a fazer as suas próprias medidas em casa, com um passo a passo simples, para acompanharmos a sua evolução mesmo à distância.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Vou precisar cortar tudo o que eu gosto?<span class="faq__mais" aria-hidden="true"></span></summary>
+        <div class="faq__resp">
+          <p>Não é assim que eu trabalho. O cuidado é individualizado, com base científica e sem terrorismo alimentar: o plano é construído para a sua rotina e ajustado conforme o seu corpo responde e a sua vida muda. E recaída não é motivo para desistir nem para culpa — a gente entende o que aconteceu e recomeça de onde parou.</p>
+        </div>
+      </details>
+    </div>
+
+    <p class="center reveal" style="margin-top:32px">
+      Ficou com outra dúvida? <a class="link-cta" data-wa="contato">Me chame no WhatsApp.</a>
+    </p>
+  </div>
+</section>
+
 <!-- ===================== CONTATO ===================== -->
 <section id="contato" class="contato">
   <div class="wrap">
@@ -750,7 +901,7 @@
 <footer class="footer">
   <div class="wrap">
     <div>
-      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="786" height="210">
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="360" height="96">
       <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher. Cuidado individualizado, com base científica e sem terrorismo alimentar.</p>
       <div class="social">
         <a data-insta aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
@@ -759,7 +910,7 @@
       </div>
     </div>
     <div>
-      <h4>Navegação</h4>
+      <h3>Navegação</h3>
       <ul>
         <li><a href="#ajuda">Como te ajudo</a></li>
         <li><a href="#consultas">Consultas</a></li>
@@ -771,7 +922,7 @@
       </ul>
     </div>
     <div>
-      <h4>Institucional</h4>
+      <h3>Institucional</h3>
       <ul>
         <li><a href="consultas.html">Consultas em detalhe</a></li>
         <li><a href="privacidade.html">Política de Privacidade</a></li>
@@ -784,9 +935,9 @@
 </footer>
 
 <!-- ===================== BARRA FIXA MOBILE ===================== -->
-<div class="mobile-bar">
+<nav class="mobile-bar" aria-label="Agendamento rápido">
   <a class="btn btn-primary" data-wa="agendar">📅 Agendar Consulta</a>
-</div>
+</nav>
 
 <!-- ===================== GUIA DE BOAS-VINDAS ===================== -->
 <div class="guide" id="guide" aria-hidden="true">
