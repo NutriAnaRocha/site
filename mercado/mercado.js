@@ -62,6 +62,39 @@
     return "https://wa.me/" + WHATS_ANA + "?text=" + encodeURIComponent(msg);
   }
 
+  /* ---------- A troca da nutri ----------
+     As alternativas da Open Food Facts respondem "que MARCA eu levo".
+     Isto responde outra pergunta, que é a que a Ana faz no consultório:
+     "e se eu não levar isso?". São trocas por COMIDA, não por produto de
+     prateleira — por isso o texto é escrito por ela e fica fixo, como a
+     explicação de diet/light na edge function. Frase de nutricionista
+     não se deixa na mão do modelo: aqui tem o CRN dela na tela.
+
+     Indexado por categoria_tag, que já vem gravada em cada análise — o
+     histórico antigo também passa a mostrar a troca, sem migration.
+     Só aparece quando o veredito NÃO é "boa": quem escolheu bem não
+     precisa de sermão. */
+  var TROCA_DA_NUTRI = {
+    hams: {
+      texto: "Em vez do embutido, o ideal é ovo cozido, sardinha ou frango desfiado. " +
+             "São proteína de verdade, sem o sódio e os conservantes do presunto.",
+      dica: "O ovo mexido fica ótimo feito só com um pouquinho de água ou um fiozinho de azeite."
+    },
+    sausages: {
+      texto: "Em vez do embutido, o ideal é ovo cozido, sardinha ou frango desfiado. " +
+             "São proteína de verdade, sem o sódio e os conservantes da salsicha.",
+      dica: "O ovo mexido fica ótimo feito só com um pouquinho de água ou um fiozinho de azeite."
+    },
+    biscuits: {
+      texto: "Se for levar biscoito, prefira os de arroz, de polvilho ou de aveia — " +
+             "lista curta e sem recheio."
+    },
+    breads: {
+      texto: "Prefira o pão integral de verdade: a farinha integral tem que estar " +
+             "no COMEÇO da lista de ingredientes, não no fim."
+    }
+  };
+
   var VEREDITOS = {
     boa:     { rotulo: "Pode levar",     icone: "✓" },
     atencao: { rotulo: "Dá para levar, mas…", icone: "!" },
@@ -690,6 +723,15 @@
         '<span class="ingr__e">' + esc(i.explicacao) + '</span></div>';
     }).join("");
 
+    /* Troca por comida (ver TROCA_DA_NUTRI). Fora do "boa" de propósito. */
+    var t = a.veredito !== "boa" ? TROCA_DA_NUTRI[a.categoria_tag] : null;
+    var troca = t
+      ? '<div class="bloco troca"><p class="bloco__t">A dica da Ana</p>' +
+        '<p class="troca__t">' + esc(t.texto) + '</p>' +
+        (t.dica ? '<p class="troca__d">🌸 ' + esc(t.dica) + '</p>' : '') +
+        '</div>'
+      : '';
+
     var alts = (a.alternativas || []).map(function (x, i) {
       return '<div class="alt"><span class="alt__n">' + (i + 1) + '</span><div>' +
         '<strong class="alt__nome">' + esc(x.nome) + (x.quantidade ? " · " + esc(x.quantidade) : "") + '</strong>' +
@@ -722,6 +764,8 @@
         (alertas ? '<div class="bloco"><p class="bloco__t">Contra</p><ul class="lista lista--ruim">' + alertas + '</ul></div>' : '') +
 
         (ingr ? '<div class="bloco"><p class="bloco__t">O que esses nomes querem dizer</p>' + ingr + '</div>' : '') +
+
+        troca +
 
         (alts
           ? '<div class="bloco"><p class="bloco__t">Se quiser trocar, olhe estas</p>' + alts +

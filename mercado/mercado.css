@@ -332,6 +332,12 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 }
 .credito-saldo{font-weight:700;color:var(--cinza);margin-bottom:10px}
 
+/* A dica da Ana: troca por comida, não por marca. Fundo rosa da casa para
+   se ler como voz dela, e não como mais um bloco de dado do app. */
+.troca{background:var(--rosa-suave);border:1px solid var(--rosa-borda);border-radius:14px;padding:14px}
+.troca__t{font-size:.9rem;margin-bottom:0}
+.troca__d{font-size:.85rem;color:var(--bordo);margin-top:8px;margin-bottom:0}
+
 /* Passo a passo da compra: quem está no corredor do mercado precisa
    saber ANTES de pagar que vai receber um código e que é ele que
    guarda as leituras — senão fecha a aba achando que perdeu. */
