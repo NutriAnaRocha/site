@@ -1,16 +1,16 @@
 /* ============================================================
-   SUPABASE CLIENT (sem build) — carrega a UMD do supabase-js pela
-   CDN e expõe:
-     window.NutriDB       -> client já criado (quando pronto)
-     window.NutriDBReady  -> Promise que resolve com o client
-   Inclua ANTES dos scripts que usam o banco (conta.js, biblioteca.js).
+   SUPABASE CLIENT (sem build) — carrega a UMD do supabase-js pela CDN e expõe:
+     window.SiteDB       -> client já criado (quando pronto)
+     window.SiteDBReady  -> Promise que resolve com o client
+   Inclua ANTES dos scripts que usam o banco (conta.js, biblioteca.js, painel.js).
 
-   Gêmeo de Plataforma/prototipo/assets/js/supabase-client.js — MESMO
-   projeto e MESMAS opções de propósito. Como as duas aplicações vivem
-   na origem nutrianarocha.github.io e não definimos storageKey, ambas
-   compartilham a chave default (sb-<ref>-auth-token) no localStorage:
-   quem entra aqui já entra logado na plataforma, e sair de um lado sai
-   dos dois. Não definir storageKey — é isso que dá o SSO.
+   O projeto Supabase é exclusivo deste site: as leitoras cadastradas aqui não
+   existem em nenhum outro projeto. É o isolamento que o contrato pede.
+
+   Este site compartilha a origem com uma plataforma externa e NÃO define
+   storageKey de propósito: os dois usam a chave default (sb-<ref>-auth-token)
+   no localStorage, então quem entra aqui entra logado lá, e sair de um lado
+   sai dos dois. Não definir storageKey — é isso que dá o SSO.
    ============================================================ */
 (function () {
   "use strict";
@@ -19,13 +19,13 @@
   var SUPABASE_ANON_KEY = "sb_publishable_WinaFUxjvv0ODjSs7sT2dQ_k7GlLLxh";
   var CDN = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
 
-  window.NutriDBReady = new Promise(function (resolve, reject) {
+  window.SiteDBReady = new Promise(function (resolve, reject) {
     function make() {
       try {
-        window.NutriDB = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        window.SiteDB = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
           auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
         });
-        resolve(window.NutriDB);
+        resolve(window.SiteDB);
       } catch (e) { reject(e); }
     }
     if (window.supabase && window.supabase.createClient) { make(); return; }

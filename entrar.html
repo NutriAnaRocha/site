@@ -1,33 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-layout="classica">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entrar na minha biblioteca — Nutri Ana Luísa Rocha</title>
-<meta name="description" content="Acesse a sua biblioteca de e-books da nutricionista Ana Luísa Rocha.">
-<meta name="theme-color" content="#840B55">
+<meta name="description" content="Acesse a sua biblioteca de materiais de Nutri Ana Luísa Rocha.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#840B55">
+<link rel="canonical" href="https://nutrianaluisarocha.com/entrar">
+
 <link rel="icon" href="assets/img/monograma.png">
-<!-- Fontes locais (nada vem do Google): pedir junto com o CSS, nao depois dele. -->
+<link rel="apple-touch-icon" href="assets/img/monograma.png">
+<!-- Fontes hospedadas no próprio site: sem CSS render-blocking de outro domínio
+     e sem mandar o IP de cada visitante para o Google (LGPD). O preload pede o
+     arquivo junto com o CSS, em vez de só depois de o navegador lê-lo.
+     Se o gerador não tiver conseguido baixar as fontes, cai no <link> do Google. -->
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Merienda-latin.woff2" crossorigin>
+
 <link rel="stylesheet" href="assets/css/styles.css">
+<!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nutri Ana Luísa Rocha">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Entrar na minha biblioteca — Nutri Ana Luísa Rocha">
+<meta property="og:description" content="Acesse a sua biblioteca de materiais de Nutri Ana Luísa Rocha.">
+<meta property="og:url" content="https://nutrianaluisarocha.com/entrar">
+<meta property="og:image" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
+<meta property="og:image:secure_url" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ana Luísa Rocha, nutricionista clínica e saúde da mulher — CRN 25100401">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Entrar na minha biblioteca — Nutri Ana Luísa Rocha">
+<meta name="twitter:description" content="Acesse a sua biblioteca de materiais de Nutri Ana Luísa Rocha.">
+<meta name="twitter:image" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
+<link rel="stylesheet" href="assets/css/biblioteca.css">
 </head>
 <body>
 
 <header class="nav nav-scrolled" id="nav">
   <div class="wrap">
-    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="200" height="89"></a>
+    <a class="nav-logo" href="/" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="564" height="252"></a>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="menu">
-      <a href="index.html#ebooks">E-books</a>
       <a href="index.html#consultas">Consultas</a>
+      <a href="index.html#vip">Comunidade VIP</a>
       <a href="index.html#sobre">Sobre</a>
       <a class="btn btn-primary nav-cta" data-wa="agendar">Agendar Consulta</a>
     </nav>
   </div>
 </header>
 
+<main>
 <section class="bg-acento vip" style="padding-top:calc(var(--nav-h) + 60px)">
   <div class="wrap">
     <div class="box">
@@ -55,14 +80,14 @@
           <a href="#" id="link-esqueci">Esqueci minha senha</a>
         </p>
         <p class="microcopy" style="margin-top:18px;border-top:1px solid var(--acento-borda);padding-top:16px" data-entrar-rodape>
-          Ainda não tem acesso? <a href="index.html#ebooks">Conheça os e-books →</a>
+          Ainda não tem acesso? <a href="/#ebooks">Conheça os materiais →</a>
         </p>
       </div>
 
       <!-- ---------- Passo: criar senha (convite / recuperação) ---------- -->
       <div data-step="senha" hidden>
         <span class="eyebrow">Quase lá</span>
-        <h1 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem" data-senha-titulo>Crie a sua senha 🌸</h1>
+        <h2 style="font-size:clamp(1.7rem,3.4vw,2.2rem);margin:.2rem 0 .4rem" data-senha-titulo>Crie a sua senha 🌸</h2>
         <p class="lead" style="margin-bottom:22px" data-senha-sub>Escolha uma senha para acessar a sua biblioteca sempre que quiser.</p>
 
         <form id="senha-form" novalidate>
@@ -83,24 +108,26 @@
   </div>
 </section>
 
+</main>
 <footer class="footer">
   <div class="wrap">
     <div>
-      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="360" height="96">
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="786" height="210">
       <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher.</p>
     </div>
     <div>
-      <h3>Navegação</h3>
+      <h2>Institucional</h2>
       <ul>
-        <li><a href="index.html#ebooks">E-books</a></li>
-        <li><a href="index.html#consultas">Consultas</a></li>
+        <li><a href="privacidade">Política de Privacidade</a></li>
+        <li><a href="termos">Termos de Uso</a></li>
       </ul>
     </div>
     <div>
-      <h3>Institucional</h3>
+      <h2>Contato</h2>
       <ul>
-        <li><a href="privacidade.html">Política de Privacidade</a></li>
-        <li><a href="termos.html">Termos de Uso</a></li>
+        <li><a data-wa="contato">WhatsApp</a></li>
+        <li><a data-insta>Instagram</a></li>
+        <li><a data-email>E-mail</a></li>
       </ul>
     </div>
   </div>
@@ -110,5 +137,6 @@
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/supabase-client.js" defer></script>
 <script src="assets/js/conta.js" defer></script>
+
 </body>
 </html>

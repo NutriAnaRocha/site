@@ -1,5 +1,9 @@
 /* =========================================================
    Nutri Ana Luísa Rocha — configuração e interações
+
+   ⚠️ Gerado por Gerar-Site-Nutri a partir de site.json.
+      O bloco CONFIG/MSG abaixo é reescrito a cada geração —
+      mudanças de conteúdo vão no site.json, não aqui.
    ========================================================= */
 
 /* ===== EDITE AQUI ===== */
@@ -8,11 +12,10 @@ const CONFIG = {
      O <head> de cada página carrega uma cópia build-time deste valor em
      rel="canonical", og:url, og:image, twitter:image e no JSON-LD — HTML
      estático não lê JS antes de o robô ler a meta tag, então a duplicação é
-     inevitável. Ao trocar de domínio, trocar aqui E rodar:
-       grep -rl "nutrianarocha.github.io" --include=*.html . | xargs sed -i "s|https://nutrianarocha.github.io/site|<NOVA_URL>|g"
+     inevitável. Ao trocar de domínio: mudar `site_url` no site.json, regerar
      e publicar um redirect 301 do endereço antigo, para não perder o que já
      está indexado. */
-  SITE_URL: "https://nutrianarocha.github.io/site",
+  SITE_URL: "https://nutrianaluisarocha.com",
   WHATS: "5521994094557",
   INSTA: "https://www.instagram.com/nutrianaluisarocha",
   EMAIL: "nutrianalrocha@gmail.com",
@@ -21,56 +24,45 @@ const CONFIG = {
 
 /* Mensagens pré-preenchidas de cada ação (WhatsApp) */
 const MSG = {
-  agendar:  "Olá, Ana! Gostaria de agendar uma consulta 🌸",
-  presencial:"Olá, Ana! Quero agendar uma consulta presencial 🌸",
-  online:   "Olá, Ana! Quero agendar uma consulta online 🌸",
-  acompanhamento:"Olá, Ana! Tenho interesse no acompanhamento nutricional 🌸",
-  vip:      (nome) => `Oi, Ana! ${nome ? nome + ", " : ""}quero entrar na Comunidade VIP e receber os conteúdos gratuitos 🌸`,
-  ebook:    (titulo) => `Olá, Ana! Tenho interesse no e-book "${titulo}" 🌸`,
-  comprar:  (titulo) => `Olá, Ana! Quero desbloquear o e-book "${titulo}". Como faço o pagamento? 🌸`,
-  assinar:  "Olá, Ana! Quero assinar o plano mensal de e-books e receber os novos lançamentos 🌸",
-  contato:  "Olá, Ana! Vim pelo seu site e gostaria de falar com você 🌸",
+  agendar: "Olá, Ana! Gostaria de agendar uma consulta 🌸",
+  presencial: "Olá, Ana! Quero agendar uma consulta presencial 🌸",
+  online: "Olá, Ana! Quero agendar uma consulta online 🌸",
+  acompanhamento: "Olá, Ana! Tenho interesse no acompanhamento nutricional 🌸",
+  vip: (nome) => `Oi, Ana! ${nome ? nome + ", " : ""}quero entrar na Comunidade VIP e receber os conteúdos gratuitos 🌸`,
+  ebook: (titulo) => `Olá, Ana! Tenho interesse no e-book "${titulo}" 🌸`,
+  comprar: (titulo) => `Olá, Ana! Quero desbloquear o e-book "${titulo}". Como faço o pagamento? 🌸`,
+  assinar: "Olá, Ana! Quero assinar o plano mensal de e-books e receber os novos lançamentos 🌸",
+  contato: "Olá, Ana! Vim pelo seu site e gostaria de falar com você 🌸",
   programa: "Olá, Ana! Tenho interesse no Meu Plano e queria tirar uma dúvida antes 🌸",
-  acesso:   "Olá, Ana! Entrei no Meu Plano mas não recebi o e-mail de acesso. Meu e-mail da compra é: ",
-  area:     "Olá, Ana! Sou sua paciente e queria acessar a minha área de acompanhamento 🌸",
+  programa_plano: (plano) => `Olá, Ana! Quero entrar no Meu Plano — plano ${plano} 🌸`,
+  acesso: "Olá, Ana! Entrei no Meu Plano mas não recebi o e-mail de acesso. Meu e-mail da compra é: ",
+  area: "Olá, Ana! Sou sua paciente e queria acessar a minha área de acompanhamento 🌸",
 };
 
-/* Links de checkout do InfinitePay (pagamento Pix/cartão). A chave é o
-   data-titulo do botão. Se o link existir, o botão de compra usa ele;
-   se ficar "", cai no WhatsApp. Cada link já redireciona, após o pagamento,
-   para a página secreta com o e-book completo. */
+/* Links de checkout (pagamento Pix/cartão). A chave é o data-titulo do botão.
+   Se o link existir, o botão de compra usa ele; se ficar "", cai no WhatsApp. */
 const CHECKOUT = {
   "Guia Completo da Tentante": "https://checkout.infinitepay.io/analuisarocha?lenc=G1IBABwJdgwxEe8MQKPkMpS9nPMm7IRC22aAQgEJ2_v0vmsKSeEzcrsJNaERlNj5JhlV0boDOyj836W24FsYfAujWsaBBhrW4jC94eP4JG0muZTYvrOiO0um-k0oCSShgZn-rLO9QMJE15Ao24UTz7TfXbuhuROn8Z_3gO-ySl8LOKDPoDAArizNQGHxwo8OKVCUpmdS1sTSSZDN_kVtpaZEgLQHcy7I1dwUiqWCkCErQQb3bHRw6GG76XQ5r3Nsdn9xWSJ3lfK3BwAY_nNK4yRabQI_1HbiLNI1BWaqI-CQomkrJuqNLWpMSEdIQRjB-uN1c5XyAQ.v1.0ba00280056ebff1",
-  "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=G14BAIyUqJ0vDVdlz-bM7IyaMO0PMB5Q6Ob--wW6ArtlloVGUGLxXXdgNzqA_UtqC7616HCP2jIONNDjW8DpNo_LS6S2raQrsDnPUjWQnCB6MXB4CIHAF5azzfYCBxp6Bh-ZBieaul9eD0NKJ0r7v7wKfSnqw0iH__NdhiAYIKj0bVB9zriMPgTvl_QFTHay_riRHQOj8OlrPEiRbxXz4VGxE4W-Do4nqnqoRVTUkehUwome1MR3gXY6zV6N1uRas1mVG72b4FwSTjVEc3HYH8b_NAw8301zy7Qj5itxkIWWGEQuUAi4yJAY_CJxjeiOojt6yF3Ipl83DdEE.v1.bc80cb571de96e80",
+  "Guia Completo das Canetas": "https://checkout.infinitepay.io/analuisarocha?lenc=G14BAIyUqJ0vDVdlz-bM7IyaMO0PMB5Q6Ob--wW6ArtlloVGUGLxXXdgNzqA_UtqC7616HCP2jIONNDjW8DpNo_LS6S2raQrsDnPUjWQnCB6MXB4CIHAF5azzfYCBxp6Bh-ZBieaul9eD0NKJ0r7v7wKfSnqw0iH__NdhiAYIKj0bVB9zriMPgTvl_QFTHay_riRHQOj8OlrPEiRbxXz4VGxE4W-Do4nqnqoRVTUkehUwome1MR3gXY6zV6N1uRas1mVG72b4FwSTjVEc3HYH8b_NAw8301zy7Qj5itxkIWWGEQuUAi4yJAY_CJxjeiOojt6yF3Ipl83DdEE.v1.bc80cb571de96e80"
 };
 
-/* Links de checkout do programa "Meu Plano com a Nutri Ana".
-   A chave é o data-programa do botão (trimestral | semestral | anual).
-
-   Cada link precisa ser criado no painel da InfinitePay com:
-     • order_nsu   = meuplano-trimestral | meuplano-semestral | meuplano-anual
-                     (é por ele que o webhook sabe qual plano liberar)
-     • redirect_url = https://nutrianarocha.github.io/site/obrigado-meu-plano.html
-     • webhook_url  = https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/programa-webhook
-
-   Enquanto um link estiver "", o botão cai no WhatsApp — nada quebra na
-   página, mas a compra automática não acontece. */
+/* Links de checkout do programa de acompanhamento online.
+   A chave é o data-programa do botão. Enquanto um link estiver "", o botão
+   cai no WhatsApp — nada quebra na página, mas a compra automática não acontece. */
 const PROGRAMA = {
-  trimestral: "",
-  semestral: "",
-  anual: "",
+  "trimestral": "",
+  "semestral": "",
+  "anual": ""
 };
 
-/* Biblioteca de e-books: onde o cliente que JÁ comprou faz login e lê.
-   Agora é uma página DO PRÓPRIO SITE (biblioteca.html + entrar.html), com a
-   marca da Ana — antes mandávamos pro login do NutriPlat, que é um portal
-   pra nutricionistas e confundia quem só comprou um e-book. O login é o mesmo
-   Supabase, então a conta vale nos dois. Se vazio, os links "Acessar minha
-   biblioteca" somem. Caminho relativo: só use [data-biblioteca] em páginas da raiz. */
+/* Biblioteca de materiais: onde quem JÁ tem acesso faz login e lê.
+   É uma página do próprio site (biblioteca.html + entrar.html), com a marca
+   da nutri. Se vazio, os links "Acessar minha biblioteca" somem. Caminho
+   relativo: só use [data-biblioteca] em páginas da raiz. */
 const PLATAFORMA_URL = "biblioteca.html";
 
-/* Captura de leads dos e-books gratuitos (grava telefone no Supabase).
-   Depois de deixar nome + WhatsApp, a pessoa lê o e-book na hora. */
+/* Captura de leads dos materiais gratuitos (grava telefone no Supabase).
+   Depois de deixar nome + WhatsApp, a pessoa lê o material na hora. */
 const LEADS = {
   SUPABASE_URL: "https://btsqrpxzlkmucrfvsytl.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_WinaFUxjvv0ODjSs7sT2dQ_k7GlLLxh",
@@ -78,6 +70,7 @@ const LEADS = {
 };
 
 const wa = (msg) => `https://wa.me/${CONFIG.WHATS}?text=${encodeURIComponent(msg)}`;
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -128,9 +121,10 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => intro.classList.add("done"), 600);
       setTimeout(maybeShowGuide, 700); // guia entra quando a abertura sai
     };
-    // O tempo mora no CSS (--intro-dur), para animação e permanência
-    // nunca saírem de sincronia. Se a leitura falhar, 1200ms.
-    const dur = parseFloat(getComputedStyle(intro).getPropertyValue("--intro-dur")) || 1200;
+    // O tempo mora no CSS (--intro-dur, gerado de marca.layout.intro_ms), para
+    // animação e permanência nunca saírem de sincronia.
+    const dur = parseFloat(getComputedStyle(intro).getPropertyValue("--intro-dur"))
+                || 2800;
     setTimeout(finish, dur);
     intro.addEventListener("click", finish);
   } else {
@@ -147,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (link) {
       el.href = link;
     } else {
-      el.href = wa(`Olá, Ana! Quero entrar no Meu Plano — plano ${plano} 🌸`);
+      el.href = wa(MSG.programa_plano(plano));
     }
     el.target = "_blank";
     el.rel = "noopener";
@@ -159,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const key = el.getAttribute("data-wa");
     const titulo = el.getAttribute("data-titulo") || "";
 
-    // Compra/assinatura: se houver link de checkout cadastrado, usa ele; senão, WhatsApp.
+    // Compra/assinatura: se houver link de pagamento cadastrado, usa ele; senão, WhatsApp.
     if ((key === "comprar" || key === "assinar") && CHECKOUT[titulo]) {
       el.href = CHECKOUT[titulo];
       el.target = "_blank"; el.rel = "noopener";
@@ -235,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // pessoa: liberamos o e-book do mesmo jeito e registramos o erro no
       // console — a captura nunca deve custar o material a quem se cadastrou.
       try {
+        if (!LEADS) throw new Error("captura de lead desligada neste site");
         const resp = await fetch(`${LEADS.SUPABASE_URL}/rest/v1/${LEADS.TABLE}`, {
           method: "POST",
           headers: {
@@ -263,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---- Compartilhar / copiar link (páginas de prévia) ---- */
-  const shareMsg = (url) => encodeURIComponent(`Olha esse e-book da Nutri Ana Luísa Rocha 🌸\n${url}`);
+  const shareMsg = (url) => encodeURIComponent("Olha esse e-book da Nutri Ana Luísa Rocha 🌸" + "\n" + url);
   document.querySelectorAll("[data-share-wa]").forEach(el => {
     el.href = `https://wa.me/?text=${shareMsg(location.href)}`;
     el.target = "_blank"; el.rel = "noopener";
@@ -296,23 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     next && next.addEventListener("click", () => row.scrollBy({ left:  step(), behavior: "smooth" }));
     row.addEventListener("scroll", updateArrows, { passive: true });
     window.addEventListener("resize", updateArrows);
-
-    /* A primeira medida NÃO pode sair no DOMContentLoaded: ler scrollWidth
-       ali obriga o navegador a diagramar a página inteira na hora (era parte
-       do Layout de 716ms do carregamento). Além disso, a seção dos e-books
-       agora tem content-visibility:auto — fora da tela ela nem foi
-       diagramada, e a medida voltaria zerada. Então medimos quando a
-       prateleira se aproxima da tela, que é quando a seta importa. */
-    if ("IntersectionObserver" in window) {
-      const ioShelf = new IntersectionObserver((entries, obs) => {
-        if (!entries.some(e => e.isIntersecting)) return;
-        obs.disconnect();
-        updateArrows();
-      }, { rootMargin: "200px" });
-      ioShelf.observe(scroller);
-    } else {
-      updateArrows();
-    }
+    updateArrows();
   });
   // Clicar na capa aciona o botão do card (Netflix-like)
   document.querySelectorAll(".nf-card__poster").forEach(poster => {
@@ -357,14 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.scrollY > 40) nav.classList.add("nav-scrolled");
     else nav.classList.remove("nav-scrolled");
   };
-  /* O estado inicial espera o primeiro quadro: ler window.scrollY aqui dentro
-     obrigaria o navegador a diagramar a página na hora, dentro desta mesma
-     tarefa (foi o que sobrou do Layout longo do carregamento). No primeiro
-     quadro a conta já foi feita de graça, junto da pintura. */
-  if (nav) {
-    requestAnimationFrame(onScroll);
-    window.addEventListener("scroll", onScroll, { passive:true });
-  }
+  if (nav) { onScroll(); window.addEventListener("scroll", onScroll, { passive:true }); }
 
   /* ---- Menu mobile (hambúrguer) ---- */
   const toggle = document.querySelector(".nav-toggle");

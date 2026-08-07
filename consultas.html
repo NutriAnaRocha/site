@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-layout="classica">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Consultas — Nutri Ana Luísa Rocha</title>
 <meta name="description" content="Modalidades de atendimento nutricional com Ana Luísa Rocha: presencial, online e acompanhamento. Saúde da mulher em todas as fases.">
 <meta name="theme-color" content="#840B55">
+<link rel="canonical" href="https://nutrianaluisarocha.com/consultas">
+
 <link rel="icon" href="assets/img/monograma.png">
-<link rel="canonical" href="https://nutrianarocha.github.io/site/consultas.html">
 <link rel="apple-touch-icon" href="assets/img/monograma.png">
-<!-- Fontes locais (nada vem do Google): pedir junto com o CSS, nao depois dele. -->
+<!-- Fontes hospedadas no próprio site: sem CSS render-blocking de outro domínio
+     e sem mandar o IP de cada visitante para o Google (LGPD). O preload pede o
+     arquivo junto com o CSS, em vez de só depois de o navegador lê-lo.
+     Se o gerador não tiver conseguido baixar as fontes, cai no <link> do Google. -->
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/Montserrat-latin.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/Merienda-latin.woff2" crossorigin>
+
 <link rel="stylesheet" href="assets/css/styles.css">
+<!-- Open Graph / prévia ao compartilhar (WhatsApp, Instagram…). og:image em URL absoluta. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nutri Ana Luísa Rocha">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Consultas — Nutri Ana Luísa Rocha">
+<meta property="og:description" content="Modalidades de atendimento nutricional com Ana Luísa Rocha: presencial, online e acompanhamento. Saúde da mulher em todas as fases.">
+<meta property="og:url" content="https://nutrianaluisarocha.com/consultas">
+<meta property="og:image" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
+<meta property="og:image:secure_url" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ana Luísa Rocha, nutricionista clínica e saúde da mulher — CRN 25100401">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Consultas — Nutri Ana Luísa Rocha">
+<meta name="twitter:description" content="Modalidades de atendimento nutricional com Ana Luísa Rocha: presencial, online e acompanhamento. Saúde da mulher em todas as fases.">
+<meta name="twitter:image" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
 </head>
 <body>
 
 <header class="nav nav-scrolled" id="nav">
   <div class="wrap">
-    <a class="nav-logo" href="index.html" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="200" height="89"></a>
+    <a class="nav-logo" href="/" aria-label="Início"><img src="assets/img/logo-ana.png" alt="Ana Luísa Rocha — Nutricionista" width="564" height="252"></a>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <nav class="nav-links" id="menu">
       <a href="index.html#ajuda">Como te ajudo</a>
@@ -31,6 +52,7 @@
   </div>
 </header>
 
+<main>
 <div class="page-head">
   <div class="wrap">
     <span class="eyebrow">Atendimento</span>
@@ -64,7 +86,7 @@
     <a class="btn btn-primary" data-wa="presencial" style="margin-top:12px">Agendar consulta presencial</a>
   </section>
 
-  <hr style="border:0;border-top:1px solid #efe4ec;margin:36px 0">
+  <hr style="border:0;border-top:1px solid var(--borda);margin:36px 0">
 
   <section id="online" style="padding:0 0 20px">
     <h2>Consulta Online</h2>
@@ -89,7 +111,7 @@
     <a class="btn btn-primary" data-wa="online" style="margin-top:12px">Agendar consulta online</a>
   </section>
 
-  <hr style="border:0;border-top:1px solid #efe4ec;margin:36px 0">
+  <hr style="border:0;border-top:1px solid var(--borda);margin:36px 0">
 
   <section id="acompanhamento" style="padding:0 0 20px">
     <h2>Acompanhamento Nutricional</h2>
@@ -114,17 +136,19 @@
     <a class="btn btn-primary" data-wa="acompanhamento" style="margin-top:12px">Quero o acompanhamento</a>
   </section>
 
-  <a class="link-cta back" href="index.html">← Voltar para a página inicial</a>
+
+  <a class="link-cta back" href="/">← Voltar para a página inicial</a>
 </div>
 
+</main>
 <footer class="footer">
   <div class="wrap">
     <div>
-      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="360" height="96">
+      <img class="flogo" src="assets/img/logo-branco.png" alt="Ana Luísa Rocha — Nutricionista" width="786" height="210">
       <p style="font-size:.9rem;max-width:34ch">Nutrição Clínica e Saúde da Mulher.</p>
     </div>
     <div>
-      <h3>Navegação</h3>
+      <h2>Navegação</h2>
       <ul>
         <li><a href="index.html#consultas">Consultas</a></li>
         <li><a href="index.html#vip">Comunidade VIP</a></li>
@@ -132,10 +156,10 @@
       </ul>
     </div>
     <div>
-      <h3>Institucional</h3>
+      <h2>Institucional</h2>
       <ul>
-        <li><a href="privacidade.html">Política de Privacidade</a></li>
-        <li><a href="termos.html">Termos de Uso</a></li>
+        <li><a href="privacidade">Política de Privacidade</a></li>
+        <li><a href="termos">Termos de Uso</a></li>
         <li><a data-wa="agendar">Agendar Consulta</a></li>
       </ul>
     </div>
@@ -144,5 +168,6 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
+
 </body>
 </html>

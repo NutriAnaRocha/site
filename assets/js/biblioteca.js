@@ -1,12 +1,11 @@
 /* ============================================================
-   BIBLIOTECA DE E-BOOKS — versão do site institucional (marca da Ana).
-   Mesma lógica e mesmo banco da biblioteca do NutriPlat
-   (Plataforma/prototipo/assets/js/biblioteca.js) — o que muda é a casca.
-   Se mexer na regra de liberação aqui, mexa lá também.
+   BIBLIOTECA DE MATERIAIS — área logada de Nutri Ana Luísa Rocha.
 
-   Lista o catálogo (público) e libera a LEITURA só do que a pessoa
-   adquiriu (ou do que é gratuito). O arquivo vem de um bucket PRIVADO;
-   quem não tem direito, o banco recusa (RLS) — o gate não é o JS.
+   Lista o catálogo (público: capa e título aparecem para todo mundo) e libera
+   a LEITURA só do que é gratuito ou do que foi liberado para aquela pessoa.
+   O arquivo vem de um bucket PRIVADO; quem não tem direito, o banco recusa
+   (RLS) — o gate é o banco, não este JavaScript.
+
    Requer supabase-client.js incluído ANTES deste arquivo.
    ============================================================ */
 (function () {
@@ -19,51 +18,49 @@
   var FRAME    = document.getElementById("bib-frame");
   var RTITLE   = document.getElementById("bib-reader-title");
 
-  // Onde comprar o que ainda não é seu (a vitrine do próprio site).
-  var COMPRAR_URL = "index.html#ebooks";
+  var PAPEL_DONA = "nutri";
+  /* Base para resolver capa_url/previa_url relativos. Vazio = os caminhos são
+     do próprio site (assets/img/...), que é o caso normal. */
+  var BASE_ARQUIVOS = "https://nutrianarocha.github.io/Plataforma/prototipo/";
 
-  // capa_url e previa_url no catálogo são relativos à PLATAFORMA
-  // (ex.: "assets/img/capas/x.jpg", "assets/previas/x.html"). Aqui no site
-  // esses caminhos não existem — resolvemos contra a base da plataforma.
-  var PLATAFORMA_BASE = "https://nutrianarocha.github.io/Plataforma/prototipo/";
   function resolver(url) {
     if (!url) return "";
     if (/^https?:\/\//i.test(url)) return url;      // já é absoluto
-    return PLATAFORMA_BASE + String(url).replace(/^\.?\//, "");
+    if (!BASE_ARQUIVOS) return url;
+    return BASE_ARQUIVOS + String(url).replace(/^\.?\//, "");
   }
 
   var blobEmUso = null; // object URL atual do leitor (revogado ao fechar)
 
-  window.NutriDBReady.then(function (c) {
-    // Logout (botão "Sair")
+  window.SiteDBReady.then(function (c) {
     document.addEventListener("click", function (e) {
       if (!e.target.closest("[data-logout]")) return;
       e.preventDefault();
-      c.auth.signOut().then(function () { window.location.replace("index.html"); });
+      c.auth.signOut().then(function () { window.location.replace("/"); });
     });
 
     return c.auth.getSession().then(function (r) {
-      if (!r.data.session) { window.location.replace("entrar.html?next=biblioteca.html"); return; }
+      if (!r.data.session) { window.location.replace("entrar?next=biblioteca"); return; }
       var user = r.data.session.user;
       var nome = nomeCurto(user);
       if (HI) HI.textContent = nome ? ("Olá, " + nome + " 🌸") : "Minha Biblioteca";
-      mostrarAtalhoPlataforma(c);
+      mostrarAtalhoPainel(c);
       return carregar(c, user);
     });
   }).catch(function (e) {
-    if (LOADING) LOADING.textContent = "Não foi possível carregar sua biblioteca. Verifique sua conexão.";
+    if (LOADING) LOADING.textContent = "Não foi possível carregar a sua biblioteca. Verifique sua conexão.";
     console.error(e);
   });
 
-  /* A nutri também tem biblioteca (ela lê os próprios e-books), mas o
-     trabalho dela é do outro lado. Sem este atalho ela entra pelo site e
-     fica sem caminho até os pacientes e o editor de plano. Só aparece para
-     tipo='nutri' — comprador não pode nem suspeitar que a porta existe. */
-  function mostrarAtalhoPlataforma(c) {
-    var link = document.getElementById("bib-plataforma");
+  /* A dona do site também tem biblioteca (ela lê os próprios materiais), mas o
+     trabalho dela é do outro lado. Sem este atalho ela entraria pela porta da
+     loja e ficaria sem caminho até o painel. Só aparece para o papel de dona —
+     uma leitora não pode nem suspeitar que a porta existe. */
+  function mostrarAtalhoPainel(c) {
+    var link = document.getElementById("bib-painel");
     if (!link) return;
     c.from("profiles").select("tipo").maybeSingle().then(function (r) {
-      if (r && r.data && r.data.tipo === "nutri") link.hidden = false;
+      if (r && r.data && r.data.tipo === PAPEL_DONA) link.hidden = false;
     }).catch(function () { /* na dúvida, não mostra */ });
   }
 
@@ -81,14 +78,14 @@
       if (res[0].error) throw res[0].error;
       // O erro da 2ª query NÃO pode passar batido: o catálogo é legível por
       // anônimo, mas ebook_acessos depende de auth.uid(). Se a chamada sair sem
-      // token, o RLS devolve 0 linhas SEM erro e a pessoa que pagou veria tudo
-      // como "🔒 Adquirir" — pior falha possível. Melhor falhar visível.
+      // token, o RLS devolve 0 linhas SEM erro e quem tem acesso veria tudo
+      // trancado — pior falha possível. Melhor falhar visível.
       if (res[1].error) throw res[1].error;
       var ebooks = res[0].data || [];
       var acessos = (res[1].data || []).filter(function (a) {
         return !a.expira_em || new Date(a.expira_em) > new Date();
       });
-      // ebook_slug '*' = acesso a tudo (assinante / cortesia).
+      // ebook_slug '*' = acesso a tudo (cortesia).
       var temTudo = acessos.some(function (a) { return a.ebook_slug === "*"; });
       var slugs = {};
       acessos.forEach(function (a) { slugs[a.ebook_slug] = true; });
@@ -103,7 +100,7 @@
     if (LOADING) LOADING.hidden = true;
     CATALOGO.innerHTML = "";
     if (!ebooks.length) {
-      CATALOGO.innerHTML = '<p class="bib-empty">Nenhum material disponível ainda.</p>';
+      CATALOGO.innerHTML = '<p class="bib-empty">' + escapeHtml("Nenhum material disponível ainda.") + "</p>";
       return;
     }
     // Agrupa por categoria, preservando a ordem em que aparecem (já vêm por 'ordem').
@@ -137,17 +134,19 @@
     card.className = "bib-card" + (liberado ? "" : " is-locked");
 
     var capa = eb.capa_url
-      ? '<img class="bib-cover" src="' + escapeAttr(resolver(eb.capa_url)) + '" alt="" loading="lazy">'
+      ? '<img class="bib-cover" src="' + escapeHtml(resolver(eb.capa_url)) + '" alt="" loading="lazy">'
       : '<div class="bib-cover bib-cover--ph">' + escapeHtml(eb.titulo) + "</div>";
 
     var selo = eb.gratuito
       ? '<span class="bib-badge bib-badge--free">Grátis</span>'
-      : (liberado ? '<span class="bib-badge bib-badge--own">Adquirido</span>' : "");
+      : (liberado ? '<span class="bib-badge bib-badge--own">Liberado</span>' : "");
+
+    var previa = eb.previa_url
+      ? '<button class="btn btn-primary btn-block bib-previa" type="button">Ver prévia</button>' : "";
 
     var acao = liberado
       ? '<button class="btn btn-primary btn-block bib-ler" type="button">Ler agora →</button>'
-      : ((eb.previa_url ? '<button class="btn btn-primary btn-block bib-previa" type="button">Ver prévia</button>' : "") +
-         '<a class="btn btn-outline btn-block" href="' + COMPRAR_URL + '">🔒 Adquirir</a>');
+      : (previa + '<a class="btn btn-outline btn-block" href="/#ebooks">🔒 Adquirir</a>');
 
     card.innerHTML =
       '<div class="bib-cover-wrap">' + capa + selo + "</div>" +
@@ -166,14 +165,21 @@
       var bp = card.querySelector(".bib-previa");
       if (bp) bp.addEventListener("click", function () { abrirPrevia(resolver(eb.previa_url), eb.titulo); });
     }
+    var pedir = card.querySelector(".bib-pedir");
+    // wa() e MSG vêm do main.js, carregado antes deste arquivo.
+    if (pedir && typeof wa === "function") {
+      pedir.addEventListener("click", function () {
+        window.open(wa(MSG.ebook(eb.titulo)), "_blank", "noopener");
+      });
+    }
     return card;
   }
 
-  // Prévia: página pública (não passa pelo bucket gated).
+  // Prévia: página pública (não passa pelo bucket privado).
   function abrirPrevia(url, titulo) {
     if (blobEmUso) { URL.revokeObjectURL(blobEmUso); blobEmUso = null; }
     FRAME.src = url;
-    RTITLE.textContent = (titulo || "E-book") + " — prévia";
+    RTITLE.textContent = (titulo || "Material") + " — prévia";
     READER.hidden = false;
     document.body.style.overflow = "hidden";
   }
@@ -184,13 +190,15 @@
     c.storage.from("ebooks").download(eb.arquivo).then(function (res) {
       btn.disabled = false; btn.textContent = txt;
       if (res.error || !res.data) {
-        alert("Não foi possível abrir este material. Se você já adquiriu, fale com a Ana.");
+        alert("Não foi possível abrir este material. Se você já tem acesso, fale com " + "a Ana" + ".");
         console.error(res.error);
         return;
       }
       if (blobEmUso) { URL.revokeObjectURL(blobEmUso); }
-      // Re-tipa o Blob p/ text/html: sem isso o iframe baixa em vez de renderizar.
-      blobEmUso = URL.createObjectURL(res.data.slice(0, res.data.size, "text/html"));
+      // Re-tipa o Blob: sem o tipo certo o iframe baixa o arquivo em vez de
+      // renderizar. O contrato prevê os dois formatos (HTML e PDF).
+      var tipo = eb.formato === "pdf" ? "application/pdf" : "text/html";
+      blobEmUso = URL.createObjectURL(res.data.slice(0, res.data.size, tipo));
       FRAME.src = blobEmUso;
       RTITLE.textContent = eb.titulo;
       READER.hidden = false;
@@ -221,5 +229,4 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch];
     });
   }
-  function escapeAttr(s) { return escapeHtml(s); }
 })();

@@ -1,0 +1,16 @@
+# URL limpa: /entrar serve entrar.html, e /entrar.html vira /entrar (301).
+Options -MultiViews
+RewriteEngine On
+
+# 1) link velho com .html -> endereço sem extensão, permanente.
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# 2) /index -> raiz.
+RewriteRule ^index/?$ / [R=301,L]
+
+# 3) endereço sem extensão -> arquivo .html correspondente.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^.]+?)/?$ /$1.html [L]

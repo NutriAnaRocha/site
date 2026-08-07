@@ -1,17 +1,17 @@
-# ATENÇÃO: robô só lê robots.txt na RAIZ do domínio. Hoje o site vive em
-# nutrianarocha.github.io/site/, então este arquivo ainda NÃO é obedecido —
-# ele passa a valer quando o site for para o domínio próprio (Hostinger).
-# Até lá, o sitemap deve ser enviado à mão no Google Search Console.
-
+# Este site pode ser indexado.
 User-agent: *
 Allow: /
 
-# Área restrita e conteúdo pago: nada disso deve entrar no índice.
-Disallow: /entrar.html
-Disallow: /biblioteca.html
+# Área restrita e conteúdo pago: nada disso entra no índice.
+Disallow: /entrar
+Disallow: /biblioteca
+Disallow: /painel
 Disallow: /e/
 Disallow: /ebooks/
-Disallow: /obrigado-meu-plano.html
-Disallow: /proposta-pets.html
+Disallow: /obrigado-meu-plano
+Disallow: /proposta-pets
+Disallow: /previa-priscila/
+Disallow: /pendencias-priscila/
+Disallow: /briefing-priscila/
 
-Sitemap: https://nutrianarocha.github.io/site/sitemap.xml
+Sitemap: https://nutrianaluisarocha.com/sitemap.xml
