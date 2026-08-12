@@ -91,6 +91,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const maybeShowGuide = () => {
     if (!guide || location.hash) return;
+    /* O aviso de cookies pergunta primeiro. O guia é um overlay com z-index
+       maior e o backdrop dele engole o clique: quem chegasse na primeira visita
+       não conseguiria responder sobre o rastreio sem antes fechar o guia. */
+    const aviso = document.getElementById("consent");
+    if (aviso && !aviso.hidden) {
+      aviso.addEventListener("click", function esperaResposta(e) {
+        if (!e.target.closest("[data-consent]")) return;
+        aviso.removeEventListener("click", esperaResposta);
+        setTimeout(maybeShowGuide, 400);
+      });
+      return;
+    }
     try { if (sessionStorage.getItem("guideSeen")) return; sessionStorage.setItem("guideSeen", "1"); } catch (e) {}
     openGuide();
   };

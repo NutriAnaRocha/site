@@ -674,8 +674,11 @@ body.intro-lock{overflow:visible}
 
 /* ---------- Aviso de cookies (só existe quando há rastreio) ----------
    Fica acima da barra mobile de agendar (z-index dela é menor) e some assim
-   que a visitante responde. Discreto de propósito: é aviso, não é a página. */
-.consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:1400;
+   que a visitante responde. Discreto de propósito: é aviso, não é a página.
+   z-index acima do guia (1500): se o guia for reaberto pelo botão flutuante
+   com a pergunta ainda de pé, o backdrop dele não pode engolir o clique da
+   resposta — consentimento que não dá para recusar não é consentimento. */
+.consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:1600;
   display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:space-between;
   max-width:820px;margin:0 auto;padding:16px 20px;
   background:var(--branco);border:1px solid var(--borda-campo);border-radius:var(--radius);
