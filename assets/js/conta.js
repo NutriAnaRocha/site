@@ -21,8 +21,8 @@
      a dona para o painel. Só existe quando o site convive com uma plataforma
      externa que tem áreas próprias. */
   var ROTAS = {
-  "paciente": "https://nutrianarocha.github.io/Plataforma/prototipo/portal-paciente.html",
-  "nutri": "https://nutrianarocha.github.io/Plataforma/prototipo/dashboard.html"
+  "paciente": "https://app.nutrianaluisarocha.com/portal-paciente.html",
+  "nutri": "https://app.nutrianaluisarocha.com/dashboard.html"
 };
   /* Cascas alternativas da mesma tela (?de=chave): mesma autenticação, outro
      texto — quem vem de "área do paciente" não deve ler "e-books adquiridos". */

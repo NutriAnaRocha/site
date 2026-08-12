@@ -1,3 +1,0 @@
-# Previa temporaria — nao indexar. Remocao automatica em 15/09/2026.
-User-agent: *
-Disallow: /

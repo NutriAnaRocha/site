@@ -21,7 +21,7 @@
   var PAPEL_DONA = "nutri";
   /* Base para resolver capa_url/previa_url relativos. Vazio = os caminhos são
      do próprio site (assets/img/...), que é o caso normal. */
-  var BASE_ARQUIVOS = "https://nutrianarocha.github.io/Plataforma/prototipo/";
+  var BASE_ARQUIVOS = "https://app.nutrianaluisarocha.com/";
 
   function resolver(url) {
     if (!url) return "";

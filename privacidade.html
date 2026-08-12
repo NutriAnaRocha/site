@@ -82,7 +82,7 @@
   </ul>
 
   <h2>4. Compartilhamento</h2>
-  <p>Não vendemos nem compartilhamos seus dados com terceiros para fins de marketing. O atendimento ocorre pelo WhatsApp (Meta Platforms), que possui política de privacidade própria. A área de materiais funciona sobre a infraestrutura do Supabase, que atua como operadora dos dados sob nossas instruções.</p>
+  <p>Não vendemos nem compartilhamos seus dados com terceiros para fins de marketing. O atendimento ocorre pelo WhatsApp (Meta Platforms), que possui política de privacidade própria. A área de materiais funciona sobre a infraestrutura do Supabase, que atua como operadora dos dados sob nossas instruções. Se — e somente se — você aceitar a medição de audiência descrita no item 7, dados de navegação (páginas vistas, origem do acesso, tipo de aparelho) passam a ser tratados também pelo Google, em servidores fora do Brasil. Nada do que você conta sobre a sua saúde entra nessa medição.</p>
 
   <h2>5. Seus direitos (LGPD)</h2>
   <p>Você pode, a qualquer momento, solicitar acesso, correção ou exclusão dos seus dados, bem como sair da lista de transmissão. Basta enviar uma mensagem pelos nossos canais de contato.</p>
@@ -90,8 +90,31 @@
   <h2>6. Dados sensíveis de saúde</h2>
   <p>Informações de saúde são sensíveis e tratadas com sigilo profissional, conforme o Código de Ética do Nutricionista e a LGPD. Guardamos apenas o necessário para o seu atendimento.</p>
 
-  <h2>7. Cookies</h2>
-  <p>Este site não utiliza cookies de rastreamento próprios. A área de materiais usa apenas o armazenamento local necessário para manter você conectada. Caso venham a ser adicionadas ferramentas de análise no futuro, esta política será atualizada.</p>
+  <h2>7. Cookies e medição de audiência</h2>
+  <p>Na primeira visita, o site pergunta se você aceita ser incluída na medição de audiência. <strong>Nada de terceiros é carregado antes da sua resposta</strong> — nem cookie, nem script.</p>
+  <ul>
+    <li><strong>Se você aceitar:</strong> o Google Analytics passa a registrar de forma agregada quantas pessoas visitam o site, de onde vieram e quais páginas interessam mais — inclusive o clique nos botões de contato. Isso grava cookies no seu navegador e trata os dados fora do Brasil.</li>
+    <li><strong>Se você recusar</strong> — ou simplesmente não responder —, nenhuma dessas ferramentas é carregada e o site funciona exatamente igual.</li>
+  </ul>
+  <p>Em qualquer das opções, o site guarda no seu próprio navegador apenas o registro da sua resposta, para não perguntar de novo. A área de materiais usa, além disso, o armazenamento local necessário para manter você conectada.</p>
+  <p>Mudou de ideia? A escolha pode ser revista quando você quiser:</p>
+  <p><button type="button" class="btn btn-outline" data-consent-rever>Rever minha escolha sobre cookies</button></p>
+  <p><small>Isso apaga a resposta guardada e faz o aviso aparecer de novo, para você decidir outra vez. Os cookies que o Google já tenha gravado continuam no navegador até você limpar os dados de navegação — a partir da recusa, nada novo é coletado.</small></p>
+  <script>
+  /* Revogar precisa ser tão fácil quanto consentir (LGPD, art. 8º, §5º). Como a
+     resposta mora no localStorage, apagar a chave e recarregar devolve a pessoa
+     ao estado de quem nunca respondeu: o aviso volta e nada carrega até a nova
+     escolha. */
+  (function () {
+    var b = document.querySelector("[data-consent-rever]");
+    if (!b) return;
+    b.addEventListener("click", function () {
+      try { localStorage.removeItem("consentimento-rastreio"); } catch (e) {}
+      location.reload();
+    });
+  })();
+  </script>
+
 
 
   <a class="link-cta back" href="/">← Voltar para a página inicial</a>
@@ -124,6 +147,94 @@
 </footer>
 
 <script src="assets/js/main.js" defer></script>
+
+<!-- ===================== RASTREIO (GA4 / Meta Pixel) =====================
+     Nada de terceiro carrega antes do "Aceitar". GA4 e Meta Pixel gravam
+     cookie e mandam dados para fora do Brasil: sob a LGPD isso é tratamento
+     que depende de consentimento, e o site é de uma profissional de saúde —
+     o custo de errar aqui não é multa, é o CRN.
+     "Recusar" é decisão gravada igual a "Aceitar": sem banner de novo, e sem
+     script nenhum. Quem não responde nada também não é rastreado. -->
+<div class="consent" id="consent" role="dialog" aria-live="polite"
+     aria-label="Aviso de cookies" hidden>
+  <p class="consent__txt">
+    Uso cookies para entender como as visitantes chegam até aqui e melhorar o site.
+    Você escolhe. <a href="privacidade">Política de privacidade</a>
+  </p>
+  <div class="consent__btns">
+    <button type="button" class="btn btn-outline" data-consent="nao">Agora não</button>
+    <button type="button" class="btn btn-primary" data-consent="sim">Aceitar</button>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var CHAVE = "consentimento-rastreio";
+  var GA = "G-CK7DCNB3L6";
+  var PIXEL = null;
+  var banner = document.getElementById("consent");
+
+  function ler() { try { return localStorage.getItem(CHAVE); } catch (e) { return "nao"; } }
+  function gravar(v) { try { localStorage.setItem(CHAVE, v); } catch (e) {} }
+
+  function ligarGA() {
+    if (!GA) return;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA);
+  }
+
+  function ligarPixel() {
+    if (!PIXEL) return;
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    window.fbq("init", PIXEL);
+    window.fbq("track", "PageView");
+  }
+
+  /* O que interessa medir num site de nutricionista não é pageview: é quanta
+     gente clicou para falar no WhatsApp. Delegação num lugar só, porque os
+     botões de agendar existem no nav, no hero, nas seções e na barra mobile. */
+  function medirConversoes() {
+    document.addEventListener("click", function (e) {
+      var alvo = e.target.closest("[data-wa]");
+      if (!alvo) return;
+      var qual = alvo.getAttribute("data-wa") || "contato";
+      if (window.gtag) window.gtag("event", "contato_whatsapp", { origem: qual });
+      if (window.fbq) window.fbq("track", "Contact", { origem: qual });
+    });
+  }
+
+  function ligarTudo() { ligarGA(); ligarPixel(); medirConversoes(); }
+
+  if (ler() === "sim") { ligarTudo(); return; }
+  if (ler() === "nao") return;
+
+  if (banner) {
+    banner.hidden = false;
+    banner.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-consent]");
+      if (!b) return;
+      var resposta = b.getAttribute("data-consent");
+      gravar(resposta);
+      banner.hidden = true;
+      if (resposta === "sim") ligarTudo();
+    });
+  }
+})();
+</script>
+
 
 </body>
 </html>

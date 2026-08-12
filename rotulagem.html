@@ -154,7 +154,7 @@ footer .fine{opacity:.6;font-size:.74rem;max-width:520px;margin:0 auto}
   .nav-brand small{display:none}
 }
 </style>
-<link rel="canonical" href="https://nutrianarocha.github.io/site/rotulagem.html">
+<link rel="canonical" href="https://nutrianaluisarocha.com/rotulagem">
 </head>
 <body>
 
@@ -370,6 +370,82 @@ document.querySelectorAll(".acc-h").forEach(function(h){
     if(!open){body.classList.add("open");h.classList.add("open");}
   });
 });
+</script>
+<!-- rastreio-legado -->
+<style>
+.nlr-consent{position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:9999;
+  max-width:34rem;margin:0 auto;background:#fff;color:#63666A;
+  border:1px solid #efe4ec;border-radius:14px;padding:1rem 1.1rem;
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:.9rem;line-height:1.5}
+.nlr-consent[hidden]{display:none}
+.nlr-consent a{color:#840B55;text-decoration:underline}
+.nlr-consent__btns{display:flex;gap:.6rem;justify-content:flex-end;margin-top:.85rem;flex-wrap:wrap}
+.nlr-consent button{font:inherit;font-weight:600;padding:.55rem 1.1rem;border-radius:999px;
+  cursor:pointer;border:1px solid #840B55}
+.nlr-consent .nlr-nao{background:#fff;color:#840B55}
+.nlr-consent .nlr-sim{background:#840B55;color:#fff}
+@media (max-width:480px){.nlr-consent__btns{justify-content:stretch}
+  .nlr-consent button{flex:1}}
+</style>
+<div class="nlr-consent" id="nlr-consent" role="dialog" aria-live="polite"
+     aria-label="Aviso de cookies" hidden>
+  <p>Uso cookies para entender como as visitantes chegam até aqui e melhorar o site.
+     Você escolhe. <a href="privacidade">Política de privacidade</a></p>
+  <div class="nlr-consent__btns">
+    <button type="button" class="nlr-nao" data-consent="nao">Agora não</button>
+    <button type="button" class="nlr-sim" data-consent="sim">Aceitar</button>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var CHAVE = "consentimento-rastreio";
+  var GA = "G-CK7DCNB3L6";
+  var banner = document.getElementById("nlr-consent");
+
+  function ler() { try { return localStorage.getItem(CHAVE); } catch (e) { return "nao"; } }
+  function gravar(v) { try { localStorage.setItem(CHAVE, v); } catch (e) {} }
+
+  function ligarGA() {
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA);
+  }
+
+  /* Mesma conversao do site principal: clique pra falar no WhatsApp. Aqui os
+     botoes nao tem data-wa, entao pego qualquer link de wa.me / whatsapp. */
+  function medirConversoes() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest('a[href*="wa.me"], a[href*="api.whatsapp.com"], [data-wa]');
+      if (!a) return;
+      var qual = a.getAttribute("data-wa") || "legado";
+      if (window.gtag) window.gtag("event", "contato_whatsapp", { origem: qual });
+    });
+  }
+
+  function ligarTudo() { ligarGA(); medirConversoes(); }
+
+  if (ler() === "sim") { ligarTudo(); return; }
+  if (ler() === "nao") return;
+
+  if (banner) {
+    banner.hidden = false;
+    banner.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-consent]");
+      if (!b) return;
+      var resposta = b.getAttribute("data-consent");
+      gravar(resposta);
+      banner.hidden = true;
+      if (resposta === "sim") ligarTudo();
+    });
+  }
+})();
 </script>
 </body>
 </html>

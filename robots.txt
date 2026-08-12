@@ -13,5 +13,6 @@ Disallow: /proposta-pets
 Disallow: /previa-priscila/
 Disallow: /pendencias-priscila/
 Disallow: /briefing-priscila/
+Disallow: /app/
 
 Sitemap: https://nutrianaluisarocha.com/sitemap.xml

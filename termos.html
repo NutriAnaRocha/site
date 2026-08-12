@@ -116,5 +116,93 @@
 
 <script src="assets/js/main.js" defer></script>
 
+<!-- ===================== RASTREIO (GA4 / Meta Pixel) =====================
+     Nada de terceiro carrega antes do "Aceitar". GA4 e Meta Pixel gravam
+     cookie e mandam dados para fora do Brasil: sob a LGPD isso é tratamento
+     que depende de consentimento, e o site é de uma profissional de saúde —
+     o custo de errar aqui não é multa, é o CRN.
+     "Recusar" é decisão gravada igual a "Aceitar": sem banner de novo, e sem
+     script nenhum. Quem não responde nada também não é rastreado. -->
+<div class="consent" id="consent" role="dialog" aria-live="polite"
+     aria-label="Aviso de cookies" hidden>
+  <p class="consent__txt">
+    Uso cookies para entender como as visitantes chegam até aqui e melhorar o site.
+    Você escolhe. <a href="privacidade">Política de privacidade</a>
+  </p>
+  <div class="consent__btns">
+    <button type="button" class="btn btn-outline" data-consent="nao">Agora não</button>
+    <button type="button" class="btn btn-primary" data-consent="sim">Aceitar</button>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var CHAVE = "consentimento-rastreio";
+  var GA = "G-CK7DCNB3L6";
+  var PIXEL = null;
+  var banner = document.getElementById("consent");
+
+  function ler() { try { return localStorage.getItem(CHAVE); } catch (e) { return "nao"; } }
+  function gravar(v) { try { localStorage.setItem(CHAVE, v); } catch (e) {} }
+
+  function ligarGA() {
+    if (!GA) return;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA);
+  }
+
+  function ligarPixel() {
+    if (!PIXEL) return;
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];
+      t = b.createElement(e); t.async = !0; t.src = v;
+      s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    window.fbq("init", PIXEL);
+    window.fbq("track", "PageView");
+  }
+
+  /* O que interessa medir num site de nutricionista não é pageview: é quanta
+     gente clicou para falar no WhatsApp. Delegação num lugar só, porque os
+     botões de agendar existem no nav, no hero, nas seções e na barra mobile. */
+  function medirConversoes() {
+    document.addEventListener("click", function (e) {
+      var alvo = e.target.closest("[data-wa]");
+      if (!alvo) return;
+      var qual = alvo.getAttribute("data-wa") || "contato";
+      if (window.gtag) window.gtag("event", "contato_whatsapp", { origem: qual });
+      if (window.fbq) window.fbq("track", "Contact", { origem: qual });
+    });
+  }
+
+  function ligarTudo() { ligarGA(); ligarPixel(); medirConversoes(); }
+
+  if (ler() === "sim") { ligarTudo(); return; }
+  if (ler() === "nao") return;
+
+  if (banner) {
+    banner.hidden = false;
+    banner.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-consent]");
+      if (!b) return;
+      var resposta = b.getAttribute("data-consent");
+      gravar(resposta);
+      banner.hidden = true;
+      if (resposta === "sim") ligarTudo();
+    });
+  }
+})();
+</script>
+
+
 </body>
 </html>
