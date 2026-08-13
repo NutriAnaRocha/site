@@ -711,6 +711,30 @@
       'de verdade — não tem marca, e por isso serve de régua, não de sugestão de compra.</p></div>';
   }
 
+  /* Os caminhos de troca. Vêm da leitura (não da base de marcas) e existem
+     em toda leitura, inclusive nas boas — aí como variação, não correção.
+     Ficam dentro de a.tabela porque foram acrescentados sem migration. */
+  var ROTULO_CAMINHO = {
+    melhor_versao: "Mesmo produto, versão melhor",
+    mesmo_papel:   "Mesmo papel, menos processado",
+    in_natura:     "O caminho mais simples"
+  };
+
+  function caminhosHTML(t) {
+    var cs = (t && t.caminhos) || [];
+    if (!cs.length) return "";
+    var intro = (t && t.caminhos_intro) || "";
+    return '<div class="bloco"><p class="bloco__t">E as alternativas?</p>' +
+      (intro ? '<p class="cam__intro">' + esc(intro) + '</p>' : '') +
+      cs.map(function (c) {
+        return '<div class="cam">' +
+          '<span class="cam__tag">' + esc(ROTULO_CAMINHO[c.tipo] || "Outro caminho") + '</span>' +
+          '<strong class="cam__t">' + esc(c.titulo) + '</strong>' +
+          '<span class="cam__m">' + esc(c.melhora) + '</span>' +
+        '</div>';
+      }).join("") + '</div>';
+  }
+
   function resultadoHTML(b) {
     var a = b.analise;
     var v = VEREDITOS[a.veredito] || VEREDITOS.atencao;
@@ -756,6 +780,12 @@
       '<div class="res__corpo">' +
         (a.resumo ? '<p class="res__resumo">' + esc(a.resumo) + '</p>' : '') +
 
+        /* "29 calorias por fatia" é verdade e é armadilha: ninguém come uma
+           fatia. A conta refeita para o que se come de verdade vem antes de
+           qualquer número da tabela, porque é ela que muda a decisão. */
+        ((a.tabela && a.tabela.porcao_real)
+          ? '<p class="porcao-real">' + esc(a.tabela.porcao_real) + '</p>' : '') +
+
         (faltando.length
           ? '<div class="aviso">Não consegui ver ' + esc(faltando.join(" nem ")) +
             '. A leitura vale, mas fica mais certeira com essa foto também.</div>'
@@ -774,11 +804,16 @@
 
         troca +
 
+        /* Primeiro o que levar no lugar (alimento); depois, se a base
+           permitir, QUAL MARCA levar. A ausência de marca vira nota de
+           rodapé do bloco anterior — nunca mais uma seção dizendo "não
+           consegui". */
+        caminhosHTML(a.tabela) +
+
         (alts
-          ? '<div class="bloco"><p class="bloco__t">Se quiser trocar, olhe estas</p>' + alts + '</div>'
+          ? '<div class="bloco"><p class="bloco__t">Se quiser trocar de marca, olhe estas</p>' + alts + '</div>'
           : (b.sem_alternativa
-              ? '<div class="bloco"><p class="bloco__t">E as alternativas?</p><p class="alt__pq">' +
-                esc(b.sem_alternativa) + '</p></div>'
+              ? '<p class="cam__nota">' + esc(b.sem_alternativa) + '</p>'
               : '')) +
 
         /* Botar na lista sai daqui de dentro porque é aqui que a decisão é
