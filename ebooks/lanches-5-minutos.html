@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lanches da Tarde de 5 Minutos — Nutri Ana Luísa Rocha</title>
+<meta name="description" content="10 lanches prontos em 5 minutos, com calorias, proteína e carboidrato calculados. Para quando bate a fome da tarde e você não quer cair no primeiro biscoito.">
+<meta name="theme-color" content="#830e56">
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Montserrat-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/Merienda-latin.woff2" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lanches da Tarde de 5 Minutos">
+<meta property="og:description" content="10 lanches prontos em 5 minutos, com calorias, proteína e carboidrato calculados. Para quando bate a fome da tarde e você não quer cair no primeiro biscoito.">
+<meta property="og:image" content="https://nutrianaluisarocha.com/assets/img/capa-lanches-5min.jpg">
+<meta property="og:image:width" content="750"><meta property="og:image:height" content="1000">
+<meta property="og:url" content="https://nutrianaluisarocha.com/e/lanches-5min">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nutrianaluisarocha.com/assets/img/capa-lanches-5min.jpg">
+<style>
+/* Fontes locais: nada vem do Google, igual ao resto do site. */
+@font-face{font-family:'Merienda';src:url('../assets/fonts/Merienda-latin.woff2') format('woff2');
+  font-weight:300 900;font-display:swap}
+@font-face{font-family:'Montserrat';src:url('../assets/fonts/Montserrat-latin.woff2') format('woff2');
+  font-weight:100 900;font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --mag:#830e56; --mag2:#6a0b46; --mag3:#520836;
+  --pk:#f1b3db; --pk2:#fce8f3; --pk3:#fff5fa;
+  --gr:#64686B; --gr2:#e8e8e9;
+  --w:#fff; --bg:#fefcfd; --tx:#2d2d2d;
+  --sh:0 4px 24px rgba(131,14,86,.10);
+  --sh2:0 12px 40px rgba(131,14,86,.14);
+  --r:18px; --r2:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:Montserrat,system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--tx);line-height:1.7;font-size:16px}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:Merienda,Georgia,serif;font-weight:900;line-height:1.25}
+
+/* capa */
+.capa{background:linear-gradient(150deg,var(--mag) 0%,var(--mag2) 55%,var(--mag3) 100%);
+  color:var(--w);padding:76px 22px 68px;text-align:center;position:relative;overflow:hidden}
+.capa::after{content:"";position:absolute;inset:auto -18% -55% -18%;height:60%;
+  background:radial-gradient(ellipse at center,rgba(241,179,219,.30),transparent 70%)}
+.capa__selo{display:inline-block;border:1.5px solid rgba(255,255,255,.55);
+  border-radius:999px;padding:6px 18px;font-size:.72rem;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;margin-bottom:24px}
+.capa h1{font-size:clamp(2rem,6.2vw,3.15rem);margin-bottom:16px;position:relative;z-index:1}
+.capa__sub{font-size:clamp(1rem,2.6vw,1.18rem);opacity:.93;max-width:34ch;
+  margin:0 auto;font-weight:500;position:relative;z-index:1}
+.capa__assina{margin-top:34px;font-size:.85rem;opacity:.85;position:relative;z-index:1}
+
+/* blocos */
+.section{padding:56px 0}
+.section h2{font-size:clamp(1.5rem,4vw,2.05rem);color:var(--mag);margin-bottom:20px}
+.lead{font-size:1.05rem;color:var(--gr)}
+.lead strong{color:var(--mag);font-weight:700}
+.caixa{background:var(--pk3);border-left:4px solid var(--pk);border-radius:var(--r2);
+  padding:22px 24px;margin-top:26px}
+.caixa h3{font-size:1.08rem;color:var(--mag);margin-bottom:12px}
+.caixa ol{margin-left:20px}.caixa ol li{margin-bottom:9px;color:var(--gr)}
+
+/* sumario */
+.sumario{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:26px 28px}
+.sumario ol{list-style:none;counter-reset:s}
+.sumario li{counter-increment:s;border-bottom:1px solid var(--gr2)}
+.sumario li:last-child{border-bottom:0}
+.sumario a{display:flex;gap:14px;align-items:baseline;padding:11px 2px;
+  text-decoration:none;color:var(--tx);font-weight:500}
+.sumario a::before{content:counter(s);color:var(--pk);font-family:Merienda,serif;
+  font-weight:900;font-size:1.1rem;min-width:26px}
+.sumario a:hover{color:var(--mag)}
+.sumario .kcal{margin-left:auto;font-size:.82rem;color:var(--gr);white-space:nowrap}
+
+/* receita */
+.receita{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);
+  padding:32px 30px;margin-bottom:30px;scroll-margin-top:18px}
+.receita__num{display:inline-block;background:var(--pk2);color:var(--mag);
+  font-family:Merienda,serif;font-weight:900;font-size:.85rem;
+  border-radius:999px;padding:3px 14px;margin-bottom:12px}
+.receita h3{font-size:clamp(1.25rem,3.4vw,1.6rem);color:var(--mag);margin-bottom:10px}
+.receita__resumo{color:var(--gr);margin-bottom:20px}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.meta span{background:var(--pk3);border:1px solid var(--pk2);border-radius:999px;
+  padding:5px 14px;font-size:.82rem;font-weight:600;color:var(--mag2)}
+
+/* macros */
+.macros{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+  gap:10px;margin-bottom:24px}
+.macro{background:linear-gradient(160deg,var(--mag),var(--mag2));color:var(--w);
+  border-radius:var(--r2);padding:14px 8px;text-align:center}
+.macro b{display:block;font-family:Merienda,serif;font-weight:900;font-size:1.35rem;line-height:1.2}
+.macro small{display:block;font-size:.68rem;letter-spacing:.09em;
+  text-transform:uppercase;opacity:.88;margin-top:3px;font-weight:600}
+.macro--claro{background:var(--pk2);color:var(--mag2)}
+
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:640px){.col2{grid-template-columns:1fr;gap:20px}}
+.bloco h4{font-family:Montserrat,sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mag);margin-bottom:12px}
+.bloco ul{list-style:none}
+.bloco ul li{padding-left:18px;position:relative;margin-bottom:8px;color:var(--gr);font-size:.95rem}
+.bloco ul li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;
+  border-radius:50%;background:var(--pk)}
+.bloco ol{margin-left:19px}
+.bloco ol li{margin-bottom:9px;color:var(--gr);font-size:.95rem;padding-left:3px}
+.dica{margin-top:22px;background:var(--pk3);border-radius:var(--r2);padding:15px 18px;
+  font-size:.92rem;color:var(--gr)}
+.dica b{color:var(--mag);font-weight:700}
+
+/* compras */
+.compras{background:var(--w);border-radius:var(--r);box-shadow:var(--sh);padding:30px 28px}
+.compras__setor{margin-bottom:26px}
+.compras__setor:last-child{margin-bottom:0}
+.compras__setor h4{font-family:Merienda,serif;font-weight:900;font-size:1.05rem;
+  color:var(--mag);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--pk2)}
+.compras__setor li{list-style:none;display:flex;gap:12px;align-items:center;
+  padding:9px 0;border-bottom:1px dashed var(--gr2);color:var(--gr);font-size:.95rem}
+.compras__setor li:last-child{border-bottom:0}
+.compras__setor li::before{content:"";flex:0 0 15px;height:15px;border:2px solid var(--pk);
+  border-radius:4px}
+.compras__setor .n{display:flex;flex-direction:column;line-height:1.35;min-width:0}
+.compras__setor .n small{font-size:.74rem;color:var(--pk);font-weight:600;margin-top:2px}
+.compras__setor .q{margin-left:auto;font-weight:700;color:var(--mag2);
+  padding-left:14px;text-align:right;line-height:1.35}
+
+/* cta */
+.cta{background:linear-gradient(150deg,var(--mag),var(--mag3));color:var(--w);
+  border-radius:var(--r);padding:44px 32px;text-align:center;box-shadow:var(--sh2)}
+.cta h2{color:var(--w);font-size:clamp(1.4rem,3.8vw,1.95rem);margin-bottom:14px}
+.cta p{opacity:.93;max-width:52ch;margin:0 auto 26px}
+.cta__btn{display:inline-flex;align-items:center;gap:10px;background:var(--w);
+  color:var(--mag);text-decoration:none;font-weight:700;font-size:1rem;
+  padding:15px 32px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.18);
+  transition:transform .18s}
+.cta__btn:hover{transform:translateY(-2px)}
+.cta__btn svg{width:20px;height:20px;fill:currentColor}
+
+footer{background:var(--mag3);color:rgba(255,255,255,.82);text-align:center;
+  padding:34px 22px;font-size:.84rem;margin-top:56px}
+footer span{font-weight:700;color:var(--w)}
+footer p+p{margin-top:.4rem;opacity:.75;font-size:.79rem}
+.fonte{font-size:.82rem;color:var(--gr);margin-top:26px;text-align:center;font-style:italic}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <span class="capa__selo">E-book gratuito</span>
+  <h1>Lanches da Tarde de 5 Minutos</h1>
+  <p class="capa__sub">10 lanches reais para quando bate a fome das 16h</p>
+  <p class="capa__assina">por Ana Luísa Rocha · Nutricionista · CRN 25100401</p>
+</header>
+
+<div class="wrap">
+
+  <section class="section">
+    <p class="lead">A fome das quatro da tarde não é falta de força de vontade. Depois de quatro, cinco horas sem comer, seu corpo pede energia rápida — e o que estiver mais perto ganha. Quase sempre é o biscoito da gaveta.<br><br>A saída não é resistir com mais vontade. É ter uma resposta pronta. Estes dez lanches ficam prontos em cinco minutos, com o que você já tem em casa, e trazem proteína suficiente para segurar a fome até o jantar — em vez de o açúcar que te derruba de novo em uma hora.<br><br>Em cada receita você encontra as calorias, a proteína e o carboidrato por porção, calculados a partir da <strong>Tabela TACO</strong> (Tabela Brasileira de Composição de Alimentos, da UNICAMP). Nada de número estimado no olho.</p>
+    <div class="caixa">
+      <h3>Como usar este e-book</h3>
+      <ol><li>Escolha dois ou três lanches que você realmente gosta e deixe os ingredientes comprados. Variedade demais no começo atrapalha mais do que ajuda.</li><li>Coma o lanche da tarde num horário fixo, mais ou menos 3 a 4 horas depois do almoço. Comer na hora certa evita a fome descontrolada no jantar.</li><li>A lista de compras no fim do e-book já traz tudo somado, por setor do mercado.</li><li>As porções são individuais, salvo indicação em contrário.</li></ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>As receitas</h2>
+    <div class="sumario"><ol><li><a href="#iogurte-cremoso-com-banana-e-aveia">Iogurte Cremoso com Banana e Aveia<span class="kcal">257 kcal</span></a></li><li><a href="#torrada-de-abacate-com-ovo">Torrada de Abacate com Ovo<span class="kcal">284 kcal</span></a></li><li><a href="#vitamina-de-mamao-com-aveia">Vitamina de Mamão com Aveia<span class="kcal">217 kcal</span></a></li><li><a href="#sanduiche-de-atum-com-cenoura">Sanduíche de Atum com Cenoura<span class="kcal">247 kcal</span></a></li><li><a href="#maca-com-pasta-de-amendoim">Maçã com Pasta de Amendoim<span class="kcal">193 kcal</span></a></li><li><a href="#pao-integral-com-queijo-minas-e-tomate">Pão Integral com Queijo Minas e Tomate<span class="kcal">265 kcal</span></a></li><li><a href="#smoothie-de-morango-com-iogurte">Smoothie de Morango com Iogurte<span class="kcal">129 kcal</span></a></li><li><a href="#cuscuz-rapido-com-ovo">Cuscuz Rápido com Ovo<span class="kcal">239 kcal</span></a></li><li><a href="#mix-de-castanhas-com-abacaxi">Mix de Castanhas com Abacaxi<span class="kcal">208 kcal</span></a></li><li><a href="#creme-de-ricota-com-torrada-e-linhaca">Creme de Ricota com Torrada e Linhaça<span class="kcal">281 kcal</span></a></li></ol></div>
+  </section>
+
+  <section class="section">
+    <article class="receita" id="iogurte-cremoso-com-banana-e-aveia"><span class="receita__num">Receita 01</span><h3>Iogurte Cremoso com Banana e Aveia</h3><p class="receita__resumo">O clássico que resolve. A aveia dá a fibra que segura a fome, e a banana adoça sem precisar de açúcar.</p><div class="meta"><span>⏱ 3 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>257</b><small>kcal</small></div><div class="macro"><b>10.2 g</b><small>Proteína</small></div><div class="macro"><b>42.5 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>6.5 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>3.2 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 pote (170 g) de iogurte natural</li><li>1 banana prata média (90 g)</li><li>1½ colher de sopa de aveia em flocos</li><li>1 colher de chá de mel</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Corte a banana em rodelas.</li><li>Num pote ou taça, coloque o iogurte e cubra com a banana.</li><li>Salpique a aveia por cima e finalize com o fio de mel.</li><li>Se quiser mais cremoso, misture a aveia no iogurte e deixe 2 minutos antes de comer.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Prepare na noite anterior e leve pronto na bolsa: a aveia hidrata no iogurte e fica com textura de mousse.</p></article><article class="receita" id="torrada-de-abacate-com-ovo"><span class="receita__num">Receita 02</span><h3>Torrada de Abacate com Ovo</h3><p class="receita__resumo">Gordura boa do abacate e proteína do ovo na mesma fatia. É o lanche que mais segura a fome desta lista.</p><div class="meta"><span>⏱ 5 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>284</b><small>kcal</small></div><div class="macro"><b>12.1 g</b><small>Proteína</small></div><div class="macro"><b>28.8 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>14.6 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>7.2 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>2 fatias de pão de forma integral</li><li>3 colheres de sopa de abacate (60 g)</li><li>1 ovo cozido</li><li>1 fio de azeite extra virgem</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Deixe o ovo cozinhando enquanto prepara o resto (use um já cozido da geladeira para ficar em 2 minutos).</li><li>Torre as fatias de pão na sanduicheira ou na frigideira seca.</li><li>Amasse o abacate com o garfo, tempere com sal, pimenta e algumas gotas de limão.</li><li>Espalhe o abacate no pão, cubra com o ovo em rodelas e finalize com o fio de azeite.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Cozinhe seis ovos de uma vez no domingo e guarde na geladeira com casca. Duram uma semana e resolvem o lanche em 2 minutos.</p></article><article class="receita" id="vitamina-de-mamao-com-aveia"><span class="receita__num">Receita 03</span><h3>Vitamina de Mamão com Aveia</h3><p class="receita__resumo">Para os dias em que você quer algo leve e líquido. O mamão ajuda o intestino e a aveia impede que a fome volte rápido.</p><div class="meta"><span>⏱ 3 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>217</b><small>kcal</small></div><div class="macro"><b>10.8 g</b><small>Proteína</small></div><div class="macro"><b>40.5 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>2.2 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>4.5 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 fatia grande de mamão formosa (150 g)</li><li>1 copo (200 ml) de leite desnatado</li><li>2 colheres de sopa de aveia em flocos</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Coloque o mamão picado, o leite e a aveia no liquidificador.</li><li>Bata por 40 segundos, até ficar homogêneo.</li><li>Sirva na hora, gelado. Se quiser mais encorpado, use o mamão congelado em cubos.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Congele o mamão já picado em saquinhos de porção. Vira vitamina cremosa sem precisar de gelo — que só dilui.</p></article><article class="receita" id="sanduiche-de-atum-com-cenoura"><span class="receita__num">Receita 04</span><h3>Sanduíche de Atum com Cenoura</h3><p class="receita__resumo">O lanche mais proteico do e-book. Aqui o iogurte substitui a maionese e deixa o recheio cremoso do mesmo jeito.</p><div class="meta"><span>⏱ 5 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>247</b><small>kcal</small></div><div class="macro"><b>21.6 g</b><small>Proteína</small></div><div class="macro"><b>27.6 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>6.1 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>4.4 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>2 fatias de pão de forma integral</li><li>½ lata de atum escorrido (60 g)</li><li>½ cenoura pequena ralada (30 g)</li><li>1 colher de sopa de iogurte natural</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Escorra bem o atum, apertando com o garfo.</li><li>Misture o atum, a cenoura ralada e o iogurte numa tigela. Tempere com sal, pimenta e cheiro-verde.</li><li>Recheie o pão e sirva. Fica ótimo prensado.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Faça o recheio em dobro e guarde na geladeira por até 2 dias. No dia seguinte ele vira salada, com folhas em vez do pão.</p></article><article class="receita" id="maca-com-pasta-de-amendoim"><span class="receita__num">Receita 05</span><h3>Maçã com Pasta de Amendoim</h3><p class="receita__resumo">Dois ingredientes, zero preparo. A combinação de fibra com gordura boa segura a fome muito melhor do que a fruta sozinha.</p><div class="meta"><span>⏱ 2 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>193</b><small>kcal</small></div><div class="macro"><b>4.9 g</b><small>Proteína</small></div><div class="macro"><b>23.5 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>10.8 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>3.2 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 maçã média (130 g)</li><li>1 colher de sopa cheia de pasta de amendoim integral (20 g)</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Corte a maçã em gomos, sem descascar — é na casca que está a maior parte da fibra.</li><li>Sirva com a pasta de amendoim ao lado, para ir mergulhando.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Na hora de comprar a pasta de amendoim, vire o pote: a lista de ingredientes deve dizer amendoim e nada mais (sal, no máximo). Se tiver açúcar ou gordura hidrogenada, deixe na prateleira.</p></article><article class="receita" id="pao-integral-com-queijo-minas-e-tomate"><span class="receita__num">Receita 06</span><h3>Pão Integral com Queijo Minas e Tomate</h3><p class="receita__resumo">A merenda de sempre, mas montada para sustentar. O queijo minas tem bem menos sódio que o queijo processado em fatias.</p><div class="meta"><span>⏱ 4 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>265</b><small>kcal</small></div><div class="macro"><b>12.1 g</b><small>Proteína</small></div><div class="macro"><b>27.5 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>13.0 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>3.9 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>2 fatias de pão de forma integral</li><li>1 fatia grossa de queijo minas frescal (40 g)</li><li>½ tomate em rodelas (40 g)</li><li>1 fio de azeite extra virgem</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Torre o pão rapidamente na frigideira seca ou na sanduicheira.</li><li>Monte com o queijo e as rodelas de tomate.</li><li>Tempere com orégano, sal e o fio de azeite.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Um pouco de orégano muda tudo aqui — e ainda ajuda a usar menos sal.</p></article><article class="receita" id="smoothie-de-morango-com-iogurte"><span class="receita__num">Receita 07</span><h3>Smoothie de Morango com Iogurte</h3><p class="receita__resumo">Doce de verdade, sem açúcar adicionado além de uma colher de chá de mel. Use morango congelado e fica com textura de milkshake.</p><div class="meta"><span>⏱ 3 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>129</b><small>kcal</small></div><div class="macro"><b>6.3 g</b><small>Proteína</small></div><div class="macro"><b>18.4 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>4.0 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>2.5 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 xícara de morangos (150 g)</li><li>½ pote de iogurte natural (120 g)</li><li>1 colher de chá de mel</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Bata os morangos com o iogurte no liquidificador por 40 segundos.</li><li>Prove antes de adoçar — dependendo do morango, o mel nem é necessário.</li><li>Sirva imediatamente.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Morango congelado é mais barato, dura meses e deixa o smoothie muito mais cremoso do que o fresco com gelo.</p></article><article class="receita" id="cuscuz-rapido-com-ovo"><span class="receita__num">Receita 08</span><h3>Cuscuz Rápido com Ovo</h3><p class="receita__resumo">Para quem chega em casa com fome de comida de verdade, não de lanche. Fica pronto no micro-ondas.</p><div class="meta"><span>⏱ 5 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>239</b><small>kcal</small></div><div class="macro"><b>12.3 g</b><small>Proteína</small></div><div class="macro"><b>26.2 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>9.5 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>2.1 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 porção de cuscuz de milho já hidratado (100 g)</li><li>1 ovo cozido ou mexido</li><li>1 fatia fina de queijo minas (20 g)</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Hidrate 4 colheres de sopa de flocão de milho com 3 colheres de água e uma pitada de sal. Deixe descansar 2 minutos.</li><li>Leve ao micro-ondas por 2 minutos numa tigela coberta.</li><li>Sirva com o ovo por cima e o queijo picado.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Uma colher de chá de azeite no cuscuz ainda quente deixa a textura muito melhor do que a manteiga — e sem a gordura saturada.</p></article><article class="receita" id="mix-de-castanhas-com-abacaxi"><span class="receita__num">Receita 09</span><h3>Mix de Castanhas com Abacaxi</h3><p class="receita__resumo">O lanche de bolsa. A castanha traz gordura boa e o abacaxi corta a vontade de doce.</p><div class="meta"><span>⏱ 2 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>208</b><small>kcal</small></div><div class="macro"><b>5.3 g</b><small>Proteína</small></div><div class="macro"><b>20.6 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>13.4 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>2.5 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>1 punhado pequeno de castanha-de-caju (15 g)</li><li>2 castanhas-do-Pará (10 g)</li><li>2 fatias de abacaxi (120 g)</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Separe as castanhas num potinho.</li><li>Corte o abacaxi em cubos e leve num pote fechado.</li><li>Coma as duas coisas juntas — a gordura da castanha faz o açúcar da fruta ser absorvido mais devagar.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Duas castanhas-do-Pará por dia já suprem sua necessidade de selênio. Mais do que isso não traz benefício extra.</p></article><article class="receita" id="creme-de-ricota-com-torrada-e-linhaca"><span class="receita__num">Receita 10</span><h3>Creme de Ricota com Torrada e Linhaça</h3><p class="receita__resumo">Leve, proteico e com ômega-3 da linhaça. Uma alternativa ao requeijão que sustenta muito mais.</p><div class="meta"><span>⏱ 4 minutos</span><span>🍽 1 porção</span></div><div class="macros"><div class="macro"><b>281</b><small>kcal</small></div><div class="macro"><b>13.7 g</b><small>Proteína</small></div><div class="macro"><b>31.6 g</b><small>Carboidrato</small></div><div class="macro macro--claro"><b>12.4 g</b><small>Gordura</small></div><div class="macro macro--claro"><b>6.5 g</b><small>Fibra</small></div></div><div class="col2"><div class="bloco"><h4>Ingredientes</h4><ul><li>4 colheres de sopa de ricota (60 g)</li><li>2 fatias de pão de forma integral</li><li>1 colher de sopa de linhaça (8 g)</li><li>algumas rodelas de tomate (30 g)</li><li>1 fio de azeite extra virgem</li></ul></div><div class="bloco"><h4>Modo de preparo</h4><ol><li>Amasse a ricota com o garfo junto com o azeite, sal e cheiro-verde até virar um creme.</li><li>Torre o pão.</li><li>Espalhe o creme, cubra com o tomate e salpique a linhaça na hora de comer.</li></ol></div></div><p class="dica"><b>Dica da nutri:</b> Triture a linhaça antes de usar. Inteira, a semente passa pelo intestino sem ser aproveitada.</p></article>
+  </section>
+
+  <section class="section">
+    <h2>Lista de compras</h2>
+    <p class="lead">As quantidades abaixo dão conta de fazer <strong>uma vez cada receita</strong>.
+    Se você for repetir alguma durante a semana, multiplique só a dela.</p>
+    <div class="compras"><div class="compras__setor"><h4>Hortifrúti</h4><ul><li><span class="n">Banana prata<small>usa 90 g</small></span><span class="q">1 dúzia</span></li><li><span class="n">Abacate<small>usa 60 g</small></span><span class="q">1 unidade</span></li><li><span class="n">Mamão formosa<small>usa 150 g</small></span><span class="q">½ mamão</span></li><li><span class="n">Cenoura<small>usa 30 g</small></span><span class="q">2 unidades</span></li><li><span class="n">Maçã<small>usa 130 g</small></span><span class="q">4 unidades</span></li><li><span class="n">Tomate<small>usa 70 g</small></span><span class="q">3 unidades</span></li><li><span class="n">Morango (fresco ou congelado)<small>usa 150 g</small></span><span class="q">1 bandeja</span></li><li><span class="n">Abacaxi<small>usa 120 g</small></span><span class="q">1 unidade</span></li></ul></div><div class="compras__setor"><h4>Padaria e mercearia</h4><ul><li><span class="n">Pão de forma integral<small>usa 200 g</small></span><span class="q">1 pacote</span></li><li><span class="n">Aveia em flocos<small>usa 35 g</small></span><span class="q">1 pacote</span></li><li><span class="n">Mel<small>usa 14 g</small></span><span class="q">1 pote pequeno</span></li><li><span class="n">Flocão de milho (cuscuz)<small>usa 100 g</small></span><span class="q">1 pacote</span></li><li><span class="n">Castanha-de-caju<small>usa 15 g</small></span><span class="q">1 pacote de 100 g</span></li><li><span class="n">Castanha-do-Pará<small>usa 10 g</small></span><span class="q">1 pacote pequeno</span></li><li><span class="n">Pasta de amendoim integral<small>usa 20 g</small></span><span class="q">1 pote</span></li><li><span class="n">Linhaça<small>usa 8 g</small></span><span class="q">1 pacote pequeno</span></li><li><span class="n">Azeite extra virgem<small>usa 9 g</small></span><span class="q">1 garrafa</span></li></ul></div><div class="compras__setor"><h4>Laticínios e ovos</h4><ul><li><span class="n">Iogurte natural<small>usa 310 g</small></span><span class="q">3 potes</span></li><li><span class="n">Leite desnatado<small>usa 200 g</small></span><span class="q">1 litro</span></li><li><span class="n">Ovos<small>usa 100 g</small></span><span class="q">½ dúzia</span></li><li><span class="n">Queijo minas frescal<small>usa 60 g</small></span><span class="q">1 peça pequena</span></li><li><span class="n">Ricota<small>usa 60 g</small></span><span class="q">1 peça pequena</span></li></ul></div><div class="compras__setor"><h4>Enlatados</h4><ul><li><span class="n">Atum em lata<small>usa 60 g</small></span><span class="q">1 lata</span></li></ul></div></div>
+    <p class="fonte">Valores nutricionais calculados a partir da Tabela Brasileira de Composição
+    de Alimentos (TACO / NEPA-UNICAMP, 4ª edição). Podem variar conforme a marca,
+    o ponto de maturação do alimento e o modo de preparo.</p>
+  </section>
+
+  <section class="section">
+    <p class="lead">Repare que nenhum destes lanches depende de produto especial, barrinha ou pó. São alimentos de mercado comum, montados de um jeito que sustenta.<br><br>Se você seguir esses dez por duas semanas, é bem provável que a fome do fim da tarde deixe de ser um problema. Mas se ela continuar te derrubando, ou se você percebe que come bem a tarde toda e mesmo assim chega ao jantar sem controle, o problema não está no lanche — está na distribuição do dia inteiro. É isso que a gente organiza na consulta.</p>
+  </section>
+
+  <section class="section">
+    <div class="cta">
+      <h2>Quer um plano montado para a sua rotina?</h2>
+      <p>Estas receitas servem para todo mundo — e é justamente por isso que elas não são
+      o seu plano. Na consulta a gente olha a sua rotina, seus exames, o que você gosta de
+      comer e o que a sua vida permite, e monta um plano que cabe no seu dia.</p>
+      <a class="cta__btn" href="https://wa.me/message/MKAWDGILVCXCI1" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Agendar minha consulta
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2026 · <span>Nutri Ana Luísa Rocha</span> · CRN 25100401</p>
+  <p>Material educativo. Não substitui a orientação nutricional individualizada.
+  Nenhuma receita aqui trata, cura ou previne doença.</p>
+</footer>
+
+</body>
+</html>
