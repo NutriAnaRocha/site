@@ -21,8 +21,8 @@ var CACHE = "mercado-v16";
 var ARQUIVOS = [
   "./",
   "index.html",
-  "mercado.css",
-  "mercado.js",
+  "mercado.css?v=16",
+  "mercado.js?v=16",
   "manifest.webmanifest",
   "icones/icon-192.png",
   "icones/icon-512.png",

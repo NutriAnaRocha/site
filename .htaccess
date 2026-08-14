@@ -14,3 +14,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.html -f
 RewriteRule ^([^.]+?)/?$ /$1.html [L]
+
+
+# O CDN da Hostinger guarda estático por 7 dias. Para o service worker isso é
+# veneno: uma correção no app levaria uma semana para chegar em quem já tem o
+# app instalado, porque o navegador só percebe a versão nova quando os BYTES
+# do sw.js mudam — e ele estaria pegando a cópia velha do cache de borda.
+<FilesMatch "(sw\.js|manifest\.webmanifest)$">
+  <IfModule mod_headers.c>
+    Header set Cache-Control "no-cache, max-age=0, must-revalidate"
+  </IfModule>
+</FilesMatch>
