@@ -1950,8 +1950,9 @@
       var nome = String(i.item)
         .replace(/(^|\s)[\d.,\/\u00bd\u00bc\u00be]+\s*(kg|g|ml|l)?\s+/gi, "$1")
         .replace(/^(colher(es)?|x[ií]cara(s)?)\s*(de\s+)?(sopa|ch[áa]|caf[ée])?\s*(de\s+)?/i, "")
-        .replace(/^(fatias?|folhas?|dentes?|potes?|latas?|copos?|punhados?|peda(ç|c)inhos?|peda(ç|c)os?|ma(ç|c)os?|postas?|fil[ée]s?|unidades?|pitadas?|vidros?|tabletes?|pratos?|litros?)\s+(de\s+|da\s+|do\s+)?/i, "")
+        .replace(/^(fatias?|folhas?|dentes?|potes?|latas?|copos?|punhados?|peda(ç|c)inhos?|peda(ç|c)os?|ma(ç|c)os?|postas?|fil[ée]s?|unidades?|pitadas?|vidros?|tabletes?|pratos?|litros?)\s+(grandes?|m[ée]dias?|m[ée]dios?|pequenas?|pequenos?|cheias?|rasas?|gross[ao]s?|fin[ao]s?|inteir[ao]s?|madur[ao]s?)?\s*(de\s+|da\s+|do\s+)?/i, "")
         .replace(/^(suco|raspas|lascas)\s+de\s+/i, "")
+        .replace(/^(de|da|do|das|dos)\s+/i, "")
         .trim();
       if (nome && nome.length > 1) { addItem(nome, "", ""); n++; }
     });
