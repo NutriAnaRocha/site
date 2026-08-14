@@ -45,6 +45,32 @@
      cadastro, cartão guardado e tela de cancelamento para um produto de
      R$ 9,90. Ver mercado-creditos/index.ts. */
   var CREDITOS = "https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/mercado-creditos";
+  var RECEITAS_FN = "https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/mercado-receitas";
+  var ASSINATURA = "https://btsqrpxzlkmucrfvsytl.supabase.co/functions/v1/mercado-assinatura";
+
+  /* Assinatura: dá o acervo inteiro de receitas e leitura de rótulo sem o
+     limite do dia. É PRÉ-PAGA, não cobrança recorrente — vence numa data
+     que a pessoa vê na tela e ela renova se quiser. Não é malandragem de
+     preço: a API de link do InfinitePay só faz cobrança avulsa, e um
+     acesso que vence à vista é mais honesto que uma recorrência que pode
+     falhar em silêncio. Ver mercado-assinatura/index.ts. */
+  var PLANOS = {
+    mensal: {
+      preco: "R$ 11,99", periodo: "por 1 mês",
+      link: "https://checkout.infinitepay.io/analuisarocha?lenc=G9gAYByHsdsk8u2DawuTQuCQIz1oiM1LLOMSdVX2_07NIjiQZOsEmSCXuf99oABVIKHO5wXs8-rkwKFFQdAWBnawtkjTMOFAgzpZaSa4f0Ezge9AaAp0BnxO-CRP1QzZeJl8PbJmI3aQ7UvRZidk3A6tMP4E6j_p1f5-k6qoOpYBKTMSINs74tdERqSCyzH9MJBsLMjuu5aF4j7-rSNR54xs7zj4F5GK6q62Abq18Q.v1.3e21a541087d70ab"
+    },
+    anual: {
+      preco: "R$ 29,90", periodo: "por 12 meses",
+      link: "https://checkout.infinitepay.io/analuisarocha?lenc=G9sAyByJcUzJCnKbWbZZ0BizwkC3BCUvQ-0rFCEeI-jfjf94QqpbgpzIvHHgcNPXcI2Dbfuk67jwgOvBMAVJNjeKkqCy6Uck2BBVz892zwoqRrHGez1RoeC0R1f7CRY8n8e9BJUWlP6XX5fo66bQD9MBPQ2Khy4lKxBkmBMdr3nJVwGYjpqHR-dkEdwVt30RdVY8dCkGPhGpaG7joO_T1Xg.v1.e79215c48b9dd1be"
+    }
+  };
+
+  /* Os cartões e as receitas já abertas ficam no aparelho: a aba abre
+     instantânea e continua legível sem sinal — que é metade da graça de
+     ter receita no celular. O que NUNCA é guardado aqui é receita que a
+     pessoa não abriu: o que trava o acervo é o servidor, não a tela. */
+  var CHAVE_CARTOES = "mercado.receitas.cartoes";
+  var CHAVE_ABERTAS = "mercado.receitas.abertas";
   var LINK_COMPRA = "https://checkout.infinitepay.io/analuisarocha?lenc=G-sAQIyUqJ2vCr3_79QkJfkgHet5QQJ6WfuvO6ACVWBt8T7P0zMNxIsKgrYwyEtCOejBjw_qhsskpfuXDBbuF4nJlRnU_Vb8c7pddHltncR6cjqf8RDP9IwF0yo-ksZhf-mH-Ueq8z95B-hxtV1AqQ2yHASt6xCmEOIx4ZtiDzGEzkoNuyE-malfPHSk0NmHyLwYJ904_R8VBmelJrJ1Vta2csmsxrnWNp8L4jk.v1.4afce9393915732d";
   var PACOTE_LEITURAS = 50;
   var PACOTE_PRECO = "R$ 9,90";
@@ -56,9 +82,9 @@
      um e-mail entregaria as leituras de qualquer uma para qualquer uma. */
   var WHATS_ANA = "5521994094557";
   function linkSocorro() {
-    var msg = "Oi Ana! Comprei o pacote de leituras do app No mercado com a Nutri Ana " +
-      "e perdi meu código. Vou te mandar o comprovante do pagamento (com a data e o valor) " +
-      "para você achar meu código. 🌸";
+    var msg = "Oi Ana! Paguei o acesso do app No mercado com a Nutri Ana e perdi meu " +
+      "código. Vou te mandar o comprovante do pagamento (com a data e o valor) para " +
+      "você achar meu código. 🌸";
     return "https://wa.me/" + WHATS_ANA + "?text=" + encodeURIComponent(msg);
   }
 
@@ -163,6 +189,12 @@
       pintarComparacao();
     }
     if (tela === "lista" && typeof pintarLista === "function") pintarLista();
+    // A aba de receitas só fala com o servidor quando alguém entra nela —
+    // e uma vez só por sessão, a não ser que a pessoa mexa nos filtros.
+    if (tela === "receitas" && typeof carregarReceitas === "function" && !rec.carregou) {
+      montarChips();
+      carregarReceitas();
+    }
     window.scrollTo(0, 0);
   }
 
@@ -391,6 +423,12 @@
 
   function pintarRestam(b) {
     var el = $("[data-restam]");
+    if (b.assinante) {
+      el.hidden = false;
+      el.textContent = "Você assina — leitura de rótulo sem limite. 🌸";
+      pintarCreditos();
+      return;
+    }
     if (typeof b.restam !== "number") { el.hidden = true; return; }
     el.hidden = false;
 
@@ -458,14 +496,30 @@
     if (box) box.innerHTML = '<div class="cartao carregando"><div class="carregando__p"></div>' +
       '<p class="carregando__t">Confirmando seu pagamento…</p></div>';
 
-    chamarCreditos({
-      acao: "resgatar",
-      transaction_nsu: nsu,
-      slug: slug,
-      order_nsu: q.get("order_nsu") || ""
-    }).then(function (res) {
+    // Dois produtos voltam por aqui: a assinatura (link com ?p=assinatura)
+    // e o pacote de leituras antigo. O 'codigo' vai junto de propósito —
+    // é ele que faz a compra de quem JÁ assina virar renovação do mesmo
+    // código, em vez de um segundo código para ela guardar.
+    var ehAssinatura = q.get("p") === "assinatura";
+    var chamada = ehAssinatura
+      ? chamarJSON(ASSINATURA, {
+          acao: "resgatar",
+          transaction_nsu: nsu,
+          slug: slug,
+          order_nsu: q.get("order_nsu") || "",
+          codigo: codigoGuardado() || ""
+        })
+      : chamarCreditos({
+          acao: "resgatar",
+          transaction_nsu: nsu,
+          slug: slug,
+          order_nsu: q.get("order_nsu") || ""
+        });
+
+    chamada.then(function (res) {
       if (res.body.ok && res.body.codigo) {
         guardarCodigo(res.body.codigo);
+        rec.carregou = false;   // a aba de receitas abre tudo agora
         pintarCreditos({ novo: true, recibo: q.get("receipt_url") || "" });
         return;
       }
@@ -483,7 +537,8 @@
         if (bt) bt.addEventListener("click", function () {
           window.location.search = "?transaction_nsu=" + encodeURIComponent(nsu) +
             "&slug=" + encodeURIComponent(slug) +
-            "&order_nsu=" + encodeURIComponent(q.get("order_nsu") || "");
+            "&order_nsu=" + encodeURIComponent(q.get("order_nsu") || "") +
+            (ehAssinatura ? "&p=assinatura" : "");
         });
       }
     }).catch(function () {
@@ -492,6 +547,19 @@
     });
   }
 
+  /* Data curta, para vencimento: "12/08/2027". */
+  function dataCurta(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    var p = function (x) { return (x < 10 ? "0" : "") + x; };
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + "/" + d.getFullYear();
+  }
+
+  /* A caixa de acesso da aba Conta. Ela atende TRÊS pessoas diferentes:
+     quem ainda não comprou nada (vitrine dos planos), quem assina (código,
+     vencimento e renovação) e quem comprou um pacote de leituras antes da
+     assinatura existir — esse pacote continua valendo até a última leitura,
+     porque ela pagou por ele. */
   function pintarCreditos(opcoes) {
     var box = $("[data-creditos-box]");
     if (!box) return;
@@ -500,73 +568,84 @@
 
     if (!cod) {
       box.innerHTML = '<div class="cartao">' +
-        '<h2 class="sec">Precisa ler mais rótulos?</h2>' +
-        '<p>O app é gratuito com limite diário. Se você faz uma compra grande de uma vez, ' +
-        'dá para levar um pacote de <strong>' + PACOTE_LEITURAS + ' leituras</strong> por ' +
-        PACOTE_PRECO + ' — elas <strong>não vencem</strong> e você usa quando quiser.</p>' +
-        '<ol class="passos">' +
-          '<li>Você paga por Pix ou cartão, na página segura da InfinitePay.</li>' +
-          '<li>Depois de alguns segundos, a página do pagamento mostra um botão para ' +
-            '<strong>voltar para o app</strong>. <strong>Toque nele e não feche a aba antes</strong> ' +
-            '— é essa volta que traz o seu código.</li>' +
-          '<li>De volta ao app, ele carrega um pouquinho e mostra o seu código — algo como ' +
-            '<span class="credito-exemplo">R7QK-3M9F</span>.</li>' +
-          '<li><strong>Guarde esse código.</strong> Tem um botão na tela para você mandar ' +
-            'para o seu WhatsApp ou salvar nas suas notas.</li>' +
-          '<li>É ele que libera as leituras. Se você trocar de celular ou limpar o navegador, ' +
-            'digita o código de novo aqui e as suas leituras voltam — elas ficam guardadas ' +
-            'comigo, não no aparelho.</li>' +
-        '</ol>' +
-        '<a class="btn btn--go" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
-        'Comprar ' + PACOTE_LEITURAS + ' leituras — ' + PACOTE_PRECO + '</a>' +
+        '<h2 class="sec">Receitas e leitura sem limite</h2>' +
+        '<p>O app continua <strong>grátis</strong>: 3 rótulos por dia e 3 receitas inteiras, ' +
+        'sem pagar nada. A assinatura abre o <strong>acervo inteiro de receitas</strong> e ' +
+        'tira o limite diário da leitura de rótulo.</p>' +
+        planosHTML() +
         '<form data-codigo-form>' +
-          '<label class="campo"><span>Já comprou? Digite seu código</span>' +
+          '<label class="campo"><span>Já assinou? Digite seu código</span>' +
             '<input name="codigo" placeholder="XXXX-XXXX" autocapitalize="characters" ' +
             'autocomplete="off" spellcheck="false" maxlength="16" required></label>' +
           '<button class="btn btn--linha btn--peq" type="submit">Usar este código</button>' +
           '<p class="msg" data-msg-codigo hidden></p>' +
         '</form>' +
         '<p class="socorro"><a href="' + linkSocorro() + '" target="_blank" rel="noopener">' +
-        'Comprou e perdeu o código?</a></p>' +
+        'Pagou e perdeu o código?</a></p>' +
         '</div>';
       return;
     }
 
     box.innerHTML = '<div class="cartao">' +
-      (op.novo ? '<h2 class="sec">Pagamento confirmado 🌸</h2>' : '<h2 class="sec">Seu pacote de leituras</h2>') +
+      (op.novo ? '<h2 class="sec">Pagamento confirmado 🌸</h2>' : '<h2 class="sec">Seu acesso</h2>') +
       '<p class="credito-codigo" data-codigo-mostra>' + esc(cod) + '</p>' +
-      '<p class="credito-saldo" data-saldo>Conferindo o saldo…</p>' +
+      '<p class="credito-saldo" data-saldo>Conferindo…</p>' +
       (op.novo
-        ? '<p><strong>Anote esse código.</strong> É ele que devolve as suas leituras se você ' +
+        ? '<p><strong>Anote esse código.</strong> É ele que devolve o seu acesso se você ' +
           'trocar de celular ou limpar o navegador.</p>'
-        : '<p>Guarde esse código: é ele que devolve as suas leituras em outro aparelho.</p>') +
+        : '<p>Guarde esse código: é ele que devolve o seu acesso em outro aparelho.</p>') +
       (op.recibo ? '<p><a href="' + esc(op.recibo) + '" target="_blank" rel="noopener">Ver o recibo</a></p>' : '') +
       '<button class="btn btn--go btn--peq" type="button" data-guardar-codigo>' +
       (temCompartilhar() ? 'Guardar meu código' : 'Copiar meu código') + '</button>' +
       '<p class="msg" data-msg-guardar hidden></p>' +
+      '<div data-acesso-extra></div>' +
       '<button class="btn btn--linha btn--peq" type="button" data-trocar-codigo>Usar outro código</button>' +
       '<p class="socorro"><a href="' + linkSocorro() + '" target="_blank" rel="noopener">' +
       'Perdeu um código de outra compra?</a></p>' +
       '</div>';
 
-    chamarCreditos({ acao: "saldo", codigo: cod }).then(function (res) {
+    chamarJSON(ASSINATURA, { acao: "acesso", codigo: cod }).then(function (res) {
       var el = box.querySelector("[data-saldo]");
+      var extra = box.querySelector("[data-acesso-extra]");
+      var b = res.body || {};
       if (!el) return;
-      if (res.body.ok) {
-        el.textContent = res.body.restam > 0
-          ? "Restam " + res.body.restam + " de " + res.body.total + " leituras."
-          : "Suas leituras acabaram. Você pode comprar outro pacote quando quiser.";
-        if (!res.body.restam) {
-          el.insertAdjacentHTML("afterend",
-            '<a class="btn btn--go btn--peq" href="' + LINK_COMPRA + '" target="_blank" rel="noopener">' +
-            'Comprar mais ' + PACOTE_LEITURAS + ' leituras</a>');
+
+      if (b.ok && b.tipo === "assinatura") {
+        if (b.ativa) {
+          el.innerHTML = '<span class="assina-badge">Assinatura ativa</span><br>' +
+            'Vale até <strong>' + dataCurta(b.expira_em) + '</strong> — ' +
+            b.dias + (b.dias === 1 ? ' dia' : ' dias') + ' pela frente.';
+          // Renovar cedo não queima dia nenhum: o tempo novo é somado ao
+          // vencimento que ela já tem, não à data de hoje.
+          if (b.dias <= 30 && extra) {
+            extra.innerHTML = '<p style="margin-top:12px">Quer garantir mais tempo? ' +
+              'Renovando, os meses são somados ao seu vencimento — e o código continua o mesmo.</p>' +
+              '<a class="btn btn--go btn--peq" href="' + PLANOS.anual.link + '" target="_blank" ' +
+              'rel="noopener" data-plano="anual">Renovar 12 meses — ' + PLANOS.anual.preco + '</a>';
+          }
+        } else {
+          el.innerHTML = 'Sua assinatura <strong>venceu</strong> em ' + dataCurta(b.expira_em) +
+            '. As receitas que você já abriu continuam no aparelho.';
+          if (extra) extra.innerHTML = planosHTML();
         }
-      } else {
-        el.textContent = "Não encontrei esse código.";
+        rec.carregou = false;   // a aba de receitas precisa perguntar de novo
+        return;
       }
+
+      if (b.ok && b.tipo === "creditos") {
+        el.textContent = b.restam > 0
+          ? "Pacote de leituras: restam " + b.restam + " de " + b.total + "."
+          : "Suas leituras compradas acabaram.";
+        if (extra) extra.innerHTML =
+          '<p style="margin-top:12px">Hoje o que existe é a assinatura: acervo de receitas ' +
+          'e leitura de rótulo sem limite diário.</p>' + planosHTML();
+        return;
+      }
+
+      el.textContent = "Não encontrei esse código.";
     }).catch(function () {
       var el = box.querySelector("[data-saldo]");
-      if (el) el.textContent = "Não consegui conferir o saldo agora.";
+      if (el) el.textContent = "Não consegui conferir agora — sem conexão.";
     });
   }
 
@@ -578,9 +657,10 @@
     var cod = f.codigo.value.trim().toUpperCase();
     msg.hidden = true;
 
-    chamarCreditos({ acao: "saldo", codigo: cod }).then(function (res) {
+    chamarJSON(ASSINATURA, { acao: "acesso", codigo: cod }).then(function (res) {
       if (res.body.ok) {
         guardarCodigo(cod);
+        rec.carregou = false;
         pintarCreditos();
         return;
       }
@@ -1538,6 +1618,397 @@
     });
   }
 
+  /* =========================================================
+     RECEITAS
+
+     A lista de cartões é aberta: é a vitrine, e é ela que faz
+     alguém querer assinar. O modo de preparo NUNCA vem junto
+     com a lista — ele é pedido receita a receita e o servidor
+     decide se manda. Se a trava fosse aqui, o acervo inteiro
+     estaria a um F12 de distância.
+     ========================================================= */
+
+  var CATS = [
+    ["", "Tudo"],
+    ["rapida", "Rápidas"],
+    ["principal", "Refeições"],
+    ["salada", "Saladas"],
+    ["suco", "Sucos"],
+    ["sobremesa", "Sobremesas"],
+    ["fruta", "Frutas"],
+    ["lowcarb", "Low carb"],
+    ["cetogenica", "Cetogênicas"],
+    ["detox", "Detox"],
+    ["vegetariana", "Vegetarianas"],
+    ["vegana", "Veganas"],
+    ["economica", "Econômicas"]
+  ];
+
+  var FAIXAS = [
+    [0, "Qualquer tempo"], [5, "5 min"], [10, "10 min"],
+    [30, "30 min"], [60, "1 hora"], [120, "2 horas"]
+  ];
+
+  var rec = {
+    categoria: "", tempo: 0, busca: "",
+    liberadas: [], gratis: null, assinante: false,
+    carregou: false, buscaT: null
+  };
+
+  function chamarJSON(url, corpo) {
+    return fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": ANON,
+                 "Authorization": "Bearer " + ANON },
+      body: JSON.stringify(corpo)
+    }).then(function (r) {
+      return r.json().then(function (j) { return { status: r.status, body: j || {} }; });
+    });
+  }
+
+  function abertas() { return ler(CHAVE_ABERTAS, {}) || {}; }
+  function guardarAberta(r) {
+    var a = abertas();
+    a[r.slug] = r;
+    // Guarda no máximo 40 receitas abertas: é bem mais do que alguém
+    // consulta de verdade, e evita estourar a cota do localStorage.
+    var chaves = Object.keys(a);
+    if (chaves.length > 40) delete a[chaves[0]];
+    gravar(CHAVE_ABERTAS, a);
+  }
+
+  function montarChips() {
+    var c = $("[data-rec-cats]");
+    var t = $("[data-rec-tempos]");
+    if (!c || !t) return;
+    c.innerHTML = CATS.map(function (x) {
+      return '<button class="chip' + (x[0] === rec.categoria ? " is-on" : "") +
+        '" type="button" data-cat="' + x[0] + '">' + esc(x[1]) + "</button>";
+    }).join("");
+    t.innerHTML = FAIXAS.map(function (x) {
+      return '<button class="chip' + (x[0] === rec.tempo ? " is-on" : "") +
+        '" type="button" data-tempo="' + x[0] + '">' +
+        (x[0] ? "até " : "") + esc(x[1]) + "</button>";
+    }).join("");
+  }
+
+  function cartaoHTML(r) {
+    var livre = rec.assinante || rec.liberadas.indexOf(r.slug) >= 0;
+    var min = r.tempo_min >= 60
+      ? (r.tempo_min / 60) + (r.tempo_min === 60 ? " hora" : " horas")
+      : r.tempo_min + " min";
+    return '<button class="rec" type="button" data-abrir-receita="' + esc(r.slug) + '">' +
+      '<span class="rec__t">' + esc(r.titulo) + "</span>" +
+      (r.chamada ? '<span class="rec__c">' + esc(r.chamada) + "</span>" : "") +
+      '<span class="rec__n">' +
+        '<span class="rec__tag rec__tag--tempo">⏱ ' + min + "</span>" +
+        '<span class="rec__tag">' + r.rende + (r.rende === 1 ? " porção" : " porções") + "</span>" +
+        (livre ? '<span class="rec__tag rec__tag--livre">aberta</span>' : "") +
+        '<span class="rec__num">' + Math.round(r.kcal) + " kcal · " +
+          Math.round(r.ptn) + " g de proteína</span>" +
+      "</span></button>";
+  }
+
+  function pintarCartoes(lista) {
+    var box = $("[data-rec-lista]");
+    var st = $("[data-rec-status]");
+    if (!box) return;
+
+    if (!lista.length) {
+      box.innerHTML = '<div class="cartao"><p>Não achei receita com esses filtros. ' +
+        "Tente um tempo maior ou toque em <strong>Tudo</strong>.</p></div>";
+      if (st) st.textContent = "";
+      return;
+    }
+
+    box.innerHTML = lista.map(cartaoHTML).join("");
+
+    if (!st) return;
+    if (rec.assinante) {
+      st.innerHTML = '<span class="assina-badge">Você assina 🌸</span> ' +
+        lista.length + (lista.length === 1 ? " receita" : " receitas") + " — todas abertas.";
+    } else if (rec.gratis === null) {
+      st.textContent = lista.length + (lista.length === 1 ? " receita." : " receitas.");
+    } else {
+      st.textContent = lista.length + (lista.length === 1 ? " receita. " : " receitas. ") +
+        (rec.gratis > 0
+          ? "Você ainda abre " + rec.gratis + (rec.gratis === 1 ? " receita inteira" : " receitas inteiras") + " de graça."
+          : "Suas 3 receitas de graça já foram — o acervo inteiro fica na assinatura.");
+    }
+
+    // "Detox" é o nome que a pessoa digita, então o filtro existe. O que
+    // não pode existir é a promessa: quem desintoxica o corpo é o fígado,
+    // e uma nutricionista registrada não pode deixar isso subentendido.
+    if (rec.categoria === "detox") {
+      st.insertAdjacentHTML("afterend",
+        '<p class="folha__n" data-nota-detox>Aqui estão as receitas que as pessoas procuram ' +
+        'como "detox": leves, com muita água, fruta e folha. Elas não desintoxicam nada — ' +
+        'quem faz isso são o seu fígado e os seus rins, de graça e o dia inteiro. O que elas ' +
+        'fazem é te dar comida de verdade num dia em que você comeria pouca.</p>');
+    } else {
+      var nota = document.querySelector("[data-nota-detox]");
+      if (nota) nota.remove();
+    }
+  }
+
+  function carregarReceitas() {
+    var box = $("[data-rec-lista]");
+    var filtrando = rec.categoria || rec.tempo || rec.busca;
+
+    // Sem filtro, pinta na hora o que está no aparelho e só então
+    // confirma com o servidor: no mercado, com sinal ruim, é a
+    // diferença entre uma tela em branco e uma lista de receitas.
+    if (!filtrando && box) {
+      var cache = ler(CHAVE_CARTOES, null);
+      if (cache && cache.length) pintarCartoes(cache);
+      else box.innerHTML = '<div class="cartao carregando"><div class="carregando__p"></div>' +
+        '<p class="carregando__t">Buscando as receitas…</p></div>';
+    } else if (box) {
+      box.innerHTML = '<div class="cartao carregando"><div class="carregando__p"></div>' +
+        '<p class="carregando__t">Filtrando…</p></div>';
+    }
+
+    return chamarJSON(RECEITAS_FN, {
+      acao: "lista",
+      categoria: rec.categoria,
+      tempo: rec.tempo,
+      busca: rec.busca,
+      dispositivo: dispositivo,
+      codigo: codigoGuardado() || ""
+    }).then(function (res) {
+      if (!res.body.ok) throw new Error(res.body.error || "falhou");
+      rec.assinante = !!res.body.assinante;
+      rec.liberadas = res.body.liberadas || [];
+      rec.gratis = typeof res.body.gratis_restantes === "number"
+        ? res.body.gratis_restantes : null;
+      rec.carregou = true;
+      if (!filtrando) gravar(CHAVE_CARTOES, res.body.receitas);
+      pintarCartoes(res.body.receitas || []);
+    }).catch(function () {
+      var cache = ler(CHAVE_CARTOES, null);
+      if (cache && cache.length && !filtrando) {
+        pintarCartoes(cache);
+        var st = $("[data-rec-status]");
+        if (st) st.textContent = "Sem conexão — mostrando o que já estava no aparelho.";
+        return;
+      }
+      if (box) box.innerHTML = '<div class="cartao"><p>Não consegui buscar as receitas agora. ' +
+        "Confira a internet e tente de novo. 🌸</p></div>";
+    });
+  }
+
+  /* ---------- a receita aberta ---------- */
+
+  function fatosHTML(r) {
+    return '<div class="det__fatos">' +
+      '<span class="fato"><span class="fato__n">' + Math.round(r.kcal) + "</span>" +
+        '<span class="fato__r">kcal<br>por porção</span></span>' +
+      '<span class="fato"><span class="fato__n">' + (Math.round(r.ptn * 10) / 10) + " g</span>" +
+        '<span class="fato__r">proteína<br>por porção</span></span>' +
+      '<span class="fato"><span class="fato__n">' + r.rende + "</span>" +
+        '<span class="fato__r">' + (r.rende === 1 ? "porção" : "porções") + "<br>rende</span></span>" +
+      '<span class="fato"><span class="fato__n">' + r.tempo_min + "</span>" +
+        '<span class="fato__r">minutos<br>de trabalho</span></span>' +
+      "</div>";
+  }
+
+  function detalheHTML(r) {
+    var ings = (r.ingredientes || []).map(function (i) {
+      return '<div class="det__ing"><span>' + esc(i.item) + "</span>" +
+        '<span class="det__g">' + i.gramas + " g</span></div>";
+    }).join("");
+
+    var passos = (r.preparo || []).map(function (p) {
+      return '<div class="det__passo">' + esc(p) + "</div>";
+    }).join("");
+
+    return '<h2 class="det__t">' + esc(r.titulo) + "</h2>" +
+      (r.chamada ? '<p class="det__c">' + esc(r.chamada) + "</p>" : "") +
+      fatosHTML(r) +
+      '<h3 class="sec">Lista de compras</h3>' +
+      '<div class="det__lista">' + ings + "</div>" +
+      '<button class="btn btn--linha btn--peq" type="button" data-rec-p-lista="' + esc(r.slug) +
+        '">Mandar os ingredientes para a minha lista</button>' +
+      '<p class="msg" data-rec-msg hidden></p>' +
+      '<h3 class="sec sec--peq">Modo de preparo</h3>' +
+      '<div class="det__passos">' + passos + "</div>" +
+      (r.dica ? '<div class="det__dica"><strong>A dica da Ana:</strong> ' + esc(r.dica) + "</div>" : "") +
+      '<p class="det__fonte">Calorias e proteína calculadas ingrediente por ingrediente pela ' +
+        "<strong>TACO</strong> — Tabela Brasileira de Composição de Alimentos, 4ª edição " +
+        "(NEPA/Unicamp) — e divididas pelo rendimento. São valores médios do alimento: a " +
+        "marca que você comprou pode variar. Receita é orientação culinária geral, não é " +
+        "plano alimentar individualizado.</p>";
+  }
+
+  function planosHTML(qual) {
+    return '<div class="plano plano--melhor">' +
+      '<span class="plano__selo">melhor escolha</span>' +
+      '<span class="plano__n">12 meses</span>' +
+      '<p class="plano__p">' + PLANOS.anual.preco + "</p>" +
+      '<p class="plano__d">Menos de R$ 2,50 por mês — o preço de dois pães na chapa, ' +
+        "o ano inteiro.</p>" +
+      '<a class="btn btn--go btn--peq" href="' + PLANOS.anual.link + '" target="_blank" ' +
+        'rel="noopener" data-plano="anual">Assinar 12 meses</a></div>' +
+      '<div class="plano"><span class="plano__n">1 mês</span>' +
+      '<p class="plano__p">' + PLANOS.mensal.preco + "</p>" +
+      '<p class="plano__d">Para experimentar sem compromisso. Não renova sozinho: ' +
+        "vence e pronto, sem cobrança surpresa.</p>" +
+      '<a class="btn btn--linha btn--peq" href="' + PLANOS.mensal.link + '" target="_blank" ' +
+        'rel="noopener" data-plano="mensal">Assinar 1 mês</a></div>' +
+      '<p class="det__fonte">Você paga por Pix ou cartão na página segura da InfinitePay. ' +
+        "Depois do pagamento, <strong>toque no botão que volta para o app</strong> — é essa " +
+        "volta que traz o seu código de acesso. Sem cadastro, sem cartão guardado e sem " +
+        "cobrança automática.</p>" + (qual || "");
+  }
+
+  function paredeHTML(titulo) {
+    return '<div class="parede">' +
+      '<span class="parede__i">🌸</span>' +
+      '<p class="parede__t">' + (titulo ? esc(titulo) : "Esta receita") + " fica na assinatura</p>" +
+      '<p class="parede__p">Você já abriu as <strong>3 receitas</strong> que são de graça. ' +
+        "Com a assinatura você abre <strong>todas</strong> — e a leitura de rótulo passa a ser " +
+        "<strong>sem limite diário</strong>.</p></div>" +
+      planosHTML('<p class="socorro" style="text-align:center"><button class="btn btn--linha btn--peq" ' +
+        'type="button" data-tenho-codigo>Já assinei — digitar meu código</button></p>');
+  }
+
+  function abrirRecFolha() {
+    var f = $("[data-rec-folha]");
+    if (f) { f.hidden = false; document.body.style.overflow = "hidden"; }
+  }
+  function fecharRecFolha() {
+    var f = $("[data-rec-folha]");
+    if (f) { f.hidden = true; document.body.style.overflow = ""; }
+  }
+
+  function mostrarReceita(r) {
+    var box = $("[data-rec-detalhe]");
+    var t = $("[data-rec-folha-t]");
+    if (t) t.textContent = r.titulo;
+    if (box) { box.innerHTML = detalheHTML(r); box.scrollTop = 0; }
+    guardarAberta(r);
+    abrirRecFolha();
+  }
+
+  function abrirReceita(slug) {
+    var box = $("[data-rec-detalhe]");
+    var t = $("[data-rec-folha-t]");
+
+    // Já aberta antes: mostra do aparelho, sem ida ao servidor. Serve ao
+    // offline e evita gastar uma das três de graça duas vezes.
+    var guardada = abertas()[slug];
+    if (guardada) { mostrarReceita(guardada); return; }
+
+    if (t) t.textContent = "Receita";
+    if (box) box.innerHTML = '<div class="cartao carregando"><div class="carregando__p"></div>' +
+      '<p class="carregando__t">Abrindo…</p></div>';
+    abrirRecFolha();
+
+    chamarJSON(RECEITAS_FN, {
+      acao: "receita",
+      slug: slug,
+      dispositivo: dispositivo,
+      codigo: codigoGuardado() || ""
+    }).then(function (res) {
+      if (res.body.ok && res.body.receita) {
+        rec.assinante = !!res.body.assinante;
+        if (typeof res.body.gratis_restantes === "number") rec.gratis = res.body.gratis_restantes;
+        if (rec.liberadas.indexOf(slug) < 0) rec.liberadas.push(slug);
+        mostrarReceita(res.body.receita);
+        // O cartão dela agora mostra "aberta", e o contador mudou.
+        var cache = ler(CHAVE_CARTOES, null);
+        if (cache && !rec.categoria && !rec.tempo && !rec.busca) pintarCartoes(cache);
+        return;
+      }
+      if (res.status === 402) {
+        rec.gratis = 0;
+        if (t) t.textContent = "Assinatura";
+        if (box) box.innerHTML = paredeHTML(res.body.titulo);
+        return;
+      }
+      if (box) box.innerHTML = '<div class="cartao"><p>' +
+        esc(res.body.detail || "Não consegui abrir essa receita agora.") + "</p></div>";
+    }).catch(function () {
+      if (box) box.innerHTML = '<div class="cartao"><p>Sem conexão para abrir a receita. ' +
+        "As que você já abriu continuam disponíveis aqui mesmo, sem internet. 🌸</p></div>";
+    });
+  }
+
+  /* Ingredientes da receita direto na lista de mercado: é o encontro das
+     duas metades do app — a receita diz o que comprar, e é na lista que
+     ela vira compra. */
+  function receitaParaLista(slug) {
+    var r = abertas()[slug];
+    var msg = document.querySelector("[data-rec-msg]");
+    if (!r) return;
+    var n = 0;
+    (r.ingredientes || []).forEach(function (i) {
+      // "2 colheres de sopa de azeite" vira "azeite": a lista é do que
+      // comprar, e a quantidade exata continua na receita, a um toque
+      // daqui. Some primeiro todo número solto, depois a unidade de
+      // medida — nessa ordem, senão "colheres de sopa" sobrevive.
+      var nome = String(i.item)
+        .replace(/(^|\s)[\d.,\/\u00bd\u00bc\u00be]+\s*(kg|g|ml|l)?\s+/gi, "$1")
+        .replace(/^(colher(es)?|x[ií]cara(s)?)\s*(de\s+)?(sopa|ch[áa]|caf[ée])?\s*(de\s+)?/i, "")
+        .replace(/^(fatias?|folhas?|dentes?|potes?|latas?|copos?|punhados?|peda(ç|c)inhos?|peda(ç|c)os?|ma(ç|c)os?|postas?|fil[ée]s?|unidades?|pitadas?|vidros?|tabletes?|pratos?|litros?)\s+(de\s+|da\s+|do\s+)?/i, "")
+        .replace(/^(suco|raspas|lascas)\s+de\s+/i, "")
+        .trim();
+      if (nome && nome.length > 1) { addItem(nome, "", ""); n++; }
+    });
+    if (msg) {
+      msg.hidden = false;
+      msg.className = "msg msg--ok";
+      msg.textContent = n + (n === 1 ? " item foi" : " itens foram") +
+        " para a sua lista de mercado. 🌸";
+    }
+  }
+
+  document.addEventListener("click", function (e) {
+    var chipCat = e.target.closest("[data-cat]");
+    if (chipCat) {
+      rec.categoria = chipCat.getAttribute("data-cat");
+      montarChips();
+      carregarReceitas();
+      return;
+    }
+    var chipTempo = e.target.closest("[data-tempo]");
+    if (chipTempo) {
+      rec.tempo = Number(chipTempo.getAttribute("data-tempo")) || 0;
+      montarChips();
+      carregarReceitas();
+      return;
+    }
+    var cartao = e.target.closest("[data-abrir-receita]");
+    if (cartao) { abrirReceita(cartao.getAttribute("data-abrir-receita")); return; }
+    if (e.target.closest("[data-rec-fechar]")) { fecharRecFolha(); return; }
+    var pLista = e.target.closest("[data-rec-p-lista]");
+    if (pLista) { receitaParaLista(pLista.getAttribute("data-rec-p-lista")); return; }
+    if (e.target.closest("[data-tenho-codigo]")) {
+      fecharRecFolha();
+      irPara("conta");
+      var campo = document.querySelector("[data-codigo-form] input");
+      if (campo) campo.focus();
+      return;
+    }
+    if (e.target.closest("[data-plano]")) {
+      // A pessoa saiu para pagar: quando voltar, a aba de receitas
+      // precisa perguntar de novo quem ela é.
+      rec.carregou = false;
+    }
+  });
+
+  (function ligarBuscaReceita() {
+    var campo = $("[data-rec-busca]");
+    if (!campo) return;
+    campo.addEventListener("input", function () {
+      clearTimeout(rec.buscaT);
+      rec.buscaT = setTimeout(function () {
+        rec.busca = campo.value.trim();
+        carregarReceitas();
+      }, 320);
+    });
+  }());
+
   /* ---------- início ---------- */
   [0, 1, 2].forEach(pintarSlot);
   pintarHistorico();
@@ -1546,5 +2017,6 @@
   pintarLista();
   pintarConta();
   pintarCreditos();
+  montarChips();
   resgatarDaURL();
 })();

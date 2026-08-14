@@ -464,7 +464,7 @@ body.travado{overflow:hidden}
 
 .barra{
   position:fixed;left:0;right:0;bottom:0;z-index:30;
-  display:grid;grid-template-columns:repeat(5,1fr);
+  display:grid;grid-template-columns:repeat(6,1fr);
   background:var(--branco);border-top:1px solid var(--rosa-borda);
   padding-bottom:env(safe-area-inset-bottom);
 }
@@ -473,10 +473,12 @@ body.travado{overflow:hidden}
   height:var(--barra-h);font-size:.66rem;color:var(--cinza-claro);
   padding:0 2px;text-align:center;
 }
-/* Com cinco abas, celular estreito (iPhone SE, 320 px) não cabe "Ler rótulo"
-   inteiro na mesma linha. */
-@media (max-width:360px){
-  .barra__b{font-size:.6rem}
+/* Com seis abas, em celular estreito (iPhone SE, 320 px) cada uma fica com
+   53 px. Os rótulos foram encurtados ("Rótulo", não "Ler rótulo") e a fonte
+   cai mais um pouco aqui embaixo. */
+@media (max-width:400px){
+  .barra__b{font-size:.58rem;letter-spacing:-.01em}
+  .barra__i{font-size:1.05rem}
 }
 .barra__i{font-size:1.15rem;line-height:1}
 .barra__b.is-on{color:var(--bordo)}
@@ -488,4 +490,108 @@ body.travado{overflow:hidden}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
+}
+
+
+/* =========================================================
+   RECEITAS
+   Cartão da vitrine, filtros e a receita aberta. O cartão
+   mostra o que vende (tempo, rendimento, kcal e proteína);
+   o preparo só aparece na folha, e só se o servidor mandar.
+   ========================================================= */
+
+.chips{
+  display:flex;gap:7px;overflow-x:auto;margin:12px -18px 0;padding:0 18px 4px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.chips::-webkit-scrollbar{display:none}
+.chips--tempo{margin-top:8px}
+.chip{
+  flex:none;border:1.5px solid var(--rosa-borda);background:var(--branco);
+  color:var(--cinza);border-radius:999px;padding:8px 14px;font-size:.8rem;
+  font-weight:600;white-space:nowrap;
+}
+.chip.is-on{background:var(--bordo);border-color:var(--bordo);color:#fff}
+.chips--tempo .chip.is-on{background:var(--rosa-suave);border-color:var(--bordo);color:var(--bordo)}
+
+.rec-status{font-size:.78rem;color:var(--cinza-claro);margin:14px 0 10px}
+
+.rec{
+  display:block;width:100%;text-align:left;background:var(--branco);
+  border:1px solid var(--rosa-borda);border-radius:var(--radius);
+  padding:14px 15px;margin-bottom:11px;box-shadow:var(--sombra);
+}
+.rec:active{transform:scale(.995)}
+.rec__t{display:block;font-family:var(--serif);font-weight:900;color:var(--bordo);
+  font-size:1.02rem;line-height:1.2;margin-bottom:5px}
+.rec__c{display:block;font-size:.83rem;color:var(--cinza);line-height:1.45;margin-bottom:9px}
+.rec__n{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rec__tag{
+  font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;
+  background:var(--rosa-suave);color:var(--bordo);
+}
+.rec__tag--tempo{background:var(--boa-fundo);color:var(--boa)}
+.rec__tag--livre{background:var(--bordo);color:#fff}
+.rec__num{font-size:.72rem;color:var(--cinza-claro);margin-left:auto;white-space:nowrap}
+
+/* ---- a receita aberta ---- */
+.det__t{font-family:var(--serif);font-weight:900;color:var(--bordo);
+  font-size:1.4rem;line-height:1.15;margin-bottom:6px}
+.det__c{font-size:.88rem;color:var(--cinza);margin-bottom:14px;line-height:1.5}
+.det__fatos{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  background:var(--rosa-suave);border-radius:var(--radius);padding:12px 8px;margin-bottom:16px;
+}
+.fato{text-align:center}
+.fato__n{display:block;font-family:var(--serif);font-weight:900;color:var(--bordo);font-size:1.05rem;line-height:1.1}
+.fato__r{display:block;font-size:.63rem;color:var(--cinza-claro);margin-top:3px;line-height:1.2}
+
+.det__lista{margin-bottom:6px}
+.det__ing{
+  display:flex;gap:9px;align-items:baseline;font-size:.88rem;
+  padding:7px 0;border-bottom:1px dashed var(--rosa-borda);
+}
+.det__ing:last-child{border-bottom:none}
+.det__g{margin-left:auto;font-size:.72rem;color:var(--cinza-claro);white-space:nowrap}
+.det__passos{counter-reset:passo;margin-top:4px}
+.det__passo{
+  position:relative;padding-left:34px;margin-bottom:13px;font-size:.9rem;line-height:1.55;
+}
+.det__passo::before{
+  counter-increment:passo;content:counter(passo);
+  position:absolute;left:0;top:-1px;width:24px;height:24px;border-radius:50%;
+  background:var(--bordo);color:#fff;font-size:.75rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+.det__dica{
+  background:var(--rosa-suave);border-left:3px solid var(--bordo);
+  border-radius:0 12px 12px 0;padding:12px 14px;font-size:.86rem;line-height:1.55;margin-top:16px;
+}
+.det__dica strong{color:var(--bordo)}
+.det__fonte{font-size:.7rem;color:var(--cinza-claro);line-height:1.5;margin-top:18px}
+
+/* ---- a parede ---- */
+.parede{text-align:center;padding:8px 4px}
+.parede__i{font-size:2rem}
+.parede__t{font-family:var(--serif);font-weight:900;color:var(--bordo);
+  font-size:1.25rem;margin:8px 0 6px;line-height:1.2}
+.parede__p{font-size:.88rem;line-height:1.55;margin-bottom:16px}
+
+.plano{
+  border:1.5px solid var(--rosa-borda);border-radius:var(--radius);
+  padding:14px 16px;margin-bottom:10px;text-align:left;background:var(--branco);
+}
+.plano--melhor{border-color:var(--bordo);box-shadow:var(--sombra)}
+.plano__selo{
+  display:inline-block;background:var(--bordo);color:#fff;font-size:.66rem;
+  font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:7px;
+}
+.plano__n{display:block;font-weight:700;font-size:.95rem;color:var(--bordo)}
+.plano__p{font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--bordo);line-height:1.1;margin:4px 0}
+.plano__d{font-size:.76rem;color:var(--cinza-claro);margin-bottom:10px}
+.plano .btn{margin-top:0}
+
+.assina-badge{
+  display:inline-block;background:var(--boa-fundo);color:var(--boa);
+  font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px;margin-bottom:8px;
 }

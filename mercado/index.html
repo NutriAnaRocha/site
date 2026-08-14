@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>No mercado com a Nutri Ana — leia o rótulo antes de levar</title>
-<meta name="description" content="Fotografe a tabela nutricional e a lista de ingredientes e descubra na hora se vale levar. Entenda diet, light e o que significam os ingredientes do rótulo. Grátis.">
+<title>No mercado com a Nutri Ana — leia o rótulo e cozinhe sem complicar</title>
+<meta name="description" content="Fotografe o rótulo e descubra na hora se vale levar — e leve junto 70 receitas práticas (low carb, vegana, detox, sobremesas) com lista de compras, calorias e proteína por porção. Comece de graça.">
 <meta name="theme-color" content="#840B55">
 <link rel="icon" href="../assets/img/monograma.png">
 <link rel="apple-touch-icon" href="icones/icon-192.png">
@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="No mercado com a Nutri Ana">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="No mercado com a Nutri Ana">
-<meta property="og:description" content="Fotografe o rótulo e descubra na hora se vale levar. Grátis.">
+<meta property="og:description" content="Fotografe o rótulo e descubra na hora se vale levar. Com 70 receitas práticas para a rotina corrida.">
 <meta property="og:url" content="https://nutrianaluisarocha.com/mercado/">
 <meta property="og:image" content="https://nutrianaluisarocha.com/assets/img/og-site.jpg">
 </head>
@@ -110,6 +110,16 @@
       <button class="btn btn--linha btn--peq" type="button" data-ir="aprenda">Ver as outras lições</button>
     </div>
 
+    <!-- A outra metade do app. Quem lê rótulo quer saber o que levar; a
+         pergunta seguinte, em casa, é o que fazer com aquilo. -->
+    <div class="cartao cartao--convite">
+      <h2 class="sec">E na hora de cozinhar?</h2>
+      <p>São <strong>70 receitas</strong> filtradas pelo tempo que você tem — de 5 minutos a
+        2 horas — com lista de compras, modo de preparo e quantas calorias e quanta proteína
+        rende cada porção.</p>
+      <button class="btn btn--linha btn--peq" type="button" data-ir="receitas">Ver as receitas</button>
+    </div>
+
     <div class="historico" data-historico hidden>
       <h2 class="sec">Rótulos que você já leu</h2>
       <div data-historico-lista></div>
@@ -118,7 +128,37 @@
     <input type="file" accept="image/*" capture="environment" id="camera" hidden>
   </section>
 
-  <!-- ===================== 2. APRENDA ===================== -->
+  <!-- ===================== 2. RECEITAS ===================== -->
+  <!-- A outra metade do app. Ler rótulo diz o que NÃO levar; a receita
+       diz o que fazer com o que se levou — e é o que faz alguém abrir o
+       app fora do mercado. A lista de cartões é aberta (é a vitrine); o
+       modo de preparo vem do servidor e só para quem tem acesso. -->
+  <section class="tela" data-tela="receitas">
+    <h1 class="tela__t">Receitas para a vida real</h1>
+    <p class="tela__p">Filtre pelo tempo que você <strong>tem hoje</strong>. Cada receita traz a
+      lista de compras, o modo de preparo e — calculado pela tabela oficial brasileira — quantas
+      calorias e quanta proteína tem cada porção.</p>
+
+    <input type="search" class="folha__busca" data-rec-busca autocomplete="off"
+           placeholder="Buscar: frango, bolo, sem forno…" aria-label="Buscar receita">
+
+    <div class="chips" data-rec-cats role="group" aria-label="Categorias"></div>
+    <div class="chips chips--tempo" data-rec-tempos role="group" aria-label="Tempo de preparo"></div>
+
+    <p class="rec-status" data-rec-status></p>
+    <div data-rec-lista></div>
+  </section>
+
+  <!-- A receita aberta. Folha por cima, como a do comparador. -->
+  <div class="folha" data-rec-folha hidden>
+    <div class="folha__topo">
+      <strong class="folha__t" data-rec-folha-t>Receita</strong>
+      <button class="folha__x" type="button" data-rec-fechar aria-label="Fechar">×</button>
+    </div>
+    <div class="folha__c" data-rec-detalhe></div>
+  </div>
+
+  <!-- ===================== 3. APRENDA ===================== -->
   <!-- Conteúdo fixo, escrito à mão e conferido: é a parte do app que
        funciona sem internet, sem conta e sem gastar análise. Também é o
        que faz a pessoa voltar quando não está no mercado. -->
@@ -218,7 +258,7 @@
       Ana Luísa Rocha, com base na legislação brasileira vigente.</p>
   </section>
 
-  <!-- ===================== 3. COMPARAR ===================== -->
+  <!-- ===================== 4. COMPARAR ===================== -->
   <!-- Compara duas leituras que JÁ estão no aparelho: não chama o servidor,
        não gasta leitura e funciona sem sinal — que é a situação real de quem
        está parada no corredor com dois pacotes na mão. -->
@@ -254,7 +294,7 @@
     <div class="folha__c" data-cmp-lista></div>
   </div>
 
-  <!-- ===================== 4. LISTA DE MERCADO ===================== -->
+  <!-- ===================== 5. LISTA DE MERCADO ===================== -->
   <!-- Fica no aparelho, como o histórico: quem anota o que falta comprar não
        deveria precisar de conta para isso. O que a lista tem de diferente de
        um papel é a tarja: item que veio de uma leitura carrega o veredito
@@ -288,7 +328,7 @@
     <div class="folha__c" data-lista-hist></div>
   </div>
 
-  <!-- ===================== 5. CONTA ===================== -->
+  <!-- ===================== 6. CONTA ===================== -->
   <section class="tela" data-tela="conta">
     <h1 class="tela__t">Sua conta</h1>
 
@@ -322,8 +362,12 @@
 
     <p class="rodape-nota">
       Ana Luísa Rocha — Nutricionista, CRN 25100401.<br>
-      Este app faz <strong>orientação geral sobre leitura de rótulos</strong>. Não é avaliação
-      nutricional individualizada, não é prescrição e não substitui consulta.<br>
+      Este app faz <strong>orientação geral sobre leitura de rótulos</strong> e traz
+      <strong>receitas culinárias</strong>. Não é avaliação nutricional individualizada, não é
+      plano alimentar, não é prescrição e não substitui consulta.<br>
+      As calorias e a proteína das receitas são calculadas ingrediente por ingrediente pela
+      <strong>TACO</strong> e são valores médios do alimento — a marca que você comprou pode
+      variar.<br>
       As leituras são geradas com apoio de inteligência artificial e podem conter erro — na dúvida,
       o que vale é o que está impresso na embalagem.<br>
       As marcas sugeridas vêm da base pública Open Food Facts. A Ana não recebe de nenhuma delas.<br>
@@ -341,7 +385,10 @@
 <!-- ===================== BARRA INFERIOR ===================== -->
 <nav class="barra">
   <button class="barra__b is-on" type="button" data-ir="ler">
-    <span class="barra__i">📷</span><span>Ler rótulo</span>
+    <span class="barra__i">📷</span><span>Rótulo</span>
+  </button>
+  <button class="barra__b" type="button" data-ir="receitas">
+    <span class="barra__i">🍳</span><span>Receitas</span>
   </button>
   <button class="barra__b" type="button" data-ir="aprenda">
     <span class="barra__i">💡</span><span>Aprenda</span>
