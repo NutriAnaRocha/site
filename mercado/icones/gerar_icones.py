@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Icones do app "No mercado com a Nutri Ana" (PWA instalavel).
+Icones do RotuLens, o app de leitura de rotulo (PWA instalavel).
 
 Monograma REAL da marca em branco sobre o bordo Pantone 235 C, mesma
 receita dos icones do portal da Plataforma -- assim o icone do app novo
