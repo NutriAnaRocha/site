@@ -1,5 +1,5 @@
 /* =========================================================
-   Service worker do app "No mercado com a Nutri Ana".
+   Service worker do RotuLens (o app de leitura de rótulo).
 
    O que ele resolve: sinal de celular dentro de supermercado é
    ruim — laje, freezer, corredor no subsolo. Sem cache, o app
@@ -16,13 +16,13 @@
 
    Ao mudar qualquer arquivo do app, incremente CACHE.
    ========================================================= */
-var CACHE = "mercado-v16";
+var CACHE = "mercado-v17";
 
 var ARQUIVOS = [
   "./",
   "index.html",
-  "mercado.css?v=16",
-  "mercado.js?v=16",
+  "mercado.css?v=17",
+  "mercado.js?v=17",
   "manifest.webmanifest",
   "icones/icon-192.png",
   "icones/icon-512.png",

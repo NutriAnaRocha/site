@@ -82,7 +82,7 @@
      um e-mail entregaria as leituras de qualquer uma para qualquer uma. */
   var WHATS_ANA = "5521994094557";
   function linkSocorro() {
-    var msg = "Oi Ana! Paguei o acesso do app No mercado com a Nutri Ana e perdi meu " +
+    var msg = "Oi Ana! Paguei o acesso do RotuLens e perdi meu " +
       "código. Vou te mandar o comprovante do pagamento (com a data e o valor) para " +
       "você achar meu código. 🌸";
     return "https://wa.me/" + WHATS_ANA + "?text=" + encodeURIComponent(msg);
@@ -708,7 +708,7 @@
     var cod = codigoGuardado();
     if (!cod) return;
     var msg = $("[data-msg-guardar]");
-    var texto = "Meu código de leituras do app No mercado com a Nutri Ana: " + cod +
+    var texto = "Meu código de leituras do RotuLens: " + cod +
       "\nUse em " + location.origin + location.pathname;
 
     function aviso(txt, erro) {
