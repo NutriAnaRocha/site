@@ -1656,11 +1656,17 @@
   };
 
   function chamarJSON(url, corpo) {
-    return fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "apikey": ANON,
-                 "Authorization": "Bearer " + ANON },
-      body: JSON.stringify(corpo)
+    /* O token da sessão vai junto quando existe, do mesmo jeito que na
+       leitura de rótulo: é por ele que o servidor reconhece a nutri e
+       abre o acervo sem código. Sem sessão segue com a chave anônima e
+       nada muda para quem usa o app sem conta — que é a maioria. */
+    return sessaoAtual().then(function (token) {
+      return fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "apikey": ANON,
+                   "Authorization": "Bearer " + (token || ANON) },
+        body: JSON.stringify(corpo)
+      });
     }).then(function (r) {
       return r.json().then(function (j) { return { status: r.status, body: j || {} }; });
     });
