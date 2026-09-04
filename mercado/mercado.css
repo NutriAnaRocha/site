@@ -128,23 +128,124 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
   background:rgba(0,0,0,.6);color:#fff;font-size:1rem;line-height:26px;text-align:center;
 }
 
-/* Convite de instalação no iOS. Fica acima das fotos porque é a primeira
-   coisa que a pessoa precisa saber, mas em tom baixo (fundo rosa suave, sem
-   sombra) para não competir com o botão de ler o rótulo, que é o que o app
-   faz. */
-.instalar{
-  position:relative;background:var(--rosa-suave);border:1px solid var(--rosa-borda);
-  border-radius:14px;padding:14px 40px 14px 15px;margin-bottom:16px;
+/* ---------------------------------------------------------------
+   Convite de instalar: botão flutuante
+
+   Substituiu o cartão que ficava acima das fotos. O cartão só
+   aparecia no iPhone e comia o topo da tela justo onde a pessoa
+   vai fotografar; o botão flutuante cabe em qualquer sistema,
+   não empurra nada e é o mesmo gesto que a plataforma já usa.
+
+   Aparece DEPOIS da primeira leitura (ver conviteInstalar em
+   mercado.js): quem chegou de anúncio ainda não viu o app fazer
+   nada, e convite recusado fica sete dias sem voltar.
+   --------------------------------------------------------------- */
+.instalar-btn{
+  position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(var(--barra-h) + 14px + env(safe-area-inset-bottom));
+  z-index:31;display:flex;align-items:center;gap:8px;
+  padding:11px 14px 11px 17px;border:none;border-radius:999px;cursor:pointer;
+  background:var(--bordo);color:var(--branco);
+  font-family:var(--sans);font-size:.9rem;font-weight:700;
+  box-shadow:0 8px 24px rgba(94,10,61,.35);
+  max-width:calc(100vw - 24px);
+  animation:instalarSobe .28s ease both;
 }
-.instalar__t{font-weight:700;color:var(--bordo);font-size:.88rem;margin-bottom:5px}
-.instalar__p{font-size:.82rem;line-height:1.45}
-.instalar__n{font-size:.72rem;color:var(--cinza-claro);margin-top:6px}
-.instalar__x{
-  position:absolute;top:0;right:0;width:44px;height:44px;
-  background:none;border:none;color:var(--cinza-claro);font-size:1.3rem;line-height:1;
-  cursor:pointer;
+@keyframes instalarSobe{
+  from{opacity:0;transform:translate(-50%,14px)}
+  to{opacity:1;transform:translate(-50%,0)}
 }
-.instalar__x:active{opacity:.5}
+.instalar-btn__x{
+  width:22px;height:22px;border-radius:50%;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.22);font-size:.95rem;line-height:1;
+}
+.instalar-btn:active{opacity:.9}
+
+/* Passo a passo de instalar, para quem o navegador não deixa
+   instalar com um toque (iPhone sempre; Firefox e Samsung também). */
+.ins-folha{
+  position:fixed;inset:0;z-index:41;display:flex;align-items:flex-end;
+  justify-content:center;background:rgba(94,10,61,.5);
+  animation:insFolhaEntra .2s ease both;
+}
+@keyframes insFolhaEntra{from{opacity:0}to{opacity:1}}
+.ins-folha__card{
+  background:var(--branco);width:100%;max-width:440px;
+  border-radius:20px 20px 0 0;
+  padding:20px 18px calc(24px + env(safe-area-inset-bottom));
+  box-shadow:0 -12px 40px rgba(94,10,61,.25);
+  animation:insFolhaSobe .3s ease both;
+}
+@keyframes insFolhaSobe{from{transform:translateY(30px)}to{transform:translateY(0)}}
+.ins-folha__t{font-family:var(--serif);color:var(--bordo);font-size:1.1rem;margin-bottom:4px}
+.ins-folha__p{font-size:.85rem;color:var(--cinza);line-height:1.5;margin-bottom:14px}
+.ins-passo{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:.9rem}
+.ins-passo__n{
+  flex:0 0 auto;width:24px;height:24px;border-radius:50%;
+  background:var(--rosa-suave);color:var(--bordo);font-weight:700;font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.ins-passo span:last-child{flex:1;line-height:1.5}
+.ins-passo strong{color:var(--bordo)}
+.ins-folha__ok{
+  margin-top:16px;width:100%;padding:13px;border:none;border-radius:12px;
+  background:var(--bordo);color:var(--branco);
+  font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;
+}
+
+/* ---------------------------------------------------------------
+   Tutorial do primeiro acesso (tutorial.js)
+
+   A primeira tela do app pede uma FOTO. Quem não entende em dois
+   segundos o que fotografar vai embora — e essa saída custa o
+   clique pago no anúncio. Então o app se explica: escurece tudo,
+   acende um elemento por vez e aponta uma seta para ele.
+   --------------------------------------------------------------- */
+.tour{position:fixed;inset:0;z-index:50;-webkit-tap-highlight-color:transparent}
+/* O "buraco" de luz é uma sombra gigante em volta do alvo: sem
+   máscara, sem quatro divs de cortina para manter alinhadas. */
+.tour__luz{
+  position:absolute;border-radius:14px;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(56,6,36,.78);
+  outline:3px solid var(--branco);
+  transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease;
+}
+.tour__seta{position:absolute;top:0;left:0;pointer-events:none;overflow:visible}
+.tour__card{
+  position:absolute;left:50%;transform:translateX(-50%);
+  width:min(330px,calc(100vw - 32px));
+  background:var(--branco);border-radius:var(--radius);padding:16px 17px;
+  box-shadow:0 14px 40px rgba(56,6,36,.4);
+  animation:tourEntra .26s ease both;
+}
+@keyframes tourEntra{
+  from{opacity:0;transform:translate(-50%,10px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+.tour__conta{
+  font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cinza-claro);margin-bottom:5px;
+}
+.tour__t{font-family:var(--serif);color:var(--bordo);font-size:1.05rem;margin-bottom:5px}
+.tour__p{font-size:.88rem;line-height:1.55;color:var(--cinza);margin-bottom:14px}
+.tour__p strong{color:var(--bordo)}
+.tour__acoes{display:flex;align-items:center;gap:10px}
+.tour__ok{
+  flex:1;padding:12px;border:none;border-radius:11px;
+  background:var(--bordo);color:var(--branco);
+  font-family:var(--sans);font-weight:700;font-size:.92rem;cursor:pointer;
+}
+.tour__pular{
+  padding:12px 4px;border:none;background:none;color:var(--cinza-claro);
+  font-family:var(--sans);font-size:.85rem;font-weight:600;
+  text-decoration:underline;cursor:pointer;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .instalar-btn,.ins-folha,.ins-folha__card,.tour__card{animation:none}
+  .tour__luz{transition:none}
+}
 
 .dica{font-size:.8rem;color:var(--cinza-claro);margin-bottom:10px}
 .dica strong{color:var(--bordo)}

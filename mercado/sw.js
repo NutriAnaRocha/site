@@ -16,13 +16,14 @@
 
    Ao mudar qualquer arquivo do app, incremente CACHE.
    ========================================================= */
-var CACHE = "mercado-v17";
+var CACHE = "mercado-v18";
 
 var ARQUIVOS = [
   "./",
   "index.html",
-  "mercado.css?v=17",
-  "mercado.js?v=17",
+  "mercado.css?v=18",
+  "mercado.js?v=18",
+  "tutorial.js?v=18",
   "manifest.webmanifest",
   "icones/icon-192.png",
   "icones/icon-512.png",

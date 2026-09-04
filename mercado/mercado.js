@@ -406,6 +406,7 @@
       esconderIsca();
       guardarNoHistorico(b.analise, b.tabela);
       pintarRestam(b);
+      conviteInstalar.oferecer();
       $("[data-resultado]").scrollIntoView({ behavior: "smooth", block: "start" });
 
       // Limpa os slots: a próxima leitura é de outro produto, e deixar as
@@ -1571,45 +1572,231 @@
 
   /* ---------- instalação (PWA) ---------- */
 
-  /* No iPhone não existe `beforeinstallprompt`: a Apple não deixa site nenhum
-     oferecer instalação, só o menu Compartilhar do Safari resolve. Como
-     ninguém adivinha isso, o passo a passo aparece na tela principal — mas só
-     para quem está no iOS, fora do app já instalado, e some quando a pessoa
-     fecha ou instala. */
-  (function conviteIOS() {
-    var el = $("[data-ios-instalar]");
-    if (!el) return;
+  /* O convite de instalar é um botão flutuante, o mesmo gesto da
+     plataforma. Antes era um cartão fixo acima das fotos, e só no
+     iPhone: comia o topo da tela justo onde a pessoa vai fotografar,
+     e deixava Android sem convite nenhum (o "Instalar agora" da aba
+     Conta só aparece se o navegador oferecer, e quase ninguém abre a
+     aba Conta antes de usar o app).
 
-    var ua = navigator.userAgent || "";
-    // iPad com iPadOS 13+ se anuncia como Mac; o toque é o que o denuncia.
-    var ehIOS = /iphone|ipad|ipod/i.test(ua) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    // `standalone` é a bandeira do próprio iOS; o media query cobre o resto.
-    var jaInstalado = navigator.standalone === true ||
-      (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+     TRÊS CAMINHOS, porque os navegadores não são iguais:
+       - Chrome/Edge guardam `beforeinstallprompt`: um toque instala.
+       - iPhone não tem esse evento (a Apple não permite): só o menu
+         Compartilhar resolve, então o botão abre o passo a passo.
+       - Firefox e Samsung Internet também não disparam nada: caem no
+         passo a passo do menu do navegador.
 
-    var CHAVE = "mercado_convite_ios";
-    if (!ehIOS || jaInstalado || localStorage.getItem(CHAVE) === "fechado") return;
-
-    el.hidden = false;
-    el.querySelector("[data-ios-fechar]").addEventListener("click", function () {
-      el.hidden = true;
-      try { localStorage.setItem(CHAVE, "fechado"); } catch (e) { /* modo privado */ }
+     QUANDO APARECE: depois da PRIMEIRA LEITURA (conviteInstalar.oferecer(),
+     chamado no fim da análise). Quem chegou de anúncio ainda não viu o app
+     fazer nada, e pedir instalação antes de entregar valor gasta o convite
+     — quem fecha fica sete dias sem vê-lo de novo. Se a análise falhar
+     sempre, o relógio de segurança mostra o botão depois de um tempo, para
+     o convite não deixar de existir. */
+  /* O aviso de cookies fica na mesma faixa de baixo da tela e por cima de
+     tudo (z-index 9999): a pílula de instalar nasceria embaixo dele, sem
+     receber toque. Além disso, dois avisos ao mesmo tempo confundem, e o do
+     cookie tem de vir primeiro — é escolha da pessoa, não explicação nossa.
+     Então tanto a pílula quanto o tutorial esperam ele sair. */
+  function quandoSemAvisoDeCookie(seguir) {
+    var banner = document.getElementById("nlr-consent");
+    if (!banner || banner.hidden) { seguir(); return; }
+    if (typeof MutationObserver !== "function") {
+      // Navegador antigo: espia de segundo em segundo e desiste em silêncio.
+      var voltas = 0;
+      var relogio = setInterval(function () {
+        if (!banner.hidden && ++voltas <= 60) return;
+        clearInterval(relogio);
+        if (banner.hidden) seguir();
+      }, 1000);
+      return;
+    }
+    var obs = new MutationObserver(function () {
+      if (!banner.hidden) return;
+      obs.disconnect();
+      setTimeout(seguir, 300);
     });
+    obs.observe(banner, { attributes: true, attributeFilter: ["hidden"] });
+  }
+
+  window.RotuLensQuandoLivre = quandoSemAvisoDeCookie;
+
+  var conviteInstalar = (function () {
+    var CHAVE = "mercado_instalar_fechado";
+    var DIAS = 7;
+    var ESPERA = 45000;
+    var prompt = null;
+    var apareceu = false;
+    var relogio = null;
+
+    function jaInstalado() {
+      return navigator.standalone === true ||
+        (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    }
+
+    function ehIOS() {
+      var ua = navigator.userAgent || "";
+      // iPad com iPadOS 13+ se anuncia como Mac; o toque é o que o denuncia.
+      return /iphone|ipad|ipod/i.test(ua) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+    function fechadoRecente() {
+      try {
+        var t = parseInt(localStorage.getItem(CHAVE) || "0", 10);
+        return t && (Date.now() - t) < DIAS * 864e5;
+      } catch (e) { return false; }   // modo privado
+    }
+
+    function guardarFechado() {
+      try { localStorage.setItem(CHAVE, String(Date.now())); } catch (e) { /* modo privado */ }
+    }
+
+    function tirarBotao() {
+      var b = $(".instalar-btn");
+      if (b) b.remove();
+    }
+
+    function mostrar() {
+      if (jaInstalado() || fechadoRecente() || apareceu) return;
+      apareceu = true;   // marca antes de esperar, para não enfileirar pílulas
+      quandoSemAvisoDeCookie(pintarBotao);
+    }
+
+    function pintarBotao() {
+      var b = document.createElement("button");
+      b.className = "instalar-btn";
+      b.type = "button";
+      b.innerHTML = '<span>📲 Instalar app</span>' +
+        '<span class="instalar-btn__x" aria-hidden="true">✕</span>';
+
+      b.addEventListener("click", function (e) {
+        if (e.target.closest(".instalar-btn__x")) {
+          guardarFechado();
+          tirarBotao();
+          return;
+        }
+        if (prompt) {
+          prompt.prompt();
+          prompt = null;
+          tirarBotao();
+          return;
+        }
+        abrirPassoAPasso(ehIOS() ? "ios" : "menu");
+      });
+
+      document.body.appendChild(b);
+    }
+
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      prompt = e;
+      // O botão da aba Conta continua existindo para quem for procurar lá.
+      var conta = $("[data-instalar]");
+      if (conta) conta.hidden = false;
+    });
+
+    window.addEventListener("appinstalled", function () {
+      prompt = null;
+      tirarBotao();
+      guardarFechado();
+    });
+
+    if (!jaInstalado()) relogio = setTimeout(mostrar, ESPERA);
+
+    // No iPhone o `beforeinstallprompt` nunca chega, então o botão da aba
+    // Conta ficava escondido para sempre — justo no sistema em que instalar
+    // é mais difícil. Agora existe o passo a passo para mostrar a ele.
+    if (ehIOS() && !jaInstalado()) {
+      var contaIOS = $("[data-instalar]");
+      if (contaIOS) contaIOS.hidden = false;
+    }
+
+    return {
+      oferecer: function () {
+        if (relogio) { clearTimeout(relogio); relogio = null; }
+        mostrar();
+      },
+      // O botão da aba Conta, para quem foi procurar instalação lá. Não passa
+      // por mostrar(): quem pediu explicitamente merece resposta mesmo tendo
+      // fechado o convite flutuante antes.
+      instalarAgora: function () {
+        if (prompt) {
+          prompt.prompt();
+          prompt = null;
+          tirarBotao();
+          return;
+        }
+        abrirPassoAPasso(ehIOS() ? "ios" : "menu");
+      },
+      // Para testar e para gravar vídeo: mostra na hora, ignorando o silêncio.
+      forcar: function () {
+        try { localStorage.removeItem(CHAVE); } catch (e) {}
+        apareceu = false;
+        tirarBotao();
+        mostrar();
+      }
+    };
   }());
 
-  var promptInstalar = null;
-  window.addEventListener("beforeinstallprompt", function (e) {
-    e.preventDefault();
-    promptInstalar = e;
-    var b = $("[data-instalar]");
-    if (b) b.hidden = false;
-  });
+  window.RotuLensInstalar = conviteInstalar;
+
+  /* O passo a passo. Os ícones são desenhados aqui e não copiados da Apple:
+     o glifo 􀈂 da SF Symbols é de uso privado e viraria quadradinho vazio em
+     Android e no computador. */
+  function abrirPassoAPasso(qual) {
+    var svgCompartilhar =
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ' +
+      'style="vertical-align:-4px">' +
+      '<path d="M12 3v13"/><path d="M8 7l4-4 4 4"/>' +
+      '<path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg>';
+    var svgMais =
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ' +
+      'style="vertical-align:-4px">' +
+      '<rect x="3" y="3" width="18" height="18" rx="4"/>' +
+      '<path d="M12 8v8"/><path d="M8 12h8"/></svg>';
+
+    function passo(n, html) {
+      return '<div class="ins-passo"><span class="ins-passo__n">' + n + '</span>' +
+        '<span>' + html + '</span></div>';
+    }
+
+    var passos = qual === "ios"
+      ? passo(1, 'Toque em ' + svgCompartilhar + ' <strong>Compartilhar</strong>, na barra de baixo do Safari') +
+        passo(2, 'Escolha ' + svgMais + ' <strong>Adicionar à Tela de Início</strong>') +
+        passo(3, 'Toque em <strong>Adicionar</strong>, no canto de cima')
+      : passo(1, 'Abra o menu <span class="tecla">⋮</span> do navegador') +
+        passo(2, 'Toque em <strong>Instalar app</strong> ou <strong>Adicionar à tela inicial</strong>') +
+        passo(3, 'Confirme em <strong>Instalar</strong>');
+
+    var ov = document.createElement("div");
+    ov.className = "ins-folha";
+    ov.innerHTML =
+      '<div class="ins-folha__card" role="dialog" aria-modal="true" aria-label="Instalar na tela inicial">' +
+      '<p class="ins-folha__t">Instalar na tela inicial</p>' +
+      '<p class="ins-folha__p">Assim o app abre por um ícone, como qualquer outro — sem ' +
+      'procurar o endereço na próxima ida ao mercado. Não ocupa espaço.</p>' +
+      passos +
+      '<button class="ins-folha__ok" type="button">Entendi</button></div>';
+
+    function fechar() {
+      ov.remove();
+      document.removeEventListener("keydown", noEsc);
+    }
+    function noEsc(e) { if (e.key === "Escape") fechar(); }
+
+    ov.addEventListener("click", function (e) {
+      if (e.target === ov || e.target.closest(".ins-folha__ok")) fechar();
+    });
+    document.addEventListener("keydown", noEsc);
+    document.body.appendChild(ov);
+    ov.querySelector(".ins-folha__ok").focus();
+  }
+
   document.addEventListener("click", function (e) {
-    if (!e.target.closest("[data-instalar]") || !promptInstalar) return;
-    promptInstalar.prompt();
-    promptInstalar = null;
-    $("[data-instalar]").hidden = true;
+    if (!e.target.closest("[data-instalar]")) return;
+    conviteInstalar.instalarAgora();
   });
 
   if ("serviceWorker" in navigator) {
