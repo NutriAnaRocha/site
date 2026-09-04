@@ -163,7 +163,7 @@
       estado.luz.style.height = luz.altura + "px";
     } else {
       estado.luz.style.display = "none";
-      estado.camada.style.background = "rgba(56,6,36,.78)";
+      estado.camada.style.background = "var(--rl-veu, rgba(28,37,49,.78))";
     }
 
     // O cartão vai para o lado do alvo que tiver mais espaço.

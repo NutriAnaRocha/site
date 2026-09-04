@@ -129,6 +129,25 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
 }
 
 /* ---------------------------------------------------------------
+   Convite de instalar e tutorial: cores em um lugar só
+
+   Estes dois pedaços não usam os tokens do resto da folha de
+   propósito. O app está sendo repintado (azul #1D4E85 e verde
+   #12836F, do logo novo) e o arquivo aqui ainda carrega a paleta
+   antiga; amarrar os convites a --bordo os deixaria de uma cor
+   que já não é a da marca. Quando a repintura chegar, é AQUI que
+   se muda — em cinco linhas, não em trinta regras.
+   --------------------------------------------------------------- */
+:root{
+  --rl-marca:#1D4E85;         /* azul do "Rotu" e dos títulos */
+  --rl-verde:#12836F;         /* verde do "Lens" */
+  --rl-claro:#EFF5FB;         /* fundo suave dos cartões */
+  --rl-tinta:#1C2531;         /* texto escuro */
+  --rl-cinza:#66717F;         /* texto secundário */
+  --rl-veu:rgba(28,37,49,.78);/* escurecimento do tutorial */
+}
+
+/* ---------------------------------------------------------------
    Convite de instalar: botão flutuante
 
    Substituiu o cartão que ficava acima das fotos. O cartão só
@@ -145,9 +164,9 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
   bottom:calc(var(--barra-h) + 14px + env(safe-area-inset-bottom));
   z-index:31;display:flex;align-items:center;gap:8px;
   padding:11px 14px 11px 17px;border:none;border-radius:999px;cursor:pointer;
-  background:var(--bordo);color:var(--branco);
+  background:var(--rl-marca);color:#fff;
   font-family:var(--sans);font-size:.9rem;font-weight:700;
-  box-shadow:0 8px 24px rgba(94,10,61,.35);
+  box-shadow:0 8px 24px rgba(29,78,133,.38);
   max-width:calc(100vw - 24px);
   animation:instalarSobe .28s ease both;
 }
@@ -166,31 +185,36 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
    instalar com um toque (iPhone sempre; Firefox e Samsung também). */
 .ins-folha{
   position:fixed;inset:0;z-index:41;display:flex;align-items:flex-end;
-  justify-content:center;background:rgba(94,10,61,.5);
+  justify-content:center;background:var(--rl-veu);
   animation:insFolhaEntra .2s ease both;
 }
 @keyframes insFolhaEntra{from{opacity:0}to{opacity:1}}
 .ins-folha__card{
-  background:var(--branco);width:100%;max-width:440px;
+  background:#fff;width:100%;max-width:440px;
   border-radius:20px 20px 0 0;
   padding:20px 18px calc(24px + env(safe-area-inset-bottom));
-  box-shadow:0 -12px 40px rgba(94,10,61,.25);
+  box-shadow:0 -12px 40px rgba(28,37,49,.28);
   animation:insFolhaSobe .3s ease both;
 }
 @keyframes insFolhaSobe{from{transform:translateY(30px)}to{transform:translateY(0)}}
-.ins-folha__t{font-family:var(--serif);color:var(--bordo);font-size:1.1rem;margin-bottom:4px}
-.ins-folha__p{font-size:.85rem;color:var(--cinza);line-height:1.5;margin-bottom:14px}
-.ins-passo{display:flex;align-items:flex-start;gap:10px;padding:7px 0;font-size:.9rem}
+.ins-folha__t{
+  font-family:var(--serif);color:var(--rl-marca);font-size:1.1rem;margin-bottom:4px;
+}
+.ins-folha__p{font-size:.85rem;color:var(--rl-cinza);line-height:1.5;margin-bottom:14px}
+.ins-passo{
+  display:flex;align-items:flex-start;gap:10px;padding:7px 0;
+  font-size:.9rem;color:var(--rl-tinta);
+}
 .ins-passo__n{
   flex:0 0 auto;width:24px;height:24px;border-radius:50%;
-  background:var(--rosa-suave);color:var(--bordo);font-weight:700;font-size:.8rem;
+  background:var(--rl-claro);color:var(--rl-marca);font-weight:700;font-size:.8rem;
   display:flex;align-items:center;justify-content:center;
 }
 .ins-passo span:last-child{flex:1;line-height:1.5}
-.ins-passo strong{color:var(--bordo)}
+.ins-passo strong{color:var(--rl-marca)}
 .ins-folha__ok{
   margin-top:16px;width:100%;padding:13px;border:none;border-radius:12px;
-  background:var(--bordo);color:var(--branco);
+  background:var(--rl-marca);color:#fff;
   font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;
 }
 
@@ -207,37 +231,41 @@ button{font-family:inherit;font-weight:inherit;cursor:pointer;border:0;backgroun
    máscara, sem quatro divs de cortina para manter alinhadas. */
 .tour__luz{
   position:absolute;border-radius:14px;pointer-events:none;
-  box-shadow:0 0 0 9999px rgba(56,6,36,.78);
-  outline:3px solid var(--branco);
+  box-shadow:0 0 0 9999px var(--rl-veu);
+  outline:3px solid #fff;
   transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease;
 }
 .tour__seta{position:absolute;top:0;left:0;pointer-events:none;overflow:visible}
 .tour__card{
   position:absolute;left:50%;transform:translateX(-50%);
   width:min(330px,calc(100vw - 32px));
-  background:var(--branco);border-radius:var(--radius);padding:16px 17px;
-  box-shadow:0 14px 40px rgba(56,6,36,.4);
+  background:#fff;border-radius:var(--radius);padding:16px 17px;
+  box-shadow:0 14px 40px rgba(28,37,49,.42);
   animation:tourEntra .26s ease both;
 }
 @keyframes tourEntra{
   from{opacity:0;transform:translate(-50%,10px)}
   to{opacity:1;transform:translate(-50%,0)}
 }
+/* O contador em verde é o outro lado do logo: azul e verde juntos
+   dizem "isto é o RotuLens" sem precisar repetir o nome. */
 .tour__conta{
   font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--cinza-claro);margin-bottom:5px;
+  color:var(--rl-verde);margin-bottom:5px;
 }
-.tour__t{font-family:var(--serif);color:var(--bordo);font-size:1.05rem;margin-bottom:5px}
-.tour__p{font-size:.88rem;line-height:1.55;color:var(--cinza);margin-bottom:14px}
-.tour__p strong{color:var(--bordo)}
+.tour__t{
+  font-family:var(--serif);color:var(--rl-marca);font-size:1.05rem;margin-bottom:5px;
+}
+.tour__p{font-size:.88rem;line-height:1.55;color:var(--rl-tinta);margin-bottom:14px}
+.tour__p strong{color:var(--rl-marca)}
 .tour__acoes{display:flex;align-items:center;gap:10px}
 .tour__ok{
   flex:1;padding:12px;border:none;border-radius:11px;
-  background:var(--bordo);color:var(--branco);
+  background:var(--rl-marca);color:#fff;
   font-family:var(--sans);font-weight:700;font-size:.92rem;cursor:pointer;
 }
 .tour__pular{
-  padding:12px 4px;border:none;background:none;color:var(--cinza-claro);
+  padding:12px 4px;border:none;background:none;color:var(--rl-cinza);
   font-family:var(--sans);font-size:.85rem;font-weight:600;
   text-decoration:underline;cursor:pointer;
 }
